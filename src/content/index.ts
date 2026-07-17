@@ -12,6 +12,7 @@ import { organisationTerritoriale } from "./p2/organisation-territoriale";
 import { unionEuropeenne } from "./p2/union-europeenne";
 import { droitsFondamentaux } from "./p3/droits-fondamentaux";
 import { obligationsDevoirs } from "./p3/obligations-devoirs";
+import { periodesPersonnages } from "./p4/periodes-personnages";
 
 export * from "./types";
 export * from "./parties";
@@ -28,6 +29,7 @@ const registry: Record<string, SousThemeContent> = {
   "p2-s3": unionEuropeenne,
   "p3-s1": droitsFondamentaux,
   "p3-s2": obligationsDevoirs,
+  "p4-s1": periodesPersonnages,
 };
 
 export const allFlashcards: Flashcard[] = Object.values(registry).flatMap(
