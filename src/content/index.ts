@@ -7,6 +7,9 @@ import type {
 } from "./types";
 import { deviseSymboles } from "./p1/devise-symboles";
 import { principesRepublique } from "./p1/principes-republique";
+import { democratieEtatDeDroit } from "./p2/democratie-etat-de-droit";
+import { organisationTerritoriale } from "./p2/organisation-territoriale";
+import { unionEuropeenne } from "./p2/union-europeenne";
 
 export * from "./types";
 export * from "./parties";
@@ -18,6 +21,9 @@ export * from "./parties";
 const registry: Record<string, SousThemeContent> = {
   "p1-s1": deviseSymboles,
   "p1-s2": principesRepublique,
+  "p2-s1": democratieEtatDeDroit,
+  "p2-s2": organisationTerritoriale,
+  "p2-s3": unionEuropeenne,
 };
 
 export const allFlashcards: Flashcard[] = Object.values(registry).flatMap(
