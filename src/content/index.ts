@@ -18,6 +18,7 @@ import { culturePatrimoine } from "./p4/culture-patrimoine";
 import { vieQuotidienne } from "./p5/vie-quotidienne";
 import { travaillerEnFrance } from "./p5/travailler-en-france";
 import { vieFamiliale } from "./p5/vie-familiale";
+import { textesFondamentaux } from "./annexes/textes-fondamentaux";
 
 export * from "./types";
 export * from "./parties";
@@ -40,6 +41,7 @@ const registry: Record<string, SousThemeContent> = {
   "p5-s1": vieQuotidienne,
   "p5-s2": travaillerEnFrance,
   "p5-s3": vieFamiliale,
+  "annexes-s1": textesFondamentaux,
 };
 
 export const allFlashcards: Flashcard[] = Object.values(registry).flatMap(
