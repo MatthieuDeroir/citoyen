@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Citoyen — Entraînement au Livret du citoyen 2026
 
-## Getting Started
+Application d'entraînement à l'examen civique et à l'entretien de naturalisation, basée sur le Livret du citoyen (édition mai 2026, Ministère de l'Intérieur).
 
-First, run the development server:
+## Fonctionnalités
+
+- **Cartes de révision** avec répétition espacée (SM-2 simplifié) — 233 cartes
+- **QCM** corrigés instantanément — 158 questions
+- **Questions ouvertes** corrigées par IA (Mistral Small), style entretien préfecture — 55 questions
+- **Textes à trous** à correction hybride (locale + IA) — 46 exercices
+- **Examen blanc** au format officiel : 40 questions, 45 min, admis à 32/40 (arrêté du 10 octobre 2025)
+- **Gamification** : parcours d'unités déverrouillables, XP et objectif quotidien, streak avec gels, badges
+- Comptes Google, progression synchronisée (Turso), mobile-first, dark mode
+
+## Stack
+
+Next.js (App Router) · Tailwind CSS 4 · Motion · Turso (libsql) + Drizzle · Auth.js v5 (Google) · API Mistral
+
+## Démarrer en local
 
 ```bash
+npm install
+cp .env.example .env.local   # puis remplir (voir ci-dessous)
+npx drizzle-kit push          # crée les tables (local.db si TURSO_DATABASE_URL absent)
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Variables d'environnement (`.env.local`) :
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Variable | Rôle |
+|---|---|
+| `AUTH_SECRET` | `npx auth secret` |
+| `AUTH_GOOGLE_ID` / `AUTH_GOOGLE_SECRET` | OAuth Google — redirect URI `http://localhost:3000/api/auth/callback/google` |
+| `MISTRAL_API_KEY` | Correction IA (console.mistral.ai) |
+| `TURSO_DATABASE_URL` / `TURSO_AUTH_TOKEN` | Prod uniquement — en local, un fichier `local.db` est utilisé |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Déployer sur Vercel
 
-## Learn More
+1. Créer une base sur [turso.tech](https://turso.tech) : `turso db create citoyen` puis récupérer l'URL et un token.
+2. `npx drizzle-kit push` avec les variables Turso pour créer les tables.
+3. Importer le repo GitHub dans Vercel, renseigner les 6 variables d'environnement.
+4. Ajouter `https://<domaine>/api/auth/callback/google` aux redirect URIs Google.
 
-To learn more about Next.js, take a look at the following resources:
+## Scripts
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `npm run validate` — intégrité du contenu (Zod : IDs uniques, trous cohérents…)
+- `npx tsx scripts/test-srs.ts` — tests SRS/XP/streak contre la base locale
+- `npx tsx --env-file=.env.local scripts/test-grading.ts` — tests de correction (dont appel Mistral réel)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Contenu
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Le contenu pédagogique (`src/content/`) est transcrit du livret officiel, sous-thème par sous-thème, avec la page source de chaque item. Le PDF source reste hors du dépôt.
