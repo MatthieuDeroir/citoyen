@@ -15,6 +15,9 @@ import { obligationsDevoirs } from "./p3/obligations-devoirs";
 import { periodesPersonnages } from "./p4/periodes-personnages";
 import { territoireGeographie } from "./p4/territoire-geographie";
 import { culturePatrimoine } from "./p4/culture-patrimoine";
+import { vieQuotidienne } from "./p5/vie-quotidienne";
+import { travaillerEnFrance } from "./p5/travailler-en-france";
+import { vieFamiliale } from "./p5/vie-familiale";
 
 export * from "./types";
 export * from "./parties";
@@ -34,6 +37,9 @@ const registry: Record<string, SousThemeContent> = {
   "p4-s1": periodesPersonnages,
   "p4-s2": territoireGeographie,
   "p4-s3": culturePatrimoine,
+  "p5-s1": vieQuotidienne,
+  "p5-s2": travaillerEnFrance,
+  "p5-s3": vieFamiliale,
 };
 
 export const allFlashcards: Flashcard[] = Object.values(registry).flatMap(
