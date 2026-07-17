@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="115" fill="#000091"/>
+  <!-- bonnet phrygien -->
+  <path
+    fill="#ffffff"
+    d="M132 352
+       Q124 296 152 238
+       Q184 166 262 148
+       Q334 132 384 164
+       Q424 190 408 226
+       Q396 250 370 240
+       Q384 204 348 188
+       Q330 242 338 300
+       Q341 330 348 352
+       Z"
+  />
+  <!-- bandeau du bonnet -->
+  <rect x="106" y="346" width="268" height="42" rx="21" fill="#ffffff"/>
+  <!-- cocarde tricolore -->
+  <circle cx="182" cy="286" r="44" fill="#e1000f"/>
+  <circle cx="182" cy="286" r="29" fill="#ffffff"/>
+  <circle cx="182" cy="286" r="14" fill="#000091"/>
+</svg>

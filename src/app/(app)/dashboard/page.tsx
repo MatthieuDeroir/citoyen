@@ -1,10 +1,12 @@
 import { Flame, Sparkles } from "lucide-react";
+import { Logo } from "@/components/ui/Logo";
 
 export const metadata = { title: "Accueil" };
 
 export default function DashboardPage() {
   return (
     <div className="space-y-6">
+      <Logo />
       <header className="flex items-center justify-between">
         <div>
           <p className="text-sm text-muted">Bonjour 👋</p>
