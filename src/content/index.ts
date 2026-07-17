@@ -10,6 +10,8 @@ import { principesRepublique } from "./p1/principes-republique";
 import { democratieEtatDeDroit } from "./p2/democratie-etat-de-droit";
 import { organisationTerritoriale } from "./p2/organisation-territoriale";
 import { unionEuropeenne } from "./p2/union-europeenne";
+import { droitsFondamentaux } from "./p3/droits-fondamentaux";
+import { obligationsDevoirs } from "./p3/obligations-devoirs";
 
 export * from "./types";
 export * from "./parties";
@@ -24,6 +26,8 @@ const registry: Record<string, SousThemeContent> = {
   "p2-s1": democratieEtatDeDroit,
   "p2-s2": organisationTerritoriale,
   "p2-s3": unionEuropeenne,
+  "p3-s1": droitsFondamentaux,
+  "p3-s2": obligationsDevoirs,
 };
 
 export const allFlashcards: Flashcard[] = Object.values(registry).flatMap(
