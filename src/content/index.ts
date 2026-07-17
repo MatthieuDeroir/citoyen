@@ -1,0 +1,43 @@
+import type {
+  Flashcard,
+  Qcm,
+  QuestionOuverte,
+  SousThemeContent,
+  TexteATrous,
+} from "./types";
+
+export * from "./types";
+export * from "./parties";
+
+/**
+ * Registre du contenu transcrit depuis le livret.
+ * Chaque fichier de sous-thème s'enregistre ici au fur et à mesure de la transcription.
+ */
+const registry: Record<string, SousThemeContent> = {};
+
+export const allFlashcards: Flashcard[] = Object.values(registry).flatMap(
+  (c) => c.flashcards,
+);
+export const allQcms: Qcm[] = Object.values(registry).flatMap((c) => c.qcms);
+export const allOuvertes: QuestionOuverte[] = Object.values(registry).flatMap(
+  (c) => c.ouvertes,
+);
+export const allTrous: TexteATrous[] = Object.values(registry).flatMap(
+  (c) => c.trous,
+);
+
+const flashcardById = new Map(allFlashcards.map((f) => [f.id, f]));
+const qcmById = new Map(allQcms.map((q) => [q.id, q]));
+const ouverteById = new Map(allOuvertes.map((q) => [q.id, q]));
+const trousById = new Map(allTrous.map((t) => [t.id, t]));
+
+export const getFlashcard = (id: string) => flashcardById.get(id);
+export const getQcm = (id: string) => qcmById.get(id);
+export const getOuverte = (id: string) => ouverteById.get(id);
+export const getTrous = (id: string) => trousById.get(id);
+
+export function getContent(sousThemeId: string): SousThemeContent {
+  return (
+    registry[sousThemeId] ?? { flashcards: [], qcms: [], ouvertes: [], trous: [] }
+  );
+}
