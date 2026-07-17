@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { getSousTheme, getPartie, sousThemes } from "@/content/parties";
 import { getContent } from "@/content";
 import { FlashcardPlayer } from "@/components/players/FlashcardPlayer";
+import { reviewCard } from "@/actions/reviews";
 
 export function generateStaticParams() {
   return sousThemes.map((st) => ({ sousTheme: st.slug }));
@@ -26,6 +27,7 @@ export default async function CartesSessionPage({
       deck={flashcards}
       title={sousTheme.titre}
       backHref={`/rubriques/${partie.slug}/${sousTheme.slug}`}
+      onRate={reviewCard}
     />
   );
 }

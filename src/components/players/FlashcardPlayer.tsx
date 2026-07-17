@@ -10,17 +10,18 @@ import {
 } from "motion/react";
 import { X, RotateCcw, Check, Zap, Lightbulb } from "lucide-react";
 import type { Flashcard } from "@/content/types";
+import type { Rating } from "@/lib/srs";
 import { CardText } from "@/components/ui/CardText";
 import { SessionResults } from "@/components/players/SessionResults";
 
-export type Rating = "again" | "good" | "easy";
+export type { Rating };
 
 interface Props {
   deck: Flashcard[];
   title: string;
   backHref: string;
-  /** branché en phase 5 sur la persistance SRS */
-  onRate?: (cardId: string, rating: Rating) => void;
+  /** server action de persistance SRS ; renvoie l'XP gagné */
+  onRate?: (cardId: string, rating: Rating) => Promise<{ xp: number } | void> | void;
 }
 
 const SWIPE_THRESHOLD = 90;
@@ -35,6 +36,7 @@ export function FlashcardPlayer({ deck, title, backHref, onRate }: Props) {
   const [showHint, setShowHint] = useState(false);
   const [counts, setCounts] = useState({ again: 0, good: 0, easy: 0 });
   const [seen, setSeen] = useState<Set<string>>(new Set());
+  const [xpTotal, setXpTotal] = useState(0);
   const router = useRouter();
 
   const x = useMotionValue(0);
@@ -48,7 +50,12 @@ export function FlashcardPlayer({ deck, title, backHref, onRate }: Props) {
 
   function rate(rating: Rating) {
     if (!card) return;
-    onRate?.(card.id, rating);
+    // fire-and-forget : la persistance ne doit pas bloquer l'animation
+    Promise.resolve(onRate?.(card.id, rating))
+      .then((res) => {
+        if (res?.xp) setXpTotal((x) => x + res.xp);
+      })
+      .catch(() => {});
     setCounts((c) => ({ ...c, [rating]: c[rating] + 1 }));
     setSeen((s) => new Set(s).add(card.id));
     if (rating === "again") {
@@ -78,6 +85,7 @@ export function FlashcardPlayer({ deck, title, backHref, onRate }: Props) {
       <SessionResults
         title={title}
         score={score}
+        xp={xpTotal}
         stats={[
           { label: "Cartes vues", value: seen.size },
           { label: "Réussies", value: counts.good + counts.easy },
@@ -89,6 +97,7 @@ export function FlashcardPlayer({ deck, title, backHref, onRate }: Props) {
           setPosition(0);
           setCounts({ again: 0, good: 0, easy: 0 });
           setSeen(new Set());
+          setXpTotal(0);
           setFlipped(false);
         }}
       />
