@@ -5,6 +5,8 @@ import type {
   SousThemeContent,
   TexteATrous,
 } from "./types";
+import { deviseSymboles } from "./p1/devise-symboles";
+import { principesRepublique } from "./p1/principes-republique";
 
 export * from "./types";
 export * from "./parties";
@@ -13,7 +15,10 @@ export * from "./parties";
  * Registre du contenu transcrit depuis le livret.
  * Chaque fichier de sous-thème s'enregistre ici au fur et à mesure de la transcription.
  */
-const registry: Record<string, SousThemeContent> = {};
+const registry: Record<string, SousThemeContent> = {
+  "p1-s1": deviseSymboles,
+  "p1-s2": principesRepublique,
+};
 
 export const allFlashcards: Flashcard[] = Object.values(registry).flatMap(
   (c) => c.flashcards,
