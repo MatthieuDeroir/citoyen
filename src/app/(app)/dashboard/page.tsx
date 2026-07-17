@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { and, eq, gte } from "drizzle-orm";
-import { Flame, Snowflake, ChevronRight, Zap } from "lucide-react";
+import { Flame, Snowflake, ChevronRight, Zap, GraduationCap } from "lucide-react";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { cardProgress, userStats } from "@/db/schema";
@@ -96,6 +96,23 @@ export default async function DashboardPage() {
           </Link>
         </div>
       </section>
+
+      {/* Examen blanc */}
+      <Link
+        href="/examen"
+        className="flex items-center gap-4 rounded-card border-2 border-primary/30 bg-surface p-4 shadow-sm transition-transform active:scale-[0.98]"
+      >
+        <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-primary text-on-primary">
+          <GraduationCap className="size-6" />
+        </span>
+        <span className="min-w-0 flex-1">
+          <span className="block font-bold">Examen blanc</span>
+          <span className="block text-sm text-muted">
+            40 questions · 45 min · admis à 32/40, comme le vrai examen
+          </span>
+        </span>
+        <ChevronRight className="size-5 shrink-0 text-muted" />
+      </Link>
 
       {/* Progression par partie */}
       <section className="space-y-3">
