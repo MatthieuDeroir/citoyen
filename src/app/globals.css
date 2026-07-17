@@ -1,0 +1,93 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  /* Palette DSFR adoucie — bleu Marianne, rouge réservé aux erreurs/moments forts */
+  --background: #f5f5fe;
+  --surface: #ffffff;
+  --surface-raised: #ffffff;
+  --foreground: #161637;
+  --muted: #6b6b8f;
+  --border: #e3e3f2;
+  --primary: #000091;
+  --primary-hover: #1212a3;
+  --primary-soft: #e8e8ff;
+  --on-primary: #ffffff;
+  --accent: #e1000f;
+  --accent-soft: #ffe9ea;
+  --success: #18753c;
+  --success-soft: #dffee6;
+  --gold: #b98900;
+  --gold-soft: #fef3c8;
+}
+
+.dark {
+  --background: #0b0b1f;
+  --surface: #16162f;
+  --surface-raised: #1e1e3f;
+  --foreground: #ececfe;
+  --muted: #9494c2;
+  --border: #2a2a52;
+  --primary: #6a6af4;
+  --primary-hover: #8585f6;
+  --primary-soft: #23234b;
+  --on-primary: #ffffff;
+  --accent: #ff5655;
+  --accent-soft: #3c1a22;
+  --success: #4ade80;
+  --success-soft: #14301f;
+  --gold: #fbbf24;
+  --gold-soft: #33270a;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-soft: var(--primary-soft);
+  --color-on-primary: var(--on-primary);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --font-sans: var(--font-public-sans);
+  --radius-card: 1.25rem;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-public-sans), system-ui, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Liseré tricolore (bouton Réviser, éléments décoratifs) */
+.tricolore {
+  background: linear-gradient(
+    90deg,
+    #000091 0%,
+    #000091 33%,
+    #ffffff 33%,
+    #ffffff 66%,
+    #e1000f 66%,
+    #e1000f 100%
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
