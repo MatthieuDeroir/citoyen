@@ -109,7 +109,7 @@ export function TrousPlayer({ deck, title, backHref, next: nextSession }: Props)
   const resultByIndex = new Map(result?.blanks.map((b) => [b.index, b]) ?? []);
 
   return (
-    <div className="flex h-full flex-col">
+    <div className="flex flex-1 flex-col">
       <header className="flex items-center gap-3 py-2">
         <button
           aria-label="Quitter la session"

@@ -193,7 +193,7 @@ export function ExamenPlayer({ deck, onSubmit }: Props) {
   const urgent = secondsLeft < 300;
 
   return (
-    <div className="flex h-full flex-col">
+    <div className="flex flex-1 flex-col">
       <header className="flex items-center justify-between gap-3 py-2">
         <span className="text-sm font-semibold text-muted tabular-nums">
           {index + 1}/{deck.length}

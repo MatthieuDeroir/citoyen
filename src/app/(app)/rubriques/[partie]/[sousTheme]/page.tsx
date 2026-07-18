@@ -75,28 +75,9 @@ export default async function SousThemePage({
   const userId = session!.user!.id!;
 
   const unlocked = await getUnlockedSousThemes(userId);
-  if (!unlocked.has(sousTheme.id)) {
-    return (
-      <div className="flex min-h-[60dvh] flex-col items-center justify-center gap-5 text-center">
-        <span className="flex size-20 items-center justify-center rounded-full bg-border">
-          <Lock className="size-9 text-muted" />
-        </span>
-        <div>
-          <h1 className="text-xl font-bold">Unité verrouillée</h1>
-          <p className="mx-auto mt-2 max-w-xs text-sm text-muted">
-            Termine l&apos;unité précédente à 60&nbsp;% dans le parcours pour débloquer «&nbsp;
-            {sousTheme.titre}&nbsp;».
-          </p>
-        </div>
-        <Link
-          href="/parcours"
-          className="rounded-2xl bg-primary px-6 py-3 font-semibold text-on-primary transition-transform active:scale-95"
-        >
-          Aller au parcours
-        </Link>
-      </div>
-    );
-  }
+  // les cartes de révision sont en accès libre ; le verrou du parcours
+  // ne concerne que les exercices (QCM, ouvertes, trous)
+  const exercisesLocked = !unlocked.has(sousTheme.id);
 
   const content = getContent(sousTheme.id);
   const progress = await getSousThemeProgress(userId, sousTheme.id);
@@ -141,18 +122,26 @@ export default async function SousThemePage({
           if (n === 0) return null;
           const p: SousThemeProgress[keyof SousThemeProgress] = progress[key];
           const full = p.done >= p.total;
+          const isLocked = exercisesLocked && key !== "cartes";
           return (
             <li key={href}>
               <Link
-                href={`/session/${href}/${sousTheme.slug}`}
-                className="flex items-center gap-4 rounded-card border border-border bg-surface p-4 shadow-sm transition-transform active:scale-[0.98]"
+                href={isLocked ? "/parcours" : `/session/${href}/${sousTheme.slug}`}
+                aria-disabled={isLocked}
+                className={`flex items-center gap-4 rounded-card border border-border bg-surface p-4 shadow-sm transition-transform active:scale-[0.98] ${
+                  isLocked ? "opacity-55" : ""
+                }`}
               >
                 <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary-soft text-primary">
                   <Icon className="size-5" />
                 </span>
                 <span className="min-w-0 flex-1">
                   <span className="block font-semibold">{label}</span>
-                  <span className="block text-sm text-muted">{description}</span>
+                  <span className="block text-sm text-muted">
+                    {isLocked
+                      ? "Débloqué via le parcours (60 % de l'unité précédente)"
+                      : description}
+                  </span>
                   <span className="mt-2 block h-1.5 overflow-hidden rounded-full bg-border">
                     <span
                       className={`block h-full rounded-full ${full ? "bg-success" : "bg-primary"}`}
@@ -160,14 +149,18 @@ export default async function SousThemePage({
                     />
                   </span>
                 </span>
-                <span
-                  className={`shrink-0 rounded-full px-2.5 py-1 text-xs font-bold tabular-nums ${
-                    full ? "bg-success-soft text-success" : "bg-primary-soft text-primary"
-                  }`}
-                  title={`${p.done} ${doneLabel} sur ${p.total}`}
-                >
-                  {p.done}/{p.total}
-                </span>
+                {isLocked ? (
+                  <Lock className="size-5 shrink-0 text-muted" />
+                ) : (
+                  <span
+                    className={`shrink-0 rounded-full px-2.5 py-1 text-xs font-bold tabular-nums ${
+                      full ? "bg-success-soft text-success" : "bg-primary-soft text-primary"
+                    }`}
+                    title={`${p.done} ${doneLabel} sur ${p.total}`}
+                  >
+                    {p.done}/{p.total}
+                  </span>
+                )}
               </Link>
             </li>
           );

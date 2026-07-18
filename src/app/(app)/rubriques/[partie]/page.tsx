@@ -47,7 +47,7 @@ export default async function PartiePage({
             content.ouvertes.length +
             content.trous.length;
           const isUnlocked = unlocked.has(st.id);
-          const ready = total > 0 && isUnlocked;
+          const ready = total > 0; // les cartes sont en libre accès
 
           return (
             <li key={st.id}>
@@ -67,17 +67,14 @@ export default async function PartiePage({
                     {total === 0
                       ? "Bientôt disponible"
                       : !isUnlocked
-                        ? "Verrouillé — termine l'unité précédente à 60 % dans le parcours"
+                        ? `${content.flashcards.length} cartes en libre accès · exercices via le parcours`
                         : `${content.flashcards.length} cartes · ${content.qcms.length} QCM · ${
                             content.ouvertes.length + content.trous.length
                           } exercices`}
                   </span>
                 </span>
-                {ready ? (
-                  <ChevronRight className="size-5 shrink-0 text-muted" />
-                ) : (
-                  <Lock className="size-5 shrink-0 text-muted" />
-                )}
+                {ready && !isUnlocked && <Lock className="size-4 shrink-0 text-muted" />}
+                {ready && <ChevronRight className="size-5 shrink-0 text-muted" />}
               </Link>
             </li>
           );

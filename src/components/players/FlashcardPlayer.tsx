@@ -111,7 +111,7 @@ export function FlashcardPlayer({ deck, title, backHref, onRate, next }: Props) 
   const progress = queue.length === 0 ? 0 : position / queue.length;
 
   return (
-    <div className="flex h-full flex-col">
+    <div className="flex flex-1 flex-col">
       {/* Header : fermer + progression */}
       <header className="flex items-center gap-3 py-2">
         <button

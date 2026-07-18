@@ -113,7 +113,7 @@ export function OuvertePlayer({ deck, title, backHref, next: nextSession }: Prop
   const verdict = result?.verdict ? verdictUi[result.verdict] : null;
 
   return (
-    <div className="flex h-full flex-col">
+    <div className="flex flex-1 flex-col">
       <header className="flex items-center gap-3 py-2">
         <button
           aria-label="Quitter la session"

@@ -96,7 +96,7 @@ export function QcmPlayer({ deck, title, backHref, onSubmit, next: nextSession }
   const progress = questions.length === 0 ? 0 : index / questions.length;
 
   return (
-    <div key={sessionKey} className="flex h-full flex-col">
+    <div key={sessionKey} className="flex flex-1 flex-col">
       <header className="flex items-center gap-3 py-2">
         <button
           aria-label="Quitter la session"
