@@ -18,6 +18,12 @@ export interface UniteParcours {
   perfect: boolean;
 }
 
+/** Sous-thèmes accessibles : le verrou du parcours s'applique partout (rubriques, sessions, file du jour). */
+export async function getUnlockedSousThemes(userId: string): Promise<Set<string>> {
+  const unites = await getParcours(userId);
+  return new Set(unites.filter((u) => u.unlocked).map((u) => u.sousTheme.id));
+}
+
 export interface ModeProgress {
   done: number;
   total: number;

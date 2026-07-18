@@ -12,6 +12,7 @@ interface Props {
   deck: QuestionOuverte[];
   title: string;
   backHref: string;
+  next?: { href: string; label: string };
 }
 
 type Verdict = "correct" | "partial" | "incorrect";
@@ -31,7 +32,7 @@ const verdictUi: Record<Verdict, { icon: typeof CircleCheck; label: string; cls:
   incorrect: { icon: CircleX, label: "À retravailler", cls: "text-accent bg-accent-soft" },
 };
 
-export function OuvertePlayer({ deck, title, backHref }: Props) {
+export function OuvertePlayer({ deck, title, backHref, next: nextSession }: Props) {
   const [index, setIndex] = useState(0);
   const [answer, setAnswer] = useState("");
   const [grading, setGrading] = useState(false);
@@ -89,6 +90,7 @@ export function OuvertePlayer({ deck, title, backHref }: Props) {
     return (
       <SessionResults
         title={title}
+        next={nextSession}
         score={avg}
         xp={xpTotal}
         stats={[

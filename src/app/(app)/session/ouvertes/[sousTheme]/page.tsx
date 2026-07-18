@@ -1,6 +1,9 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { getSousTheme, getPartie, sousThemes } from "@/content/parties";
 import { getContent } from "@/content";
+import { getNextSession } from "@/lib/sessionNav";
+import { auth } from "@/lib/auth";
+import { getUnlockedSousThemes } from "@/lib/parcours";
 import { OuvertePlayer } from "@/components/players/OuvertePlayer";
 
 export function generateStaticParams() {
@@ -16,6 +19,10 @@ export default async function OuvertesSessionPage({
   const sousTheme = getSousTheme(slug);
   if (!sousTheme) notFound();
 
+  const session = await auth();
+  const unlocked = await getUnlockedSousThemes(session!.user!.id!);
+  if (!unlocked.has(sousTheme.id)) redirect("/parcours");
+
   const { ouvertes } = getContent(sousTheme.id);
   if (ouvertes.length === 0) notFound();
 
@@ -23,6 +30,7 @@ export default async function OuvertesSessionPage({
 
   return (
     <OuvertePlayer
+      next={getNextSession(slug, "ouvertes")}
       deck={ouvertes}
       title={sousTheme.titre}
       backHref={`/rubriques/${partie.slug}/${sousTheme.slug}`}

@@ -11,6 +11,7 @@ interface Props {
   deck: TexteATrous[];
   title: string;
   backHref: string;
+  next?: { href: string; label: string };
 }
 
 interface BlankResult {
@@ -28,7 +29,7 @@ interface GradeResponse {
   xp: number;
 }
 
-export function TrousPlayer({ deck, title, backHref }: Props) {
+export function TrousPlayer({ deck, title, backHref, next: nextSession }: Props) {
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [grading, setGrading] = useState(false);
@@ -85,6 +86,7 @@ export function TrousPlayer({ deck, title, backHref }: Props) {
     return (
       <SessionResults
         title={title}
+        next={nextSession}
         score={avg}
         xp={xpTotal}
         stats={[

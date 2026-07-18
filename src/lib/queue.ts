@@ -2,6 +2,7 @@ import { and, asc, eq, lte } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { cardProgress } from "@/db/schema";
 import { allFlashcards, type Flashcard } from "@/content";
+import { getUnlockedSousThemes } from "@/lib/parcours";
 
 const MAX_DUE = 40;
 const MAX_NEW = 10;
@@ -35,8 +36,12 @@ export async function getDailyQueue(userId: string): Promise<DailyQueue> {
     .map((r) => allFlashcards.find((c) => c.id === r.cardId))
     .filter((c): c is Flashcard => Boolean(c));
 
-  // allFlashcards est déjà dans l'ordre du livret (partie 1 → annexes)
-  const newCards = allFlashcards.filter((c) => !seen.has(c.id)).slice(0, MAX_NEW);
+  // allFlashcards est déjà dans l'ordre du livret (partie 1 → annexes) ;
+  // les nouvelles cartes respectent le verrou du parcours
+  const unlocked = await getUnlockedSousThemes(userId);
+  const newCards = allFlashcards
+    .filter((c) => !seen.has(c.id) && unlocked.has(c.sousThemeId))
+    .slice(0, MAX_NEW);
 
   // intercalage : 1 nouvelle toutes les NEW_EVERY dues
   const cards: Flashcard[] = [];

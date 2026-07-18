@@ -156,3 +156,18 @@ export const achievements = sqliteTable(
   },
   (t) => [primaryKey({ columns: [t.userId, t.achievementId] })],
 );
+
+/** Abonnements Web Push (rappels de streak). */
+export const pushSubscriptions = sqliteTable(
+  "push_subscriptions",
+  {
+    endpoint: text("endpoint").primaryKey(),
+    userId: text("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    p256dh: text("p256dh").notNull(),
+    auth: text("auth").notNull(),
+    createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
+  },
+  (t) => [index("idx_push_user").on(t.userId)],
+);

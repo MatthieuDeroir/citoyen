@@ -23,11 +23,12 @@ interface Props {
   backHref: string;
   /** server action de persistance SRS ; renvoie l'XP gagné */
   onRate?: (cardId: string, rating: Rating) => Promise<{ xp: number } | void> | void;
+  next?: { href: string; label: string };
 }
 
 const SWIPE_THRESHOLD = 90;
 
-export function FlashcardPlayer({ deck, title, backHref, onRate }: Props) {
+export function FlashcardPlayer({ deck, title, backHref, onRate, next }: Props) {
   const initialQueue = useMemo(() => deck.map((c) => c.id), [deck]);
   const cardById = useMemo(() => new Map(deck.map((c) => [c.id, c])), [deck]);
 
@@ -86,6 +87,7 @@ export function FlashcardPlayer({ deck, title, backHref, onRate }: Props) {
     return (
       <SessionResults
         title={title}
+        next={next}
         score={score}
         xp={xpTotal}
         stats={[

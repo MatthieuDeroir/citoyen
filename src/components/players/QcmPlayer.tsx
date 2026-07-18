@@ -12,6 +12,7 @@ interface Props {
   title: string;
   backHref: string;
   onSubmit?: (qcmId: string, chosenIndex: number) => Promise<{ correct: boolean; xp: number }>;
+  next?: { href: string; label: string };
 }
 
 /** Mélange stable par session (Fisher-Yates seedé au premier rendu). */
@@ -24,7 +25,7 @@ function shuffle<T>(arr: T[]): T[] {
   return a;
 }
 
-export function QcmPlayer({ deck, title, backHref, onSubmit }: Props) {
+export function QcmPlayer({ deck, title, backHref, onSubmit, next: nextSession }: Props) {
   // ordre des questions ET des choix mélangés ; order[posAffichée] = index d'origine
   const questions = useMemo(
     () =>
@@ -72,6 +73,7 @@ export function QcmPlayer({ deck, title, backHref, onSubmit }: Props) {
     return (
       <SessionResults
         title={title}
+        next={nextSession}
         score={score}
         xp={xpTotal}
         stats={[

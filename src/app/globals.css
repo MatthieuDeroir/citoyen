@@ -82,6 +82,17 @@ body {
   );
 }
 
+/* Barres du graphe XP (stats) */
+@keyframes grow-bar {
+  from {
+    transform: scaleY(0);
+  }
+}
+.animate-grow-bar {
+  animation: grow-bar 0.6s ease-out both;
+  transform-origin: bottom;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

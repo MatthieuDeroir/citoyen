@@ -1,13 +1,11 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ChevronRight, ChevronLeft } from "lucide-react";
-import { getPartie, getSousThemesByPartie, parties } from "@/content/parties";
+import { ChevronRight, ChevronLeft, Lock } from "lucide-react";
+import { auth } from "@/lib/auth";
+import { getUnlockedSousThemes } from "@/lib/parcours";
+import { getPartie, getSousThemesByPartie } from "@/content/parties";
 import { getContent } from "@/content";
 import { PartieIcon } from "@/components/ui/PartieIcon";
-
-export function generateStaticParams() {
-  return parties.map((p) => ({ partie: p.slug }));
-}
 
 export default async function PartiePage({
   params,
@@ -18,6 +16,8 @@ export default async function PartiePage({
   const partie = getPartie(slug);
   if (!partie) notFound();
 
+  const session = await auth();
+  const unlocked = await getUnlockedSousThemes(session!.user!.id!);
   const sousThemes = getSousThemesByPartie(partie.id);
 
   return (
@@ -46,7 +46,8 @@ export default async function PartiePage({
             content.qcms.length +
             content.ouvertes.length +
             content.trous.length;
-          const ready = total > 0;
+          const isUnlocked = unlocked.has(st.id);
+          const ready = total > 0 && isUnlocked;
 
           return (
             <li key={st.id}>
@@ -57,17 +58,26 @@ export default async function PartiePage({
                   ready ? "active:scale-[0.98]" : "pointer-events-none opacity-50"
                 }`}
               >
+                <span aria-hidden className="text-2xl">
+                  {st.emoji}
+                </span>
                 <span className="min-w-0 flex-1">
                   <span className="block font-semibold">{st.titre}</span>
                   <span className="block text-sm text-muted">
-                    {ready
-                      ? `${content.flashcards.length} cartes · ${content.qcms.length} QCM · ${
-                          content.ouvertes.length + content.trous.length
-                        } exercices`
-                      : "Bientôt disponible"}
+                    {total === 0
+                      ? "Bientôt disponible"
+                      : !isUnlocked
+                        ? "Verrouillé — termine l'unité précédente à 60 % dans le parcours"
+                        : `${content.flashcards.length} cartes · ${content.qcms.length} QCM · ${
+                            content.ouvertes.length + content.trous.length
+                          } exercices`}
                   </span>
                 </span>
-                {ready && <ChevronRight className="size-5 shrink-0 text-muted" />}
+                {ready ? (
+                  <ChevronRight className="size-5 shrink-0 text-muted" />
+                ) : (
+                  <Lock className="size-5 shrink-0 text-muted" />
+                )}
               </Link>
             </li>
           );

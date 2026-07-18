@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { motion } from "motion/react";
 import { Home, Route, LibraryBig, ChartLine, Zap } from "lucide-react";
 
 const items = [
@@ -38,10 +39,17 @@ export function BottomNav() {
             <Link
               key={href}
               href={href}
-              className={`flex flex-col items-center gap-0.5 px-2 py-2 text-[11px] font-medium transition-colors ${
+              className={`relative flex flex-col items-center gap-0.5 px-2 py-2 text-[11px] font-medium transition-colors ${
                 active ? "text-primary" : "text-muted hover:text-foreground"
               }`}
             >
+              {active && (
+                <motion.span
+                  layoutId="nav-active"
+                  transition={{ type: "spring", stiffness: 400, damping: 32 }}
+                  className="absolute -top-px h-1 w-8 rounded-full bg-primary"
+                />
+              )}
               <Icon className="size-6" strokeWidth={active ? 2.4 : 1.8} />
               {label}
             </Link>

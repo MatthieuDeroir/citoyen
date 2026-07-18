@@ -7,6 +7,7 @@ import { MASTERY_INTERVAL_DAYS } from "@/lib/srs";
 import { allFlashcards } from "@/content";
 import { getAchievements } from "@/lib/achievements";
 import { parisDay } from "@/lib/dates";
+import { ReminderSettings } from "@/components/pwa/ReminderSettings";
 
 export const metadata = { title: "Stats" };
 
@@ -87,7 +88,7 @@ export default async function StatsPage() {
                   {xp > 0 ? xp : ""}
                 </span>
                 <div
-                  className={`w-full rounded-t-md ${xp > 0 ? "bg-primary" : "bg-border"}`}
+                  className={`animate-grow-bar w-full rounded-t-md ${xp > 0 ? "bg-primary" : "bg-border"}`}
                   style={{ height: `${Math.max(4, (xp / maxXp) * 80)}px` }}
                 />
                 <span className="text-[10px] text-muted">{day.slice(8)}</span>
@@ -121,6 +122,8 @@ export default async function StatsPage() {
           ))}
         </div>
       </section>
+
+      <ReminderSettings />
 
       <form
         action={async () => {

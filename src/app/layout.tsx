@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Public_Sans } from "next/font/google";
 import { ThemeProvider } from "next-themes";
+import { UpdatePrompt } from "@/components/pwa/UpdatePrompt";
 import "./globals.css";
 
 const publicSans = Public_Sans({
@@ -43,6 +44,7 @@ export default function RootLayout({
       <body className="min-h-dvh antialiased">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {children}
+          <UpdatePrompt />
         </ThemeProvider>
       </body>
     </html>

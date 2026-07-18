@@ -1,6 +1,9 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { getSousTheme, getPartie, sousThemes } from "@/content/parties";
 import { getContent } from "@/content";
+import { getNextSession } from "@/lib/sessionNav";
+import { auth } from "@/lib/auth";
+import { getUnlockedSousThemes } from "@/lib/parcours";
 import { TrousPlayer } from "@/components/players/TrousPlayer";
 
 export function generateStaticParams() {
@@ -16,6 +19,10 @@ export default async function TrousSessionPage({
   const sousTheme = getSousTheme(slug);
   if (!sousTheme) notFound();
 
+  const session = await auth();
+  const unlocked = await getUnlockedSousThemes(session!.user!.id!);
+  if (!unlocked.has(sousTheme.id)) redirect("/parcours");
+
   const { trous } = getContent(sousTheme.id);
   if (trous.length === 0) notFound();
 
@@ -23,6 +30,7 @@ export default async function TrousSessionPage({
 
   return (
     <TrousPlayer
+      next={getNextSession(slug, "trous")}
       deck={trous}
       title={sousTheme.titre}
       backHref={`/rubriques/${partie.slug}/${sousTheme.slug}`}

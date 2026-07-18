@@ -6,6 +6,7 @@ import { db } from "@/lib/db";
 import { cardProgress, userStats } from "@/db/schema";
 import { getTodayXp } from "@/lib/xp";
 import { getDueCount } from "@/lib/queue";
+import { getParcours } from "@/lib/parcours";
 import { allFlashcards, parties, sousThemes } from "@/content";
 import { Logo } from "@/components/ui/Logo";
 import { ProgressRing } from "@/components/ui/ProgressRing";
@@ -36,6 +37,13 @@ export default async function DashboardPage() {
   const goal = stats?.dailyXpGoal ?? 50;
   const streak = stats?.currentStreak ?? 0;
   const freezes = stats?.streakFreezes ?? 0;
+
+  // unité en cours du parcours (première déverrouillée non terminée)
+  const unites = await getParcours(userId);
+  const currentUnite = unites.find((u) => u.unlocked && u.progress < 1);
+  const currentPartie = currentUnite
+    ? parties.find((p) => p.id === currentUnite.sousTheme.partieId)
+    : undefined;
 
   const partiesProgress = parties
     .map((partie) => {
@@ -95,6 +103,33 @@ export default async function DashboardPage() {
           </Link>
         </div>
       </section>
+
+      {/* Reprendre le parcours */}
+      {currentUnite && currentPartie && (
+        <Link
+          href={`/rubriques/${currentPartie.slug}/${currentUnite.sousTheme.slug}?from=parcours`}
+          className="flex items-center gap-4 rounded-card border border-border bg-surface p-4 shadow-sm transition-transform active:scale-[0.98]"
+        >
+          <ProgressRing progress={currentUnite.progress} size={52} strokeWidth={5}>
+            <span aria-hidden className="text-xl">
+              {currentUnite.sousTheme.emoji}
+            </span>
+          </ProgressRing>
+          <span className="min-w-0 flex-1">
+            <span className="block text-xs font-semibold uppercase tracking-wide text-muted">
+              Reprendre le parcours
+            </span>
+            <span className="block truncate font-bold">{currentUnite.sousTheme.titre}</span>
+            <span className="block text-sm text-muted">
+              {Math.round(currentUnite.progress * 100)}&nbsp;%
+              {Math.round(currentUnite.progress * 100) >= 60
+                ? " — unité suivante débloquée ✓"
+                : ` — encore ${60 - Math.round(currentUnite.progress * 100)} % pour débloquer la suite`}
+            </span>
+          </span>
+          <ChevronRight className="size-5 shrink-0 text-muted" />
+        </Link>
+      )}
 
       {/* Examen blanc */}
       <Link

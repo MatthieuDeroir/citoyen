@@ -4,11 +4,16 @@ import {
   ChevronLeft,
   Layers,
   ListChecks,
+  Lock,
   MessageCircleQuestion,
   TextCursorInput,
 } from "lucide-react";
 import { auth } from "@/lib/auth";
-import { getSousThemeProgress, type SousThemeProgress } from "@/lib/parcours";
+import {
+  getSousThemeProgress,
+  getUnlockedSousThemes,
+  type SousThemeProgress,
+} from "@/lib/parcours";
 import { getPartie, getSousTheme } from "@/content/parties";
 import { getContent } from "@/content";
 
@@ -67,8 +72,34 @@ export default async function SousThemePage({
   if (!partie || !sousTheme || sousTheme.partieId !== partie.id) notFound();
 
   const session = await auth();
+  const userId = session!.user!.id!;
+
+  const unlocked = await getUnlockedSousThemes(userId);
+  if (!unlocked.has(sousTheme.id)) {
+    return (
+      <div className="flex min-h-[60dvh] flex-col items-center justify-center gap-5 text-center">
+        <span className="flex size-20 items-center justify-center rounded-full bg-border">
+          <Lock className="size-9 text-muted" />
+        </span>
+        <div>
+          <h1 className="text-xl font-bold">Unité verrouillée</h1>
+          <p className="mx-auto mt-2 max-w-xs text-sm text-muted">
+            Termine l&apos;unité précédente à 60&nbsp;% dans le parcours pour débloquer «&nbsp;
+            {sousTheme.titre}&nbsp;».
+          </p>
+        </div>
+        <Link
+          href="/parcours"
+          className="rounded-2xl bg-primary px-6 py-3 font-semibold text-on-primary transition-transform active:scale-95"
+        >
+          Aller au parcours
+        </Link>
+      </div>
+    );
+  }
+
   const content = getContent(sousTheme.id);
-  const progress = await getSousThemeProgress(session!.user!.id!, sousTheme.id);
+  const progress = await getSousThemeProgress(userId, sousTheme.id);
 
   const totalDone =
     progress.cartes.done + progress.qcm.done + progress.ouvertes.done + progress.trous.done;
