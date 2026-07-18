@@ -168,45 +168,50 @@ export function FlashcardPlayer({ deck, title, backHref, onRate }: Props) {
               {/* Recto — chaque face porte sa propre rotation : backface-visibility
                   fiable partout (Firefox l'ignore quand la rotation est sur un parent) */}
               <motion.div
-                className="absolute inset-0 flex flex-col items-center justify-center overflow-hidden rounded-card border border-border bg-surface p-6 text-center shadow-lg"
+                className="absolute inset-0 overflow-hidden rounded-card border border-border bg-surface text-center shadow-lg"
                 style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}
                 animate={{ rotateY: flipped ? 180 : 0 }}
                 transition={{ type: "spring", stiffness: 260, damping: 26 }}
               >
                 <span aria-hidden className="tricolore absolute inset-x-0 top-0 h-1.5" />
-                {emoji && (
-                  <span aria-hidden className="mb-5 flex size-20 items-center justify-center rounded-full bg-primary-soft text-4xl">
-                    {emoji}
-                  </span>
-                )}
-                <span className="mb-4 rounded-full bg-primary-soft px-3 py-1 text-xs font-bold uppercase tracking-wide text-primary">
-                  Question
-                </span>
-                <p
-                  className={`text-balance font-semibold leading-snug ${
-                    card.front.length > 120 ? "text-lg" : "text-xl sm:text-2xl"
-                  }`}
-                >
-                  {card.front}
-                </p>
-                {card.hint && (
-                  <div className="mt-6">
-                    {showHint ? (
-                      <p className="text-sm italic text-muted">💡 {card.hint}</p>
-                    ) : (
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setShowHint(true);
-                        }}
-                        className="inline-flex items-center gap-1 text-sm font-medium text-primary"
-                      >
-                        <Lightbulb className="size-4" /> Indice
-                      </button>
+                {/* m-auto : centré si ça tient, scroll sinon (petits écrans) */}
+                <div className="flex h-full flex-col overflow-y-auto p-5 pb-9">
+                  <div className="m-auto flex flex-col items-center">
+                    {emoji && (
+                      <span aria-hidden className="mb-4 flex size-16 items-center justify-center rounded-full bg-primary-soft text-3xl">
+                        {emoji}
+                      </span>
+                    )}
+                    <span className="mb-3 rounded-full bg-primary-soft px-3 py-1 text-xs font-bold uppercase tracking-wide text-primary">
+                      Question
+                    </span>
+                    <p
+                      className={`text-balance font-semibold leading-snug ${
+                        card.front.length > 120 ? "text-lg" : "text-xl sm:text-2xl"
+                      }`}
+                    >
+                      {card.front}
+                    </p>
+                    {card.hint && (
+                      <div className="mt-5">
+                        {showHint ? (
+                          <p className="text-sm italic text-muted">💡 {card.hint}</p>
+                        ) : (
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setShowHint(true);
+                            }}
+                            className="inline-flex items-center gap-1 text-sm font-medium text-primary"
+                          >
+                            <Lightbulb className="size-4" /> Indice
+                          </button>
+                        )}
+                      </div>
                     )}
                   </div>
-                )}
-                <p className="absolute inset-x-0 bottom-5 text-xs text-muted">
+                </div>
+                <p className="pointer-events-none absolute inset-x-0 bottom-3 text-xs text-muted">
                   Touche la carte pour la retourner
                 </p>
               </motion.div>

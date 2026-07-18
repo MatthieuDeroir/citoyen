@@ -15,6 +15,11 @@ export const metadata: Metadata = {
   },
   description:
     "Entraînement interactif au Livret du citoyen : cartes de révision, QCM, questions ouvertes et textes à trous pour préparer l'examen civique.",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Citoyen",
+  },
 };
 
 export const viewport: Viewport = {
