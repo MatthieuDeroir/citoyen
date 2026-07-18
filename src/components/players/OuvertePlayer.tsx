@@ -111,7 +111,7 @@ export function OuvertePlayer({ deck, title, backHref }: Props) {
   const verdict = result?.verdict ? verdictUi[result.verdict] : null;
 
   return (
-    <div className="flex min-h-[calc(100dvh-1rem)] flex-col pb-4">
+    <div className="flex h-full flex-col">
       <header className="flex items-center gap-3 py-2">
         <button
           aria-label="Quitter la session"
@@ -139,7 +139,7 @@ export function OuvertePlayer({ deck, title, backHref }: Props) {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -40 }}
           transition={{ duration: 0.18 }}
-          className="flex flex-1 flex-col gap-4 pt-4"
+          className="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto pt-4"
         >
           <div className="rounded-card border border-border bg-surface p-5 shadow-sm">
             <p className="mb-1 text-xs font-bold uppercase tracking-wide text-primary">

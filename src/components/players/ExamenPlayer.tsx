@@ -20,6 +20,15 @@ interface Props {
   onSubmit: (answers: { qcmId: string; chosenIndex: number }[]) => Promise<ExamResult>;
 }
 
+function shuffle<T>(arr: T[]): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
 export function ExamenPlayer({ deck, onSubmit }: Props) {
   const [started, setStarted] = useState(false);
   const [index, setIndex] = useState(0);
@@ -30,6 +39,11 @@ export function ExamenPlayer({ deck, onSubmit }: Props) {
   const submittedRef = useRef(false);
 
   const qcmById = useMemo(() => new Map(deck.map((q) => [q.id, q])), [deck]);
+  // ordre d'affichage des choix mélangé par question ; on soumet l'index d'origine
+  const choiceOrders = useMemo(
+    () => new Map(deck.map((q) => [q.id, shuffle(q.choices.map((_, i) => i))])),
+    [deck],
+  );
   const answeredCount = Object.keys(answers).length;
 
   async function finish(current: Record<string, number>) {
@@ -82,7 +96,8 @@ export function ExamenPlayer({ deck, onSubmit }: Props) {
             <strong>
               {EXAM_PASS}/{EXAM_TOTAL}
             </strong>{" "}
-            bonnes réponses. Pas de correction pendant l&apos;épreuve.
+            bonnes réponses. Pas de correction pendant l&apos;épreuve. Le sujet est tiré des{" "}
+            <strong>questions officielles</strong> publiées par le ministère de l&apos;Intérieur.
           </p>
         </div>
         <button
@@ -178,7 +193,7 @@ export function ExamenPlayer({ deck, onSubmit }: Props) {
   const urgent = secondsLeft < 300;
 
   return (
-    <div className="flex min-h-[calc(100dvh-1rem)] flex-col pb-4">
+    <div className="flex h-full flex-col">
       <header className="flex items-center justify-between gap-3 py-2">
         <span className="text-sm font-semibold text-muted tabular-nums">
           {index + 1}/{deck.length}
@@ -206,12 +221,14 @@ export function ExamenPlayer({ deck, onSubmit }: Props) {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -30 }}
           transition={{ duration: 0.15 }}
-          className="flex flex-1 flex-col gap-4 pt-4"
+          className="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto pt-4"
         >
           <h1 className="text-lg font-bold leading-snug">{qcm.question}</h1>
 
           <div className="space-y-3">
-            {qcm.choices.map((choice, i) => (
+            {(choiceOrders.get(qcm.id) ?? qcm.choices.map((_, i) => i)).map((i) => {
+              const choice = qcm.choices[i];
+              return (
               <button
                 key={i}
                 onClick={() => setAnswers((a) => ({ ...a, [qcm.id]: i }))}
@@ -223,7 +240,8 @@ export function ExamenPlayer({ deck, onSubmit }: Props) {
               >
                 {choice}
               </button>
-            ))}
+              );
+            })}
           </div>
 
           <div className="mt-auto flex gap-3">

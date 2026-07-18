@@ -1,9 +1,12 @@
-import { allQcms, sousThemes, type Qcm } from "@/content";
+import { sousThemes, type Qcm } from "@/content";
+import { annales } from "@/content/examen";
 
 /**
  * Format officiel de l'examen civique (arrêté du 10 octobre 2025) :
  * 40 QCM, 45 minutes, admis à partir de 32/40 (80 %).
  * Répartition par thématique : P1 11 · P2 6 · P3 11 · P4 8 · P5 4.
+ * Le sujet est tiré de la banque officielle des questions du ministère
+ * (« Questions de connaissance », 12 décembre 2025 — src/content/examen/).
  */
 export const EXAM_TOTAL = 40;
 export const EXAM_PASS = 32;
@@ -32,10 +35,10 @@ function shuffle<T>(arr: T[]): T[] {
   return a;
 }
 
-/** Tire un sujet d'examen blanc selon la répartition officielle. */
+/** Tire un sujet d'examen blanc dans les annales, selon la répartition officielle. */
 export function buildExam(): Qcm[] {
   const byTheme = new Map<string, Qcm[]>();
-  for (const qcm of allQcms) {
+  for (const qcm of annales) {
     const theme = themeOf(qcm);
     byTheme.set(theme, [...(byTheme.get(theme) ?? []), qcm]);
   }

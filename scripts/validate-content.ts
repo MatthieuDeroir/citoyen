@@ -6,6 +6,7 @@ import {
   allTrous,
   sousThemes,
 } from "../src/content";
+import { annales } from "../src/content/examen";
 
 const sousThemeIds = new Set(sousThemes.map((s) => s.id));
 const validSousTheme = z
@@ -108,11 +109,26 @@ function check(label: string, items: { id: string }[], schema: z.ZodTypeAny) {
   console.log(`  ${label} : ${items.length} items`);
 }
 
+const annaleSchema = z
+  .object({
+    id: z.string().regex(/^an-(pv|si|dd|hg|vs)-\d{3}$/),
+    sousThemeId: validSousTheme,
+    question: z.string().min(5),
+    choices: z.array(z.string().min(1)).length(4),
+    correctIndex: z.literal(0), // convention annales : bonne réponse en premier, mélange à l'affichage
+    explication: z.string().min(10),
+    sourcePage: z.number().int().min(1).max(11), // pages du PDF ministériel
+  })
+  .refine((q) => new Set(q.choices).size === q.choices.length, {
+    message: "choix dupliqués",
+  });
+
 console.log("Validation du contenu…");
 check("flashcard", allFlashcards, flashcardSchema);
 check("qcm", allQcms, qcmSchema);
 check("ouverte", allOuvertes, ouverteSchema);
 check("trous", allTrous, trousSchema);
+check("annale", annales, annaleSchema);
 
 if (errors > 0) {
   console.error(`\n${errors} erreur(s) de contenu.`);

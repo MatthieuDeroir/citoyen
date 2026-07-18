@@ -6,7 +6,6 @@ import { db } from "@/lib/db";
 import { cardProgress, userStats } from "@/db/schema";
 import { getTodayXp } from "@/lib/xp";
 import { getDueCount } from "@/lib/queue";
-import { MASTERY_INTERVAL_DAYS } from "@/lib/srs";
 import { allFlashcards, parties, sousThemes } from "@/content";
 import { Logo } from "@/components/ui/Logo";
 import { ProgressRing } from "@/components/ui/ProgressRing";
@@ -29,7 +28,7 @@ export default async function DashboardPage() {
     .where(
       and(
         eq(cardProgress.userId, userId),
-        gte(cardProgress.intervalDays, MASTERY_INTERVAL_DAYS),
+        gte(cardProgress.repetitions, 1),
       ),
     );
   const mastered = new Set(masteredRows.map((r) => r.cardId));

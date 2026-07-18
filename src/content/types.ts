@@ -17,6 +17,8 @@ export interface SousTheme {
   slug: string;
   titre: string;
   description: string;
+  /** illustration des cartes et listes */
+  emoji: string;
   pages: [number, number];
 }
 

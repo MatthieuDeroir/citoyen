@@ -64,6 +64,7 @@ export const sousThemes: SousTheme[] = [
     slug: "devise-et-symboles",
     titre: "La devise et les symboles de la République",
     description: "Liberté, égalité, fraternité — drapeau, Marianne, 14 juillet…",
+    emoji: "🇫🇷",
     pages: [6, 9],
   },
   {
@@ -72,6 +73,7 @@ export const sousThemes: SousTheme[] = [
     slug: "principes-de-la-republique",
     titre: "Les principes de la République",
     description: "Une République indivisible, laïque, démocratique et sociale.",
+    emoji: "🏛️",
     pages: [10, 14],
   },
   {
@@ -80,6 +82,7 @@ export const sousThemes: SousTheme[] = [
     slug: "democratie-et-etat-de-droit",
     titre: "Démocratie et état de droit",
     description: "Les pouvoirs, les élections et la séparation des pouvoirs.",
+    emoji: "🗳️",
     pages: [16, 18],
   },
   {
@@ -88,6 +91,7 @@ export const sousThemes: SousTheme[] = [
     slug: "organisation-territoriale",
     titre: "Organisation territoriale de la République",
     description: "Communes, départements, régions et outre-mer.",
+    emoji: "🗺️",
     pages: [19, 21],
   },
   {
@@ -96,6 +100,7 @@ export const sousThemes: SousTheme[] = [
     slug: "union-europeenne",
     titre: "L'Union européenne et ses institutions",
     description: "La construction européenne et ses institutions.",
+    emoji: "🇪🇺",
     pages: [22, 23],
   },
   {
@@ -104,6 +109,7 @@ export const sousThemes: SousTheme[] = [
     slug: "droits-fondamentaux",
     titre: "Les droits fondamentaux",
     description: "Libertés, protection sociale, éducation, santé…",
+    emoji: "📜",
     pages: [25, 31],
   },
   {
@@ -112,6 +118,7 @@ export const sousThemes: SousTheme[] = [
     slug: "obligations-et-devoirs",
     titre: "Les obligations et devoirs des citoyens",
     description: "Respect de la loi, impôts, défense, scolarité…",
+    emoji: "⚖️",
     pages: [32, 36],
   },
   {
@@ -120,6 +127,7 @@ export const sousThemes: SousTheme[] = [
     slug: "periodes-et-personnages",
     titre: "Principales périodes et personnages",
     description: "De la Gaule à la Ve République : dates et figures clés.",
+    emoji: "👑",
     pages: [38, 48],
   },
   {
@@ -128,6 +136,7 @@ export const sousThemes: SousTheme[] = [
     slug: "territoire-et-geographie",
     titre: "Territoire et géographie",
     description: "Fleuves, montagnes, frontières, outre-mer.",
+    emoji: "⛰️",
     pages: [49, 52],
   },
   {
@@ -136,6 +145,7 @@ export const sousThemes: SousTheme[] = [
     slug: "culture-et-patrimoine",
     titre: "La culture et le patrimoine",
     description: "Monuments, artistes, gastronomie, langue française.",
+    emoji: "🎨",
     pages: [53, 60],
   },
   {
@@ -144,6 +154,7 @@ export const sousThemes: SousTheme[] = [
     slug: "vie-quotidienne",
     titre: "La vie quotidienne",
     description: "Logement, santé, école, démarches administratives.",
+    emoji: "🏠",
     pages: [62, 69],
   },
   {
@@ -152,6 +163,7 @@ export const sousThemes: SousTheme[] = [
     slug: "travailler-en-france",
     titre: "Travailler en France",
     description: "Droit du travail, recherche d'emploi, protection sociale.",
+    emoji: "💼",
     pages: [70, 72],
   },
   {
@@ -160,6 +172,7 @@ export const sousThemes: SousTheme[] = [
     slug: "vie-familiale",
     titre: "La vie familiale",
     description: "Mariage, égalité dans la famille, protection de l'enfance.",
+    emoji: "👨‍👩‍👧",
     pages: [73, 76],
   },
   {
@@ -168,6 +181,7 @@ export const sousThemes: SousTheme[] = [
     slug: "textes-fondamentaux",
     titre: "Les textes fondamentaux",
     description: "DDHC de 1789 et Charte des droits et devoirs du citoyen.",
+    emoji: "📖",
     pages: [78, 80],
   },
 ];

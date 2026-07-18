@@ -48,7 +48,7 @@ export default async function ParcoursPage() {
               <div className={offset}>
                 {unite.unlocked ? (
                   <Link
-                    href={`/rubriques/${partie.slug}/${unite.sousTheme.slug}`}
+                    href={`/rubriques/${partie.slug}/${unite.sousTheme.slug}?from=parcours`}
                     className={`flex w-fit max-w-full items-center gap-4 rounded-card border-2 p-3 pr-5 shadow-sm transition-transform active:scale-[0.97] ${
                       unite.perfect
                         ? "border-gold bg-gold-soft"

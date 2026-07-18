@@ -10,6 +10,7 @@ import {
 } from "motion/react";
 import { X, RotateCcw, Check, Zap, Lightbulb } from "lucide-react";
 import type { Flashcard } from "@/content/types";
+import { getSousTheme } from "@/content/parties";
 import type { Rating } from "@/lib/srs";
 import { CardText } from "@/components/ui/CardText";
 import { SessionResults } from "@/components/players/SessionResults";
@@ -46,6 +47,7 @@ export function FlashcardPlayer({ deck, title, backHref, onRate }: Props) {
 
   const currentId = queue[position];
   const card = currentId ? cardById.get(currentId) : undefined;
+  const emoji = card ? getSousTheme(card.sousThemeId)?.emoji : undefined;
   const done = position >= queue.length;
 
   function rate(rating: Rating) {
@@ -107,7 +109,7 @@ export function FlashcardPlayer({ deck, title, backHref, onRate }: Props) {
   const progress = queue.length === 0 ? 0 : position / queue.length;
 
   return (
-    <div className="flex min-h-[calc(100dvh-1rem)] flex-col pb-4">
+    <div className="flex h-full flex-col">
       {/* Header : fermer + progression */}
       <header className="flex items-center gap-3 py-2">
         <button
@@ -130,16 +132,16 @@ export function FlashcardPlayer({ deck, title, backHref, onRate }: Props) {
       </header>
 
       {/* Carte */}
-      <div className="relative flex flex-1 items-center justify-center py-4" style={{ perspective: 1200 }}>
+      <div className="relative flex-1 py-3">
         <AnimatePresence mode="wait">
           {card && (
             <motion.div
               key={`${card.id}-${position}`}
-              className="relative h-full max-h-[480px] w-full cursor-pointer touch-pan-y"
+              className="absolute inset-x-0 inset-y-3 mx-auto max-w-xl cursor-pointer touch-pan-y"
               drag={flipped ? "x" : false}
               dragConstraints={{ left: 0, right: 0 }}
               dragElastic={0.8}
-              style={{ x, rotate }}
+              style={{ x, rotate, perspective: 1200 }}
               onDragEnd={handleDragEnd}
               initial={{ opacity: 0, y: 24, scale: 0.96 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -163,50 +165,83 @@ export function FlashcardPlayer({ deck, title, backHref, onRate }: Props) {
                 </>
               )}
 
+              {/* Recto — chaque face porte sa propre rotation : backface-visibility
+                  fiable partout (Firefox l'ignore quand la rotation est sur un parent) */}
               <motion.div
-                className="relative h-full w-full"
+                className="absolute inset-0 flex flex-col items-center justify-center overflow-hidden rounded-card border border-border bg-surface p-6 text-center shadow-lg"
+                style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}
                 animate={{ rotateY: flipped ? 180 : 0 }}
                 transition={{ type: "spring", stiffness: 260, damping: 26 }}
-                style={{ transformStyle: "preserve-3d" }}
               >
-                {/* Recto */}
-                <div
-                  className="absolute inset-0 flex flex-col items-center justify-center rounded-card border border-border bg-surface p-6 text-center shadow-lg"
-                  style={{ backfaceVisibility: "hidden" }}
-                >
-                  <span className="mb-4 rounded-full bg-primary-soft px-3 py-1 text-xs font-bold uppercase tracking-wide text-primary">
-                    Question
+                <span aria-hidden className="tricolore absolute inset-x-0 top-0 h-1.5" />
+                {emoji && (
+                  <span aria-hidden className="mb-5 flex size-20 items-center justify-center rounded-full bg-primary-soft text-4xl">
+                    {emoji}
                   </span>
-                  <p className="text-xl font-semibold leading-snug">{card.front}</p>
-                  {card.hint && (
-                    <div className="mt-6">
-                      {showHint ? (
-                        <p className="text-sm italic text-muted">💡 {card.hint}</p>
-                      ) : (
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setShowHint(true);
-                          }}
-                          className="inline-flex items-center gap-1 text-sm font-medium text-primary"
-                        >
-                          <Lightbulb className="size-4" /> Indice
-                        </button>
-                      )}
-                    </div>
-                  )}
-                  <p className="mt-8 text-xs text-muted">Touche la carte pour la retourner</p>
-                </div>
+                )}
+                <span className="mb-4 rounded-full bg-primary-soft px-3 py-1 text-xs font-bold uppercase tracking-wide text-primary">
+                  Question
+                </span>
+                <p
+                  className={`text-balance font-semibold leading-snug ${
+                    card.front.length > 120 ? "text-lg" : "text-xl sm:text-2xl"
+                  }`}
+                >
+                  {card.front}
+                </p>
+                {card.hint && (
+                  <div className="mt-6">
+                    {showHint ? (
+                      <p className="text-sm italic text-muted">💡 {card.hint}</p>
+                    ) : (
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setShowHint(true);
+                        }}
+                        className="inline-flex items-center gap-1 text-sm font-medium text-primary"
+                      >
+                        <Lightbulb className="size-4" /> Indice
+                      </button>
+                    )}
+                  </div>
+                )}
+                <p className="absolute inset-x-0 bottom-5 text-xs text-muted">
+                  Touche la carte pour la retourner
+                </p>
+              </motion.div>
 
-                {/* Verso */}
-                <div
-                  className="absolute inset-0 flex flex-col items-center justify-center overflow-y-auto rounded-card border border-primary/30 bg-surface p-6 text-center shadow-lg"
-                  style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
-                >
-                  <span className="mb-4 rounded-full bg-success-soft px-3 py-1 text-xs font-bold uppercase tracking-wide text-success">
-                    Réponse
+              {/* Verso */}
+              <motion.div
+                className="absolute inset-0 overflow-hidden rounded-card border border-primary/30 bg-surface text-center shadow-lg"
+                style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}
+                initial={false}
+                animate={{ rotateY: flipped ? 0 : -180 }}
+                transition={{ type: "spring", stiffness: 260, damping: 26 }}
+              >
+                <span aria-hidden className="tricolore absolute inset-x-0 top-0 h-1.5" />
+                {emoji && (
+                  <span
+                    aria-hidden
+                    className="pointer-events-none absolute -bottom-8 -right-6 select-none text-[9rem] opacity-[0.07]"
+                  >
+                    {emoji}
                   </span>
-                  <CardText text={card.back} className="text-base leading-relaxed" />
+                )}
+                {/* m-auto : centré quand la réponse est courte, scroll depuis le haut sinon */}
+                <div className="flex h-full flex-col overflow-y-auto p-6">
+                  <div className="m-auto flex flex-col items-center">
+                    <span className="mb-4 rounded-full bg-success-soft px-3 py-1 text-xs font-bold uppercase tracking-wide text-success">
+                      Réponse
+                    </span>
+                    <CardText
+                      text={card.back}
+                      className={`leading-relaxed ${card.back.length > 400 ? "text-base" : "text-lg"}`}
+                    />
+                    <p className="mt-5 text-xs text-muted">
+                      Question : <span className="italic">{card.front}</span>
+                    </p>
+                  </div>
                 </div>
               </motion.div>
             </motion.div>

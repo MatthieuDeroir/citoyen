@@ -43,7 +43,7 @@ export function SessionResults({ title, score, stats, backHref, onRestart, xp }:
         : { Icon: Dumbbell, message: "L'entraînement paie, persévère !" };
 
   return (
-    <div className="flex min-h-[calc(100dvh-8rem)] flex-col items-center justify-center gap-6 text-center">
+    <div className="flex min-h-full flex-col items-center justify-center gap-6 text-center">
       <motion.div
         initial={{ scale: 0, rotate: -12 }}
         animate={{ scale: 1, rotate: 0 }}

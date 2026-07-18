@@ -5,6 +5,7 @@ import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { attempts, userStats } from "@/db/schema";
 import { getQcm } from "@/content";
+import { annalesById } from "@/content/examen";
 import { addXp } from "@/lib/xp";
 import { EXAM_PASS, EXAM_TOTAL } from "@/lib/examen";
 
@@ -29,7 +30,7 @@ export async function submitExamen(
   let correctCount = 0;
 
   for (const { qcmId, chosenIndex } of answers) {
-    const qcm = getQcm(qcmId);
+    const qcm = annalesById.get(qcmId) ?? getQcm(qcmId);
     if (!qcm) continue;
     const correct = chosenIndex === qcm.correctIndex;
     if (correct) correctCount++;

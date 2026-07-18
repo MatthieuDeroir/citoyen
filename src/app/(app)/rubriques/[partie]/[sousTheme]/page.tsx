@@ -7,42 +7,45 @@ import {
   MessageCircleQuestion,
   TextCursorInput,
 } from "lucide-react";
-import { getPartie, getSousTheme, sousThemes, parties } from "@/content/parties";
+import { auth } from "@/lib/auth";
+import { getSousThemeProgress, type SousThemeProgress } from "@/lib/parcours";
+import { getPartie, getSousTheme } from "@/content/parties";
 import { getContent } from "@/content";
-
-export function generateStaticParams() {
-  return sousThemes.map((st) => {
-    const partie = parties.find((p) => p.id === st.partieId)!;
-    return { partie: partie.slug, sousTheme: st.slug };
-  });
-}
 
 const modes = [
   {
     href: "cartes",
+    key: "cartes",
     label: "Cartes de révision",
     description: "Mémorise recto-verso",
+    doneLabel: "revues avec succès",
     icon: Layers,
     count: (c: ReturnType<typeof getContent>) => c.flashcards.length,
   },
   {
     href: "qcm",
+    key: "qcm",
     label: "QCM",
     description: "Choisis la bonne réponse",
+    doneLabel: "réussis",
     icon: ListChecks,
     count: (c: ReturnType<typeof getContent>) => c.qcms.length,
   },
   {
     href: "ouvertes",
+    key: "ouvertes",
     label: "Questions ouvertes",
     description: "Réponds comme à l'entretien",
+    doneLabel: "réussies",
     icon: MessageCircleQuestion,
     count: (c: ReturnType<typeof getContent>) => c.ouvertes.length,
   },
   {
     href: "trous",
+    key: "trous",
     label: "Textes à trous",
     description: "Complète les phrases clés",
+    doneLabel: "réussis",
     icon: TextCursorInput,
     count: (c: ReturnType<typeof getContent>) => c.trous.length,
   },
@@ -50,33 +53,63 @@ const modes = [
 
 export default async function SousThemePage({
   params,
+  searchParams,
 }: {
   params: Promise<{ partie: string; sousTheme: string }>;
+  searchParams: Promise<{ from?: string }>;
 }) {
-  const { partie: partieSlug, sousTheme: stSlug } = await params;
+  const [{ partie: partieSlug, sousTheme: stSlug }, { from }] = await Promise.all([
+    params,
+    searchParams,
+  ]);
   const partie = getPartie(partieSlug);
   const sousTheme = getSousTheme(stSlug);
   if (!partie || !sousTheme || sousTheme.partieId !== partie.id) notFound();
 
+  const session = await auth();
   const content = getContent(sousTheme.id);
+  const progress = await getSousThemeProgress(session!.user!.id!, sousTheme.id);
+
+  const totalDone =
+    progress.cartes.done + progress.qcm.done + progress.ouvertes.done + progress.trous.done;
+  const totalAll =
+    progress.cartes.total + progress.qcm.total + progress.ouvertes.total + progress.trous.total;
+  const percent = totalAll === 0 ? 0 : Math.round((totalDone / totalAll) * 100);
+
+  const fromParcours = from === "parcours";
+  const backHref = fromParcours ? "/parcours" : `/rubriques/${partie.slug}`;
+  const backLabel = fromParcours ? "Parcours" : partie.titreCourt;
 
   return (
     <div className="space-y-6">
       <header>
         <Link
-          href={`/rubriques/${partie.slug}`}
+          href={backHref}
           className="mb-3 inline-flex items-center gap-1 text-sm font-medium text-muted"
         >
-          <ChevronLeft className="size-4" /> {partie.titreCourt}
+          <ChevronLeft className="size-4" /> {backLabel}
         </Link>
-        <h1 className="text-xl font-bold leading-tight">{sousTheme.titre}</h1>
+        <div className="flex items-start justify-between gap-3">
+          <h1 className="text-xl font-bold leading-tight">
+            {sousTheme.emoji} {sousTheme.titre}
+          </h1>
+          <span className="mt-0.5 shrink-0 rounded-full bg-primary-soft px-2.5 py-1 text-xs font-bold tabular-nums text-primary">
+            {percent}%
+          </span>
+        </div>
         <p className="mt-2 text-sm text-muted">{sousTheme.description}</p>
+        <p className="mt-1 text-xs text-muted">
+          {totalDone}/{totalAll} éléments validés — cartes revues avec succès et exercices
+          réussis au moins une fois.
+        </p>
       </header>
 
       <ul className="grid grid-cols-1 gap-3">
-        {modes.map(({ href, label, description, icon: Icon, count }) => {
+        {modes.map(({ href, key, label, description, doneLabel, icon: Icon, count }) => {
           const n = count(content);
           if (n === 0) return null;
+          const p: SousThemeProgress[keyof SousThemeProgress] = progress[key];
+          const full = p.done >= p.total;
           return (
             <li key={href}>
               <Link
@@ -86,12 +119,23 @@ export default async function SousThemePage({
                 <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary-soft text-primary">
                   <Icon className="size-5" />
                 </span>
-                <span className="flex-1">
+                <span className="min-w-0 flex-1">
                   <span className="block font-semibold">{label}</span>
                   <span className="block text-sm text-muted">{description}</span>
+                  <span className="mt-2 block h-1.5 overflow-hidden rounded-full bg-border">
+                    <span
+                      className={`block h-full rounded-full ${full ? "bg-success" : "bg-primary"}`}
+                      style={{ width: `${p.total === 0 ? 0 : (p.done / p.total) * 100}%` }}
+                    />
+                  </span>
                 </span>
-                <span className="rounded-full bg-primary-soft px-2.5 py-1 text-xs font-bold text-primary">
-                  {n}
+                <span
+                  className={`shrink-0 rounded-full px-2.5 py-1 text-xs font-bold tabular-nums ${
+                    full ? "bg-success-soft text-success" : "bg-primary-soft text-primary"
+                  }`}
+                  title={`${p.done} ${doneLabel} sur ${p.total}`}
+                >
+                  {p.done}/{p.total}
                 </span>
               </Link>
             </li>

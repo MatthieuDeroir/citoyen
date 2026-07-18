@@ -8,7 +8,7 @@ Application d'entraînement à l'examen civique et à l'entretien de naturalisat
 - **QCM** corrigés instantanément — 158 questions
 - **Questions ouvertes** corrigées par IA (Mistral Small), style entretien préfecture — 55 questions
 - **Textes à trous** à correction hybride (locale + IA) — 46 exercices
-- **Examen blanc** au format officiel : 40 questions, 45 min, admis à 32/40 (arrêté du 10 octobre 2025)
+- **Examen blanc** au format officiel : 40 questions, 45 min, admis à 32/40 (arrêté du 10 octobre 2025), tiré des **258 questions officielles** du ministère de l'Intérieur (banque du 12 décembre 2025) avec la répartition réglementaire par thème
 - **Gamification** : parcours d'unités déverrouillables, XP et objectif quotidien, streak avec gels, badges
 - Comptes Google, progression synchronisée (Turso), mobile-first, dark mode
 

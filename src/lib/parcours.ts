@@ -1,11 +1,14 @@
 import { and, eq, gte, inArray } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { attempts, cardProgress } from "@/db/schema";
-import { MASTERY_INTERVAL_DAYS } from "@/lib/srs";
 import { getContent, sousThemes, type SousTheme } from "@/content";
 
-/** Seuil de maîtrise (cartes + exercices réussis) pour déverrouiller l'unité suivante. */
+/** Seuil (cartes validées + exercices réussis) pour déverrouiller l'unité suivante. */
 const UNLOCK_THRESHOLD = 0.6;
+
+// Une carte est « validée » dès qu'une révision réussie (Correct/Facile) est
+// enregistrée : repetitions ≥ 1. La maîtrise long terme (intervalle ≥ 21 j)
+// reste réservée aux badges — sinon la progression stagnerait des semaines à 0.
 
 export interface UniteParcours {
   sousTheme: SousTheme;
@@ -15,6 +18,75 @@ export interface UniteParcours {
   perfect: boolean;
 }
 
+export interface ModeProgress {
+  done: number;
+  total: number;
+}
+
+export interface SousThemeProgress {
+  cartes: ModeProgress;
+  qcm: ModeProgress;
+  ouvertes: ModeProgress;
+  trous: ModeProgress;
+}
+
+/** Détail par activité : cartes maîtrisées et exercices réussis (distincts). */
+export async function getSousThemeProgress(
+  userId: string,
+  sousThemeId: string,
+): Promise<SousThemeProgress> {
+  const content = getContent(sousThemeId);
+  const cardIds = content.flashcards.map((c) => c.id);
+  const exerciseIds = [
+    ...content.qcms.map((q) => q.id),
+    ...content.ouvertes.map((q) => q.id),
+    ...content.trous.map((t) => t.id),
+  ];
+
+  const masteredRows =
+    cardIds.length === 0
+      ? []
+      : await db
+          .select({ cardId: cardProgress.cardId })
+          .from(cardProgress)
+          .where(
+            and(
+              eq(cardProgress.userId, userId),
+              gte(cardProgress.repetitions, 1),
+              inArray(cardProgress.cardId, cardIds),
+            ),
+          );
+  const mastered = new Set(masteredRows.map((r) => r.cardId));
+
+  const solvedRows =
+    exerciseIds.length === 0
+      ? []
+      : await db
+          .select({ exerciseId: attempts.exerciseId })
+          .from(attempts)
+          .where(
+            and(
+              eq(attempts.userId, userId),
+              eq(attempts.verdict, "correct"),
+              inArray(attempts.exerciseId, exerciseIds),
+            ),
+          );
+  const solved = new Set(solvedRows.map((r) => r.exerciseId));
+
+  const count = (ids: string[], set: Set<string>) =>
+    ids.filter((id) => set.has(id)).length;
+
+  return {
+    cartes: { done: count(cardIds, mastered), total: cardIds.length },
+    qcm: { done: count(content.qcms.map((q) => q.id), solved), total: content.qcms.length },
+    ouvertes: {
+      done: count(content.ouvertes.map((q) => q.id), solved),
+      total: content.ouvertes.length,
+    },
+    trous: { done: count(content.trous.map((t) => t.id), solved), total: content.trous.length },
+  };
+}
+
 export async function getParcours(userId: string): Promise<UniteParcours[]> {
   const masteredRows = await db
     .select({ cardId: cardProgress.cardId })
@@ -22,7 +94,7 @@ export async function getParcours(userId: string): Promise<UniteParcours[]> {
     .where(
       and(
         eq(cardProgress.userId, userId),
-        gte(cardProgress.intervalDays, MASTERY_INTERVAL_DAYS),
+        gte(cardProgress.repetitions, 1),
       ),
     );
   const mastered = new Set(masteredRows.map((r) => r.cardId));

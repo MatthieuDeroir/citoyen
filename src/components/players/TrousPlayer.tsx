@@ -107,7 +107,7 @@ export function TrousPlayer({ deck, title, backHref }: Props) {
   const resultByIndex = new Map(result?.blanks.map((b) => [b.index, b]) ?? []);
 
   return (
-    <div className="flex min-h-[calc(100dvh-1rem)] flex-col pb-4">
+    <div className="flex h-full flex-col">
       <header className="flex items-center gap-3 py-2">
         <button
           aria-label="Quitter la session"
@@ -135,7 +135,7 @@ export function TrousPlayer({ deck, title, backHref }: Props) {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -40 }}
           transition={{ duration: 0.18 }}
-          className="flex flex-1 flex-col gap-4 pt-4"
+          className="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto pt-4"
         >
           {exercise.intro && (
             <p className="text-sm font-semibold text-muted">{exercise.intro}</p>

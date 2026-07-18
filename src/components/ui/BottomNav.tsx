@@ -17,7 +17,7 @@ export function BottomNav() {
 
   return (
     <nav className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-surface/90 pb-[env(safe-area-inset-bottom)] backdrop-blur-md">
-      <div className="mx-auto flex max-w-lg items-end justify-between px-4">
+      <div className="mx-auto flex h-16 max-w-lg items-end justify-between px-4">
         {items.map(({ href, label, icon: Icon, ...rest }) => {
           const active = pathname.startsWith(href);
           const central = "central" in rest && rest.central;
