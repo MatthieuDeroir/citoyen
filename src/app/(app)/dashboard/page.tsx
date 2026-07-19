@@ -24,8 +24,7 @@ import { ProgressRing } from "@/components/ui/ProgressRing";
 import { GoalEditor } from "@/components/ui/GoalEditor";
 import { ExamChart } from "@/components/ui/ExamChart";
 import { MarseillaisePlayer } from "@/components/marseillaise/MarseillaisePlayer";
-import { AmbianceCard } from "@/components/marseillaise/AmbianceCard";
-import { getAmbianceTracks } from "@/lib/ambiance";
+import { RadioCard } from "@/components/marseillaise/RadioCard";
 
 export const metadata = { title: "Accueil" };
 
@@ -39,7 +38,6 @@ export default async function DashboardPage() {
   const solvedQcms = await getSolvedIds(userId, allQcms.map((q) => q.id));
   const errors = await getErrorQcms(userId);
   const examHistory = await getExamHistory(userId);
-  const ambianceTracks = await getAmbianceTracks();
 
   const goal = stats?.dailyXpGoal ?? 50;
   const streak = stats?.currentStreak ?? 0;
@@ -99,8 +97,8 @@ export default async function DashboardPage() {
       {/* La Marseillaise */}
       <MarseillaisePlayer />
 
-      {/* Ambiance chanson française */}
-      <AmbianceCard tracks={ambianceTracks} />
+      {/* Radio chanson française */}
+      <RadioCard />
 
       {/* Objectif du jour (paramétrable) */}
       <section className="flex items-center gap-5 rounded-card border border-border bg-surface p-5 shadow-sm">

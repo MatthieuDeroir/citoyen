@@ -9,7 +9,6 @@ import {
 } from "react";
 import { usePathname } from "next/navigation";
 import { Pause } from "lucide-react";
-import type { AmbianceTrack } from "@/lib/ambiance";
 
 interface MarseillaiseContextValue {
   playing: boolean;
@@ -19,12 +18,20 @@ interface MarseillaiseContextValue {
   seek: (t: number) => void;
 }
 
+export interface AmbianceSource {
+  title: string;
+  artist: string;
+  src: string;
+  cover: string;
+}
+
 interface AmbianceContextValue {
   playing: boolean;
-  current: AmbianceTrack | null;
-  /** Lance (ou reprend) l'ambiance sur un pool de titres ; tirage aléatoire. */
-  toggle: (tracks: AmbianceTrack[]) => void;
-  next: () => void;
+  current: AmbianceSource | null;
+  /** Lance cette source (change de station si besoin). */
+  select: (source: AmbianceSource) => void;
+  /** Pause/reprise de la source en cours. */
+  toggle: () => void;
 }
 
 const MarseillaiseCtx = createContext<MarseillaiseContextValue | null>(null);
@@ -43,7 +50,7 @@ export function useAmbiance(): AmbianceContextValue {
 }
 
 /**
- * Héberge les éléments audio (Marseillaise + ambiance chanson française) au
+ * Héberge les éléments audio (Marseillaise + radio chanson française) au
  * niveau du layout : la lecture survit à la navigation. Hors de l'accueil, un
  * petit bouton flottant coupe la musique en cours. Une seule source joue à la
  * fois.
@@ -51,12 +58,11 @@ export function useAmbiance(): AmbianceContextValue {
 export function MarseillaiseProvider({ children }: { children: ReactNode }) {
   const anthemRef = useRef<HTMLAudioElement>(null);
   const ambianceRef = useRef<HTMLAudioElement>(null);
-  const poolRef = useRef<AmbianceTrack[]>([]);
   const [anthemPlaying, setAnthemPlaying] = useState(false);
   const [time, setTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [ambPlaying, setAmbPlaying] = useState(false);
-  const [current, setCurrent] = useState<AmbianceTrack | null>(null);
+  const [current, setCurrent] = useState<AmbianceSource | null>(null);
   const pathname = usePathname();
 
   function toggleAnthem() {
@@ -78,24 +84,23 @@ export function MarseillaiseProvider({ children }: { children: ReactNode }) {
     audio.play();
   }
 
-  function playRandomTrack() {
+  function selectAmbiance(source: AmbianceSource) {
     const audio = ambianceRef.current;
-    const pool = poolRef.current;
-    if (!audio || pool.length === 0) return;
-    const track = pool[Math.floor(Math.random() * pool.length)];
-    setCurrent(track);
-    audio.src = track.preview;
+    if (!audio) return;
+    anthemRef.current?.pause();
+    setCurrent(source);
+    audio.src = source.src;
     audio.play();
   }
 
-  function toggleAmbiance(tracks: AmbianceTrack[]) {
+  function toggleAmbiance() {
     const audio = ambianceRef.current;
-    if (!audio) return;
-    if (tracks.length > 0) poolRef.current = tracks;
+    if (!audio || !current) return;
     if (audio.paused) {
       anthemRef.current?.pause();
-      if (audio.src && current) audio.play();
-      else playRandomTrack();
+      // flux en direct : on recharge pour reprendre au direct, pas au buffer
+      audio.src = current.src;
+      audio.play();
     } else {
       audio.pause();
     }
@@ -117,8 +122,8 @@ export function MarseillaiseProvider({ children }: { children: ReactNode }) {
         value={{
           playing: ambPlaying,
           current,
+          select: selectAmbiance,
           toggle: toggleAmbiance,
-          next: playRandomTrack,
         }}
       >
         {children}
@@ -140,7 +145,6 @@ export function MarseillaiseProvider({ children }: { children: ReactNode }) {
           preload="none"
           onPlay={() => setAmbPlaying(true)}
           onPause={() => setAmbPlaying(false)}
-          onEnded={playRandomTrack}
         />
         {showMini && (
           <button
