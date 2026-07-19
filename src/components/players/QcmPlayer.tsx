@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useExitSession } from "@/components/players/useExitSession";
 import { motion, AnimatePresence } from "motion/react";
 import { X, Check, XCircle, ArrowRight } from "lucide-react";
 import type { Qcm } from "@/content/types";
@@ -41,7 +41,7 @@ export function QcmPlayer({ deck, title, backHref, onSubmit, next: nextSession }
   const [correctCount, setCorrectCount] = useState(0);
   const [xpTotal, setXpTotal] = useState(0);
   const [sessionKey, setSessionKey] = useState(0);
-  const router = useRouter();
+  const exitSession = useExitSession(backHref);
 
   const qcm = questions[index];
   const done = index >= questions.length;
@@ -100,7 +100,7 @@ export function QcmPlayer({ deck, title, backHref, onSubmit, next: nextSession }
       <header className="flex items-center gap-3 py-2">
         <button
           aria-label="Quitter la session"
-          onClick={() => router.push(backHref)}
+          onClick={exitSession}
           className="rounded-full p-2 text-muted transition-colors hover:text-foreground"
         >
           <X className="size-6" />

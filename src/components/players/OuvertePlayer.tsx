@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useExitSession } from "@/components/players/useExitSession";
 import { motion, AnimatePresence } from "motion/react";
 import { X, Send, ArrowRight, Sparkles, CircleCheck, CircleAlert, CircleX } from "lucide-react";
 import type { QuestionOuverte } from "@/content/types";
@@ -39,7 +39,7 @@ export function OuvertePlayer({ deck, title, backHref, next: nextSession }: Prop
   const [result, setResult] = useState<GradeResponse | null>(null);
   const [scores, setScores] = useState<number[]>([]);
   const [xpTotal, setXpTotal] = useState(0);
-  const router = useRouter();
+  const exitSession = useExitSession(backHref);
 
   const question = deck[index];
   const done = index >= deck.length;
@@ -117,7 +117,7 @@ export function OuvertePlayer({ deck, title, backHref, next: nextSession }: Prop
       <header className="flex items-center gap-3 py-2">
         <button
           aria-label="Quitter la session"
-          onClick={() => router.push(backHref)}
+          onClick={exitSession}
           className="rounded-full p-2 text-muted transition-colors hover:text-foreground"
         >
           <X className="size-6" />

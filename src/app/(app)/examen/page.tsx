@@ -7,12 +7,8 @@ import {
   TrendingUp,
 } from "lucide-react";
 import { auth } from "@/lib/auth";
-import {
-  EXAM_DURATION_MINUTES,
-  EXAM_PASS,
-  EXAM_TOTAL,
-  getExamHistory,
-} from "@/lib/examen";
+import { EXAM_DURATION_MINUTES, EXAM_PASS, EXAM_TOTAL } from "@/lib/examen";
+import { getExamHistory } from "@/lib/examenDb";
 import { ExamChart } from "@/components/ui/ExamChart";
 
 export const metadata = { title: "Examen blanc" };

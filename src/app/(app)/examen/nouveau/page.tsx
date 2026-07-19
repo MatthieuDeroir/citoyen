@@ -1,5 +1,6 @@
 import { auth } from "@/lib/auth";
-import { buildExam, getSeenExamQuestionIds } from "@/lib/examen";
+import { buildExam } from "@/lib/examen";
+import { getSeenExamQuestionIds } from "@/lib/examenDb";
 import { submitExamen } from "@/actions/examen";
 import { ExamenPlayer } from "@/components/players/ExamenPlayer";
 

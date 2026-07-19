@@ -15,7 +15,8 @@ import { userStats } from "@/db/schema";
 import { getTodayXp } from "@/lib/xp";
 import { getParcours, getSolvedIds } from "@/lib/parcours";
 import { getErrorQcms } from "@/lib/erreurs";
-import { getExamHistory, EXAM_TOTAL } from "@/lib/examen";
+import { EXAM_TOTAL } from "@/lib/examen";
+import { getExamHistory } from "@/lib/examenDb";
 import { getLevel } from "@/lib/levels";
 import { parties, allQcms } from "@/content";
 import { Logo } from "@/components/ui/Logo";
@@ -23,6 +24,8 @@ import { ProgressRing } from "@/components/ui/ProgressRing";
 import { GoalEditor } from "@/components/ui/GoalEditor";
 import { ExamChart } from "@/components/ui/ExamChart";
 import { MarseillaisePlayer } from "@/components/marseillaise/MarseillaisePlayer";
+import { AmbianceCard } from "@/components/marseillaise/AmbianceCard";
+import { getAmbianceTracks } from "@/lib/ambiance";
 
 export const metadata = { title: "Accueil" };
 
@@ -36,6 +39,7 @@ export default async function DashboardPage() {
   const solvedQcms = await getSolvedIds(userId, allQcms.map((q) => q.id));
   const errors = await getErrorQcms(userId);
   const examHistory = await getExamHistory(userId);
+  const ambianceTracks = await getAmbianceTracks();
 
   const goal = stats?.dailyXpGoal ?? 50;
   const streak = stats?.currentStreak ?? 0;
@@ -94,6 +98,9 @@ export default async function DashboardPage() {
 
       {/* La Marseillaise */}
       <MarseillaisePlayer />
+
+      {/* Ambiance chanson française */}
+      <AmbianceCard tracks={ambianceTracks} />
 
       {/* Objectif du jour (paramétrable) */}
       <section className="flex items-center gap-5 rounded-card border border-border bg-surface p-5 shadow-sm">

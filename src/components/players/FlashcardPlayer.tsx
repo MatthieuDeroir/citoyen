@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useExitSession } from "@/components/players/useExitSession";
 import {
   motion,
   AnimatePresence,
@@ -39,7 +39,7 @@ export function FlashcardPlayer({ deck, title, backHref, onRate, next }: Props) 
   const [counts, setCounts] = useState({ again: 0, good: 0, easy: 0 });
   const [seen, setSeen] = useState<Set<string>>(new Set());
   const [xpTotal, setXpTotal] = useState(0);
-  const router = useRouter();
+  const exitSession = useExitSession(backHref);
 
   const x = useMotionValue(0);
   const rotate = useTransform(x, [-200, 200], [-12, 12]);
@@ -116,7 +116,7 @@ export function FlashcardPlayer({ deck, title, backHref, onRate, next }: Props) 
       <header className="flex items-center gap-3 py-2">
         <button
           aria-label="Quitter la session"
-          onClick={() => router.push(backHref)}
+          onClick={exitSession}
           className="rounded-full p-2 text-muted transition-colors hover:text-foreground"
         >
           <X className="size-6" />

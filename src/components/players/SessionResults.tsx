@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Link from "next/link";
 import { motion } from "motion/react";
 import { RotateCcw, ArrowLeft, ArrowRight, Trophy, ThumbsUp, Dumbbell } from "lucide-react";
+import { useExitSession } from "@/components/players/useExitSession";
 
 interface Props {
   title: string;
@@ -19,6 +20,7 @@ interface Props {
 }
 
 export function SessionResults({ title, score, stats, backHref, onRestart, xp, next }: Props) {
+  const exit = useExitSession(backHref);
   useEffect(() => {
     if (score < 80) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -96,6 +98,7 @@ export function SessionResults({ title, score, stats, backHref, onRestart, xp, n
         {next && (
           <Link
             href={next.href}
+            replace
             className="flex items-center justify-center gap-2 rounded-2xl bg-primary py-3.5 font-semibold text-on-primary shadow-lg shadow-primary/20 transition-transform active:scale-[0.98]"
           >
             Continuer : {next.label} <ArrowRight className="size-5" />
@@ -113,12 +116,12 @@ export function SessionResults({ title, score, stats, backHref, onRestart, xp, n
             <RotateCcw className="size-5" /> Recommencer
           </button>
         )}
-        <Link
-          href={backHref}
+        <button
+          onClick={exit}
           className="flex items-center justify-center gap-2 rounded-2xl border border-border bg-surface py-3.5 font-semibold transition-transform active:scale-[0.98]"
         >
           <ArrowLeft className="size-5" /> Retour
-        </Link>
+        </button>
       </div>
     </div>
   );
