@@ -41,12 +41,16 @@ async function main() {
   console.assert(dueDiffH > 23 && dueDiffH < 25, `dueAt ≈ +24h (${dueDiffH.toFixed(1)}h)`);
   console.log("✓ cardProgress persisté, dueAt à +24h");
 
-  // --- file du jour : la carte revue n'est plus due, les nouvelles sont capées à 10 ---
+  // --- file de révision : uniquement les cartes acquises ; la carte revue
+  // n'est pas due (dueAt +24h) donc proposée en mode « en avance » ---
   const queue = await getDailyQueue(TEST_ID);
   console.assert(queue.dueCount === 0, "aucune carte due");
-  console.assert(queue.newCount === 10, `10 nouvelles (reçu ${queue.newCount})`);
-  console.assert(!queue.cards.some((c) => c.id === "p1-s1-fc-001"), "carte revue exclue des nouvelles");
-  console.log("✓ file du jour :", { due: queue.dueCount, nouvelles: queue.newCount });
+  console.assert(queue.ahead, "mode révision en avance");
+  console.assert(
+    queue.cards.length === 1 && queue.cards[0].id === "p1-s1-fc-001",
+    "seule la carte acquise est proposée",
+  );
+  console.log("✓ file de révision :", { due: queue.dueCount, enAvance: queue.cards.length });
 
   // --- XP + streak : atteindre l'objectif (50 XP) déclenche le streak ---
   for (let i = 0; i < 5; i++) await addXp(TEST_ID, 10, "review");

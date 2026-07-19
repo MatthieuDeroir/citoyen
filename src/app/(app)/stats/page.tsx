@@ -6,6 +6,7 @@ import { cardProgress, userStats, xpEvents } from "@/db/schema";
 import { MASTERY_INTERVAL_DAYS } from "@/lib/srs";
 import { allFlashcards } from "@/content";
 import { getAchievements } from "@/lib/achievements";
+import { getLevel } from "@/lib/levels";
 import { parisDay } from "@/lib/dates";
 import { ReminderSettings } from "@/components/pwa/ReminderSettings";
 
@@ -57,6 +58,10 @@ export default async function StatsPage() {
           <h1 className="text-2xl font-bold">Statistiques</h1>
           <p className="mt-1 text-sm text-muted">
             {session?.user?.name ?? session?.user?.email}
+          </p>
+          <p className="mt-0.5 text-sm font-semibold text-primary">
+            Niveau {getLevel(stats?.totalXp ?? 0).level} —{" "}
+            {getLevel(stats?.totalXp ?? 0).title}
           </p>
         </div>
         {(stats?.streakFreezes ?? 0) > 0 && (

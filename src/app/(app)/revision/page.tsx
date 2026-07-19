@@ -17,16 +17,16 @@ export default async function RevisionPage() {
     return (
       <div className="flex min-h-[60dvh] flex-col items-center justify-center gap-4 text-center">
         <PartyPopper className="size-14 text-primary" />
-        <h1 className="text-2xl font-bold">Tout est à jour !</h1>
+        <h1 className="text-2xl font-bold">Rien à réviser ici !</h1>
         <p className="max-w-xs text-muted">
-          Aucune carte à réviser pour le moment. Reviens plus tard, ou entraîne-toi
-          avec les QCM et exercices d&apos;une rubrique.
+          La révision reprend les cartes que tu as déjà validées. Commence par
+          apprendre des cartes dans le parcours ou les rubriques.
         </p>
         <Link
-          href="/rubriques"
+          href="/parcours"
           className="rounded-2xl bg-primary px-6 py-3 font-semibold text-on-primary"
         >
-          Explorer les rubriques
+          Aller au parcours
         </Link>
       </div>
     );
@@ -35,7 +35,11 @@ export default async function RevisionPage() {
   return (
     <FlashcardPlayer
       deck={queue.cards}
-      title={`Révision du jour · ${queue.dueCount} due${queue.dueCount > 1 ? "s" : ""} + ${queue.newCount} nouvelle${queue.newCount > 1 ? "s" : ""}`}
+      title={
+        queue.ahead
+          ? `Révision en avance · ${queue.cards.length} carte${queue.cards.length > 1 ? "s" : ""}`
+          : `Révision du jour · ${queue.dueCount} carte${queue.dueCount > 1 ? "s" : ""} due${queue.dueCount > 1 ? "s" : ""}`
+      }
       backHref="/dashboard"
       onRate={reviewCard}
     />

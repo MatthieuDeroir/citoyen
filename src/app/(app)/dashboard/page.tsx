@@ -1,16 +1,24 @@
 import Link from "next/link";
-import { and, eq, gte } from "drizzle-orm";
-import { Flame, Snowflake, ChevronRight, Zap, GraduationCap } from "lucide-react";
+import { eq } from "drizzle-orm";
+import {
+  Flame,
+  Snowflake,
+  ChevronRight,
+  Zap,
+  GraduationCap,
+  Star,
+} from "lucide-react";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { cardProgress, userStats } from "@/db/schema";
+import { userStats } from "@/db/schema";
 import { getTodayXp } from "@/lib/xp";
 import { getDueCount } from "@/lib/queue";
 import { getParcours } from "@/lib/parcours";
-import { allFlashcards, parties, sousThemes } from "@/content";
+import { getLevel } from "@/lib/levels";
+import { parties } from "@/content";
 import { Logo } from "@/components/ui/Logo";
 import { ProgressRing } from "@/components/ui/ProgressRing";
-import { PartieIcon } from "@/components/ui/PartieIcon";
+import { GoalEditor } from "@/components/ui/GoalEditor";
 
 export const metadata = { title: "Accueil" };
 
@@ -23,20 +31,10 @@ export default async function DashboardPage() {
   const todayXp = await getTodayXp(userId);
   const dueCount = await getDueCount(userId);
 
-  const masteredRows = await db
-    .select({ cardId: cardProgress.cardId })
-    .from(cardProgress)
-    .where(
-      and(
-        eq(cardProgress.userId, userId),
-        gte(cardProgress.repetitions, 1),
-      ),
-    );
-  const mastered = new Set(masteredRows.map((r) => r.cardId));
-
   const goal = stats?.dailyXpGoal ?? 50;
   const streak = stats?.currentStreak ?? 0;
   const freezes = stats?.streakFreezes ?? 0;
+  const level = getLevel(stats?.totalXp ?? 0);
 
   // unité en cours du parcours (première déverrouillée non terminée)
   const unites = await getParcours(userId);
@@ -44,16 +42,6 @@ export default async function DashboardPage() {
   const currentPartie = currentUnite
     ? parties.find((p) => p.id === currentUnite.sousTheme.partieId)
     : undefined;
-
-  const partiesProgress = parties
-    .map((partie) => {
-      const stIds = sousThemes.filter((s) => s.partieId === partie.id).map((s) => s.id);
-      const cards = allFlashcards.filter((c) => stIds.includes(c.sousThemeId));
-      if (cards.length === 0) return null;
-      const done = cards.filter((c) => mastered.has(c.id)).length;
-      return { partie, total: cards.length, done };
-    })
-    .filter(Boolean) as { partie: (typeof parties)[number]; total: number; done: number }[];
 
   return (
     <div className="space-y-6">
@@ -77,9 +65,27 @@ export default async function DashboardPage() {
       <header>
         <p className="text-sm text-muted">Bonjour{prenom ? ` ${prenom}` : ""} 👋</p>
         <h1 className="text-2xl font-bold">Prêt à réviser ?</h1>
+        {/* Niveau (XP total) */}
+        <div className="mt-3 flex items-center gap-3 rounded-2xl bg-primary-soft px-3.5 py-2.5">
+          <Star className="size-5 shrink-0 fill-primary text-primary" />
+          <div className="min-w-0 flex-1">
+            <p className="text-sm font-bold text-primary">
+              Niveau {level.level} — {level.title}
+            </p>
+            <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-primary/15">
+              <div
+                className="h-full rounded-full bg-primary transition-[width] duration-700"
+                style={{ width: `${level.progress * 100}%` }}
+              />
+            </div>
+          </div>
+          <span className="shrink-0 text-xs font-semibold tabular-nums text-primary">
+            {level.intoLevel}/{level.levelCost} XP
+          </span>
+        </div>
       </header>
 
-      {/* Objectif du jour + CTA révision */}
+      {/* Objectif du jour (paramétrable) */}
       <section className="flex items-center gap-5 rounded-card border border-border bg-surface p-5 shadow-sm">
         <ProgressRing progress={todayXp / goal} size={104}>
           <span className="text-lg font-black tabular-nums">{todayXp}</span>
@@ -90,17 +96,13 @@ export default async function DashboardPage() {
             {todayXp >= goal ? "Objectif atteint 🎉" : "Objectif du jour"}
           </h2>
           <p className="mt-0.5 text-sm text-muted">
-            {dueCount > 0
-              ? `${dueCount} carte${dueCount > 1 ? "s" : ""} à réviser`
-              : "Aucune carte en retard"}
+            {todayXp >= goal
+              ? "Ta série est en sécurité pour aujourd'hui."
+              : `Encore ${goal - todayXp} XP pour prolonger ta série.`}
           </p>
-          <Link
-            href="/revision"
-            className="mt-3 inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-on-primary transition-transform active:scale-95"
-          >
-            <Zap className="size-4" />
-            Lancer la révision
-          </Link>
+          <div className="mt-3">
+            <GoalEditor current={goal} />
+          </div>
         </div>
       </section>
 
@@ -131,6 +133,30 @@ export default async function DashboardPage() {
         </Link>
       )}
 
+      {/* Révision (cartes acquises) */}
+      <Link
+        href="/revision"
+        className="flex items-center gap-4 rounded-card border border-border bg-surface p-4 shadow-sm transition-transform active:scale-[0.98]"
+      >
+        <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-primary text-on-primary">
+          <Zap className="size-6" />
+        </span>
+        <span className="min-w-0 flex-1">
+          <span className="block font-bold">Révision</span>
+          <span className="block text-sm text-muted">
+            {dueCount > 0
+              ? `${dueCount} carte${dueCount > 1 ? "s" : ""} acquise${dueCount > 1 ? "s" : ""} à revoir aujourd'hui`
+              : "Tout est à jour — révise en avance pour consolider"}
+          </span>
+        </span>
+        {dueCount > 0 && (
+          <span className="shrink-0 rounded-full bg-accent-soft px-2.5 py-1 text-xs font-bold tabular-nums text-accent">
+            {dueCount}
+          </span>
+        )}
+        <ChevronRight className="size-5 shrink-0 text-muted" />
+      </Link>
+
       {/* Examen blanc */}
       <Link
         href="/examen"
@@ -142,40 +168,11 @@ export default async function DashboardPage() {
         <span className="min-w-0 flex-1">
           <span className="block font-bold">Examen blanc</span>
           <span className="block text-sm text-muted">
-            40 questions · 45 min · admis à 32/40, comme le vrai examen
+            40 questions officielles · 45 min · admis à 32/40
           </span>
         </span>
         <ChevronRight className="size-5 shrink-0 text-muted" />
       </Link>
-
-      {/* Progression par partie */}
-      <section className="space-y-3">
-        <h2 className="font-bold">Ta progression</h2>
-        {partiesProgress.map(({ partie, total, done }) => (
-          <Link
-            key={partie.id}
-            href={`/rubriques/${partie.slug}`}
-            className="flex items-center gap-3 rounded-card border border-border bg-surface p-4 shadow-sm transition-transform active:scale-[0.98]"
-          >
-            <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary-soft text-primary">
-              <PartieIcon name={partie.icone} className="size-5" />
-            </span>
-            <div className="min-w-0 flex-1">
-              <p className="truncate text-sm font-semibold">{partie.titreCourt}</p>
-              <div className="mt-1.5 h-2 overflow-hidden rounded-full bg-border">
-                <div
-                  className="h-full rounded-full bg-primary transition-[width] duration-700"
-                  style={{ width: `${total === 0 ? 0 : (done / total) * 100}%` }}
-                />
-              </div>
-            </div>
-            <span className="text-xs font-semibold tabular-nums text-muted">
-              {done}/{total}
-            </span>
-            <ChevronRight className="size-4 shrink-0 text-muted" />
-          </Link>
-        ))}
-      </section>
     </div>
   );
 }

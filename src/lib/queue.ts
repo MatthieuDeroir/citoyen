@@ -1,66 +1,77 @@
-import { and, asc, eq, lte } from "drizzle-orm";
+import { and, asc, eq, gte, lte } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { cardProgress } from "@/db/schema";
 import { allFlashcards, type Flashcard } from "@/content";
 import { getUnlockedSousThemes } from "@/lib/parcours";
 
 const MAX_DUE = 40;
-const MAX_NEW = 10;
-/** 1 nouvelle carte intercalée toutes les N dues. */
-const NEW_EVERY = 3;
+/** cartes proposées « en avance » quand rien n'est dû */
+const AHEAD_COUNT = 20;
 
 export interface DailyQueue {
   cards: Flashcard[];
   dueCount: number;
-  newCount: number;
+  /** true si la session est une révision en avance (aucune carte due) */
+  ahead: boolean;
 }
 
-/** File du jour : cartes dues (SRS) + nouvelles cartes dans l'ordre pédagogique. */
+/**
+ * File de révision : uniquement les cartes déjà acquises (au moins une
+ * révision réussie) des unités déverrouillées. La découverte de nouvelles
+ * cartes se fait dans le parcours et les rubriques, jamais ici.
+ */
 export async function getDailyQueue(userId: string): Promise<DailyQueue> {
-  const now = new Date();
+  const unlocked = await getUnlockedSousThemes(userId);
+  const acquiredWhere = and(
+    eq(cardProgress.userId, userId),
+    gte(cardProgress.repetitions, 1),
+  );
+
+  const toCards = (rows: { cardId: string }[]) =>
+    rows
+      .map((r) => allFlashcards.find((c) => c.id === r.cardId))
+      .filter((c): c is Flashcard => Boolean(c) && unlocked.has(c!.sousThemeId));
 
   const dueRows = await db
     .select({ cardId: cardProgress.cardId })
     .from(cardProgress)
-    .where(and(eq(cardProgress.userId, userId), lte(cardProgress.dueAt, now)))
+    .where(and(acquiredWhere, lte(cardProgress.dueAt, new Date())))
     .orderBy(asc(cardProgress.dueAt))
     .limit(MAX_DUE);
+  const dueCards = toCards(dueRows);
 
-  const seenRows = await db
+  if (dueCards.length > 0) {
+    return { cards: dueCards, dueCount: dueCards.length, ahead: false };
+  }
+
+  // rien n'est dû : révision en avance des cartes qui arrivent à échéance
+  const aheadRows = await db
     .select({ cardId: cardProgress.cardId })
     .from(cardProgress)
-    .where(eq(cardProgress.userId, userId));
-  const seen = new Set(seenRows.map((r) => r.cardId));
+    .where(acquiredWhere)
+    .orderBy(asc(cardProgress.dueAt))
+    .limit(AHEAD_COUNT);
+  const aheadCards = toCards(aheadRows);
 
-  const dueCards = dueRows
-    .map((r) => allFlashcards.find((c) => c.id === r.cardId))
-    .filter((c): c is Flashcard => Boolean(c));
-
-  // allFlashcards est déjà dans l'ordre du livret (partie 1 → annexes) ;
-  // les nouvelles cartes respectent le verrou du parcours
-  const unlocked = await getUnlockedSousThemes(userId);
-  const newCards = allFlashcards
-    .filter((c) => !seen.has(c.id) && unlocked.has(c.sousThemeId))
-    .slice(0, MAX_NEW);
-
-  // intercalage : 1 nouvelle toutes les NEW_EVERY dues
-  const cards: Flashcard[] = [];
-  let newIdx = 0;
-  for (let i = 0; i < dueCards.length; i++) {
-    cards.push(dueCards[i]);
-    if ((i + 1) % NEW_EVERY === 0 && newIdx < newCards.length) {
-      cards.push(newCards[newIdx++]);
-    }
-  }
-  while (newIdx < newCards.length) cards.push(newCards[newIdx++]);
-
-  return { cards, dueCount: dueCards.length, newCount: newCards.length };
+  return { cards: aheadCards, dueCount: 0, ahead: aheadCards.length > 0 };
 }
 
+/** Cartes acquises dues (unités déverrouillées uniquement). */
 export async function getDueCount(userId: string): Promise<number> {
+  const unlocked = await getUnlockedSousThemes(userId);
   const rows = await db
     .select({ cardId: cardProgress.cardId })
     .from(cardProgress)
-    .where(and(eq(cardProgress.userId, userId), lte(cardProgress.dueAt, new Date())));
-  return rows.length;
+    .where(
+      and(
+        eq(cardProgress.userId, userId),
+        gte(cardProgress.repetitions, 1),
+        lte(cardProgress.dueAt, new Date()),
+      ),
+    );
+  const byId = new Map(allFlashcards.map((c) => [c.id, c]));
+  return rows.filter((r) => {
+    const card = byId.get(r.cardId);
+    return card && unlocked.has(card.sousThemeId);
+  }).length;
 }
