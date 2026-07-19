@@ -1,17 +1,28 @@
 /**
- * Niveaux fondés sur l'XP total : chaque niveau coûte un peu plus cher
- * que le précédent (100, 125, 150…). Les titres suivent le thème civique.
+ * Niveaux fondés sur l'XP total. La courbe est volontairement lente :
+ * premier niveau à 150 XP puis +60 XP par niveau (150, 210, 270…),
+ * soit plusieurs jours de pratique par niveau une fois lancé.
  */
 const TITLES = [
   "Nouveau venu",
+  "Curieux de la République",
   "Apprenti citoyen",
+  "Lecteur du Livret",
+  "Élève appliqué",
   "Élève de la République",
+  "Connaisseur des symboles",
   "Connaisseur du Livret",
   "Ami de Marianne",
+  "Fidèle de la devise",
   "Gardien de la devise",
+  "Habitué des institutions",
   "Expert des institutions",
+  "Défenseur des droits",
   "Ambassadeur des valeurs",
+  "Pilier de la République",
   "Sage de la République",
+  "Mémoire de la Nation",
+  "Grand citoyen",
   "Citoyen d'honneur",
 ];
 
@@ -26,15 +37,18 @@ export interface Level {
   progress: number;
 }
 
+export function levelCostOf(level: number): number {
+  return 150 + (level - 1) * 60;
+}
+
 export function getLevel(totalXp: number): Level {
   let level = 1;
   let remaining = Math.max(0, totalXp);
-  let cost = 100;
-  while (remaining >= cost) {
-    remaining -= cost;
+  while (remaining >= levelCostOf(level)) {
+    remaining -= levelCostOf(level);
     level++;
-    cost = 100 + (level - 1) * 25;
   }
+  const cost = levelCostOf(level);
   return {
     level,
     title: TITLES[Math.min(level, TITLES.length) - 1],

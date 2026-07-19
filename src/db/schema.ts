@@ -157,6 +157,25 @@ export const achievements = sqliteTable(
   (t) => [primaryKey({ columns: [t.userId, t.achievementId] })],
 );
 
+/** Examens blancs passés (historique, rotation du sujet, graphe d'évolution). */
+export const examens = sqliteTable(
+  "examens",
+  {
+    id: text("id")
+      .primaryKey()
+      .$defaultFn(() => crypto.randomUUID()),
+    userId: text("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    score: integer("score").notNull(),
+    total: integer("total").notNull(),
+    /** JSON [{ qcmId, chosenIndex|null, correct }] pour les 40 questions du sujet */
+    detail: text("detail").notNull(),
+    createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
+  },
+  (t) => [index("idx_examens_user").on(t.userId, t.createdAt)],
+);
+
 /** Abonnements Web Push (rappels de streak). */
 export const pushSubscriptions = sqliteTable(
   "push_subscriptions",

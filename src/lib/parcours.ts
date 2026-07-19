@@ -3,9 +3,6 @@ import { db } from "@/lib/db";
 import { attempts, cardProgress } from "@/db/schema";
 import { getContent, sousThemes, type SousTheme } from "@/content";
 
-/** Seuil (cartes validées + exercices réussis) pour déverrouiller l'unité suivante. */
-const UNLOCK_THRESHOLD = 0.6;
-
 // Une carte est « validée » dès qu'une révision réussie (Correct/Facile) est
 // enregistrée : repetitions ≥ 1. La maîtrise long terme (intervalle ≥ 21 j)
 // reste réservée aux badges — sinon la progression stagnerait des semaines à 0.
@@ -18,10 +15,9 @@ export interface UniteParcours {
   perfect: boolean;
 }
 
-/** Sous-thèmes accessibles : le verrou du parcours s'applique partout (rubriques, sessions, file du jour). */
-export async function getUnlockedSousThemes(userId: string): Promise<Set<string>> {
-  const unites = await getParcours(userId);
-  return new Set(unites.filter((u) => u.unlocked).map((u) => u.sousTheme.id));
+/** Toutes les unités sont accessibles : le parcours n'a plus de verrou. */
+export async function getUnlockedSousThemes(_userId: string): Promise<Set<string>> {
+  return new Set(sousThemes.map((s) => s.id));
 }
 
 export interface ModeProgress {
@@ -93,6 +89,25 @@ export async function getSousThemeProgress(
   };
 }
 
+/** Exercices déjà réussis (verdict correct) parmi `ids`. */
+export async function getSolvedIds(
+  userId: string,
+  ids: string[],
+): Promise<Set<string>> {
+  if (ids.length === 0) return new Set();
+  const rows = await db
+    .select({ exerciseId: attempts.exerciseId })
+    .from(attempts)
+    .where(
+      and(
+        eq(attempts.userId, userId),
+        eq(attempts.verdict, "correct"),
+        inArray(attempts.exerciseId, ids),
+      ),
+    );
+  return new Set(rows.map((r) => r.exerciseId));
+}
+
 export async function getParcours(userId: string): Promise<UniteParcours[]> {
   const masteredRows = await db
     .select({ cardId: cardProgress.cardId })
@@ -112,7 +127,6 @@ export async function getParcours(userId: string): Promise<UniteParcours[]> {
   const solved = new Set(correctRows.map((r) => r.exerciseId));
 
   const unites: UniteParcours[] = [];
-  let previousProgress = 1; // la première unité est toujours déverrouillée
 
   for (const st of sousThemes) {
     const content = getContent(st.id);
@@ -131,10 +145,9 @@ export async function getParcours(userId: string): Promise<UniteParcours[]> {
     unites.push({
       sousTheme: st,
       progress,
-      unlocked: previousProgress >= UNLOCK_THRESHOLD,
+      unlocked: true,
       perfect: total > 0 && done === total,
     });
-    previousProgress = progress;
   }
 
   return unites;

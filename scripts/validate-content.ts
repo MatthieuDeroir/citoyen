@@ -125,7 +125,9 @@ const annaleSchema = z
 
 console.log("Validation du contenu…");
 check("flashcard", allFlashcards, flashcardSchema);
-check("qcm", allQcms, qcmSchema);
+// allQcms fusionne les annales dans les pools de rubrique ; elles ont leur propre schéma
+const annaleIds = new Set(annales.map((a) => a.id));
+check("qcm", allQcms.filter((q) => !annaleIds.has(q.id)), qcmSchema);
 check("ouverte", allOuvertes, ouverteSchema);
 check("trous", allTrous, trousSchema);
 check("annale", annales, annaleSchema);

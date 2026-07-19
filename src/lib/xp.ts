@@ -4,14 +4,11 @@ import { userStats, xpEvents } from "@/db/schema";
 import { parisDay, parisYesterday } from "@/lib/dates";
 
 export const XP = {
-  cardGood: 10,
-  cardEasy: 10,
-  cardAgain: 5,
-  qcmCorrect: 10,
-  ouverteCorrect: 20,
-  ouvertePartial: 10,
-  trousCorrect: 15,
-  trousPartial: 8,
+  qcmCorrect: 5,
+  ouverteCorrect: 12,
+  ouvertePartial: 6,
+  trousCorrect: 8,
+  trousPartial: 4,
 } as const;
 
 const FREEZE_MAX = 5;

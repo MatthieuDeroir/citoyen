@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Lock, Star, Check } from "lucide-react";
+import { Star, Check } from "lucide-react";
 import { auth } from "@/lib/auth";
 import { getParcours } from "@/lib/parcours";
 import { parties } from "@/content/parties";
@@ -19,7 +19,7 @@ export default async function ParcoursPage() {
       <header>
         <h1 className="text-2xl font-bold">Parcours</h1>
         <p className="mt-1 text-sm text-muted">
-          Suis le livret unité par unité. Atteins 60&nbsp;% pour déverrouiller la suivante.
+          Suis le livret unité par unité, dans l&apos;ordre ou à ta guise.
         </p>
       </header>
 
@@ -46,48 +46,32 @@ export default async function ParcoursPage() {
               )}
 
               <div className={offset}>
-                {unite.unlocked ? (
-                  <Link
-                    href={`/rubriques/${partie.slug}/${unite.sousTheme.slug}?from=parcours`}
-                    className={`flex w-fit max-w-full items-center gap-4 rounded-card border-2 p-3 pr-5 shadow-sm transition-transform active:scale-[0.97] ${
-                      unite.perfect
-                        ? "border-gold bg-gold-soft"
-                        : "border-border bg-surface"
-                    }`}
-                  >
-                    <ProgressRing progress={unite.progress} size={56} strokeWidth={5}>
-                      {unite.perfect ? (
-                        <Star className="size-6 fill-gold text-gold" />
-                      ) : percent >= 100 ? (
-                        <Check className="size-6 text-success" />
-                      ) : (
-                        <span className="text-xs font-bold tabular-nums">{percent}%</span>
-                      )}
-                    </ProgressRing>
-                    <span className="min-w-0">
-                      <span className="block truncate font-semibold leading-tight">
-                        {unite.sousTheme.titre}
-                      </span>
-                      <span className="block text-xs text-muted">
-                        {unite.perfect ? "Unité parfaite ⭐" : unite.sousTheme.description}
-                      </span>
+                <Link
+                  href={`/parcours/${unite.sousTheme.slug}`}
+                  className={`flex w-fit max-w-full items-center gap-4 rounded-card border-2 p-3 pr-5 shadow-sm transition-transform active:scale-[0.97] ${
+                    unite.perfect
+                      ? "border-gold bg-gold-soft"
+                      : "border-border bg-surface"
+                  }`}
+                >
+                  <ProgressRing progress={unite.progress} size={56} strokeWidth={5}>
+                    {unite.perfect ? (
+                      <Star className="size-6 fill-gold text-gold" />
+                    ) : percent >= 100 ? (
+                      <Check className="size-6 text-success" />
+                    ) : (
+                      <span className="text-xs font-bold tabular-nums">{percent}%</span>
+                    )}
+                  </ProgressRing>
+                  <span className="min-w-0">
+                    <span className="block truncate font-semibold leading-tight">
+                      {unite.sousTheme.titre}
                     </span>
-                  </Link>
-                ) : (
-                  <div className="flex w-fit max-w-full items-center gap-4 rounded-card border-2 border-dashed border-border bg-surface/50 p-3 pr-5 opacity-60">
-                    <span className="flex size-14 items-center justify-center rounded-full bg-border">
-                      <Lock className="size-5 text-muted" />
+                    <span className="block text-xs text-muted">
+                      {unite.perfect ? "Unité parfaite ⭐" : unite.sousTheme.description}
                     </span>
-                    <span className="min-w-0">
-                      <span className="block truncate font-semibold leading-tight text-muted">
-                        {unite.sousTheme.titre}
-                      </span>
-                      <span className="block text-xs text-muted">
-                        Termine l&apos;unité précédente à 60&nbsp;%
-                      </span>
-                    </span>
-                  </div>
-                )}
+                  </span>
+                </Link>
               </div>
             </li>
           );

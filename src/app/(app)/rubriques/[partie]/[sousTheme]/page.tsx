@@ -1,171 +1,72 @@
+/* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Dumbbell } from "lucide-react";
+import { BackLink } from "@/components/ui/BackLink";
 import {
-  ChevronLeft,
-  Layers,
-  ListChecks,
-  Lock,
-  MessageCircleQuestion,
-  TextCursorInput,
-} from "lucide-react";
-import { auth } from "@/lib/auth";
-import {
-  getSousThemeProgress,
-  getUnlockedSousThemes,
-  type SousThemeProgress,
-} from "@/lib/parcours";
-import { getPartie, getSousTheme } from "@/content/parties";
-import { getContent } from "@/content";
+  getPartie,
+  getSousTheme,
+  getSousThemesByPartie,
+  parties,
+  sousThemes,
+} from "@/content/parties";
 
-const modes = [
-  {
-    href: "cartes",
-    key: "cartes",
-    label: "Cartes de révision",
-    description: "Mémorise recto-verso",
-    doneLabel: "revues avec succès",
-    icon: Layers,
-    count: (c: ReturnType<typeof getContent>) => c.flashcards.length,
-  },
-  {
-    href: "qcm",
-    key: "qcm",
-    label: "QCM",
-    description: "Choisis la bonne réponse",
-    doneLabel: "réussis",
-    icon: ListChecks,
-    count: (c: ReturnType<typeof getContent>) => c.qcms.length,
-  },
-  {
-    href: "ouvertes",
-    key: "ouvertes",
-    label: "Questions ouvertes",
-    description: "Réponds comme à l'entretien",
-    doneLabel: "réussies",
-    icon: MessageCircleQuestion,
-    count: (c: ReturnType<typeof getContent>) => c.ouvertes.length,
-  },
-  {
-    href: "trous",
-    key: "trous",
-    label: "Textes à trous",
-    description: "Complète les phrases clés",
-    doneLabel: "réussis",
-    icon: TextCursorInput,
-    count: (c: ReturnType<typeof getContent>) => c.trous.length,
-  },
-] as const;
+export function generateStaticParams() {
+  return sousThemes.map((st) => ({
+    partie: parties.find((p) => p.id === st.partieId)!.slug,
+    sousTheme: st.slug,
+  }));
+}
 
-export default async function SousThemePage({
+export default async function LectureSousThemePage({
   params,
-  searchParams,
 }: {
   params: Promise<{ partie: string; sousTheme: string }>;
-  searchParams: Promise<{ from?: string }>;
 }) {
-  const [{ partie: partieSlug, sousTheme: stSlug }, { from }] = await Promise.all([
-    params,
-    searchParams,
-  ]);
+  const { partie: partieSlug, sousTheme: stSlug } = await params;
   const partie = getPartie(partieSlug);
   const sousTheme = getSousTheme(stSlug);
   if (!partie || !sousTheme || sousTheme.partieId !== partie.id) notFound();
 
-  const session = await auth();
-  const userId = session!.user!.id!;
-
-  const unlocked = await getUnlockedSousThemes(userId);
-  // les cartes de révision sont en accès libre ; le verrou du parcours
-  // ne concerne que les exercices (QCM, ouvertes, trous)
-  const exercisesLocked = !unlocked.has(sousTheme.id);
-
-  const content = getContent(sousTheme.id);
-  const progress = await getSousThemeProgress(userId, sousTheme.id);
-
-  const totalDone =
-    progress.cartes.done + progress.qcm.done + progress.ouvertes.done + progress.trous.done;
-  const totalAll =
-    progress.cartes.total + progress.qcm.total + progress.ouvertes.total + progress.trous.total;
-  const percent = totalAll === 0 ? 0 : Math.round((totalDone / totalAll) * 100);
-
-  const fromParcours = from === "parcours";
-  const backHref = fromParcours ? "/parcours" : `/rubriques/${partie.slug}`;
-  const backLabel = fromParcours ? "Parcours" : partie.titreCourt;
+  // la page d'ouverture de la partie est rattachée à son premier sous-thème,
+  // les pages de fin (ressources…) au dernier
+  const siblings = getSousThemesByPartie(partie.id);
+  const first = siblings[0]?.id === sousTheme.id;
+  const last = siblings[siblings.length - 1]?.id === sousTheme.id;
+  const from = first ? partie.pages[0] : sousTheme.pages[0];
+  const to = last ? partie.pages[1] : sousTheme.pages[1];
+  const pageNumbers = Array.from({ length: to - from + 1 }, (_, i) => from + i);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       <header>
-        <Link
-          href={backHref}
-          className="mb-3 inline-flex items-center gap-1 text-sm font-medium text-muted"
-        >
-          <ChevronLeft className="size-4" /> {backLabel}
-        </Link>
-        <div className="flex items-start justify-between gap-3">
-          <h1 className="text-xl font-bold leading-tight">
-            {sousTheme.emoji} {sousTheme.titre}
-          </h1>
-          <span className="mt-0.5 shrink-0 rounded-full bg-primary-soft px-2.5 py-1 text-xs font-bold tabular-nums text-primary">
-            {percent}%
-          </span>
-        </div>
-        <p className="mt-2 text-sm text-muted">{sousTheme.description}</p>
-        <p className="mt-1 text-xs text-muted">
-          {totalDone}/{totalAll} éléments validés — cartes revues avec succès et exercices
-          réussis au moins une fois.
+        <BackLink fallback={`/rubriques/${partie.slug}`} label="Retour" />
+        <h1 className="text-xl font-bold leading-tight">
+          {sousTheme.emoji} {sousTheme.titre}
+        </h1>
+        <p className="mt-1 text-sm text-muted">
+          Livret du citoyen, pages {from}–{to} — texte original.
         </p>
       </header>
 
-      <ul className="grid grid-cols-1 gap-3">
-        {modes.map(({ href, key, label, description, doneLabel, icon: Icon, count }) => {
-          const n = count(content);
-          if (n === 0) return null;
-          const p: SousThemeProgress[keyof SousThemeProgress] = progress[key];
-          const full = p.done >= p.total;
-          const isLocked = exercisesLocked && key !== "cartes";
-          return (
-            <li key={href}>
-              <Link
-                href={isLocked ? "/parcours" : `/session/${href}/${sousTheme.slug}`}
-                aria-disabled={isLocked}
-                className={`flex items-center gap-4 rounded-card border border-border bg-surface p-4 shadow-sm transition-transform active:scale-[0.98] ${
-                  isLocked ? "opacity-55" : ""
-                }`}
-              >
-                <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary-soft text-primary">
-                  <Icon className="size-5" />
-                </span>
-                <span className="min-w-0 flex-1">
-                  <span className="block font-semibold">{label}</span>
-                  <span className="block text-sm text-muted">
-                    {isLocked
-                      ? "Débloqué via le parcours (60 % de l'unité précédente)"
-                      : description}
-                  </span>
-                  <span className="mt-2 block h-1.5 overflow-hidden rounded-full bg-border">
-                    <span
-                      className={`block h-full rounded-full ${full ? "bg-success" : "bg-primary"}`}
-                      style={{ width: `${p.total === 0 ? 0 : (p.done / p.total) * 100}%` }}
-                    />
-                  </span>
-                </span>
-                {isLocked ? (
-                  <Lock className="size-5 shrink-0 text-muted" />
-                ) : (
-                  <span
-                    className={`shrink-0 rounded-full px-2.5 py-1 text-xs font-bold tabular-nums ${
-                      full ? "bg-success-soft text-success" : "bg-primary-soft text-primary"
-                    }`}
-                    title={`${p.done} ${doneLabel} sur ${p.total}`}
-                  >
-                    {p.done}/{p.total}
-                  </span>
-                )}
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
+      <div className="space-y-3">
+        {pageNumbers.map((n) => (
+          <img
+            key={n}
+            src={`/livret/page-${String(n).padStart(2, "0")}.webp`}
+            alt={`Livret du citoyen, page ${n}`}
+            loading="lazy"
+            className="w-full rounded-2xl border border-border shadow-sm"
+          />
+        ))}
+      </div>
+
+      <Link
+        href={`/parcours/${sousTheme.slug}`}
+        className="flex items-center justify-center gap-2 rounded-2xl bg-primary py-3.5 font-semibold text-on-primary transition-transform active:scale-[0.98]"
+      >
+        <Dumbbell className="size-5" /> S&apos;entraîner sur ce chapitre
+      </Link>
     </div>
   );
 }

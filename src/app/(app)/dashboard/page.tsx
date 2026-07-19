@@ -7,18 +7,22 @@ import {
   Zap,
   GraduationCap,
   Star,
+  CircleX,
 } from "lucide-react";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { userStats } from "@/db/schema";
 import { getTodayXp } from "@/lib/xp";
-import { getDueCount } from "@/lib/queue";
-import { getParcours } from "@/lib/parcours";
+import { getParcours, getSolvedIds } from "@/lib/parcours";
+import { getErrorQcms } from "@/lib/erreurs";
+import { getExamHistory, EXAM_TOTAL } from "@/lib/examen";
 import { getLevel } from "@/lib/levels";
-import { parties } from "@/content";
+import { parties, allQcms } from "@/content";
 import { Logo } from "@/components/ui/Logo";
 import { ProgressRing } from "@/components/ui/ProgressRing";
 import { GoalEditor } from "@/components/ui/GoalEditor";
+import { ExamChart } from "@/components/ui/ExamChart";
+import { MarseillaisePlayer } from "@/components/marseillaise/MarseillaisePlayer";
 
 export const metadata = { title: "Accueil" };
 
@@ -29,12 +33,15 @@ export default async function DashboardPage() {
 
   const [stats] = await db.select().from(userStats).where(eq(userStats.userId, userId));
   const todayXp = await getTodayXp(userId);
-  const dueCount = await getDueCount(userId);
+  const solvedQcms = await getSolvedIds(userId, allQcms.map((q) => q.id));
+  const errors = await getErrorQcms(userId);
+  const examHistory = await getExamHistory(userId);
 
   const goal = stats?.dailyXpGoal ?? 50;
   const streak = stats?.currentStreak ?? 0;
   const freezes = stats?.streakFreezes ?? 0;
   const level = getLevel(stats?.totalXp ?? 0);
+  const bestExam = examHistory.reduce((m, e) => Math.max(m, e.score), 0);
 
   // unité en cours du parcours (première déverrouillée non terminée)
   const unites = await getParcours(userId);
@@ -85,6 +92,9 @@ export default async function DashboardPage() {
         </div>
       </header>
 
+      {/* La Marseillaise */}
+      <MarseillaisePlayer />
+
       {/* Objectif du jour (paramétrable) */}
       <section className="flex items-center gap-5 rounded-card border border-border bg-surface p-5 shadow-sm">
         <ProgressRing progress={todayXp / goal} size={104}>
@@ -109,7 +119,7 @@ export default async function DashboardPage() {
       {/* Reprendre le parcours */}
       {currentUnite && currentPartie && (
         <Link
-          href={`/rubriques/${currentPartie.slug}/${currentUnite.sousTheme.slug}?from=parcours`}
+          href={`/parcours/${currentUnite.sousTheme.slug}`}
           className="flex items-center gap-4 rounded-card border border-border bg-surface p-4 shadow-sm transition-transform active:scale-[0.98]"
         >
           <ProgressRing progress={currentUnite.progress} size={52} strokeWidth={5}>
@@ -123,56 +133,83 @@ export default async function DashboardPage() {
             </span>
             <span className="block truncate font-bold">{currentUnite.sousTheme.titre}</span>
             <span className="block text-sm text-muted">
-              {Math.round(currentUnite.progress * 100)}&nbsp;%
-              {Math.round(currentUnite.progress * 100) >= 60
-                ? " — unité suivante débloquée ✓"
-                : ` — encore ${60 - Math.round(currentUnite.progress * 100)} % pour débloquer la suite`}
+              {Math.round(currentUnite.progress * 100)}&nbsp;% de l&apos;unité validés
             </span>
           </span>
           <ChevronRight className="size-5 shrink-0 text-muted" />
         </Link>
       )}
 
-      {/* Révision (cartes acquises) */}
+      {/* Corriger mes erreurs */}
+      {errors.length > 0 && (
+        <Link
+          href="/erreurs"
+          className="flex items-center gap-4 rounded-card border-2 border-accent/30 bg-surface p-4 shadow-sm transition-transform active:scale-[0.98]"
+        >
+          <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-accent text-white">
+            <CircleX className="size-6" />
+          </span>
+          <span className="min-w-0 flex-1">
+            <span className="block font-bold">Corriger mes erreurs</span>
+            <span className="block text-sm text-muted">
+              Retente les questions ratées en QCM ou en examen
+            </span>
+          </span>
+          <span className="shrink-0 rounded-full bg-accent-soft px-2.5 py-1 text-xs font-bold tabular-nums text-accent">
+            {errors.length}
+          </span>
+          <ChevronRight className="size-5 shrink-0 text-muted" />
+        </Link>
+      )}
+
+      {/* Révision éclair : 5 QCM parmi les validés */}
       <Link
-        href="/revision"
+        href="/revision/qcm"
         className="flex items-center gap-4 rounded-card border border-border bg-surface p-4 shadow-sm transition-transform active:scale-[0.98]"
       >
         <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-primary text-on-primary">
           <Zap className="size-6" />
         </span>
         <span className="min-w-0 flex-1">
-          <span className="block font-bold">Révision</span>
+          <span className="block font-bold">Révision éclair</span>
           <span className="block text-sm text-muted">
-            {dueCount > 0
-              ? `${dueCount} carte${dueCount > 1 ? "s" : ""} acquise${dueCount > 1 ? "s" : ""} à revoir aujourd'hui`
-              : "Tout est à jour — révise en avance pour consolider"}
+            {solvedQcms.size > 0
+              ? `5 questions parmi tes ${solvedQcms.size} validées`
+              : "Valide des QCM dans le parcours pour la débloquer"}
           </span>
         </span>
-        {dueCount > 0 && (
-          <span className="shrink-0 rounded-full bg-accent-soft px-2.5 py-1 text-xs font-bold tabular-nums text-accent">
-            {dueCount}
-          </span>
-        )}
         <ChevronRight className="size-5 shrink-0 text-muted" />
       </Link>
 
-      {/* Examen blanc */}
+      {/* Examen blanc + évolution */}
       <Link
         href="/examen"
-        className="flex items-center gap-4 rounded-card border-2 border-primary/30 bg-surface p-4 shadow-sm transition-transform active:scale-[0.98]"
+        className="block rounded-card border-2 border-primary/30 bg-surface p-4 shadow-sm transition-transform active:scale-[0.98]"
       >
-        <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-primary text-on-primary">
-          <GraduationCap className="size-6" />
-        </span>
-        <span className="min-w-0 flex-1">
-          <span className="block font-bold">Examen blanc</span>
-          <span className="block text-sm text-muted">
-            40 questions officielles · 45 min · admis à 32/40
+        <span className="flex items-center gap-4">
+          <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-primary text-on-primary">
+            <GraduationCap className="size-6" />
           </span>
+          <span className="min-w-0 flex-1">
+            <span className="block font-bold">Examen blanc</span>
+            <span className="block text-sm text-muted">
+              {examHistory.length > 0
+                ? `${examHistory.length} passé${examHistory.length > 1 ? "s" : ""} · record ${bestExam}/${EXAM_TOTAL}`
+                : "40 questions officielles · 45 min · admis à 32/40"}
+            </span>
+          </span>
+          <ChevronRight className="size-5 shrink-0 text-muted" />
         </span>
-        <ChevronRight className="size-5 shrink-0 text-muted" />
+        {examHistory.length > 1 && (
+          <span className="mt-3 block h-16">
+            <ExamChart
+              scores={[...examHistory].reverse().map((e) => e.score)}
+              height={64}
+            />
+          </span>
+        )}
       </Link>
+
     </div>
   );
 }

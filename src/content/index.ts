@@ -19,6 +19,7 @@ import { vieQuotidienne } from "./p5/vie-quotidienne";
 import { travaillerEnFrance } from "./p5/travailler-en-france";
 import { vieFamiliale } from "./p5/vie-familiale";
 import { textesFondamentaux } from "./annexes/textes-fondamentaux";
+import { annales } from "./examen";
 
 export * from "./types";
 export * from "./parties";
@@ -27,7 +28,7 @@ export * from "./parties";
  * Registre du contenu transcrit depuis le livret.
  * Chaque fichier de sous-thème s'enregistre ici au fur et à mesure de la transcription.
  */
-const registry: Record<string, SousThemeContent> = {
+const baseRegistry: Record<string, SousThemeContent> = {
   "p1-s1": deviseSymboles,
   "p1-s2": principesRepublique,
   "p2-s1": democratieEtatDeDroit,
@@ -43,6 +44,27 @@ const registry: Record<string, SousThemeContent> = {
   "p5-s3": vieFamiliale,
   "annexes-s1": textesFondamentaux,
 };
+
+/**
+ * Les 258 annales officielles (banque du ministère) rejoignent le pool QCM
+ * de leur sous-thème : l'entraînement en rubrique couvre ainsi l'intégralité
+ * de la banque de l'examen, et une annale réussie en examen blanc compte
+ * automatiquement dans la progression de sa rubrique.
+ */
+const annalesBySousTheme = new Map<string, Qcm[]>();
+for (const q of annales) {
+  annalesBySousTheme.set(q.sousThemeId, [
+    ...(annalesBySousTheme.get(q.sousThemeId) ?? []),
+    q,
+  ]);
+}
+
+const registry: Record<string, SousThemeContent> = Object.fromEntries(
+  Object.entries(baseRegistry).map(([id, c]) => [
+    id,
+    { ...c, qcms: [...c.qcms, ...(annalesBySousTheme.get(id) ?? [])] },
+  ]),
+);
 
 export const allFlashcards: Flashcard[] = Object.values(registry).flatMap(
   (c) => c.flashcards,

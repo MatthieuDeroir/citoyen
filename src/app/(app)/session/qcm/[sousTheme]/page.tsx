@@ -1,9 +1,10 @@
-import { notFound, redirect } from "next/navigation";
-import { getSousTheme, getPartie, sousThemes } from "@/content/parties";
+import { notFound } from "next/navigation";
+import { getSousTheme, sousThemes } from "@/content/parties";
 import { getContent } from "@/content";
 import { getNextSession } from "@/lib/sessionNav";
 import { auth } from "@/lib/auth";
-import { getUnlockedSousThemes } from "@/lib/parcours";
+import { getSolvedIds } from "@/lib/parcours";
+import { shuffle } from "@/lib/shuffle";
 import { QcmPlayer } from "@/components/players/QcmPlayer";
 import { submitQcm } from "@/actions/attempts";
 
@@ -21,20 +22,22 @@ export default async function QcmSessionPage({
   if (!sousTheme) notFound();
 
   const session = await auth();
-  const unlocked = await getUnlockedSousThemes(session!.user!.id!);
-  if (!unlocked.has(sousTheme.id)) redirect("/parcours");
+  const userId = session!.user!.id!;
 
   const { qcms } = getContent(sousTheme.id);
   if (qcms.length === 0) notFound();
 
-  const partie = getPartie(sousTheme.partieId)!;
+  // Ne jouer que les questions non validées ; quand tout est validé, tout rejouer.
+  const solved = await getSolvedIds(userId, qcms.map((q) => q.id));
+  const remaining = qcms.filter((q) => !solved.has(q.id));
+  const deck = remaining.length > 0 ? shuffle(remaining) : shuffle(qcms);
 
   return (
     <QcmPlayer
       next={getNextSession(slug, "qcm")}
-      deck={qcms}
+      deck={deck}
       title={sousTheme.titre}
-      backHref={`/rubriques/${partie.slug}/${sousTheme.slug}`}
+      backHref={`/parcours/${sousTheme.slug}`}
       onSubmit={submitQcm}
     />
   );

@@ -1,9 +1,10 @@
-import { notFound, redirect } from "next/navigation";
-import { getSousTheme, getPartie, sousThemes } from "@/content/parties";
+import { notFound } from "next/navigation";
+import { getSousTheme, sousThemes } from "@/content/parties";
 import { getContent } from "@/content";
 import { getNextSession } from "@/lib/sessionNav";
 import { auth } from "@/lib/auth";
-import { getUnlockedSousThemes } from "@/lib/parcours";
+import { getSolvedIds } from "@/lib/parcours";
+import { shuffle } from "@/lib/shuffle";
 import { TrousPlayer } from "@/components/players/TrousPlayer";
 
 export function generateStaticParams() {
@@ -20,20 +21,22 @@ export default async function TrousSessionPage({
   if (!sousTheme) notFound();
 
   const session = await auth();
-  const unlocked = await getUnlockedSousThemes(session!.user!.id!);
-  if (!unlocked.has(sousTheme.id)) redirect("/parcours");
+  const userId = session!.user!.id!;
 
   const { trous } = getContent(sousTheme.id);
   if (trous.length === 0) notFound();
 
-  const partie = getPartie(sousTheme.partieId)!;
+  // Ne rejouer que les exercices non validés ; quand tout est validé, tout rejouer.
+  const solved = await getSolvedIds(userId, trous.map((t) => t.id));
+  const remaining = trous.filter((t) => !solved.has(t.id));
+  const deck = remaining.length > 0 ? shuffle(remaining) : shuffle(trous);
 
   return (
     <TrousPlayer
       next={getNextSession(slug, "trous")}
-      deck={trous}
+      deck={deck}
       title={sousTheme.titre}
-      backHref={`/rubriques/${partie.slug}/${sousTheme.slug}`}
+      backHref={`/parcours/${sousTheme.slug}`}
     />
   );
 }

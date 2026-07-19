@@ -6,7 +6,6 @@ import { db } from "@/lib/db";
 import { cardProgress, userStats } from "@/db/schema";
 import { review, nextDueDate, INITIAL_STATE, type Rating } from "@/lib/srs";
 import { getFlashcard } from "@/content";
-import { addXp, XP } from "@/lib/xp";
 
 export async function reviewCard(cardId: string, rating: Rating) {
   const session = await auth();
@@ -53,8 +52,6 @@ export async function reviewCard(cardId: string, rating: Rating) {
     .set({ totalReviews: sql`${userStats.totalReviews} + 1` })
     .where(eq(userStats.userId, userId));
 
-  const xp = rating === "again" ? XP.cardAgain : XP.cardGood;
-  await addXp(userId, xp, "review");
-
-  return { xp };
+  // Les cartes de révision ne rapportent pas d'XP : seuls les exercices en donnent.
+  return { xp: 0 };
 }

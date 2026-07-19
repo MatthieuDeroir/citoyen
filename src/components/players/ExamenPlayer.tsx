@@ -17,7 +17,10 @@ import type { ExamResult } from "@/actions/examen";
 
 interface Props {
   deck: Qcm[];
-  onSubmit: (answers: { qcmId: string; chosenIndex: number }[]) => Promise<ExamResult>;
+  onSubmit: (
+    questionIds: string[],
+    answers: { qcmId: string; chosenIndex: number }[],
+  ) => Promise<ExamResult>;
 }
 
 function shuffle<T>(arr: T[]): T[] {
@@ -55,7 +58,7 @@ export function ExamenPlayer({ deck, onSubmit }: Props) {
         qcmId,
         chosenIndex,
       }));
-      setResult(await onSubmit(payload));
+      setResult(await onSubmit(deck.map((q) => q.id), payload));
     } finally {
       setSubmitting(false);
     }
@@ -106,8 +109,8 @@ export function ExamenPlayer({ deck, onSubmit }: Props) {
         >
           Commencer l&apos;examen
         </button>
-        <Link href="/dashboard" className="text-sm font-medium text-muted">
-          Retour à l&apos;accueil
+        <Link href="/examen" className="text-sm font-medium text-muted">
+          Retour
         </Link>
       </div>
     );
@@ -163,7 +166,10 @@ export function ExamenPlayer({ deck, onSubmit }: Props) {
                 <div className="mt-3 space-y-1 text-sm">
                   {!correct && (
                     <p className="text-accent">
-                      Ta réponse : {qcm.choices[chosenIndex] ?? "—"}
+                      Ta réponse :{" "}
+                      {chosenIndex === null
+                        ? "aucune réponse"
+                        : (qcm.choices[chosenIndex] ?? "—")}
                     </p>
                   )}
                   <p className="text-success">
@@ -176,12 +182,20 @@ export function ExamenPlayer({ deck, onSubmit }: Props) {
           })}
         </section>
 
-        <Link
-          href="/dashboard"
-          className="flex items-center justify-center rounded-2xl bg-primary py-3.5 font-semibold text-on-primary"
-        >
-          Retour à l&apos;accueil
-        </Link>
+        <div className="flex gap-3">
+          <Link
+            href="/examen"
+            className="flex flex-1 items-center justify-center rounded-2xl border border-border bg-surface py-3.5 font-semibold"
+          >
+            Historique
+          </Link>
+          <Link
+            href="/dashboard"
+            className="flex flex-1 items-center justify-center rounded-2xl bg-primary py-3.5 font-semibold text-on-primary"
+          >
+            Accueil
+          </Link>
+        </div>
       </div>
     );
   }

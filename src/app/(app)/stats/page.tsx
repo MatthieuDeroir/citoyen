@@ -1,5 +1,5 @@
 import { and, eq, gte, sql } from "drizzle-orm";
-import { Flame, Snowflake, Zap, Layers, Target, LogOut } from "lucide-react";
+import { Flame, Snowflake, Zap, Layers, Target, LogOut, ChevronDown } from "lucide-react";
 import { auth, signOut } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { cardProgress, userStats, xpEvents } from "@/db/schema";
@@ -103,14 +103,17 @@ export default async function StatsPage() {
         </div>
       </section>
 
-      <section>
-        <h2 className="mb-3 font-bold">
-          Badges{" "}
-          <span className="text-sm font-normal text-muted">
-            ({unlockedCount}/{badges.length})
+      <details className="group rounded-card border border-border bg-surface p-4 shadow-sm">
+        <summary className="flex cursor-pointer list-none items-center justify-between font-bold [&::-webkit-details-marker]:hidden">
+          <span>
+            Badges{" "}
+            <span className="text-sm font-normal text-muted">
+              ({unlockedCount}/{badges.length})
+            </span>
           </span>
-        </h2>
-        <div className="grid grid-cols-3 gap-3">
+          <ChevronDown className="size-5 text-muted transition-transform group-open:rotate-180" />
+        </summary>
+        <div className="mt-4 grid grid-cols-3 gap-3">
           {badges.map((badge) => (
             <div
               key={badge.id}
@@ -126,7 +129,7 @@ export default async function StatsPage() {
             </div>
           ))}
         </div>
-      </section>
+      </details>
 
       <ReminderSettings />
 

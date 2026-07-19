@@ -3,15 +3,16 @@ import { parties } from "@/content/parties";
 import { PartieIcon } from "@/components/ui/PartieIcon";
 import { ChevronRight } from "lucide-react";
 
-export const metadata = { title: "Rubriques" };
+export const metadata = { title: "Le livret" };
 
 export default function RubriquesPage() {
   return (
     <div className="space-y-6">
       <header>
-        <h1 className="text-2xl font-bold">Rubriques</h1>
+        <h1 className="text-2xl font-bold">Le livret</h1>
         <p className="mt-1 text-sm text-muted">
-          Les 6 grandes parties du Livret du citoyen.
+          Consulte le Livret du citoyen tel qu&apos;il est écrit, rubrique par
+          rubrique.
         </p>
       </header>
 

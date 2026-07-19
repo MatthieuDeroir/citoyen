@@ -1,5 +1,9 @@
+import { desc, eq } from "drizzle-orm";
+import { db } from "@/lib/db";
+import { examens } from "@/db/schema";
 import { sousThemes, type Qcm } from "@/content";
 import { annales } from "@/content/examen";
+import { shuffle } from "@/lib/shuffle";
 
 /**
  * Format officiel de l'examen civique (arrêté du 10 octobre 2025) :
@@ -26,17 +30,38 @@ function themeOf(qcm: Qcm): string {
   return st.partieId === "annexes" ? "p3" : st.partieId;
 }
 
-function shuffle<T>(arr: T[]): T[] {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
+export interface ExamDetailEntry {
+  qcmId: string;
+  chosenIndex: number | null;
+  correct: boolean;
 }
 
-/** Tire un sujet d'examen blanc dans les annales, selon la répartition officielle. */
-export function buildExam(): Qcm[] {
+/** Ids des questions déjà tombées dans les examens blancs de l'utilisateur. */
+export async function getSeenExamQuestionIds(userId: string): Promise<Set<string>> {
+  const rows = await db
+    .select({ detail: examens.detail })
+    .from(examens)
+    .where(eq(examens.userId, userId));
+  const seen = new Set<string>();
+  for (const row of rows) {
+    try {
+      for (const entry of JSON.parse(row.detail) as ExamDetailEntry[]) {
+        seen.add(entry.qcmId);
+      }
+    } catch {
+      // détail illisible : on l'ignore
+    }
+  }
+  return seen;
+}
+
+/**
+ * Tire un sujet d'examen blanc dans les annales, selon la répartition officielle.
+ * Les questions jamais tombées dans un examen précédent sont servies en priorité ;
+ * quand une thématique est épuisée, elle est complétée par des questions déjà vues
+ * (le cycle repart naturellement une fois toute la banque parcourue).
+ */
+export function buildExam(seenIds: Set<string> = new Set()): Qcm[] {
   const byTheme = new Map<string, Qcm[]>();
   for (const qcm of annales) {
     const theme = themeOf(qcm);
@@ -45,7 +70,33 @@ export function buildExam(): Qcm[] {
 
   const selected: Qcm[] = [];
   for (const [theme, count] of Object.entries(DISTRIBUTION)) {
-    selected.push(...shuffle(byTheme.get(theme) ?? []).slice(0, count));
+    const pool = byTheme.get(theme) ?? [];
+    const fresh = shuffle(pool.filter((q) => !seenIds.has(q.id)));
+    const already = shuffle(pool.filter((q) => seenIds.has(q.id)));
+    selected.push(...[...fresh, ...already].slice(0, count));
   }
   return shuffle(selected);
+}
+
+export interface ExamHistoryEntry {
+  id: string;
+  score: number;
+  total: number;
+  passed: boolean;
+  createdAt: Date;
+}
+
+/** Historique des examens blancs, du plus récent au plus ancien. */
+export async function getExamHistory(userId: string): Promise<ExamHistoryEntry[]> {
+  const rows = await db
+    .select({
+      id: examens.id,
+      score: examens.score,
+      total: examens.total,
+      createdAt: examens.createdAt,
+    })
+    .from(examens)
+    .where(eq(examens.userId, userId))
+    .orderBy(desc(examens.createdAt));
+  return rows.map((r) => ({ ...r, passed: r.score >= EXAM_PASS }));
 }
