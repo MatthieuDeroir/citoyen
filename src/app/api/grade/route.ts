@@ -7,7 +7,7 @@ import { attempts, userStats } from "@/db/schema";
 import { getOuverte, getTrous } from "@/content";
 import { matchBlank } from "@/lib/grading/local";
 import { gradeOuverte, gradeTrousRemainder } from "@/lib/grading/mistral";
-import { addXp, XP } from "@/lib/xp";
+import { addXp, markActivity, XP } from "@/lib/xp";
 
 export const runtime = "nodejs";
 export const maxDuration = 30;
@@ -101,6 +101,7 @@ export async function POST(req: Request) {
             ? XP.ouvertePartial
             : 0;
       if (xp > 0) await addXp(userId, xp, "ouverte");
+      else await markActivity(userId);
 
       return NextResponse.json({
         gradedBy: "ai",
@@ -188,6 +189,7 @@ export async function POST(req: Request) {
   const xp =
     verdict === "correct" ? XP.trousCorrect : verdict === "partial" ? XP.trousPartial : 0;
   if (xp > 0) await addXp(userId, xp, "trous");
+  else await markActivity(userId);
 
   return NextResponse.json({ gradedBy, verdict, score, blanks, xp });
 }

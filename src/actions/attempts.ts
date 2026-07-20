@@ -5,7 +5,7 @@ import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { attempts, userStats } from "@/db/schema";
 import { getQcm } from "@/content";
-import { addXp, XP } from "@/lib/xp";
+import { addXp, markActivity, XP } from "@/lib/xp";
 
 /** Enregistre une réponse de QCM ; la correction fait foi côté serveur. */
 export async function submitQcm(qcmId: string, chosenIndex: number) {
@@ -36,6 +36,7 @@ export async function submitQcm(qcmId: string, chosenIndex: number) {
 
   const xp = correct ? XP.qcmCorrect : 0;
   if (xp > 0) await addXp(userId, xp, "qcm");
+  else await markActivity(userId); // une réponse fausse compte aussi pour le streak
 
   return { correct, xp };
 }
@@ -74,6 +75,7 @@ export async function submitSelfEval(
   const xp =
     verdict === "correct" ? XP.ouverteCorrect : verdict === "partial" ? XP.ouvertePartial : 0;
   if (xp > 0) await addXp(userId, xp, "ouverte");
+  else await markActivity(userId);
 
   return { xp };
 }

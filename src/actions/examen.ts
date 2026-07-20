@@ -6,7 +6,7 @@ import { db } from "@/lib/db";
 import { attempts, examens, userStats } from "@/db/schema";
 import { getQcm } from "@/content";
 import { annalesById } from "@/content/examen";
-import { addXp } from "@/lib/xp";
+import { addXp, markActivity } from "@/lib/xp";
 import { EXAM_PASS, EXAM_TOTAL, type ExamDetailEntry } from "@/lib/examen";
 
 export interface ExamResult {
@@ -81,6 +81,7 @@ export async function submitExamen(
     Math.max(0, correctCount - EXAM_PASS) * 2 +
     (correctCount === EXAM_TOTAL && questionIds.length === EXAM_TOTAL ? 100 : 0);
   if (xp > 0) await addXp(userId, xp, "bonus");
+  else await markActivity(userId); // un examen tenté compte pour le streak même à 0 XP
 
   return { examId: exam.id, score: correctCount, passed, xp, corrections };
 }
