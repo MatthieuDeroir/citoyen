@@ -43,7 +43,7 @@ export const territoireGeographie: SousThemeContent = {
       id: `${S}-fc-006`,
       sousThemeId: S,
       front: "Quel rang économique la France occupe-t-elle dans le monde ?",
-      back: "La **7e puissance économique mondiale** (2024), avec un PIB de 2 830 milliards de dollars. Elle est aussi la **2e puissance maritime au monde** derrière les États-Unis, grâce à l'outre-mer.",
+      back: "La **7e puissance économique mondiale** (2024), avec un PIB de **2 830 milliards de dollars**.",
       sourcePage: 49,
     },
     {
@@ -92,7 +92,7 @@ export const territoireGeographie: SousThemeContent = {
       id: `${S}-fc-013`,
       sousThemeId: S,
       front: "Quelle est la plus grande forêt de France ?",
-      back: "La **forêt amazonienne de Guyane** (8 millions d'hectares), qui abrite la plus grande variété de faune et de flore de la planète. En métropole : 17,5 millions d'hectares, soit **32 % du territoire**.",
+      back: "La **forêt amazonienne de Guyane** (8 millions d'hectares), qui s'étend sur **9 pays** et abrite la plus grande variété de faune et de flore de la planète. En métropole : 17,5 millions d'hectares, soit **32 % du territoire**.",
       sourcePage: 52,
     },
     {
@@ -101,6 +101,41 @@ export const territoireGeographie: SousThemeContent = {
       front: "Qu'est-ce que la grotte de Lascaux ?",
       back: "La plus célèbre grotte préhistorique de France, en **Dordogne (Nouvelle-Aquitaine)** : des **peintures rupestres** datant de **18 000 à 15 000 ans avant J.-C.**",
       sourcePage: 52,
+    },
+    {
+      id: `${S}-fc-015`,
+      sousThemeId: S,
+      front: "Pourquoi dit-on que la France est une grande puissance mondiale ?",
+      back: "Elle est l'une des **dix plus grandes puissances mondiales**. Elle dispose d'**ambassades et de consulats dans plus de 150 pays**, l'un des plus grands réseaux diplomatiques au monde.",
+      sourcePage: 49,
+    },
+    {
+      id: `${S}-fc-016`,
+      sousThemeId: S,
+      front: "Qu'est-ce que Paris La Défense ?",
+      back: "Le **plus grand quartier d'affaires d'Europe** : plus de **500 entreprises**, dont les sièges sociaux de la plupart des grandes entreprises françaises.",
+      sourcePage: 49,
+    },
+    {
+      id: `${S}-fc-017`,
+      sousThemeId: S,
+      front: "Combien la France compte-t-elle de grands groupes économiques ?",
+      back: "Une **centaine de grands groupes économiques** de plus de **10 000 salariés**, des entreprises multinationales présentes dans de nombreux pays.",
+      sourcePage: 49,
+    },
+    {
+      id: `${S}-fc-018`,
+      sousThemeId: S,
+      front: "Quel rang la France occupe-t-elle en tant que puissance maritime ?",
+      back: "**2e puissance maritime au monde**, derrière les États-Unis, grâce à ses territoires d'outre-mer et sa présence sur tous les océans.",
+      sourcePage: 50,
+    },
+    {
+      id: `${S}-fc-019`,
+      sousThemeId: S,
+      front: "Que la France exporte-t-elle et importe-t-elle en matière agricole, et quelles sont ses spécialités régionales ?",
+      back: "Elle **exporte** blé, vin, produits laitiers et viande, mais **importe** fruits, légumes et produits transformés. Spécialités régionales : **bassin parisien** (blé, betterave), **Bretagne/Ouest** (vaches laitières, porcs), **Sud-Ouest** (élevage, maïs), **Sud-Est** (fruits, légumes, vin), **Bourgogne/Champagne/Languedoc/Bordeaux** (vignobles).",
+      sourcePage: 50,
     },
   ],
 
@@ -229,6 +264,71 @@ export const territoireGeographie: SousThemeContent = {
       explication:
         "Le Piton de la Fournaise (2 600 m), sur l'île de La Réunion, est l'un des volcans les plus actifs au monde, inscrit au patrimoine mondial de l'UNESCO.",
       sourcePage: 51,
+    },
+    {
+      id: `${S}-qcm-012`,
+      sousThemeId: S,
+      question: "Dans combien de pays environ la France dispose-t-elle d'ambassades et de consulats ?",
+      choices: ["Plus de 150 pays", "Environ 50 pays", "Environ 90 pays", "Tous les pays du monde"],
+      correctIndex: 0,
+      explication:
+        "La France est l'une des dix plus grandes puissances mondiales : elle dispose d'ambassades et de consulats dans plus de 150 pays, l'un des plus grands réseaux diplomatiques au monde.",
+      sourcePage: 49,
+    },
+    {
+      id: `${S}-qcm-013`,
+      sousThemeId: S,
+      question: "Qu'est-ce que Paris La Défense ?",
+      choices: [
+        "Le plus grand quartier d'affaires d'Europe",
+        "Le siège de l'ONU en France",
+        "Un grand port maritime commercial",
+        "Une réserve naturelle protégée",
+      ],
+      correctIndex: 0,
+      explication:
+        "Paris La Défense est le plus grand quartier d'affaires d'Europe : il abrite plus de 500 entreprises, dont les sièges sociaux de la plupart des grandes entreprises françaises.",
+      sourcePage: 49,
+    },
+    {
+      id: `${S}-qcm-014`,
+      sousThemeId: S,
+      question: "Combien la France compte-t-elle environ de grands groupes économiques de plus de 10 000 salariés ?",
+      choices: ["Une centaine", "Une dizaine", "Un millier", "Environ 25"],
+      correctIndex: 0,
+      explication:
+        "La France compte une centaine de grands groupes économiques de plus de 10 000 salariés, des entreprises multinationales présentes dans de nombreux pays.",
+      sourcePage: 49,
+    },
+    {
+      id: `${S}-qcm-015`,
+      sousThemeId: S,
+      question: "Quel rang mondial la France occupe-t-elle en tant que puissance maritime ?",
+      choices: ["2e, derrière les États-Unis", "1re", "5e", "10e"],
+      correctIndex: 0,
+      explication:
+        "Grâce à ses territoires d'outre-mer et sa présence sur tous les océans, la France est la 2e puissance maritime au monde, derrière les États-Unis.",
+      sourcePage: 50,
+    },
+    {
+      id: `${S}-qcm-016`,
+      sousThemeId: S,
+      question: "Quelle région est réputée pour l'élevage de vaches laitières et de porcs ?",
+      choices: ["La Bretagne", "Le Sud-Est", "La Champagne", "Le bassin parisien"],
+      correctIndex: 0,
+      explication:
+        "La Bretagne et l'Ouest sont réputés pour l'élevage de vaches laitières et de porcs. Le bassin parisien est plutôt connu pour le blé et la betterave, le Sud-Est pour les fruits, légumes et le vin.",
+      sourcePage: 50,
+    },
+    {
+      id: `${S}-qcm-017`,
+      sousThemeId: S,
+      question: "Sur combien de pays s'étend la forêt amazonienne, dont une partie se trouve en Guyane française ?",
+      choices: ["9", "3", "15", "5"],
+      correctIndex: 0,
+      explication:
+        "La forêt amazonienne, qui couvre notamment 8 millions d'hectares en Guyane, s'étend sur 9 pays et abrite la plus grande variété de faune et de flore de la planète.",
+      sourcePage: 52,
     },
   ],
 

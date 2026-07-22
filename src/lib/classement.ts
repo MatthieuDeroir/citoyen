@@ -1,7 +1,7 @@
 import { eq, gte, sql, and } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { attempts, cardProgress, examens, userStats, users } from "@/db/schema";
-import { allFlashcards, allQcms, allOuvertes, allTrous } from "@/content";
+import { allFlashcards, allQcms } from "@/content";
 import { getLevel, type Level } from "@/lib/levels";
 
 export interface ClassementEntry {
@@ -17,8 +17,8 @@ export interface ClassementEntry {
 
 /** Classement de tous les utilisateurs : complétion, meilleur examen, niveau. */
 export async function getClassement(): Promise<ClassementEntry[]> {
-  const totalItems =
-    allFlashcards.length + allQcms.length + allOuvertes.length + allTrous.length;
+  // Questions ouvertes et textes à trous retirés du parcours pour l'instant.
+  const totalItems = allFlashcards.length + allQcms.length;
 
   const rows = await db
     .select({

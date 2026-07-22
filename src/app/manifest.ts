@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "Citoyen — Livret du citoyen 2026",
     short_name: "Citoyen",
     description:
-      "Entraînement interactif au Livret du citoyen : cartes, QCM, questions ouvertes, textes à trous et examen blanc officiel.",
+      "Entraînement interactif au Livret du citoyen : cartes, QCM et examen blanc officiel.",
     start_url: "/",
     display: "standalone",
     orientation: "portrait",

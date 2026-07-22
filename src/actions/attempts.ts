@@ -1,6 +1,7 @@
 "use server";
 
 import { eq, sql } from "drizzle-orm";
+import { revalidatePath } from "next/cache";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { attempts, userStats } from "@/db/schema";
@@ -37,6 +38,10 @@ export async function submitQcm(qcmId: string, chosenIndex: number) {
   const xp = correct ? XP.qcmCorrect : 0;
   if (xp > 0) await addXp(userId, xp, "qcm");
   else await markActivity(userId); // une réponse fausse compte aussi pour le streak
+
+  // Purge le cache client : la progression (parcours, dashboard, classement…)
+  // doit être à jour même en revenant en arrière dans l'historique.
+  revalidatePath("/", "layout");
 
   return { correct, xp };
 }
@@ -76,6 +81,8 @@ export async function submitSelfEval(
     verdict === "correct" ? XP.ouverteCorrect : verdict === "partial" ? XP.ouvertePartial : 0;
   if (xp > 0) await addXp(userId, xp, "ouverte");
   else await markActivity(userId);
+
+  revalidatePath("/", "layout");
 
   return { xp };
 }

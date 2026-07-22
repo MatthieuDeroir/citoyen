@@ -119,9 +119,9 @@ export const droitsFondamentaux: SousThemeContent = {
     {
       id: `${S}-fc-017`,
       sousThemeId: S,
-      front: "Faut-il une autorisation pour manifester ?",
-      back: "Une manifestation doit être **déclarée auprès de l'administration** (parcours, organisateurs). La liberté de réunion peut être restreinte par le maire ou le préfet en cas de risque de trouble à l'ordre public, sous le contrôle du juge.",
-      sourcePage: 31,
+      front: "Qu'est-ce que la liberté de réunion ?",
+      back: "Le droit de se **rassembler pacifiquement** pour exprimer des opinions, débattre ou défendre des intérêts communs. En cas de **risque de trouble à l'ordre public**, le **maire ou le préfet** peuvent la restreindre, sous le contrôle du juge.",
+      sourcePage: 30,
     },
     {
       id: `${S}-fc-018`,
@@ -135,6 +135,48 @@ export const droitsFondamentaux: SousThemeContent = {
       sousThemeId: S,
       front: "Quel texte reconnaît les droits environnementaux ?",
       back: "La **Charte de l'environnement de 2004**, intégrée dans la Constitution : chacun a le droit de vivre dans un environnement équilibré et respectueux de la santé.",
+      sourcePage: 31,
+    },
+    {
+      id: `${S}-fc-020`,
+      sousThemeId: S,
+      front: "Qu'est-ce que la liberté de choix, protégée par l'article 4 de la DDHC ?",
+      back: "Une liberté personnelle qui permet de décider de son **mode de vie**, de ses **relations**, de ses **projets**, dans les limites de la loi. Le préambule de la Constitution de 1958 cite l'article 4 de la DDHC de 1789 : « **La liberté consiste à pouvoir faire tout ce qui ne nuit pas à autrui**. » (illustrée par *La Liberté guidant le peuple*, Delacroix, 1830)",
+      sourcePage: 26,
+    },
+    {
+      id: `${S}-fc-021`,
+      sousThemeId: S,
+      front: "Un détenu conserve-t-il sa liberté de culte ? Peut-on adhérer librement à un parti politique ?",
+      back: "**Oui** dans les deux cas : les personnes emprisonnées **conservent la liberté de culte** pendant leur détention, et tout individu est **libre d'adhérer à un parti politique** sans condition.",
+      sourcePage: 26,
+    },
+    {
+      id: `${S}-fc-022`,
+      sousThemeId: S,
+      front: "Un mineur peut-il voyager librement à l'étranger sans ses parents ?",
+      back: "Non : les mineurs qui voyagent **sans leurs parents** doivent obtenir une **autorisation de sortie du territoire**.",
+      sourcePage: 27,
+    },
+    {
+      id: `${S}-fc-023`,
+      sousThemeId: S,
+      front: "Quelles atteintes au corps sont interdites au nom du droit à disposer de son corps ?",
+      back: "Le **viol**, la **mutilation**, la **stérilisation forcée**, l'**excision**… Toute atteinte de ce type est interdite et sanctionnée par le juge.",
+      sourcePage: 29,
+    },
+    {
+      id: `${S}-fc-024`,
+      sousThemeId: S,
+      front: "Quel est le rôle de la police et de la gendarmerie ?",
+      back: "Assurer le **maintien de l'ordre** et la **sécurité publique**, mener les **enquêtes judiciaires**, et exercer des missions de **prévention et d'assistance**. Sous le contrôle du juge, elles peuvent arrêter, détenir, interroger et fouiller des personnes.",
+      sourcePage: 29,
+    },
+    {
+      id: `${S}-fc-025`,
+      sousThemeId: S,
+      front: "Faut-il déclarer une manifestation avant qu'elle ait lieu ?",
+      back: "**Oui** : pour éviter les troubles à l'ordre public, une manifestation doit être **déclarée auprès de l'administration**. Cette **déclaration préalable** précise notamment le parcours et identifie les organisateurs.",
       sourcePage: 31,
     },
   ],
@@ -308,6 +350,67 @@ export const droitsFondamentaux: SousThemeContent = {
       explication:
         "La loi du 1er juillet 1901 reconnaît la liberté d'association. Une association qui ne respecte pas les principes républicains peut être dissoute par l'État.",
       sourcePage: 31,
+    },
+    {
+      id: `${S}-qcm-013`,
+      sousThemeId: S,
+      question:
+        "Que proclame l'article 4 de la DDHC, cité par le préambule de la Constitution de 1958 à propos de la liberté de choix ?",
+      choices: [
+        "« La liberté consiste à pouvoir faire tout ce qui ne nuit pas à autrui »",
+        "« Les hommes naissent et demeurent libres et égaux en droits »",
+        "« La loi est l'expression de la volonté générale »",
+        "« Nul ne peut être accusé, arrêté ni détenu que dans les cas déterminés par la loi »",
+      ],
+      correctIndex: 0,
+      explication:
+        "L'article 4 de la DDHC de 1789, cité dans le préambule de la Constitution de 1958, protège la liberté de choix : décider de son mode de vie, de ses relations, de ses projets, dans les limites de la loi.",
+      sourcePage: 26,
+    },
+    {
+      id: `${S}-qcm-014`,
+      sousThemeId: S,
+      question: "Le droit à la contraception est-il garanti en France ?",
+      choices: [
+        "Oui, y compris pour les mineurs",
+        "Oui, mais seulement pour les personnes majeures",
+        "Non, seul le droit à l'IVG est garanti",
+        "Oui, mais uniquement sur prescription des parents",
+      ],
+      correctIndex: 0,
+      explication:
+        "Le droit à la contraception, qui permet de choisir de ne pas devenir parent, est garanti par plusieurs dispositifs législatifs et de santé publique, y compris pour les mineurs.",
+      sourcePage: 29,
+    },
+    {
+      id: `${S}-qcm-015`,
+      sousThemeId: S,
+      question: "Lesquelles de ces atteintes au corps sont interdites et sanctionnées par le juge ?",
+      choices: [
+        "Le viol, la mutilation, la stérilisation forcée, l'excision",
+        "Uniquement les actes médicaux non consentis",
+        "Uniquement les mutilations pratiquées à l'étranger",
+        "Aucune, le droit à disposer de son corps n'a pas de limite",
+      ],
+      correctIndex: 0,
+      explication:
+        "Le droit à disposer de son corps garantit à chacun de faire ses propres choix, notamment médicaux. Toute atteinte comme le viol, la mutilation, la stérilisation forcée ou l'excision est interdite et sanctionnée par le juge.",
+      sourcePage: 29,
+    },
+    {
+      id: `${S}-qcm-016`,
+      sousThemeId: S,
+      question: "Qui peut restreindre la liberté de réunion en cas de risque de trouble à l'ordre public ?",
+      choices: [
+        "Le maire ou le préfet, sous le contrôle du juge",
+        "Uniquement le Premier ministre",
+        "Aucune autorité, cette liberté est absolue",
+        "Le Conseil constitutionnel",
+      ],
+      correctIndex: 0,
+      explication:
+        "La liberté de réunion permet de se rassembler pacifiquement. En cas de risque de trouble à l'ordre public, l'autorité administrative — maire ou préfet — peut la restreindre, sous le contrôle du juge.",
+      sourcePage: 30,
     },
   ],
 

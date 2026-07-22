@@ -57,14 +57,14 @@ export const deviseSymboles: SousThemeContent = {
       id: `${S}-fc-008`,
       sousThemeId: S,
       front: "Sur quoi repose la fraternité républicaine ?",
-      back: "Sur la volonté des citoyens de **vivre ensemble** et la capacité à voir en l'autre un semblable. Elle est **civique**, pas fondée sur l'origine ou la religion.",
+      back: "Sur la volonté des citoyens de **vivre ensemble** et la capacité à voir en l'autre un semblable, **malgré les différences**. Elle est **civique**, pas fondée sur l'origine ou la religion.",
       sourcePage: 7,
     },
     {
       id: `${S}-fc-009`,
       sousThemeId: S,
       front: "Quelles sont les deux formes de solidarité issues de la fraternité ?",
-      back: "- **Collective** : la Nation protège les individus (Sécurité sociale, impôts qui financent les services publics, défense de la Nation)\n- **Intergénérationnelle** : les cotisations des salariés financent les retraites",
+      back: "- **Collective** : la Nation protège les individus (Sécurité sociale, impôts qui financent les services publics, défense de la Nation)\n- **Intergénérationnelle** : les cotisations des salariés financent les retraites\n\nLa fraternité contribue ainsi à la **réduction des inégalités**, notamment sociales.",
       sourcePage: 7,
     },
     {
@@ -92,14 +92,14 @@ export const deviseSymboles: SousThemeContent = {
       id: `${S}-fc-013`,
       sousThemeId: S,
       front: "Quand le drapeau tricolore est-il devenu le drapeau officiel de la France ?",
-      back: "En **1794** (créé pendant la Révolution). Il ne fut pas utilisé pendant la Restauration (1814-1830).",
+      back: "En **1794** (créé pendant la Révolution). Il est **bleu, blanc, rouge**. Il ne fut pas utilisé pendant la Restauration (1814-1830).",
       sourcePage: 8,
     },
     {
       id: `${S}-fc-014`,
       sousThemeId: S,
       front: "Que représente le coq ?",
-      back: "La **fierté, le courage et la vigilance**. Il n'a pas de statut officiel dans la Constitution mais est largement reconnu comme symbole national depuis l'Antiquité.",
+      back: "La **fierté, le courage et la vigilance**. Il n'a pas de statut officiel dans la Constitution mais est **utilisé depuis l'Antiquité** et largement reconnu comme symbole national.",
       sourcePage: 8,
     },
     {
@@ -108,6 +108,34 @@ export const deviseSymboles: SousThemeContent = {
       front: "Quelle est la langue officielle de la République ?",
       back: "Le **français**.",
       sourcePage: 8,
+    },
+    {
+      id: `${S}-fc-016`,
+      sousThemeId: S,
+      front: "Que dit le livret sur la liberté, au-delà de l'article 4 de la DDHC ?",
+      back: "Les femmes et les hommes sont **libres dans leurs choix**, leurs opinions et leur manière de penser, de s'exprimer et de vivre. Les libertés sont les **mêmes pour l'ensemble des citoyens**, dans le respect des lois.",
+      sourcePage: 6,
+    },
+    {
+      id: `${S}-fc-017`,
+      sousThemeId: S,
+      front: "Comment le livret définit-il le sexisme, le racisme et la discrimination sur critère religieux ?",
+      back: "- **Sexisme** : traitement dénigrant envers une personne en raison de son sexe\n- **Racisme** : discrimination fondée sur l'origine ou l'appartenance ethnique ou raciale\n- **Discrimination sur critère religieux** : discrimination fondée sur la religion supposée de la personne",
+      sourcePage: 7,
+    },
+    {
+      id: `${S}-fc-018`,
+      sousThemeId: S,
+      front: "Sur quoi doit être fondée toute décision d'un employeur (embauche, promotion…) ?",
+      back: "Sur des **raisons professionnelles**, et non personnelles.",
+      sourcePage: 7,
+    },
+    {
+      id: `${S}-fc-019`,
+      sousThemeId: S,
+      front: "Citez deux exemples concrets de participation citoyenne qui traduisent la solidarité et la fraternité.",
+      back: "L'organisation de **collectes au profit d'associations humanitaires** et l'**engagement dans une association de quartier**.",
+      sourcePage: 7,
     },
   ],
 
@@ -250,6 +278,52 @@ export const deviseSymboles: SousThemeContent = {
       explication:
         "Le coq représente la fierté, le courage et la vigilance ; il est largement reconnu comme symbole national mais n'a pas de statut officiel dans la Constitution.",
       sourcePage: 8,
+    },
+    {
+      id: `${S}-qcm-011`,
+      sousThemeId: S,
+      question: "Quelles sont les couleurs du drapeau tricolore français ?",
+      choices: [
+        "Bleu, blanc, rouge",
+        "Bleu, rouge, blanc",
+        "Blanc, rouge, bleu",
+        "Rouge, blanc, vert",
+      ],
+      correctIndex: 0,
+      explication:
+        "Le drapeau tricolore (bleu, blanc, rouge) a été créé pendant la Révolution et est devenu le drapeau officiel de la France en 1794.",
+      sourcePage: 8,
+    },
+    {
+      id: `${S}-qcm-012`,
+      sousThemeId: S,
+      question: "Comment le livret définit-il le racisme ?",
+      choices: [
+        "Une discrimination fondée sur l'origine ou l'appartenance ethnique ou raciale d'une personne",
+        "Un traitement dénigrant envers une personne en raison de son sexe",
+        "Une discrimination fondée sur la religion supposée de la personne",
+        "Une attitude hostile envers une personne en raison de son orientation sexuelle",
+      ],
+      correctIndex: 0,
+      explication:
+        "Le racisme est une discrimination fondée sur l'origine ou l'appartenance ethnique ou raciale d'une personne — à distinguer du sexisme, de la discrimination sur critère religieux et de la haine anti-LGBT+.",
+      sourcePage: 7,
+    },
+    {
+      id: `${S}-qcm-013`,
+      sousThemeId: S,
+      question:
+        "Sur quoi une décision d'employeur (embauche, promotion…) doit-elle obligatoirement être fondée ?",
+      choices: [
+        "Des raisons professionnelles",
+        "Les convictions religieuses du candidat",
+        "L'origine du candidat",
+        "Les opinions politiques du candidat",
+      ],
+      correctIndex: 0,
+      explication:
+        "Toute décision d'un employeur doit être fondée sur des raisons professionnelles et non personnelles ; se fonder sur la religion, l'origine ou les opinions politiques constituerait une discrimination.",
+      sourcePage: 7,
     },
   ],
 

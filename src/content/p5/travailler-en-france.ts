@@ -81,6 +81,27 @@ export const travaillerEnFrance: SousThemeContent = {
       back: "Conditions d'âge et de diplôme, **nationalité française ou d'un pays de l'UE/EEE**, jouir de ses **droits civiques**, casier judiciaire (bulletin n°2) vierge de condamnation incompatible. Les emplois de **souveraineté** (défense, affaires étrangères) sont réservés aux Français.",
       sourcePage: 72,
     },
+    {
+      id: `${S}-fc-012`,
+      sousThemeId: S,
+      front: "La discrimination au travail est-elle autorisée ?",
+      back: "**Non** : aucune discrimination liée au **genre**, à la **religion** ou au **physique** n'est autorisée. Exception : si un emploi exige un niveau de qualification, l'employeur peut demander la présentation de **diplômes** pour vérifier les compétences du candidat.",
+      sourcePage: 70,
+    },
+    {
+      id: `${S}-fc-013`,
+      sousThemeId: S,
+      front: "Que se passe-t-il après un concours de la fonction publique territoriale ?",
+      back: "Contrairement à la fonction publique d'État, réussir le concours **ne donne pas directement un poste** : les candidats admis sont inscrits sur une **liste d'aptitude** et doivent ensuite **postuler eux-mêmes** à un emploi.",
+      sourcePage: 72,
+    },
+    {
+      id: `${S}-fc-014`,
+      sousThemeId: S,
+      front: "Qu'est-ce qu'un fonctionnaire et comment le devient-on ?",
+      back: "Un fonctionnaire est un **agent public titulaire** de l'une des trois fonctions publiques, recruté par **concours** (sauf exceptions). Après une **période de stage**, il est **titularisé** dans un grade et occupe un emploi permanent. Son statut est régi par le **Code général de la fonction publique**.",
+      sourcePage: 72,
+    },
   ],
 
   qcms: [
@@ -208,6 +229,31 @@ export const travaillerEnFrance: SousThemeContent = {
       explication:
         "Le règlement intérieur est rédigé par l'employeur dont l'entreprise compte au moins 50 salariés : il détaille les règles de santé, sécurité et comportement au travail.",
       sourcePage: 70,
+    },
+    {
+      id: `${S}-qcm-011`,
+      sousThemeId: S,
+      question: "Un employeur peut-il refuser d'embaucher un candidat en raison de sa religion ?",
+      choices: [
+        "Non, c'est une discrimination interdite",
+        "Oui, s'il le justifie",
+        "Oui, sans justification",
+        "Oui, uniquement dans le secteur privé",
+      ],
+      correctIndex: 0,
+      explication:
+        "Dans le cadre professionnel, aucune discrimination liée au genre, à la religion ou au physique n'est autorisée. Seule l'exigence d'un diplôme pour vérifier une qualification est possible.",
+      sourcePage: 70,
+    },
+    {
+      id: `${S}-qcm-012`,
+      sousThemeId: S,
+      question: "Quel texte régit le statut des fonctionnaires ?",
+      choices: ["Le Code général de la fonction publique", "Le Code du travail", "Le Code civil", "La Constitution"],
+      correctIndex: 0,
+      explication:
+        "Le statut du fonctionnaire, agent public titulaire recruté par concours, est régi par le Code général de la fonction publique.",
+      sourcePage: 72,
     },
   ],
 

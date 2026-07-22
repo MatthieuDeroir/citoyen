@@ -25,25 +25,21 @@ export interface ModeProgress {
   total: number;
 }
 
+// Questions ouvertes et textes à trous retirés du parcours pour l'instant :
+// la progression ne porte plus que sur les cartes et les QCM.
 export interface SousThemeProgress {
   cartes: ModeProgress;
   qcm: ModeProgress;
-  ouvertes: ModeProgress;
-  trous: ModeProgress;
 }
 
-/** Détail par activité : cartes maîtrisées et exercices réussis (distincts). */
+/** Détail par activité : cartes maîtrisées et QCM réussis (distincts). */
 export async function getSousThemeProgress(
   userId: string,
   sousThemeId: string,
 ): Promise<SousThemeProgress> {
   const content = getContent(sousThemeId);
   const cardIds = content.flashcards.map((c) => c.id);
-  const exerciseIds = [
-    ...content.qcms.map((q) => q.id),
-    ...content.ouvertes.map((q) => q.id),
-    ...content.trous.map((t) => t.id),
-  ];
+  const exerciseIds = content.qcms.map((q) => q.id);
 
   const masteredRows =
     cardIds.length === 0
@@ -80,12 +76,7 @@ export async function getSousThemeProgress(
 
   return {
     cartes: { done: count(cardIds, mastered), total: cardIds.length },
-    qcm: { done: count(content.qcms.map((q) => q.id), solved), total: content.qcms.length },
-    ouvertes: {
-      done: count(content.ouvertes.map((q) => q.id), solved),
-      total: content.ouvertes.length,
-    },
-    trous: { done: count(content.trous.map((t) => t.id), solved), total: content.trous.length },
+    qcm: { done: count(exerciseIds, solved), total: exerciseIds.length },
   };
 }
 
@@ -131,11 +122,8 @@ export async function getParcours(userId: string): Promise<UniteParcours[]> {
   for (const st of sousThemes) {
     const content = getContent(st.id);
     const cardIds = content.flashcards.map((c) => c.id);
-    const exerciseIds = [
-      ...content.qcms.map((q) => q.id),
-      ...content.ouvertes.map((q) => q.id),
-      ...content.trous.map((t) => t.id),
-    ];
+    // Questions ouvertes et textes à trous retirés du parcours pour l'instant.
+    const exerciseIds = content.qcms.map((q) => q.id);
     const total = cardIds.length + exerciseIds.length;
     const done =
       cardIds.filter((id) => mastered.has(id)).length +

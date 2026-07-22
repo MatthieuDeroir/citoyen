@@ -85,7 +85,7 @@ export const obligationsDevoirs: SousThemeContent = {
       id: `${S}-fc-012`,
       sousThemeId: S,
       front: "Que dit l'article 2 de la Charte de l'environnement ?",
-      back: "« Toute personne a le **devoir de prendre part à la préservation et à l'amélioration de l'environnement**. » (Charte de 2004)",
+      back: "« Toute personne a le **devoir de prendre part à la préservation et à l'amélioration de l'environnement**. » (Charte de 2004) Cet engagement s'inscrit dans le respect des valeurs républicaines : **égalité** (accès de tous à un environnement sain) et **fraternité** (envers les générations futures).",
       sourcePage: 35,
     },
     {
@@ -108,6 +108,34 @@ export const obligationsDevoirs: SousThemeContent = {
       front: "Quel rôle les parents jouent-ils dans la transmission des valeurs républicaines ?",
       back: "Ils sont les **premiers acteurs de l'éducation** : transmettre liberté, égalité, fraternité et laïcité au quotidien. Les parents étrangers s'engagent à assurer une éducation respectueuse des valeurs de la République (article 20 de la **loi CIAI du 26 janvier 2024**).",
       sourcePage: 36,
+    },
+    {
+      id: `${S}-fc-016`,
+      sousThemeId: S,
+      front: "Une condamnation pour un crime grave (viol, agression sexuelle) peut-elle priver des droits civiques ?",
+      back: "**Oui** : certaines condamnations graves peuvent entraîner la **privation des droits civiques et politiques**. Pendant plusieurs années, la personne condamnée ne peut plus **voter ni se présenter à des élections**.",
+      sourcePage: 33,
+    },
+    {
+      id: `${S}-fc-017`,
+      sousThemeId: S,
+      front: "Les décisions de justice doivent-elles être respectées par tous ?",
+      back: "**Oui**, conformément au principe de l'**État de droit**. Ce respect s'ajoute à celui dû aux **agents publics, élus et juges** dans l'exercice de leurs fonctions.",
+      sourcePage: 33,
+    },
+    {
+      id: `${S}-fc-018`,
+      sousThemeId: S,
+      front: "Sur quoi repose en premier lieu la défense nationale française ?",
+      back: "Sur une **armée de métier** et une stratégie de **dissuasion nucléaire**. Le service militaire obligatoire n'existe plus depuis **1997**.",
+      sourcePage: 35,
+    },
+    {
+      id: `${S}-fc-019`,
+      sousThemeId: S,
+      front: "Quels dispositifs de réserve permettent à des volontaires de s'investir pour l'intérêt général ?",
+      back: "La **réserve militaire**, la **réserve de la police**, la **réserve citoyenne**, la **réserve sanitaire**… En cas de **crise ou de guerre**, tout citoyen peut être appelé à participer à la défense du pays.",
+      sourcePage: 35,
     },
   ],
 
@@ -250,6 +278,36 @@ export const obligationsDevoirs: SousThemeContent = {
       correctIndex: 0,
       explication:
         "Le SMV, d'une durée de 8 mois, s'adresse aux jeunes de 18 à 25 ans, français ou étrangers, exclus du marché de l'emploi, pour leur apporter une formation et affirmer les valeurs de la République.",
+      sourcePage: 35,
+    },
+    {
+      id: `${S}-qcm-012`,
+      sousThemeId: S,
+      question: "Une condamnation pour viol ou agression sexuelle peut-elle avoir des conséquences sur les droits civiques ?",
+      choices: [
+        "Oui, la privation des droits civiques et politiques pendant plusieurs années",
+        "Non, seule la peine de prison s'applique",
+        "Oui, mais uniquement la perte du droit de conduire",
+        "Non, les droits civiques ne peuvent jamais être retirés",
+      ],
+      correctIndex: 0,
+      explication:
+        "Certaines condamnations graves, comme pour viol ou agression sexuelle, peuvent entraîner la privation des droits civiques et politiques : la personne condamnée ne peut plus voter ni se présenter à des élections pendant plusieurs années.",
+      sourcePage: 33,
+    },
+    {
+      id: `${S}-qcm-013`,
+      sousThemeId: S,
+      question: "Sur quoi repose en premier lieu la défense nationale française aujourd'hui ?",
+      choices: [
+        "Une armée de métier et la dissuasion nucléaire",
+        "Le service militaire obligatoire pour tous",
+        "Une armée de conscription",
+        "Uniquement la garde nationale",
+      ],
+      correctIndex: 0,
+      explication:
+        "La défense nationale repose en premier lieu sur une armée de métier et une stratégie de dissuasion nucléaire ; le service militaire obligatoire n'existe plus depuis 1997.",
       sourcePage: 35,
     },
   ],

@@ -1,12 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import {
-  BookOpen,
-  Layers,
-  ListChecks,
-  MessageCircleQuestion,
-  TextCursorInput,
-} from "lucide-react";
+import { BookOpen, Layers, ListChecks } from "lucide-react";
 import { BackLink } from "@/components/ui/BackLink";
 import { auth } from "@/lib/auth";
 import { getSousThemeProgress, type SousThemeProgress } from "@/lib/parcours";
@@ -17,6 +11,7 @@ export function generateStaticParams() {
   return sousThemes.map((st) => ({ sousTheme: st.slug }));
 }
 
+// Questions ouvertes et textes à trous retirés du parcours pour l'instant.
 const modes = [
   {
     href: "cartes",
@@ -36,24 +31,6 @@ const modes = [
     icon: ListChecks,
     count: (c: ReturnType<typeof getContent>) => c.qcms.length,
   },
-  {
-    href: "ouvertes",
-    key: "ouvertes",
-    label: "Questions ouvertes",
-    description: "Réponds comme à l'entretien",
-    doneLabel: "réussies",
-    icon: MessageCircleQuestion,
-    count: (c: ReturnType<typeof getContent>) => c.ouvertes.length,
-  },
-  {
-    href: "trous",
-    key: "trous",
-    label: "Textes à trous",
-    description: "Complète les phrases clés",
-    doneLabel: "réussis",
-    icon: TextCursorInput,
-    count: (c: ReturnType<typeof getContent>) => c.trous.length,
-  },
 ] as const;
 
 export default async function UniteParcoursPage({
@@ -72,10 +49,8 @@ export default async function UniteParcoursPage({
   const content = getContent(sousTheme.id);
   const progress = await getSousThemeProgress(userId, sousTheme.id);
 
-  const totalDone =
-    progress.cartes.done + progress.qcm.done + progress.ouvertes.done + progress.trous.done;
-  const totalAll =
-    progress.cartes.total + progress.qcm.total + progress.ouvertes.total + progress.trous.total;
+  const totalDone = progress.cartes.done + progress.qcm.done;
+  const totalAll = progress.cartes.total + progress.qcm.total;
   const percent = totalAll === 0 ? 0 : Math.round((totalDone / totalAll) * 100);
 
   return (
@@ -92,7 +67,7 @@ export default async function UniteParcoursPage({
         </div>
         <p className="mt-2 text-sm text-muted">{sousTheme.description}</p>
         <p className="mt-1 text-xs text-muted">
-          {totalDone}/{totalAll} éléments validés — cartes revues avec succès et exercices
+          {totalDone}/{totalAll} éléments validés — cartes revues avec succès et QCM
           réussis au moins une fois (examens blancs compris).
         </p>
       </header>

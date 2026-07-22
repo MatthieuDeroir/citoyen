@@ -127,7 +127,7 @@ export const culturePatrimoine: SousThemeContent = {
       id: `${S}-fc-018`,
       sousThemeId: S,
       front: "Qu'est-ce que le Tour de France ?",
-      back: "La **plus grande course cycliste du monde**, chaque année en **juillet** — 3e événement sportif mondial. Première édition en **1903**. Arrivée sur les **Champs-Élysées**.",
+      back: "La **plus grande course cycliste du monde**, chaque année en **juillet** — 3e événement sportif mondial. Première édition en **1903** : **60 coureurs** sur **6 étapes** (2 300 km). Aujourd'hui : plus de **170 coureurs**, plus de **3 000 km** sur **20 étapes**, arrivée sur les **Champs-Élysées**.",
       sourcePage: 58,
     },
     {
@@ -162,8 +162,36 @@ export const culturePatrimoine: SousThemeContent = {
       id: `${S}-fc-023`,
       sousThemeId: S,
       front: "D'où vient le champagne ?",
-      back: "À partir du **XVIIe siècle, en Champagne**, les producteurs mettent au point une méthode de **fermentation en bouteille**. Le vin et le champagne sont protégés par les **AOC** (appellations d'origine contrôlée).",
+      back: "L'histoire du vin en France remonte à l'**époque romaine**, quand la vigne est introduite et cultivée dans de nombreuses régions. À partir du **XVIIe siècle, en Champagne**, les producteurs mettent au point une méthode de **fermentation en bouteille**. Le vin et le champagne sont protégés par les **AOC** (appellations d'origine contrôlée).",
       sourcePage: 60,
+    },
+    {
+      id: `${S}-fc-024`,
+      sousThemeId: S,
+      front: "Comment la fête nationale du 14 juillet est-elle célébrée aujourd'hui ?",
+      back: "C'est à la fois un événement institutionnel, avec un **défilé militaire** organisé à Paris sur les **Champs-Élysées** en présence du président de la République, et une fête populaire avec de nombreux **concerts, bals et feux d'artifice** dans tout le pays.",
+      sourcePage: 57,
+    },
+    {
+      id: `${S}-fc-025`,
+      sousThemeId: S,
+      front: "Quel est le rôle des bibliothèques et médiathèques dans l'accès à la culture ?",
+      back: "Implantées dans la **plupart des communes**, elles donnent accès à des **millions d'ouvrages**, gratuitement ou à tarif réduit, quels que soient l'âge, la situation ou les moyens de chacun.",
+      sourcePage: 53,
+    },
+    {
+      id: `${S}-fc-026`,
+      sousThemeId: S,
+      front: "Citez trois grands festivals cités dans le livret comme événements culturels français.",
+      back: "Le **festival de théâtre d'Avignon**, le **festival de jazz de Marciac** et le **festival du cinéma à Cannes** — aux côtés des Journées du patrimoine.",
+      sourcePage: 53,
+    },
+    {
+      id: `${S}-fc-027`,
+      sousThemeId: S,
+      front: "Combien la France compte-t-elle de musées ?",
+      back: "Plus de **1 200 musées**, dont une **centaine de musées nationaux**, couvrant l'art, l'histoire, la science, l'archéologie…",
+      sourcePage: 54,
     },
   ],
 
@@ -241,7 +269,7 @@ export const culturePatrimoine: SousThemeContent = {
         "L'Exposition universelle de 1889",
         "L'Exposition universelle de 1900",
         "Les Jeux Olympiques de 1924",
-        "Le centenaire de la Révolution… de 1848",
+        "Le couronnement de Napoléon III",
       ],
       correctIndex: 0,
       explication:
@@ -316,6 +344,81 @@ export const culturePatrimoine: SousThemeContent = {
       correctIndex: 0,
       explication:
         "Le Brocciu vient de Corse, le Camembert de Normandie et le Maroilles du Nord de la France — tous protégés par une appellation.",
+      sourcePage: 60,
+    },
+    {
+      id: `${S}-qcm-014`,
+      sousThemeId: S,
+      question: "Comment est célébrée la fête nationale du 14 juillet aujourd'hui ?",
+      choices: [
+        "Défilé militaire sur les Champs-Élysées, bals et feux d'artifice",
+        "Uniquement un jour de repos, sans célébration particulière",
+        "Un feu de la Saint-Jean dans chaque village",
+        "Un grand marché artisanal national",
+      ],
+      correctIndex: 0,
+      explication:
+        "La fête du 14 juillet est à la fois un événement institutionnel (défilé militaire à Paris sur les Champs-Élysées, en présence du président de la République) et une fête populaire, avec concerts, bals et feux d'artifice dans tout le pays.",
+      sourcePage: 57,
+    },
+    {
+      id: `${S}-qcm-015`,
+      sousThemeId: S,
+      question: "Que permettent les bibliothèques et médiathèques, implantées dans la plupart des communes ?",
+      choices: [
+        "L'accès gratuit ou à tarif réduit à des millions d'ouvrages",
+        "L'accès uniquement aux étudiants",
+        "L'accès à des œuvres d'art originales exclusivement",
+        "L'accès payant réservé aux habitants de grandes villes",
+      ],
+      correctIndex: 0,
+      explication:
+        "Les bibliothèques et médiathèques, implantées dans la plupart des communes, donnent accès à des millions d'ouvrages afin de permettre à chacun de s'approprier la culture.",
+      sourcePage: 53,
+    },
+    {
+      id: `${S}-qcm-016`,
+      sousThemeId: S,
+      question: "Quel festival de jazz est cité dans le livret comme exemple d'événement culturel français ?",
+      choices: [
+        "Le festival de jazz de Marciac",
+        "Le festival de jazz d'Antibes Juan-les-Pins",
+        "Le festival de jazz de Nice",
+        "Le festival de jazz de Vienne",
+      ],
+      correctIndex: 0,
+      explication:
+        "Le livret cite les Journées du patrimoine, le festival de théâtre d'Avignon, le festival de jazz de Marciac et le festival du cinéma à Cannes.",
+      sourcePage: 53,
+    },
+    {
+      id: `${S}-qcm-017`,
+      sousThemeId: S,
+      question: "Combien la France compte-t-elle environ de musées ?",
+      choices: ["Plus de 1 200", "Environ 500", "Environ 300", "Plus de 2 000"],
+      correctIndex: 0,
+      explication:
+        "La France compte plus de 1 200 musées, dont une centaine de musées nationaux, couvrant l'art, l'histoire, la science, l'archéologie…",
+      sourcePage: 54,
+    },
+    {
+      id: `${S}-qcm-018`,
+      sousThemeId: S,
+      question: "Combien de coureurs ont participé à la toute première édition du Tour de France, en 1903 ?",
+      choices: ["60 coureurs", "170 coureurs", "100 coureurs", "30 coureurs"],
+      correctIndex: 0,
+      explication:
+        "La première édition du Tour de France, en 1903, a réuni 60 coureurs sur six étapes (2 300 km). Dans sa version moderne, le Tour réunit plus de 170 coureurs sur environ 3 000 km et 20 étapes.",
+      sourcePage: 58,
+    },
+    {
+      id: `${S}-qcm-019`,
+      sousThemeId: S,
+      question: "À quelle époque remonte l'introduction de la vigne en France ?",
+      choices: ["L'époque romaine", "Le Moyen Âge", "Le XVIIe siècle", "La Renaissance"],
+      correctIndex: 0,
+      explication:
+        "L'histoire du vin en France remonte à l'époque romaine, quand la vigne a été introduite et cultivée dans de nombreuses régions du pays. Ce n'est qu'au XVIIe siècle que la méthode de fermentation en bouteille du champagne est mise au point, en Champagne.",
       sourcePage: 60,
     },
   ],

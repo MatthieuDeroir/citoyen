@@ -15,7 +15,7 @@ export const textesFondamentaux: SousThemeContent = {
       id: `${S}-fc-002`,
       sousThemeId: S,
       front: "Quels sont les droits naturels et imprescriptibles de l'Homme selon l'article 2 de la DDHC ?",
-      back: "« La **liberté**, la **propriété**, la **sûreté** et la **résistance à l'oppression**. »",
+      back: "« Le but de toute association politique est la **conservation des droits naturels et imprescriptibles de l'Homme**. Ces droits sont la **liberté**, la **propriété**, la **sûreté**, et la **résistance à l'oppression**. »",
       sourcePage: 78,
     },
     {
@@ -71,7 +71,7 @@ export const textesFondamentaux: SousThemeContent = {
       id: `${S}-fc-010`,
       sousThemeId: S,
       front: "Selon la Charte, quels droits et devoirs s'attachent spécifiquement à la qualité de citoyen français ?",
-      back: "Le droit de **participer à l'élection des représentants** du peuple, et le devoir de **concourir à la défense nationale** et de **participer aux jurys d'assises**.",
+      back: "Le droit de **participer à l'élection des représentants** du peuple, et le devoir de **concourir à la défense nationale** ou de **participer aux jurys d'assises**.",
       sourcePage: 80,
     },
     {
@@ -108,6 +108,62 @@ export const textesFondamentaux: SousThemeContent = {
       front: "Où trouver le référentiel officiel de l'examen civique ?",
       back: "Annexe I de l'**arrêté du 10 octobre 2025** relatif au programme, aux épreuves et aux modalités d'organisation de l'examen civique (sur Légifrance). Autres ressources : legifrance.gouv.fr, vie-publique.fr.",
       sourcePage: 81,
+    },
+    {
+      id: `${S}-fc-016`,
+      sousThemeId: S,
+      front: "Que dit l'article 5 de la DDHC sur les limites de la loi ?",
+      back: "« La Loi n'a le droit de défendre que les **actions nuisibles à la Société**. Tout ce qui n'est pas défendu par la Loi ne peut être **empêché**, et nul ne peut être **contraint** à faire ce qu'elle n'ordonne pas. »",
+      sourcePage: 78,
+    },
+    {
+      id: `${S}-fc-017`,
+      sousThemeId: S,
+      front: "Que dit l'article 8 de la DDHC sur les peines ?",
+      back: "« La Loi ne doit établir que des peines **strictement et évidemment nécessaires**, et nul ne peut être puni qu'en vertu d'une Loi établie et promulguée **antérieurement au délit**, et légalement appliquée. » C'est le principe de **légalité des peines** et de **non-rétroactivité** de la loi pénale.",
+      sourcePage: 78,
+    },
+    {
+      id: `${S}-fc-018`,
+      sousThemeId: S,
+      front: "Selon l'article 12 de la DDHC, à quoi sert la force publique ?",
+      back: "« La garantie des droits de l'Homme et du Citoyen nécessite une force publique : cette force est donc instituée pour l'**avantage de tous**, et non pour l'**utilité particulière** de ceux auxquels elle est confiée. »",
+      sourcePage: 78,
+    },
+    {
+      id: `${S}-fc-019`,
+      sousThemeId: S,
+      front: "Que garantit l'article 14 de la DDHC au sujet de l'impôt ?",
+      back: "« Tous les Citoyens ont le droit de **constater**, par eux-mêmes ou par leurs représentants, la nécessité de la contribution publique, de la **consentir librement**, d'en suivre l'**emploi**, et d'en déterminer la **quotité, l'assiette, le recouvrement et la durée**. »",
+      sourcePage: 78,
+    },
+    {
+      id: `${S}-fc-020`,
+      sousThemeId: S,
+      front: "Que dit l'article 15 de la DDHC sur les agents publics ?",
+      back: "« La Société a le droit de **demander compte** à tout **Agent public** de son administration. »",
+      sourcePage: 78,
+    },
+    {
+      id: `${S}-fc-021`,
+      sousThemeId: S,
+      front: "Selon la Charte, que favorise la République en matière d'accès des femmes et des hommes aux mandats électoraux ?",
+      back: "« La République favorise l'**égal accès des femmes et des hommes** aux **mandats électoraux et fonctions électives**, ainsi qu'aux **responsabilités professionnelles et sociales**. »",
+      sourcePage: 80,
+    },
+    {
+      id: `${S}-fc-022`,
+      sousThemeId: S,
+      front: "Selon la Charte, quelle liberté professionnelle est reconnue à chaque conjoint ?",
+      back: "« Chacun des conjoints peut librement **exercer une profession**, percevoir ses **revenus** et en disposer comme il l'entend, après avoir contribué aux **charges communes**. »",
+      sourcePage: 80,
+    },
+    {
+      id: `${S}-fc-023`,
+      sousThemeId: S,
+      front: "Selon la Charte, à quelle condition un citoyen peut-il accéder à un emploi public ?",
+      back: "« Les citoyens français étant égaux, ils peuvent accéder à **tout emploi public selon leurs capacités**. » (Ce principe d'égal accès aux emplois publics selon le mérite figure aussi à la fin de l'article 6 de la DDHC.)",
+      sourcePage: 80,
     },
   ],
 
@@ -226,6 +282,66 @@ export const textesFondamentaux: SousThemeContent = {
       explication:
         "Une personne ayant acquis la nationalité française peut en être déchue si elle s'est soustraite à ses obligations de défense ou livrée à des actes contraires aux intérêts fondamentaux de la France.",
       sourcePage: 80,
+    },
+    {
+      id: `${S}-qcm-009`,
+      sousThemeId: S,
+      question: "Que garantit l'article 8 de la DDHC en matière de peines ?",
+      choices: [
+        "Le principe de légalité des peines et de non-rétroactivité de la loi pénale",
+        "La gratuité de la justice pour tous",
+        "Le droit de faire appel à la Cour de cassation",
+        "L'abolition de la peine de mort",
+      ],
+      correctIndex: 0,
+      explication:
+        "« Nul ne peut être puni qu'en vertu d'une Loi établie et promulguée antérieurement au délit » (article 8) : c'est le principe de légalité des peines et de non-rétroactivité de la loi pénale.",
+      sourcePage: 78,
+    },
+    {
+      id: `${S}-qcm-010`,
+      sousThemeId: S,
+      question: "Selon la Charte, que favorise la République en matière de mandats électoraux ?",
+      choices: [
+        "L'égal accès des femmes et des hommes aux mandats électoraux et fonctions électives",
+        "La priorité donnée aux candidats les plus âgés",
+        "La réservation de sièges aux personnes naturalisées",
+        "Le tirage au sort des candidats",
+      ],
+      correctIndex: 0,
+      explication:
+        "La Charte précise que « la République favorise l'égal accès des femmes et des hommes aux mandats électoraux et fonctions électives, ainsi qu'aux responsabilités professionnelles et sociales ».",
+      sourcePage: 80,
+    },
+    {
+      id: `${S}-qcm-011`,
+      sousThemeId: S,
+      question: "Selon l'article 14 de la DDHC, que peuvent faire les citoyens au sujet de l'impôt ?",
+      choices: [
+        "Constater la nécessité de la contribution publique et la consentir librement, par eux-mêmes ou leurs représentants",
+        "Refuser librement de payer l'impôt",
+        "Fixer eux-mêmes le montant de leurs impôts sans aucun contrôle",
+        "Déléguer intégralement cette question au gouvernement sans regard possible",
+      ],
+      correctIndex: 0,
+      explication:
+        "L'article 14 garantit aux citoyens le droit de constater la nécessité de la contribution publique, de la consentir librement, d'en suivre l'emploi et d'en déterminer la quotité, l'assiette, le recouvrement et la durée, par eux-mêmes ou par leurs représentants.",
+      sourcePage: 78,
+    },
+    {
+      id: `${S}-qcm-012`,
+      sousThemeId: S,
+      question: "Que garantit l'article 15 de la DDHC ?",
+      choices: [
+        "Le droit de la Société de demander compte à tout agent public de son administration",
+        "Le droit de vote aux étrangers résidents",
+        "La gratuité de tous les services publics",
+        "L'élection directe des juges",
+      ],
+      correctIndex: 0,
+      explication:
+        "« La Société a le droit de demander compte à tout Agent public de son administration » (article 15) : c'est le fondement de la responsabilité et de la transparence de l'administration.",
+      sourcePage: 78,
     },
   ],
 

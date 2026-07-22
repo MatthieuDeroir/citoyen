@@ -72,7 +72,7 @@ export const principesRepublique: SousThemeContent = {
       id: `${S}-fc-010`,
       sousThemeId: S,
       front: "Quelles sont les limites de la liberté d'expression ?",
-      back: "- La **diffamation** et les injures publiques\n- L'encouragement à commettre des crimes\n- L'**incitation à la haine** raciale, ethnique ou religieuse\n- L'utilisation de la religion pour justifier crimes de guerre ou terrorisme\n- L'incitation à discriminer\n- Le **négationnisme** (nier l'existence de la Shoah)",
+      back: "- La **diffamation** et les injures publiques\n- L'encouragement à commettre certains crimes ou délits **contre une religion**\n- L'**incitation à la haine** raciale, ethnique ou religieuse\n- L'utilisation de la religion pour justifier crimes de guerre ou terrorisme\n- L'incitation à discriminer\n- La remise en cause de crimes contre l'humanité, dont le **négationnisme** (nier l'existence de la Shoah)",
       sourcePage: 12,
     },
     {
@@ -129,6 +129,42 @@ export const principesRepublique: SousThemeContent = {
       sousThemeId: S,
       front: "Dans quels domaines l'État intervient-il au titre de la République sociale ?",
       back: "- L'**éducation** (école gratuite)\n- Le **logement** (logement social)\n- L'**emploi** (RSA, aide au retour à l'emploi)\n- La **santé** (Sécurité sociale)",
+      sourcePage: 14,
+    },
+    {
+      id: `${S}-fc-019`,
+      sousThemeId: S,
+      front: "Un salarié peut-il s'absenter pour une fête religieuse ?",
+      back: "Il peut **solliciter une autorisation d'absence** auprès de son employeur. Ce dernier peut la **refuser**, à condition que ce refus ne soit **pas discriminatoire** : la décision peut être motivée par le règlement intérieur ou des nécessités de service.",
+      sourcePage: 13,
+    },
+    {
+      id: `${S}-fc-020`,
+      sousThemeId: S,
+      front: "La neutralité de l'État s'applique-t-elle aussi aux bâtiments des services publics ?",
+      back: "**Oui** : aucun signe ou emblème **religieux, politique ou philosophique** ne doit être exposé dans les bureaux, aux guichets ou dans les espaces communs des services publics — en plus de la neutralité exigée des agents eux-mêmes.",
+      sourcePage: 12,
+    },
+    {
+      id: `${S}-fc-021`,
+      sousThemeId: S,
+      front:
+        "Peut-on exiger l'adaptation d'un service public au nom d'une religion, ou organiser librement une manifestation religieuse dans la rue ?",
+      back: "**Non** sur les deux points : il n'est pas possible d'exiger une adaptation du service public au nom d'une religion, et une manifestation religieuse (ex. **prière de rue**) peut être **soumise à autorisation, encadrée ou interdite** pour éviter des troubles à l'ordre public.",
+      sourcePage: 12,
+    },
+    {
+      id: `${S}-fc-022`,
+      sousThemeId: S,
+      front: "Quelle est la finalité de la laïcité à l'école, et à qui s'adresse la Charte de la laïcité ?",
+      back: "Elle vise à garantir la **liberté de conscience des élèves**, en leur permettant de penser librement et de se construire leurs propres opinions. La Charte de la laïcité à l'École s'adresse à l'ensemble des **personnels** (professeurs, animateurs…), aux **élèves** et aux **parents d'élèves**. On ne peut pas non plus refuser, pour motif religieux, une règle de fonctionnement ou un enseignement du programme scolaire.",
+      sourcePage: 13,
+    },
+    {
+      id: `${S}-fc-023`,
+      sousThemeId: S,
+      front: "Quels mandats sont pourvus au suffrage universel en France, et qui peut s'y présenter ?",
+      back: "Le **Président de la République**, les **parlementaires**, les **maires** et les représentants des **régions, départements et communes**. Tout citoyen d'au moins 18 ans disposant de ses droits civils et politiques a le droit de **voter et de se présenter** aux élections, dans les conditions fixées par la loi.",
       sourcePage: 14,
     },
   ],
@@ -288,6 +324,37 @@ export const principesRepublique: SousThemeContent = {
       correctIndex: 0,
       explication:
         "L'État favorise l'égalité des chances en intervenant dans l'éducation (école gratuite), le logement social, l'emploi (RSA) et la santé (Sécurité sociale).",
+      sourcePage: 14,
+    },
+    {
+      id: `${S}-qcm-012`,
+      sousThemeId: S,
+      question:
+        "Un employeur peut-il refuser une autorisation d'absence demandée par un salarié pour une fête religieuse ?",
+      choices: [
+        "Oui, à condition que ce refus ne soit pas discriminatoire",
+        "Non, il doit toujours l'accorder",
+        "Oui, mais uniquement dans la fonction publique",
+        "Non, sauf s'il s'agit d'un agent public",
+      ],
+      correctIndex: 0,
+      explication:
+        "Le salarié peut solliciter une autorisation d'absence pour une fête religieuse ; l'employeur peut la refuser à condition que ce refus ne soit pas discriminatoire, en la motivant par le règlement intérieur ou des nécessités de service.",
+      sourcePage: 13,
+    },
+    {
+      id: `${S}-qcm-013`,
+      sousThemeId: S,
+      question: "En France, le droit de se présenter aux élections appartient…",
+      choices: [
+        "à tout citoyen d'au moins 18 ans disposant de ses droits civils et politiques",
+        "aux seuls citoyens de plus de 25 ans",
+        "aux seuls membres d'un parti politique",
+        "aux seuls citoyens nés en France",
+      ],
+      correctIndex: 0,
+      explication:
+        "Tous les citoyens, hommes et femmes, ayant au moins 18 ans et disposant de leurs droits civils et politiques, ont le droit de voter et de se présenter aux élections dans les conditions fixées par la loi.",
       sourcePage: 14,
     },
   ],

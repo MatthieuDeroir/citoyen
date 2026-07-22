@@ -23,7 +23,7 @@ export const unionEuropeenne: SousThemeContent = {
       sousThemeId: S,
       front: "Quand l'Union européenne a-t-elle été créée, et par quel traité ?",
       back: "En **1992**, avec la signature du **traité de Maastricht**. Il crée aussi la citoyenneté européenne et la Banque centrale européenne.",
-      sourcePage: 22,
+      sourcePage: 23,
     },
     {
       id: `${S}-fc-004`,
@@ -85,8 +85,22 @@ export const unionEuropeenne: SousThemeContent = {
       id: `${S}-fc-012`,
       sousThemeId: S,
       front: "Quelles sont les grandes étapes de la construction européenne ?",
-      back: "- **1951** : CECA (charbon et acier)\n- **1957** : CEE, marché commun (traité de Rome)\n- **1958** : Commission européenne (Bruxelles)\n- **1992** : Union européenne, citoyenneté, BCE (Maastricht)\n- **2002** : euro en circulation",
+      back: "- **1951** : CECA (charbon et acier)\n- **1957** : CEE, marché commun (traité de Rome)\n- **1958** : **Commission européenne** — organe exécutif de l'UE, siège à **Bruxelles**\n- **1992** : Union européenne, citoyenneté, **BCE** (traité de Maastricht) — mise en place de la BCE le **1er juin 1998 à Francfort**\n- **2002** : euro en circulation",
       sourcePage: 23,
+    },
+    {
+      id: `${S}-fc-013`,
+      sousThemeId: S,
+      front: "Qu'est-ce que la Charte des droits fondamentaux de l'Union européenne ?",
+      back: "Adoptée en **2000**, elle **garantit les droits des personnes** au sein de l'Union européenne.",
+      sourcePage: 22,
+    },
+    {
+      id: `${S}-fc-014`,
+      sousThemeId: S,
+      front: "Quelles sont les principales vagues d'élargissement de l'Union européenne depuis 1957 ?",
+      back: "- **1973** : Royaume-Uni, Irlande, Danemark (9 membres)\n- **1981** : Grèce (10)\n- **1986** : Espagne, Portugal (12)\n- **1995** : Autriche, Suède, Finlande (15)\n- **2004** : **10 pays** d'Europe centrale et de l'Est, dont la Pologne et la Hongrie (25)\n- **2007** : Roumanie, Bulgarie (27)\n- **2013** : Croatie (28, maximum avant le Brexit)",
+      sourcePage: 22,
     },
   ],
 
@@ -208,6 +222,31 @@ export const unionEuropeenne: SousThemeContent = {
       correctIndex: 0,
       explication:
         "Le Royaume-Uni a quitté l'Union européenne en 2020 (Brexit), ramenant le nombre d'États membres à 27.",
+      sourcePage: 22,
+    },
+    {
+      id: `${S}-qcm-011`,
+      sousThemeId: S,
+      question: "Quel est le rôle de la Commission européenne ?",
+      choices: [
+        "C'est l'organe exécutif de l'UE, basé à Bruxelles",
+        "Elle vote les lois au nom des citoyens européens",
+        "Elle gère la politique monétaire et l'euro",
+        "Elle rend la justice au niveau européen",
+      ],
+      correctIndex: 0,
+      explication:
+        "La Commission européenne, créée en 1958 et basée à Bruxelles, est l'organe exécutif de l'Union européenne. Le Parlement (Strasbourg) vote les lois et la BCE (Francfort) gère la politique monétaire.",
+      sourcePage: 23,
+    },
+    {
+      id: `${S}-qcm-012`,
+      sousThemeId: S,
+      question: "En 2004, combien de pays ont rejoint l'Union européenne en une seule vague d'élargissement ?",
+      choices: ["10", "6", "5", "3"],
+      correctIndex: 0,
+      explication:
+        "En 2004, 10 pays d'Europe centrale et de l'Est (dont la Pologne et la Hongrie) ont rejoint l'UE, la faisant passer de 15 à 25 États membres.",
       sourcePage: 22,
     },
   ],

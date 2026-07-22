@@ -88,6 +88,27 @@ export const organisationTerritoriale: SousThemeContent = {
       back: "**La Martinique, la Guadeloupe, Saint-Martin et Saint-Barthélemy**.",
       sourcePage: 20,
     },
+    {
+      id: `${S}-fc-013`,
+      sousThemeId: S,
+      front: "Les ressortissants de l'Union européenne peuvent-ils être candidats aux élections municipales ?",
+      back: "Oui : les élections municipales permettent aux **citoyens français** et aux **ressortissants de l'Union européenne** de **voter et de se présenter comme candidats**.",
+      sourcePage: 19,
+    },
+    {
+      id: `${S}-fc-014`,
+      sousThemeId: S,
+      front: "Quels sont les noms des 13 régions métropolitaines ?",
+      back: "**Hauts-de-France, Normandie, Île-de-France, Grand Est, Bretagne, Pays de la Loire, Centre-Val de Loire, Bourgogne-Franche-Comté, Nouvelle-Aquitaine, Auvergne-Rhône-Alpes, Occitanie, Provence-Alpes-Côte d'Azur, Corse**.",
+      sourcePage: 21,
+    },
+    {
+      id: `${S}-fc-015`,
+      sousThemeId: S,
+      front: "Quels sont les numéros des départements et régions d'outre-mer (DROM) ?",
+      back: "**Guadeloupe : 971, Martinique : 972, Guyane : 973, La Réunion : 974, Mayotte : 976**.",
+      sourcePage: 21,
+    },
   ],
 
   qcms: [
@@ -193,6 +214,42 @@ export const organisationTerritoriale: SousThemeContent = {
       explication:
         "Les communes regroupées en intercommunalités (communautés de communes, métropoles…) gèrent des services publics comme l'eau, l'assainissement, les déchets ou les transports urbains.",
       sourcePage: 19,
+    },
+    {
+      id: `${S}-qcm-011`,
+      sousThemeId: S,
+      question:
+        "Les ressortissants de l'Union européenne peuvent-ils se présenter comme candidats aux élections municipales en France ?",
+      choices: [
+        "Oui, ils peuvent voter et se présenter comme candidats",
+        "Non, ils peuvent seulement voter",
+        "Non, ils n'ont aucun droit électoral en France",
+        "Oui, mais uniquement comme conseillers régionaux",
+      ],
+      correctIndex: 0,
+      explication:
+        "Les élections municipales permettent aux citoyens français et aux ressortissants de l'Union européenne de voter et de se présenter comme candidats.",
+      sourcePage: 19,
+    },
+    {
+      id: `${S}-qcm-012`,
+      sousThemeId: S,
+      question: "Quel est le numéro de département de la Guadeloupe ?",
+      choices: ["971", "972", "973", "974"],
+      correctIndex: 0,
+      explication:
+        "Guadeloupe : 971, Martinique : 972, Guyane : 973, La Réunion : 974, Mayotte : 976.",
+      sourcePage: 21,
+    },
+    {
+      id: `${S}-qcm-013`,
+      sousThemeId: S,
+      question: "Parmi ces noms, lequel est celui d'une région métropolitaine française ?",
+      choices: ["Nouvelle-Aquitaine", "Nouvelle-Bretagne", "Grande-Provence", "Île-Bourgogne"],
+      correctIndex: 0,
+      explication:
+        "La Nouvelle-Aquitaine fait partie des 13 régions métropolitaines, avec entre autres Hauts-de-France, Normandie, Île-de-France, Grand Est, Bretagne, Pays de la Loire, Centre-Val de Loire, Bourgogne-Franche-Comté, Auvergne-Rhône-Alpes, Occitanie, Provence-Alpes-Côte d'Azur et Corse.",
+      sourcePage: 21,
     },
   ],
 

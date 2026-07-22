@@ -78,7 +78,7 @@ export const democratieEtatDeDroit: SousThemeContent = {
       id: `${S}-fc-011`,
       sousThemeId: S,
       front: "Combien y a-t-il de sénateurs et comment sont-ils élus ?",
-      back: "**348 sénateurs**, élus au **suffrage universel indirect** pour un mandat de **6 ans**.",
+      back: "**348 sénateurs**, élus au **suffrage universel indirect** pour un mandat de **6 ans**, par les élus locaux (conseillers municipaux, départementaux et régionaux).",
       sourcePage: 16,
     },
     {
@@ -122,6 +122,27 @@ export const democratieEtatDeDroit: SousThemeContent = {
       front: "Pour combien de temps sont élus les conseillers municipaux, départementaux et régionaux ?",
       back: "Tous pour **6 ans** (maire et conseillers municipaux, conseillers départementaux, conseillers régionaux).",
       sourcePage: 18,
+    },
+    {
+      id: `${S}-fc-018`,
+      sousThemeId: S,
+      front: "Où la Déclaration des droits de l'homme et du citoyen de 1789 est-elle citée aujourd'hui, et que fait par ailleurs l'administration ?",
+      back: "Elle est citée dans le **préambule de la Constitution**, qui définit aussi l'organisation de l'État. Les **partis politiques se forment et exercent leur activité librement**, et l'administration agit **sous le contrôle du juge**.",
+      sourcePage: 16,
+    },
+    {
+      id: `${S}-fc-019`,
+      sousThemeId: S,
+      front: "Quel est le rôle général de la justice ?",
+      back: "Rendue par les **juges**, elle règle les **litiges** entre particuliers ou entreprises, et entre citoyens et administration. Elle **sanctionne les infractions** par des peines prévues par la loi (ex. : emprisonnement, amende).",
+      sourcePage: 17,
+    },
+    {
+      id: `${S}-fc-020`,
+      sousThemeId: S,
+      front: "Faut-il présenter une pièce d'identité pour voter ?",
+      back: "Oui, les Français et les ressortissants de l'UE doivent présenter une **pièce d'identité**. Exception : ce n'est **pas obligatoire dans les communes de moins de 1 000 habitants** (le président du bureau de vote peut toutefois demander une preuve).",
+      sourcePage: 17,
     },
   ],
 
@@ -254,6 +275,21 @@ export const democratieEtatDeDroit: SousThemeContent = {
       correctIndex: 0,
       explication:
         "Le vote est personnel et secret : on passe par un isoloir pour mettre son bulletin dans une enveloppe, déposée ensuite dans une urne. Il est interdit d'entrer à plusieurs dans un isoloir.",
+      sourcePage: 17,
+    },
+    {
+      id: `${S}-qcm-011`,
+      sousThemeId: S,
+      question: "Faut-il présenter une pièce d'identité pour voter en France ?",
+      choices: [
+        "Oui, sauf exception dans les communes de moins de 1 000 habitants",
+        "Non, jamais",
+        "Oui, uniquement un passeport",
+        "Non, la carte électorale suffit toujours",
+      ],
+      correctIndex: 0,
+      explication:
+        "Les Français et les ressortissants de l'UE doivent présenter une pièce d'identité pour voter, sauf dans les communes de moins de 1 000 habitants où ce n'est pas obligatoire.",
       sourcePage: 17,
     },
   ],

@@ -102,6 +102,41 @@ export const vieFamiliale: SousThemeContent = {
       back: "**15 ans**, instaurée par la **loi du 7 juillet 2023** pour lutter contre le cyber-harcèlement : avant cet âge, on ne peut pas s'inscrire seul sur les réseaux sociaux. Les parents doivent veiller au bon usage des écrans.",
       sourcePage: 76,
     },
+    {
+      id: `${S}-fc-015`,
+      sousThemeId: S,
+      front: "Contre quoi les parents doivent-ils protéger leurs enfants, selon le code civil ?",
+      back: "Les parents doivent surveiller les relations, déplacements et communications de l'enfant, y compris son usage des réseaux sociaux, et le protéger contre le **racket**, le **viol**, la **prostitution**, les **addictions** et le **harcèlement**, en plus de la violence.",
+      sourcePage: 74,
+    },
+    {
+      id: `${S}-fc-016`,
+      sousThemeId: S,
+      front: "Les enfants sont-ils associés aux décisions qui les concernent ?",
+      back: "**Oui** : les parents associent l'enfant aux décisions qui le concernent, selon son **âge** et son **degré de maturité**.",
+      sourcePage: 74,
+    },
+    {
+      id: `${S}-fc-017`,
+      sousThemeId: S,
+      front: "Que risquent les parents qui ne scolarisent pas leur enfant de 3 à 16 ans ?",
+      back: "L'instruction est **obligatoire de 3 à 16 ans**. Les parents qui ne respectent pas cette obligation peuvent être sanctionnés par une **amende** et une **peine de prison**. Seules les absences pour raisons de santé ou familiales (mariage, enterrement…) sont acceptées.",
+      sourcePage: 75,
+    },
+    {
+      id: `${S}-fc-018`,
+      sousThemeId: S,
+      front: "Comment les parents peuvent-ils s'impliquer dans la vie de l'école ?",
+      back: "Les parents font partie de la **communauté éducative** : ils échangent avec les enseignants et le personnel de l'établissement, et peuvent se porter candidats aux **élections de représentants de parents d'élèves** ou rejoindre une association de parents.",
+      sourcePage: 75,
+    },
+    {
+      id: `${S}-fc-019`,
+      sousThemeId: S,
+      front: "Qu'est-ce que la citoyenneté numérique ?",
+      back: "Enseignée notamment à l'**école**, elle permet d'apprendre à faire un usage **responsable, éthique et sûr** des technologies numériques.",
+      sourcePage: 76,
+    },
   ],
 
   qcms: [
@@ -233,6 +268,36 @@ export const vieFamiliale: SousThemeContent = {
       explication:
         "La loi du 7 juillet 2023 a instauré la majorité numérique à 15 ans : avant cet âge, on ne peut pas s'inscrire seul sur les réseaux sociaux.",
       sourcePage: 76,
+    },
+    {
+      id: `${S}-qcm-011`,
+      sousThemeId: S,
+      question: "Contre quoi les parents ont-ils l'obligation de protéger leur enfant, selon le code civil ?",
+      choices: [
+        "Le racket, le viol, la prostitution, les addictions et le harcèlement",
+        "Uniquement les mauvaises fréquentations",
+        "Uniquement les accidents domestiques",
+        "Rien, cela relève uniquement de l'école",
+      ],
+      correctIndex: 0,
+      explication:
+        "Les parents ont l'obligation de protéger l'enfant contre le racket, le viol, la prostitution, les addictions, le harcèlement et la violence, en surveillant notamment ses relations et son usage des réseaux sociaux.",
+      sourcePage: 74,
+    },
+    {
+      id: `${S}-qcm-012`,
+      sousThemeId: S,
+      question: "Que risquent les parents en cas de non-scolarisation de leur enfant sans motif valable ?",
+      choices: [
+        "Une amende et une peine de prison",
+        "Rien, ce n'est pas sanctionné",
+        "Un simple rappel à l'ordre",
+        "La perte de la nationalité",
+      ],
+      correctIndex: 0,
+      explication:
+        "L'instruction est obligatoire de 3 à 16 ans. Les parents qui ne respectent pas cette obligation peuvent être sanctionnés par une amende et une peine de prison.",
+      sourcePage: 75,
     },
   ],
 

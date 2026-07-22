@@ -1,6 +1,7 @@
 "use server";
 
 import { and, eq, sql } from "drizzle-orm";
+import { revalidatePath } from "next/cache";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { cardProgress, userStats } from "@/db/schema";
@@ -56,6 +57,10 @@ export async function reviewCard(cardId: string, rating: Rating) {
   // Les cartes de révision ne rapportent pas d'XP, mais comptent pour le streak au même
   // titre que n'importe quel exercice : seuls les exercices en donnent.
   await markActivity(userId, now);
+
+  // Purge le cache client : la progression (parcours, dashboard, classement…)
+  // doit être à jour même en revenant en arrière dans l'historique.
+  revalidatePath("/", "layout");
 
   return { xp: 0 };
 }
