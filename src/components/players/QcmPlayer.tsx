@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useExitSession } from "@/components/players/useExitSession";
 import { motion, AnimatePresence } from "motion/react";
 import { X, Check, XCircle, ArrowRight } from "lucide-react";
@@ -42,10 +42,18 @@ export function QcmPlayer({ deck, title, backHref, onSubmit, next: nextSession }
   const [xpTotal, setXpTotal] = useState(0);
   const [sessionKey, setSessionKey] = useState(0);
   const exitSession = useExitSession(backHref);
+  // Verrou anti double-clic/double-tap : sans lui, un deuxième appel rapproché
+  // à next() incrémente l'index deux fois et saute une question sans que rien
+  // ne s'affiche entre les deux (mode="wait" ne rend jamais l'état intermédiaire).
+  const advancingRef = useRef(false);
 
   const qcm = questions[index];
   const done = index >= questions.length;
   const revealed = chosen !== null;
+
+  useEffect(() => {
+    advancingRef.current = false;
+  }, [index]);
 
   async function choose(i: number) {
     if (revealed || pending || !qcm) return;
@@ -64,6 +72,8 @@ export function QcmPlayer({ deck, title, backHref, onSubmit, next: nextSession }
   }
 
   function next() {
+    if (advancingRef.current) return;
+    advancingRef.current = true;
     setChosen(null);
     setIndex((i) => i + 1);
   }

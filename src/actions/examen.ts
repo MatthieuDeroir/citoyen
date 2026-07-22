@@ -1,7 +1,6 @@
 "use server";
 
 import { eq, sql } from "drizzle-orm";
-import { revalidatePath } from "next/cache";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { attempts, examens, userStats } from "@/db/schema";
@@ -9,6 +8,7 @@ import { getQcm } from "@/content";
 import { annalesById } from "@/content/examen";
 import { addXp, markActivity } from "@/lib/xp";
 import { EXAM_PASS, EXAM_TOTAL, type ExamDetailEntry } from "@/lib/examen";
+import { revalidateProgressPaths } from "@/lib/revalidateProgress";
 
 export interface ExamResult {
   examId: string;
@@ -84,9 +84,7 @@ export async function submitExamen(
   if (xp > 0) await addXp(userId, xp, "bonus");
   else await markActivity(userId); // un examen tenté compte pour le streak même à 0 XP
 
-  // Purge le cache client : la progression (parcours, dashboard, classement…)
-  // doit être à jour même en revenant en arrière dans l'historique.
-  revalidatePath("/", "layout");
+  revalidateProgressPaths();
 
   return { examId: exam.id, score: correctCount, passed, xp, corrections };
 }

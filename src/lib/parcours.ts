@@ -80,6 +80,25 @@ export async function getSousThemeProgress(
   };
 }
 
+/** Cartes déjà maîtrisées (repetitions ≥ 1) parmi `ids`. */
+export async function getMasteredCardIds(
+  userId: string,
+  ids: string[],
+): Promise<Set<string>> {
+  if (ids.length === 0) return new Set();
+  const rows = await db
+    .select({ cardId: cardProgress.cardId })
+    .from(cardProgress)
+    .where(
+      and(
+        eq(cardProgress.userId, userId),
+        gte(cardProgress.repetitions, 1),
+        inArray(cardProgress.cardId, ids),
+      ),
+    );
+  return new Set(rows.map((r) => r.cardId));
+}
+
 /** Exercices déjà réussis (verdict correct) parmi `ids`. */
 export async function getSolvedIds(
   userId: string,

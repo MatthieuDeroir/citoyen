@@ -1,12 +1,12 @@
 "use server";
 
 import { eq, sql } from "drizzle-orm";
-import { revalidatePath } from "next/cache";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { attempts, userStats } from "@/db/schema";
 import { getQcm } from "@/content";
 import { addXp, markActivity, XP } from "@/lib/xp";
+import { revalidateProgressPaths } from "@/lib/revalidateProgress";
 
 /** Enregistre une réponse de QCM ; la correction fait foi côté serveur. */
 export async function submitQcm(qcmId: string, chosenIndex: number) {
@@ -39,9 +39,7 @@ export async function submitQcm(qcmId: string, chosenIndex: number) {
   if (xp > 0) await addXp(userId, xp, "qcm");
   else await markActivity(userId); // une réponse fausse compte aussi pour le streak
 
-  // Purge le cache client : la progression (parcours, dashboard, classement…)
-  // doit être à jour même en revenant en arrière dans l'historique.
-  revalidatePath("/", "layout");
+  revalidateProgressPaths();
 
   return { correct, xp };
 }
@@ -82,7 +80,7 @@ export async function submitSelfEval(
   if (xp > 0) await addXp(userId, xp, "ouverte");
   else await markActivity(userId);
 
-  revalidatePath("/", "layout");
+  revalidateProgressPaths();
 
   return { xp };
 }

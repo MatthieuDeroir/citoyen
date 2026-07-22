@@ -1,13 +1,13 @@
 "use server";
 
 import { and, eq, sql } from "drizzle-orm";
-import { revalidatePath } from "next/cache";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { cardProgress, userStats } from "@/db/schema";
 import { review, nextDueDate, INITIAL_STATE, type Rating } from "@/lib/srs";
 import { getFlashcard } from "@/content";
 import { markActivity } from "@/lib/xp";
+import { revalidateProgressPaths } from "@/lib/revalidateProgress";
 
 export async function reviewCard(cardId: string, rating: Rating) {
   const session = await auth();
@@ -58,9 +58,7 @@ export async function reviewCard(cardId: string, rating: Rating) {
   // titre que n'importe quel exercice : seuls les exercices en donnent.
   await markActivity(userId, now);
 
-  // Purge le cache client : la progression (parcours, dashboard, classement…)
-  // doit être à jour même en revenant en arrière dans l'historique.
-  revalidatePath("/", "layout");
+  revalidateProgressPaths();
 
   return { xp: 0 };
 }
