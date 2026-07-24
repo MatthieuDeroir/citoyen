@@ -12,24 +12,19 @@ import {
   CircleX,
 } from "lucide-react";
 import type { Qcm } from "@/content/types";
+import type { WithChoiceOrder } from "@/lib/shuffle";
 import { EXAM_DURATION_MINUTES, EXAM_PASS, EXAM_TOTAL } from "@/lib/examen";
 import type { ExamResult } from "@/actions/examen";
 
 interface Props {
-  deck: Qcm[];
+  /** Paquet déjà mélangé côté serveur (voir `withChoiceOrder`) : mélanger
+   * l'ordre des choix ici, côté client, provoquerait un mismatch
+   * d'hydratation (Math.random() diffère entre le SSR et l'hydratation). */
+  deck: (Qcm & WithChoiceOrder)[];
   onSubmit: (
     questionIds: string[],
     answers: { qcmId: string; chosenIndex: number }[],
   ) => Promise<ExamResult>;
-}
-
-function shuffle<T>(arr: T[]): T[] {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
 }
 
 export function ExamenPlayer({ deck, onSubmit }: Props) {
@@ -42,11 +37,6 @@ export function ExamenPlayer({ deck, onSubmit }: Props) {
   const submittedRef = useRef(false);
 
   const qcmById = useMemo(() => new Map(deck.map((q) => [q.id, q])), [deck]);
-  // ordre d'affichage des choix mélangé par question ; on soumet l'index d'origine
-  const choiceOrders = useMemo(
-    () => new Map(deck.map((q) => [q.id, shuffle(q.choices.map((_, i) => i))])),
-    [deck],
-  );
   const answeredCount = Object.keys(answers).length;
 
   async function finish(current: Record<string, number>) {
@@ -240,7 +230,7 @@ export function ExamenPlayer({ deck, onSubmit }: Props) {
           <h1 className="text-lg font-bold leading-snug">{qcm.question}</h1>
 
           <div className="space-y-3">
-            {(choiceOrders.get(qcm.id) ?? qcm.choices.map((_, i) => i)).map((i) => {
+            {qcm.order.map((i) => {
               const choice = qcm.choices[i];
               return (
               <button

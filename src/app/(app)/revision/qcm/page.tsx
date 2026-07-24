@@ -3,7 +3,7 @@ import { PartyPopper } from "lucide-react";
 import { auth } from "@/lib/auth";
 import { allQcms } from "@/content";
 import { getSolvedIds } from "@/lib/parcours";
-import { shuffle } from "@/lib/shuffle";
+import { shuffle, withChoiceOrder } from "@/lib/shuffle";
 import { QcmPlayer } from "@/components/players/QcmPlayer";
 import { submitQcm } from "@/actions/attempts";
 
@@ -41,7 +41,7 @@ export default async function RevisionQcmPage() {
 
   return (
     <QcmPlayer
-      deck={shuffle(validated).slice(0, SESSION_SIZE)}
+      deck={withChoiceOrder(shuffle(validated).slice(0, SESSION_SIZE))}
       title="Révision éclair"
       backHref="/dashboard"
       onSubmit={submitQcm}

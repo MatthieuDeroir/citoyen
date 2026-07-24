@@ -7,7 +7,6 @@ import { cardProgress, userStats } from "@/db/schema";
 import { review, nextDueDate, INITIAL_STATE, type Rating } from "@/lib/srs";
 import { getFlashcard } from "@/content";
 import { markActivity } from "@/lib/xp";
-import { revalidateProgressPaths } from "@/lib/revalidateProgress";
 
 export async function reviewCard(cardId: string, rating: Rating) {
   const session = await auth();
@@ -57,8 +56,6 @@ export async function reviewCard(cardId: string, rating: Rating) {
   // Les cartes de révision ne rapportent pas d'XP, mais comptent pour le streak au même
   // titre que n'importe quel exercice : seuls les exercices en donnent.
   await markActivity(userId, now);
-
-  revalidateProgressPaths();
 
   return { xp: 0 };
 }

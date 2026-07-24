@@ -2,7 +2,7 @@ import Link from "next/link";
 import { PartyPopper } from "lucide-react";
 import { auth } from "@/lib/auth";
 import { getErrorQcms } from "@/lib/erreurs";
-import { shuffle } from "@/lib/shuffle";
+import { shuffle, withChoiceOrder } from "@/lib/shuffle";
 import { QcmPlayer } from "@/components/players/QcmPlayer";
 import { submitQcm } from "@/actions/attempts";
 
@@ -35,7 +35,7 @@ export default async function ErreursPage() {
     );
   }
 
-  const deck = shuffle(errors).slice(0, SESSION_SIZE);
+  const deck = withChoiceOrder(shuffle(errors).slice(0, SESSION_SIZE));
 
   return (
     <QcmPlayer

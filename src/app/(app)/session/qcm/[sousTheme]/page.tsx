@@ -4,7 +4,7 @@ import { getContent } from "@/content";
 import { getNextSession } from "@/lib/sessionNav";
 import { auth } from "@/lib/auth";
 import { getSolvedIds } from "@/lib/parcours";
-import { shuffle } from "@/lib/shuffle";
+import { shuffle, withChoiceOrder } from "@/lib/shuffle";
 import { QcmPlayer } from "@/components/players/QcmPlayer";
 import { submitQcm } from "@/actions/attempts";
 
@@ -30,7 +30,7 @@ export default async function QcmSessionPage({
   // Ne jouer que les questions non validées ; quand tout est validé, tout rejouer.
   const solved = await getSolvedIds(userId, qcms.map((q) => q.id));
   const remaining = qcms.filter((q) => !solved.has(q.id));
-  const deck = remaining.length > 0 ? shuffle(remaining) : shuffle(qcms);
+  const deck = withChoiceOrder(remaining.length > 0 ? shuffle(remaining) : shuffle(qcms));
 
   return (
     <QcmPlayer

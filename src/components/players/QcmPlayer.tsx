@@ -1,40 +1,26 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useExitSession } from "@/components/players/useExitSession";
 import { motion, AnimatePresence } from "motion/react";
 import { X, Check, XCircle, ArrowRight } from "lucide-react";
 import type { Qcm } from "@/content/types";
+import type { WithChoiceOrder } from "@/lib/shuffle";
 import { SessionResults } from "@/components/players/SessionResults";
 
 interface Props {
-  deck: Qcm[];
+  /** Paquet déjà mélangé côté serveur (ordre des questions et des choix) —
+   * voir `withChoiceOrder` : mélanger ici, côté client, provoquerait un
+   * mismatch d'hydratation (Math.random() donne un résultat différent au
+   * SSR et à l'hydratation). */
+  deck: (Qcm & WithChoiceOrder)[];
   title: string;
   backHref: string;
   onSubmit?: (qcmId: string, chosenIndex: number) => Promise<{ correct: boolean; xp: number }>;
   next?: { href: string; label: string };
 }
 
-/** Mélange stable par session (Fisher-Yates seedé au premier rendu). */
-function shuffle<T>(arr: T[]): T[] {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
-
-export function QcmPlayer({ deck, title, backHref, onSubmit, next: nextSession }: Props) {
-  // ordre des questions ET des choix mélangés ; order[posAffichée] = index d'origine
-  const questions = useMemo(
-    () =>
-      shuffle(deck).map((q) => ({
-        ...q,
-        order: shuffle(q.choices.map((_, i) => i)),
-      })),
-    [deck],
-  );
+export function QcmPlayer({ deck: questions, title, backHref, onSubmit, next: nextSession }: Props) {
   const [index, setIndex] = useState(0);
   const [chosen, setChosen] = useState<number | null>(null);
   const [pending, setPending] = useState(false);

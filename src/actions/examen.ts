@@ -8,7 +8,6 @@ import { getQcm } from "@/content";
 import { annalesById } from "@/content/examen";
 import { addXp, markActivity } from "@/lib/xp";
 import { EXAM_PASS, EXAM_TOTAL, type ExamDetailEntry } from "@/lib/examen";
-import { revalidateProgressPaths } from "@/lib/revalidateProgress";
 
 export interface ExamResult {
   examId: string;
@@ -83,8 +82,6 @@ export async function submitExamen(
     (correctCount === EXAM_TOTAL && questionIds.length === EXAM_TOTAL ? 100 : 0);
   if (xp > 0) await addXp(userId, xp, "bonus");
   else await markActivity(userId); // un examen tenté compte pour le streak même à 0 XP
-
-  revalidateProgressPaths();
 
   return { examId: exam.id, score: correctCount, passed, xp, corrections };
 }
