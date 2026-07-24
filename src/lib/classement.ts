@@ -13,6 +13,7 @@ export interface ClassementEntry {
   /** 0 → 1 : cartes validées + exercices réussis / total du contenu */
   completion: number;
   bestExam: number | null;
+  streak: number;
 }
 
 /** Classement de tous les utilisateurs : complétion, meilleur examen, niveau. */
@@ -27,6 +28,7 @@ export async function getClassement(): Promise<ClassementEntry[]> {
       email: users.email,
       image: users.image,
       totalXp: userStats.totalXp,
+      currentStreak: userStats.currentStreak,
     })
     .from(users)
     .innerJoin(userStats, eq(userStats.userId, users.id));
@@ -65,6 +67,7 @@ export async function getClassement(): Promise<ClassementEntry[]> {
       totalXp: r.totalXp,
       completion: totalItems === 0 ? 0 : Math.min(1, done / totalItems),
       bestExam: bestByUser.get(r.userId) ?? null,
+      streak: r.currentStreak,
     };
   });
 

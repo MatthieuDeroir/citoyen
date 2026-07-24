@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { Trophy } from "lucide-react";
+import { Trophy, Flame } from "lucide-react";
 import { auth } from "@/lib/auth";
 import { getClassement } from "@/lib/classement";
 import { EXAM_TOTAL } from "@/lib/examen";
@@ -56,8 +56,16 @@ export default async function ClassementPage() {
                   {entry.name}
                   {isMe && <span className="ml-1 text-xs font-semibold text-primary">(toi)</span>}
                 </p>
-                <p className="text-xs text-muted">
-                  Niv. {entry.level.level} — {entry.level.title}
+                <p className="flex items-center gap-1.5 text-xs text-muted">
+                  <span>
+                    Niv. {entry.level.level} — {entry.level.title}
+                  </span>
+                  {entry.streak > 0 && (
+                    <span className="flex items-center gap-0.5 font-semibold text-gold">
+                      <Flame className="size-3.5" />
+                      <span className="tabular-nums">{entry.streak}</span>
+                    </span>
+                  )}
                 </p>
               </div>
               <div className="shrink-0 text-right">
