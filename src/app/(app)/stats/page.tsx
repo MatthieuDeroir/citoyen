@@ -8,6 +8,7 @@ import { allFlashcards } from "@/content";
 import { getAchievements } from "@/lib/achievements";
 import { getLevel } from "@/lib/levels";
 import { parisDay } from "@/lib/dates";
+import { getEffectiveStreak } from "@/lib/xp";
 import { ReminderSettings } from "@/components/pwa/ReminderSettings";
 
 export const metadata = { title: "Stats" };
@@ -45,7 +46,7 @@ export default async function StatsPage() {
   const unlockedCount = badges.filter((b) => b.unlocked).length;
 
   const tiles = [
-    { icon: Flame, label: "Streak actuel", value: stats?.currentStreak ?? 0 },
+    { icon: Flame, label: "Streak actuel", value: getEffectiveStreak(stats) },
     { icon: Target, label: "Record", value: stats?.longestStreak ?? 0 },
     { icon: Zap, label: "XP total", value: stats?.totalXp ?? 0 },
     { icon: Layers, label: "Cartes maîtrisées", value: `${mastered}/${allFlashcards.length}` },

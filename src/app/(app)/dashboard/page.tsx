@@ -12,7 +12,7 @@ import {
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { userStats } from "@/db/schema";
-import { getTodayXp } from "@/lib/xp";
+import { getEffectiveStreak, getTodayXp } from "@/lib/xp";
 import { getParcours, getSolvedIds } from "@/lib/parcours";
 import { getErrorQcms } from "@/lib/erreurs";
 import { EXAM_TOTAL } from "@/lib/examen";
@@ -40,7 +40,7 @@ export default async function DashboardPage() {
   const examHistory = await getExamHistory(userId);
 
   const goal = stats?.dailyXpGoal ?? 50;
-  const streak = stats?.currentStreak ?? 0;
+  const streak = getEffectiveStreak(stats);
   const freezes = stats?.streakFreezes ?? 0;
   const level = getLevel(stats?.totalXp ?? 0);
   const bestExam = examHistory.reduce((m, e) => Math.max(m, e.score), 0);

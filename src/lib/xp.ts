@@ -1,7 +1,7 @@
 import { and, eq, sql } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { userStats, xpEvents } from "@/db/schema";
-import { parisDay, parisYesterday } from "@/lib/dates";
+import { daysBetween, parisDay, parisYesterday } from "@/lib/dates";
 
 export const XP = {
   qcmCorrect: 5,
@@ -102,6 +102,30 @@ export async function addXp(userId: string, amount: number, source: XpSource) {
   const goalReached = todayXp >= (stats?.dailyXpGoal ?? 50);
 
   return { todayXp, goalReached };
+}
+
+export interface StreakStats {
+  currentStreak: number;
+  lastActivityDate: string | null;
+  streakFreezes: number;
+}
+
+/**
+ * Streak réellement en cours "maintenant". `currentStreak` en base n'est mis à jour
+ * que lors d'une activité (voir `markActivity`) : un utilisateur absent depuis des
+ * jours garde donc en base le dernier streak calculé, comme s'il était toujours actif.
+ * Cette fonction recalcule la valeur réelle à afficher sans toucher à la base, en
+ * appliquant la même règle de gel qu'un retour d'activité appliquerait.
+ */
+export function getEffectiveStreak(
+  stats: StreakStats | undefined,
+  now: Date = new Date(),
+): number {
+  if (!stats?.lastActivityDate) return 0;
+  const gap = daysBetween(stats.lastActivityDate, parisDay(now));
+  if (gap <= 1) return stats.currentStreak;
+  if (gap === 2 && stats.streakFreezes > 0) return stats.currentStreak;
+  return 0;
 }
 
 export async function getTodayXp(userId: string): Promise<number> {

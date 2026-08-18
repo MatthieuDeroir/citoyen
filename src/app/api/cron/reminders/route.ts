@@ -3,7 +3,7 @@ import { eq, inArray } from "drizzle-orm";
 import webpush from "web-push";
 import { db } from "@/lib/db";
 import { pushSubscriptions, userStats } from "@/db/schema";
-import { getTodayXp } from "@/lib/xp";
+import { getEffectiveStreak, getTodayXp } from "@/lib/xp";
 
 export const maxDuration = 60;
 
@@ -46,7 +46,7 @@ export async function GET(request: Request) {
     const todayXp = await getTodayXp(userId);
     if (todayXp >= goal) continue; // objectif atteint, pas de rappel
 
-    const streak = stats?.currentStreak ?? 0;
+    const streak = getEffectiveStreak(stats);
     const remaining = goal - todayXp;
     const body =
       streak > 0

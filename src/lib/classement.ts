@@ -3,6 +3,7 @@ import { db } from "@/lib/db";
 import { attempts, cardProgress, examens, userStats, users } from "@/db/schema";
 import { allFlashcards, allQcms } from "@/content";
 import { getLevel, type Level } from "@/lib/levels";
+import { getEffectiveStreak } from "@/lib/xp";
 
 export interface ClassementEntry {
   userId: string;
@@ -29,6 +30,8 @@ export async function getClassement(): Promise<ClassementEntry[]> {
       image: users.image,
       totalXp: userStats.totalXp,
       currentStreak: userStats.currentStreak,
+      lastActivityDate: userStats.lastActivityDate,
+      streakFreezes: userStats.streakFreezes,
     })
     .from(users)
     .innerJoin(userStats, eq(userStats.userId, users.id));
@@ -67,7 +70,7 @@ export async function getClassement(): Promise<ClassementEntry[]> {
       totalXp: r.totalXp,
       completion: totalItems === 0 ? 0 : Math.min(1, done / totalItems),
       bestExam: bestByUser.get(r.userId) ?? null,
-      streak: r.currentStreak,
+      streak: getEffectiveStreak(r),
     };
   });
 
