@@ -10,7 +10,6 @@ import {
   ChartLine,
   Zap,
   GraduationCap,
-  Trophy,
 } from "lucide-react";
 
 const items = [
@@ -19,7 +18,6 @@ const items = [
   { href: "/examen", label: "Examen blanc", icon: GraduationCap },
   { href: "/revision", label: "Réviser", icon: Zap, central: true },
   { href: "/rubriques", label: "Livret", icon: LibraryBig },
-  { href: "/classement", label: "Classement", icon: Trophy },
   { href: "/stats", label: "Stats", icon: ChartLine },
 ] as const;
 
