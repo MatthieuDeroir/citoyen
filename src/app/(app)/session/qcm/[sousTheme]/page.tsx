@@ -39,6 +39,7 @@ export default async function QcmSessionPage({
       title={sousTheme.titre}
       backHref={`/parcours/${sousTheme.slug}`}
       onSubmit={submitQcm}
+      resume={{ key: `qcm-${sousTheme.slug}`, href: `/session/qcm/${sousTheme.slug}` }}
     />
   );
 }

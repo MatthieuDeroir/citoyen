@@ -3,24 +3,49 @@
 import { useEffect, useRef, useState } from "react";
 import { useExitSession } from "@/components/players/useExitSession";
 import { motion, AnimatePresence } from "motion/react";
-import { X, Check, XCircle, ArrowRight } from "lucide-react";
+import { X, Check, XCircle, ArrowRight, PlayCircle } from "lucide-react";
 import type { Qcm } from "@/content/types";
 import type { WithChoiceOrder } from "@/lib/shuffle";
 import { SessionResults } from "@/components/players/SessionResults";
+import { clearSession, saveSession, useSavedSession } from "@/lib/sessionStore";
+
+type Deck = (Qcm & WithChoiceOrder)[];
+
+/** État sauvegardé pour reprendre une session QCM quittée en cours de route. */
+interface QcmSaveState {
+  deck: Deck;
+  index: number;
+  correctCount: number;
+  xpTotal: number;
+}
 
 interface Props {
   /** Paquet déjà mélangé côté serveur (ordre des questions et des choix) —
    * voir `withChoiceOrder` : mélanger ici, côté client, provoquerait un
    * mismatch d'hydratation (Math.random() donne un résultat différent au
    * SSR et à l'hydratation). */
-  deck: (Qcm & WithChoiceOrder)[];
+  deck: Deck;
   title: string;
+  /** Active la reprise : la session est sauvegardée sous cette clé, et
+   * `resumeHref` est la page qui permet de la reprendre. */
+  resume?: { key: string; href: string };
   backHref: string;
   onSubmit?: (qcmId: string, chosenIndex: number) => Promise<{ correct: boolean; xp: number }>;
   next?: { href: string; label: string };
 }
 
-export function QcmPlayer({ deck: questions, title, backHref, onSubmit, next: nextSession }: Props) {
+export function QcmPlayer({
+  deck: initialDeck,
+  title,
+  backHref,
+  onSubmit,
+  next: nextSession,
+  resume,
+}: Props) {
+  const saved = useSavedSession<QcmSaveState>(resume?.key);
+  // tant que l'utilisateur n'a pas choisi entre reprendre et recommencer
+  const [resumeDecided, setResumeDecided] = useState(false);
+  const [questions, setQuestions] = useState(initialDeck);
   const [index, setIndex] = useState(0);
   const [chosen, setChosen] = useState<number | null>(null);
   const [pending, setPending] = useState(false);
@@ -46,15 +71,40 @@ export function QcmPlayer({ deck: questions, title, backHref, onSubmit, next: ne
     setPending(true);
     setChosen(i);
     const isCorrect = i === qcm.correctIndex;
-    if (isCorrect) setCorrectCount((c) => c + 1);
+    const newCorrect = correctCount + (isCorrect ? 1 : 0);
+    let newXp = xpTotal;
+    if (isCorrect) setCorrectCount(newCorrect);
     try {
       const res = await onSubmit?.(qcm.id, i);
-      if (res?.xp) setXpTotal((x) => x + res.xp);
+      if (res?.xp) {
+        newXp += res.xp;
+        setXpTotal(newXp);
+      }
     } catch {
       // hors-ligne / erreur : la session continue sans persistance
     } finally {
       setPending(false);
     }
+    if (resume) {
+      const nextIndex = index + 1;
+      if (nextIndex >= questions.length) clearSession(resume.key);
+      else
+        saveSession<QcmSaveState>({
+          key: resume.key,
+          href: resume.href,
+          title,
+          progress: `${nextIndex}/${questions.length} questions faites`,
+          state: { deck: questions, index: nextIndex, correctCount: newCorrect, xpTotal: newXp },
+        });
+    }
+  }
+
+  function restore(state: QcmSaveState) {
+    setQuestions(state.deck);
+    setIndex(state.index);
+    setCorrectCount(state.correctCount);
+    setXpTotal(state.xpTotal);
+    setResumeDecided(true);
   }
 
   function next() {
@@ -62,6 +112,38 @@ export function QcmPlayer({ deck: questions, title, backHref, onSubmit, next: ne
     advancingRef.current = true;
     setChosen(null);
     setIndex((i) => i + 1);
+  }
+
+  // session sauvegardée : proposer de la reprendre avant de commencer
+  if (resume && saved && !resumeDecided && index === 0 && !revealed) {
+    return (
+      <div className="flex min-h-[60dvh] flex-col items-center justify-center gap-5 text-center">
+        <PlayCircle className="size-14 text-primary" />
+        <div>
+          <h1 className="text-2xl font-bold">Session en cours</h1>
+          <p className="mx-auto mt-1 max-w-xs text-sm text-muted">
+            {title} · {saved.progress}
+          </p>
+        </div>
+        <div className="flex w-full max-w-xs flex-col gap-3">
+          <button
+            onClick={() => restore(saved.state)}
+            className="rounded-2xl bg-primary px-6 py-3.5 font-semibold text-on-primary transition-transform active:scale-95"
+          >
+            Reprendre
+          </button>
+          <button
+            onClick={() => {
+              clearSession(resume.key);
+              setResumeDecided(true);
+            }}
+            className="rounded-2xl border border-border bg-surface px-6 py-3 text-sm font-semibold transition-transform active:scale-95"
+          >
+            Recommencer une nouvelle session
+          </button>
+        </div>
+      </div>
+    );
   }
 
   if (done) {

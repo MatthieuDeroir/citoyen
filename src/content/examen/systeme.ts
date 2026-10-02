@@ -12,7 +12,11 @@ export const annalesSysteme: Qcm[] = [
     3,
     "Comment est désigné le Premier ministre ?",
     "Il est nommé par le président de la République",
-    ["Il est élu au suffrage universel direct", "Il est tiré au sort", "Il est désigné par le Sénat"],
+    [
+      "Il est élu par l'Assemblée nationale",
+      "Il est élu au suffrage universel direct",
+      "Il est désigné par le parti majoritaire",
+    ],
     "Le président de la République nomme le Premier ministre (article 8 de la Constitution).",
   ),
   annale(
@@ -21,7 +25,11 @@ export const annalesSysteme: Qcm[] = [
     3,
     "Qui peut se présenter aux élections présidentielles ?",
     "Tout citoyen français majeur remplissant les conditions, dont 500 parrainages d'élus",
-    ["Uniquement les ministres en fonction", "Uniquement les personnes nées en France", "Uniquement les députés"],
+    [
+      "Tout citoyen français ayant recueilli 500 000 signatures d'électeurs",
+      "Tout citoyen français âgé d'au moins 35 ans",
+      "Tout citoyen français ayant déjà exercé un mandat d'élu",
+    ],
     "Il faut être français, électeur, âgé d'au moins 18 ans et réunir 500 parrainages d'élus.",
   ),
   annale(
@@ -30,7 +38,7 @@ export const annalesSysteme: Qcm[] = [
     3,
     "À qui appartient la souveraineté nationale ?",
     "Au peuple",
-    ["Au président de la République", "Au gouvernement", "Aux préfets"],
+    ["Au Parlement", "Au président de la République", "À l'État"],
     "« La souveraineté nationale appartient au peuple qui l'exerce par ses représentants et par la voie du référendum. »",
   ),
   annale(
@@ -39,7 +47,11 @@ export const annalesSysteme: Qcm[] = [
     3,
     "Qui est élu lors des élections municipales ?",
     "Les conseillers municipaux",
-    ["Le préfet", "Les députés", "Les sénateurs"],
+    [
+      "Le maire, élu directement par les habitants",
+      "Les conseillers départementaux",
+      "Les conseillers régionaux",
+    ],
     "Les électeurs de la commune élisent les conseillers municipaux, qui élisent ensuite le maire.",
   ),
   annale(
@@ -48,7 +60,11 @@ export const annalesSysteme: Qcm[] = [
     3,
     "L'inscription sur les listes électorales est :",
     "Indispensable pour pouvoir voter",
-    ["Facultative pour voter", "Payante", "Réservée aux plus de 25 ans"],
+    [
+      "Automatique pour toute personne résidant en France",
+      "Facultative si l'on présente sa carte d'identité",
+      "Valable pour une seule élection",
+    ],
     "Pour voter, il faut être inscrit sur les listes électorales de sa commune (inscription automatique à 18 ans pour les jeunes recensés).",
   ),
   annale(
@@ -57,7 +73,11 @@ export const annalesSysteme: Qcm[] = [
     3,
     "Quelle condition est nécessaire pour voter aux élections présidentielles ?",
     "Être français, majeur et inscrit sur les listes électorales",
-    ["Payer des impôts en France", "Avoir plus de 21 ans", "Posséder un logement"],
+    [
+      "Être français, majeur et payer l'impôt sur le revenu",
+      "Être majeur et résider en France depuis cinq ans",
+      "Être français et avoir au moins 21 ans",
+    ],
     "Le droit de vote appartient aux citoyens français majeurs inscrits sur les listes électorales et jouissant de leurs droits civiques.",
   ),
   annale(
@@ -66,7 +86,11 @@ export const annalesSysteme: Qcm[] = [
     3,
     "Quelle condition faut-il remplir pour être candidat aux élections municipales ?",
     "Avoir au moins 18 ans et être électeur ou contribuable de la commune",
-    ["Être né dans la commune", "Avoir plus de 30 ans", "Être fonctionnaire"],
+    [
+      "Être né dans la commune et y résider",
+      "Avoir au moins 23 ans et y habiter depuis 5 ans",
+      "Être inscrit dans la commune depuis au moins 10 ans",
+    ],
     "Tout électeur français ou citoyen de l'UE d'au moins 18 ans, attaché à la commune, peut se présenter.",
   ),
   annale(
@@ -75,7 +99,7 @@ export const annalesSysteme: Qcm[] = [
     3,
     "Parmi ces autorités, laquelle est élue ?",
     "Le député",
-    ["Le préfet", "Le recteur d'académie", "Le commissaire de police"],
+    ["Le préfet", "Le Premier ministre", "Le recteur d'académie"],
     "Le député est élu au suffrage universel direct ; préfet, recteur et commissaire sont nommés.",
   ),
   annale(
@@ -84,7 +108,11 @@ export const annalesSysteme: Qcm[] = [
     3,
     "Quelles sont les fonctions du maire ?",
     "Diriger l'administration communale et être officier d'état civil",
-    ["Voter les lois nationales", "Diriger la police nationale", "Juger les délits"],
+    [
+      "Diriger la police nationale et la gendarmerie de la commune",
+      "Nommer les conseillers municipaux et les adjoints",
+      "Juger les litiges entre les habitants de la commune",
+    ],
     "Le maire gère la commune, célèbre les mariages et représente l'État pour l'état civil.",
   ),
   annale(
@@ -93,7 +121,7 @@ export const annalesSysteme: Qcm[] = [
     3,
     "Une personne, n'ayant pas d'accès à internet, veut s'inscrire sur les listes électorales pour pouvoir voter aux prochaines élections politiques. Où peut-elle s'inscrire ?",
     "À la mairie de sa commune",
-    ["À la préfecture uniquement", "Au commissariat", "Au tribunal"],
+    ["À la préfecture de son département", "Au tribunal judiciaire", "Au bureau de poste"],
     "L'inscription sur les listes électorales se fait en mairie (ou en ligne).",
   ),
   annale(
@@ -102,7 +130,7 @@ export const annalesSysteme: Qcm[] = [
     3,
     "À quel âge peut-on devenir électeur ?",
     "18 ans",
-    ["16 ans", "21 ans", "25 ans"],
+    ["16 ans", "21 ans", "17 ans"],
     "Le droit de vote s'acquiert à la majorité, fixée à 18 ans.",
   ),
   annale(
@@ -111,7 +139,11 @@ export const annalesSysteme: Qcm[] = [
     3,
     "En France, est-ce obligatoire de voter ?",
     "Non, voter est un droit, pas une obligation",
-    ["Oui, sous peine d'amende", "Oui, pour les fonctionnaires", "Oui, sauf pour les plus de 70 ans"],
+    [
+      "Oui, sous peine d'amende",
+      "Oui, pour l'élection présidentielle uniquement",
+      "Non, sauf pour les élections municipales",
+    ],
     "Le vote est un droit et un devoir civique, mais il n'est pas juridiquement obligatoire.",
   ),
   annale(
@@ -120,7 +152,11 @@ export const annalesSysteme: Qcm[] = [
     3,
     "A-t-on le droit de ne pas respecter une loi ?",
     "Non, la loi s'impose à tous",
-    ["Oui, si on ne l'approuve pas", "Oui, si on est étranger", "Oui, dans sa vie privée"],
+    [
+      "Oui, si elle est contraire à ses convictions",
+      "Oui, tant qu'elle n'a pas été approuvée par référendum",
+      "Oui, si l'on n'a pas voté pour les députés qui l'ont adoptée",
+    ],
     "Nul n'est au-dessus de la loi : elle s'applique à tous, on peut seulement militer pour la changer.",
   ),
   annale(
@@ -129,7 +165,11 @@ export const annalesSysteme: Qcm[] = [
     3,
     "Comment sont désignés les députés ?",
     "Ils sont élus au suffrage universel direct",
-    ["Ils sont nommés par le président", "Ils sont tirés au sort", "Ils sont élus par les maires"],
+    [
+      "Ils sont élus au suffrage universel indirect",
+      "Ils sont élus par les conseillers municipaux",
+      "Ils sont nommés par le Premier ministre",
+    ],
     "Les députés sont élus pour 5 ans au suffrage universel direct, lors des élections législatives.",
   ),
   annale(
@@ -138,7 +178,7 @@ export const annalesSysteme: Qcm[] = [
     3,
     "Qui vote les lois ?",
     "Le Parlement (Assemblée nationale et Sénat)",
-    ["Le président de la République", "Le Conseil constitutionnel", "Les préfets"],
+    ["Le gouvernement", "Le président de la République", "Le Conseil d'État"],
     "Le pouvoir législatif appartient au Parlement, composé de l'Assemblée nationale et du Sénat.",
   ),
   annale(
@@ -147,7 +187,11 @@ export const annalesSysteme: Qcm[] = [
     3,
     "La séparation des pouvoirs est un principe fondamental. Quels sont les trois pouvoirs concernés ?",
     "Législatif, exécutif et judiciaire",
-    ["National, régional et local", "Civil, militaire et religieux", "Politique, économique et social"],
+    [
+      "Législatif, exécutif et constitutionnel",
+      "Exécutif, judiciaire et médiatique",
+      "Législatif, administratif et judiciaire",
+    ],
     "Le pouvoir législatif fait la loi, l'exécutif l'applique, le judiciaire la fait respecter.",
   ),
   annale(
@@ -157,9 +201,9 @@ export const annalesSysteme: Qcm[] = [
     "Qu'est-ce que l'État de droit ?",
     "Un État où la loi s'applique à tous, y compris aux pouvoirs publics",
     [
-      "Un État dirigé par des juges",
-      "Un État sans constitution",
-      "Un État où seul le président fait la loi",
+      "Un État où le gouvernement peut déroger aux lois",
+      "Un État où les juges sont élus par le peuple",
+      "Un État dirigé par un président élu",
     ],
     "Dans un État de droit, chacun — citoyens comme institutions — est soumis au droit.",
   ),
@@ -178,7 +222,7 @@ export const annalesSysteme: Qcm[] = [
     3,
     "Qui est élu lors des élections législatives ?",
     "Les députés",
-    ["Les sénateurs", "Les conseillers régionaux", "Le président de la République"],
+    ["Les sénateurs", "Les conseillers départementaux", "Les députés européens"],
     "Les législatives désignent les 577 députés de l'Assemblée nationale.",
   ),
   annale(
@@ -187,7 +231,7 @@ export const annalesSysteme: Qcm[] = [
     3,
     "Quelle est la durée du mandat du Président de la République française ?",
     "5 ans",
-    ["7 ans", "4 ans", "6 ans"],
+    ["7 ans", "6 ans", "4 ans"],
     "Depuis le référendum de 2000, le mandat présidentiel est de 5 ans (quinquennat).",
   ),
   annale(
@@ -196,7 +240,7 @@ export const annalesSysteme: Qcm[] = [
     3,
     "Quelle est la durée du mandat des députés ?",
     "5 ans",
-    ["6 ans", "4 ans", "9 ans"],
+    ["6 ans", "4 ans", "7 ans"],
     "Les députés sont élus pour 5 ans, sauf dissolution de l'Assemblée nationale.",
   ),
   annale(
@@ -205,7 +249,7 @@ export const annalesSysteme: Qcm[] = [
     3,
     "Quelle est la durée du mandat des sénateurs ?",
     "6 ans",
-    ["5 ans", "7 ans", "3 ans"],
+    ["9 ans", "5 ans", "7 ans"],
     "Les sénateurs sont élus pour 6 ans au suffrage universel indirect, le Sénat étant renouvelé par moitié tous les 3 ans.",
   ),
   annale(
@@ -214,7 +258,11 @@ export const annalesSysteme: Qcm[] = [
     3,
     "Qui dirige l'action du gouvernement ?",
     "Le Premier ministre",
-    ["Le président du Sénat", "Le ministre de l'Intérieur", "Le Conseil constitutionnel"],
+    [
+      "Le président de l'Assemblée nationale",
+      "Le ministre de l'Intérieur",
+      "Le président du Sénat",
+    ],
     "Le Premier ministre dirige l'action du gouvernement (article 21 de la Constitution).",
   ),
   annale(
@@ -223,7 +271,11 @@ export const annalesSysteme: Qcm[] = [
     3,
     "En France, est-ce possible d'adhérer à un parti politique ?",
     "Oui, librement",
-    ["Non, c'est réservé aux élus", "Oui, avec l'autorisation du préfet", "Non, les partis sont interdits"],
+    [
+      "Oui, mais seulement à partir de 21 ans",
+      "Oui, après déclaration à la mairie",
+      "Non, c'est réservé aux élus",
+    ],
     "Les partis politiques se forment et exercent leur activité librement (article 4 de la Constitution).",
   ),
   annale(
@@ -232,7 +284,7 @@ export const annalesSysteme: Qcm[] = [
     3,
     "Qui sanctionne l'auteur d'un vol ?",
     "La justice (un tribunal)",
-    ["Le maire", "La victime elle-même", "Le préfet"],
+    ["La police", "Le maire de la commune", "Le préfet"],
     "Seule l'autorité judiciaire peut juger et sanctionner les infractions : nul ne peut se faire justice soi-même.",
   ),
   annale(
@@ -241,7 +293,7 @@ export const annalesSysteme: Qcm[] = [
     3,
     "Qui gère les collèges publics ?",
     "Le département",
-    ["La commune", "La région", "L'État seul"],
+    ["La commune", "La région", "Le rectorat"],
     "Les communes gèrent les écoles, les départements les collèges et les régions les lycées.",
   ),
   annale(
@@ -250,7 +302,7 @@ export const annalesSysteme: Qcm[] = [
     3,
     "Qui gère les écoles primaires et maternelles publiques ?",
     "La commune",
-    ["Le département", "La région", "Le rectorat seul"],
+    ["Le département", "La région", "La préfecture"],
     "La commune construit et entretient les écoles maternelles et élémentaires.",
   ),
   annale(
@@ -259,7 +311,11 @@ export const annalesSysteme: Qcm[] = [
     3,
     "Comment sont désignés les maires ?",
     "Ils sont élus par le conseil municipal",
-    ["Ils sont élus directement par les habitants", "Ils sont nommés par le préfet", "Ils sont tirés au sort"],
+    [
+      "Ils sont élus directement par les habitants",
+      "Ils sont nommés par le préfet",
+      "Ils sont élus par les conseillers départementaux",
+    ],
     "Après les élections municipales, le conseil municipal élit le maire parmi ses membres.",
   ),
   annale(
@@ -268,7 +324,7 @@ export const annalesSysteme: Qcm[] = [
     4,
     "Quelle collectivité territoriale est responsable des transports régionaux ?",
     "La région",
-    ["La commune", "Le département", "L'État"],
+    ["Le département", "La commune", "L'intercommunalité"],
     "La région organise notamment les transports régionaux (TER) et gère les lycées.",
   ),
   annale(
@@ -277,7 +333,11 @@ export const annalesSysteme: Qcm[] = [
     4,
     "Quelle est l'une des voies possibles pour modifier la Constitution ?",
     "Le référendum",
-    ["Un décret du Premier ministre", "Un vote du conseil municipal", "Une décision du Conseil d'État"],
+    [
+      "Une loi ordinaire votée par l'Assemblée nationale",
+      "Un décret du président de la République",
+      "Une décision du Conseil constitutionnel",
+    ],
     "La Constitution peut être révisée par référendum ou par le Parlement réuni en Congrès.",
   ),
   annale(
@@ -286,7 +346,11 @@ export const annalesSysteme: Qcm[] = [
     4,
     "Qui assure l'intérim du président de la République en cas de décès ?",
     "Le président du Sénat",
-    ["Le Premier ministre", "Le président de l'Assemblée nationale", "Le ministre de l'Intérieur"],
+    [
+      "Le Premier ministre",
+      "Le président de l'Assemblée nationale",
+      "Le président du Conseil constitutionnel",
+    ],
     "En cas de vacance de la présidence, le président du Sénat assure l'intérim.",
   ),
   annale(
@@ -295,7 +359,11 @@ export const annalesSysteme: Qcm[] = [
     4,
     "Quel est le rôle du Conseil constitutionnel ?",
     "Vérifier que les lois sont conformes à la Constitution",
-    ["Voter les lois", "Diriger le gouvernement", "Juger les crimes"],
+    [
+      "Contrôler l'action du gouvernement",
+      "Juger les litiges entre l'administration et les citoyens",
+      "Conseiller le gouvernement sur ses projets de loi",
+    ],
     "Le Conseil constitutionnel contrôle la constitutionnalité des lois et veille à la régularité des grandes élections.",
   ),
   annale(
@@ -304,7 +372,11 @@ export const annalesSysteme: Qcm[] = [
     4,
     "Quelle condition est obligatoire pour se présenter à l'élection présidentielle ?",
     "Avoir la nationalité française",
-    ["Être né à Paris", "Avoir été ministre", "Avoir plus de 40 ans"],
+    [
+      "Avoir au moins 35 ans",
+      "Être membre d'un parti politique",
+      "Avoir déjà exercé un mandat électif",
+    ],
     "Le candidat doit être français, électeur, âgé d'au moins 18 ans et parrainé par 500 élus.",
   ),
   annale(
@@ -313,7 +385,7 @@ export const annalesSysteme: Qcm[] = [
     4,
     "Combien y a-t-il de départements en France ?",
     "101",
-    ["95", "83", "110"],
+    ["96", "100", "95"],
     "La France compte 101 départements, dont 5 d'outre-mer.",
   ),
   annale(
@@ -322,7 +394,11 @@ export const annalesSysteme: Qcm[] = [
     4,
     "Comment est organisé le découpage administratif de la France ?",
     "En communes, départements et régions",
-    ["En provinces et duchés", "En États fédérés", "En cantons uniquement"],
+    [
+      "En communes, cantons et provinces",
+      "En régions et États fédérés",
+      "En départements et provinces",
+    ],
     "Le territoire est organisé en collectivités : communes, départements et régions.",
   ),
   annale(
@@ -331,7 +407,11 @@ export const annalesSysteme: Qcm[] = [
     4,
     "Qui représente l'État dans un département ?",
     "Le préfet",
-    ["Le maire", "Le président du conseil départemental", "Le député"],
+    [
+      "Le président du conseil départemental",
+      "Le maire du chef-lieu",
+      "Le sénateur du département",
+    ],
     "Le préfet, nommé par le président de la République, représente l'État dans le département.",
   ),
   annale(
@@ -340,7 +420,11 @@ export const annalesSysteme: Qcm[] = [
     4,
     "Quel est le rôle du Président de la République ?",
     "Chef de l'État, il veille au respect de la Constitution et à l'indépendance nationale",
-    ["Il vote les lois", "Il juge les affaires pénales", "Il dirige les communes"],
+    [
+      "Chef du gouvernement, il dirige l'action des ministres et l'administration",
+      "Chef du Parlement, il vote les lois et contrôle le gouvernement",
+      "Chef de la justice, il nomme et révoque librement les juges",
+    ],
     "Le président est le chef de l'État, garant des institutions, chef des armées, et il nomme le Premier ministre.",
   ),
   annale(
@@ -349,7 +433,11 @@ export const annalesSysteme: Qcm[] = [
     4,
     "Quel est le rôle du Premier ministre ?",
     "Diriger l'action du gouvernement et assurer l'exécution des lois",
-    ["Présider le Sénat", "Contrôler la constitutionnalité des lois", "Commander la police municipale"],
+    [
+      "Présider le Conseil des ministres et promulguer les lois",
+      "Présider l'Assemblée nationale et fixer son ordre du jour",
+      "Commander les armées et négocier les traités",
+    ],
     "Nommé par le président, le Premier ministre conduit la politique de la Nation avec son gouvernement.",
   ),
   annale(
@@ -358,7 +446,11 @@ export const annalesSysteme: Qcm[] = [
     4,
     "Quel est le rôle du Défenseur des droits ?",
     "Défendre les citoyens face aux administrations et lutter contre les discriminations",
-    ["Défendre la France à l'ONU", "Juger les litiges commerciaux", "Voter le budget de l'État"],
+    [
+      "Défendre les accusés devant les tribunaux",
+      "Contrôler la conformité des lois à la Constitution",
+      "Représenter la France devant les cours européennes",
+    ],
     "Autorité indépendante, le Défenseur des droits protège les droits des usagers et combat les discriminations.",
   ),
   annale(
@@ -367,7 +459,7 @@ export const annalesSysteme: Qcm[] = [
     4,
     "En quelle année la citoyenneté européenne a-t-elle été créée ?",
     "1992",
-    ["1957", "2002", "1981"],
+    ["1957", "1979", "1986"],
     "La citoyenneté européenne a été instituée par le traité de Maastricht en 1992.",
   ),
   annale(
@@ -376,7 +468,7 @@ export const annalesSysteme: Qcm[] = [
     4,
     "Quel est le dernier État à avoir intégré l'Union européenne en 2013 ?",
     "La Croatie",
-    ["La Serbie", "La Turquie", "La Norvège"],
+    ["La Bulgarie", "La Slovénie", "La Serbie"],
     "La Croatie est devenue le 28e État membre de l'UE le 1er juillet 2013.",
   ),
   annale(
@@ -385,7 +477,7 @@ export const annalesSysteme: Qcm[] = [
     4,
     "Qui a composé l'hymne de l'Union européenne ?",
     "Ludwig van Beethoven",
-    ["Wolfgang Amadeus Mozart", "Claude Debussy", "Jean-Sébastien Bach"],
+    ["Wolfgang Amadeus Mozart", "Joseph Haydn", "Franz Schubert"],
     "L'« Ode à la joie », extraite de la 9e symphonie de Beethoven, est l'hymne européen.",
   ),
   annale(
@@ -394,7 +486,7 @@ export const annalesSysteme: Qcm[] = [
     4,
     "Quand est célébrée la journée de l'Europe ?",
     "Le 9 mai",
-    ["Le 14 juillet", "Le 1er janvier", "Le 11 novembre"],
+    ["Le 8 mai", "Le 1er mai", "Le 25 mars"],
     "Le 9 mai commémore la déclaration Schuman de 1950, acte fondateur de la construction européenne.",
   ),
   annale(
@@ -403,7 +495,7 @@ export const annalesSysteme: Qcm[] = [
     4,
     "Où est le siège de la Banque centrale européenne ?",
     "À Francfort",
-    ["À Bruxelles", "À Paris", "À Genève"],
+    ["À Bruxelles", "À Luxembourg", "À Strasbourg"],
     "La BCE, qui gère l'euro, siège à Francfort-sur-le-Main, en Allemagne.",
   ),
   annale(
@@ -412,7 +504,7 @@ export const annalesSysteme: Qcm[] = [
     4,
     "Où est le siège de la Commission européenne ?",
     "À Bruxelles",
-    ["À Strasbourg", "À Luxembourg", "À Berlin"],
+    ["À Strasbourg", "À Luxembourg", "À La Haye"],
     "La Commission européenne siège à Bruxelles, en Belgique.",
   ),
   annale(
@@ -421,7 +513,11 @@ export const annalesSysteme: Qcm[] = [
     4,
     "Qui siège au Parlement européen ?",
     "Les députés européens élus par les citoyens de l'Union",
-    ["Les chefs d'État", "Les ambassadeurs", "Les commissaires de police"],
+    [
+      "Les ministres des États membres",
+      "Les commissaires européens",
+      "Des députés désignés par les parlements nationaux",
+    ],
     "Les eurodéputés, élus tous les 5 ans au suffrage universel direct, siègent au Parlement européen.",
   ),
   annale(
@@ -430,7 +526,11 @@ export const annalesSysteme: Qcm[] = [
     4,
     "Les citoyens de l'Union européenne peuvent-ils voter aux élections locales dans un autre État de l'Union ?",
     "Oui, aux élections municipales et européennes de leur État de résidence",
-    ["Non, jamais", "Oui, à toutes les élections", "Seulement après 10 ans de résidence"],
+    [
+      "Oui, à toutes les élections, y compris nationales",
+      "Non, ils votent uniquement dans leur pays d'origine",
+      "Oui, mais uniquement aux élections européennes",
+    ],
     "La citoyenneté européenne donne le droit de vote aux municipales et aux européennes dans l'État de résidence.",
   ),
   annale(
@@ -439,7 +539,7 @@ export const annalesSysteme: Qcm[] = [
     4,
     "Combien d'États font partie de l'Union européenne au 1er janvier 2025 ?",
     "27",
-    ["25", "28", "30"],
+    ["28", "25", "26"],
     "Depuis le départ du Royaume-Uni en 2020, l'UE compte 27 États membres.",
   ),
   annale(
@@ -448,7 +548,7 @@ export const annalesSysteme: Qcm[] = [
     4,
     "En quelle année le traité de Maastricht, qui marque la fondation de l'Union européenne, a-t-il été signé ?",
     "1992",
-    ["1957", "1989", "2002"],
+    ["1957", "1986", "1999"],
     "Signé en 1992, le traité de Maastricht crée l'Union européenne et la citoyenneté européenne.",
   ),
   annale(
@@ -457,7 +557,7 @@ export const annalesSysteme: Qcm[] = [
     4,
     "Quel traité concerne la construction de l'Union européenne ?",
     "Le traité de Maastricht",
-    ["Le traité de Versailles", "Les accords d'Évian", "Le traité de l'Élysée"],
+    ["Le traité de Versailles", "Le traité de l'Élysée", "Le traité de l'Atlantique Nord"],
     "Le traité de Maastricht (1992) fonde l'Union européenne ; Versailles (1919) clôt la Première Guerre mondiale.",
   ),
   annale(
@@ -466,7 +566,7 @@ export const annalesSysteme: Qcm[] = [
     4,
     "Quel État a quitté l'Union européenne en 2020 ?",
     "Le Royaume-Uni",
-    ["L'Irlande", "La Suisse", "La Norvège"],
+    ["La Suisse", "Le Danemark", "La Norvège"],
     "Après le référendum de 2016, le Royaume-Uni a quitté l'UE le 31 janvier 2020 (Brexit).",
   ),
   annale(
@@ -475,7 +575,7 @@ export const annalesSysteme: Qcm[] = [
     4,
     "Quelle est la devise de l'Union européenne ?",
     "« Unie dans la diversité »",
-    ["« Liberté, Égalité, Fraternité »", "« L'union fait la force »", "« Paix et prospérité »"],
+    ["« Unie dans la paix »", "« L'union fait la force »", "« Liberté, Égalité, Fraternité »"],
     "La devise de l'UE est « Unie dans la diversité ».",
   ),
   annale(
@@ -484,7 +584,7 @@ export const annalesSysteme: Qcm[] = [
     4,
     "Quel est l'hymne de l'Union européenne ?",
     "L'Ode à la joie",
-    ["La Marseillaise", "L'Hymne à l'amour", "Le Chant des partisans"],
+    ["Le Beau Danube bleu", "Le Boléro", "L'Hymne à la paix"],
     "L'hymne européen est l'« Ode à la joie » de Beethoven.",
   ),
   annale(
@@ -493,7 +593,11 @@ export const annalesSysteme: Qcm[] = [
     4,
     "De quoi est composé le drapeau européen ?",
     "De douze étoiles dorées en cercle sur fond bleu",
-    ["De vingt-sept étoiles blanches", "De bandes bleues et jaunes", "D'une colombe sur fond bleu"],
+    [
+      "De vingt-sept étoiles dorées en cercle sur fond bleu",
+      "De douze étoiles blanches en cercle sur fond bleu",
+      "De douze étoiles dorées en carré sur fond blanc",
+    ],
     "Les douze étoiles en cercle symbolisent l'unité et l'harmonie entre les peuples d'Europe.",
   ),
   annale(
@@ -502,7 +606,11 @@ export const annalesSysteme: Qcm[] = [
     4,
     "Qui élit les députés européens ?",
     "Les citoyens de l'Union européenne, au suffrage universel direct",
-    ["Les parlements nationaux", "Les chefs d'État et de gouvernement", "La Commission européenne"],
+    [
+      "Les parlements nationaux de chaque État membre",
+      "Les chefs d'État et de gouvernement",
+      "Les citoyens de l'Union, au suffrage universel indirect",
+    ],
     "Les eurodéputés sont élus tous les 5 ans par les citoyens de chaque État membre.",
   ),
   annale(
@@ -511,7 +619,7 @@ export const annalesSysteme: Qcm[] = [
     4,
     "Où est le siège du Parlement européen ?",
     "À Strasbourg",
-    ["À Bruxelles uniquement", "À Francfort", "À La Haye"],
+    ["À Bruxelles", "À Francfort", "À La Haye"],
     "Le siège officiel du Parlement européen est à Strasbourg, en France.",
   ),
 ];

@@ -12,7 +12,11 @@ export const annalesHistoire: Qcm[] = [
     7,
     "Parmi ces textes, lequel a été adopté sous Napoléon Ier ?",
     "Le Code civil",
-    ["La Déclaration des droits de l'homme", "La loi de 1905", "La Constitution de 1958"],
+    [
+      "La Déclaration des droits de l'homme et du citoyen",
+      "Les lois Jules Ferry",
+      "L'édit de Nantes",
+    ],
     "Le Code civil, promulgué en 1804, est l'œuvre majeure de Napoléon Ier.",
   ),
   annale(
@@ -21,7 +25,7 @@ export const annalesHistoire: Qcm[] = [
     7,
     "Qui a été président de la Ve République ?",
     "Charles de Gaulle",
-    ["Georges Clemenceau", "Napoléon III", "Jean Jaurès"],
+    ["Georges Clemenceau", "Léon Blum", "Jean Jaurès"],
     "Charles de Gaulle, fondateur de la Ve République en 1958, en fut le premier président.",
   ),
   annale(
@@ -30,7 +34,11 @@ export const annalesHistoire: Qcm[] = [
     7,
     "Quel est l'objectif des lois scolaires de la IIIe République ?",
     "Rendre l'école gratuite, laïque et obligatoire",
-    ["Créer les universités", "Réserver l'école aux garçons", "Rendre l'école payante"],
+    [
+      "Créer le baccalauréat et les lycées",
+      "Rendre l'enseignement religieux obligatoire",
+      "Rendre l'école obligatoire jusqu'à 18 ans",
+    ],
     "Les lois Jules Ferry (1881-1882) instaurent l'école gratuite, laïque et obligatoire.",
   ),
   annale(
@@ -39,7 +47,11 @@ export const annalesHistoire: Qcm[] = [
     7,
     "Que signifie la date du 14 juillet pour les Français ?",
     "La prise de la Bastille en 1789",
-    ["La fin de la Seconde Guerre mondiale", "Le couronnement de Napoléon", "L'abolition de l'esclavage"],
+    [
+      "La Déclaration des droits de l'homme en 1789",
+      "La proclamation de la République en 1792",
+      "La libération de Paris en 1944",
+    ],
     "Le 14 juillet, fête nationale, commémore la prise de la Bastille (1789) et la fête de la Fédération (1790).",
   ),
   annale(
@@ -48,7 +60,11 @@ export const annalesHistoire: Qcm[] = [
     7,
     "Pourquoi l'année 1958 est importante pour la France ?",
     "C'est la naissance de la Ve République",
-    ["C'est la fin de la Première Guerre mondiale", "C'est l'année de l'abolition de la peine de mort", "C'est l'entrée dans l'euro"],
+    [
+      "C'est l'année du droit de vote des femmes",
+      "C'est la signature du traité de Rome",
+      "C'est la fin de la guerre d'Algérie",
+    ],
     "En 1958, une nouvelle Constitution fonde la Ve République, notre régime actuel.",
   ),
   annale(
@@ -57,7 +73,7 @@ export const annalesHistoire: Qcm[] = [
     7,
     "Lequel de ces pays est un pays fondateur de l'Union européenne ?",
     "L'Italie",
-    ["L'Espagne", "La Pologne", "Le Royaume-Uni"],
+    ["L'Espagne", "Le Portugal", "Le Danemark"],
     "Les six fondateurs : France, Allemagne, Italie, Belgique, Pays-Bas, Luxembourg.",
   ),
   annale(
@@ -66,7 +82,11 @@ export const annalesHistoire: Qcm[] = [
     7,
     "Simone Veil est une figure importante de l'histoire française. Elle a notamment :",
     "Fait voter la loi légalisant l'interruption volontaire de grossesse (1975)",
-    ["Aboli la peine de mort", "Été présidente de la République", "Écrit la Constitution de 1958"],
+    [
+      "Fait voter l'abolition de la peine de mort (1981)",
+      "Obtenu le droit de vote des femmes (1944)",
+      "Fait voter la loi sur le mariage pour tous (2013)",
+    ],
     "Ministre de la Santé, Simone Veil a porté la loi de 1975 sur l'IVG ; elle fut aussi présidente du Parlement européen.",
   ),
   annale(
@@ -75,7 +95,7 @@ export const annalesHistoire: Qcm[] = [
     7,
     "Dans quelle région est située une partie des plages du débarquement ayant permis d'engager la libération de la France ?",
     "La Normandie",
-    ["La Bretagne", "La Provence", "Les Hauts-de-France"],
+    ["Les Hauts-de-France", "La Bretagne", "La Nouvelle-Aquitaine"],
     "Le débarquement allié du 6 juin 1944 a eu lieu sur les plages de Normandie.",
   ),
   annale(
@@ -84,7 +104,7 @@ export const annalesHistoire: Qcm[] = [
     7,
     "Dans quelle ville les rois de France étaient-ils couronnés ?",
     "Reims",
-    ["Paris", "Versailles", "Orléans"],
+    ["Saint-Denis", "Paris", "Orléans"],
     "Les rois de France étaient sacrés dans la cathédrale de Reims.",
   ),
   annale(
@@ -93,7 +113,7 @@ export const annalesHistoire: Qcm[] = [
     7,
     "Quel roi de France a été guillotiné pendant la Révolution française ?",
     "Louis XVI",
-    ["Louis XIV", "Henri IV", "François Ier"],
+    ["Louis XV", "Louis XIV", "Charles X"],
     "Louis XVI a été guillotiné le 21 janvier 1793.",
   ),
   annale(
@@ -102,7 +122,7 @@ export const annalesHistoire: Qcm[] = [
     7,
     "En quelle année a débuté la Révolution française ?",
     "1789",
-    ["1804", "1848", "1715"],
+    ["1792", "1793", "1799"],
     "La Révolution française débute en 1789, avec notamment la prise de la Bastille le 14 juillet.",
   ),
   annale(
@@ -111,7 +131,7 @@ export const annalesHistoire: Qcm[] = [
     7,
     "En quelle année Napoléon Ier est-il devenu empereur ?",
     "1804",
-    ["1789", "1815", "1830"],
+    ["1799", "1815", "1802"],
     "Napoléon Bonaparte s'est fait sacrer empereur des Français en 1804.",
   ),
   annale(
@@ -120,7 +140,7 @@ export const annalesHistoire: Qcm[] = [
     7,
     "Lequel de ces personnages a un lien avec la République française ?",
     "Marianne",
-    ["Astérix", "Jeanne Calment", "Le roi Arthur"],
+    ["Jeanne d'Arc", "Vercingétorix", "Clovis"],
     "Marianne incarne la République française et ses valeurs.",
   ),
   annale(
@@ -129,7 +149,7 @@ export const annalesHistoire: Qcm[] = [
     7,
     "De quand date l'appel à la résistance du général de Gaulle ?",
     "Du 18 juin 1940",
-    ["Du 11 novembre 1918", "Du 8 mai 1945", "Du 14 juillet 1939"],
+    ["Du 22 juin 1940", "Du 10 mai 1940", "Du 6 juin 1944"],
     "Depuis Londres, le général de Gaulle appelle à poursuivre le combat le 18 juin 1940.",
   ),
   annale(
@@ -138,7 +158,11 @@ export const annalesHistoire: Qcm[] = [
     7,
     "Qu'est-ce que la Shoah ?",
     "L'extermination des Juifs d'Europe par l'Allemagne nazie",
-    ["Une bataille de la Première Guerre mondiale", "Un traité de paix", "Une région d'Europe centrale"],
+    [
+      "La déportation des opposants soviétiques en Sibérie",
+      "Le génocide des Arméniens en 1915",
+      "Le bombardement d'Hiroshima en 1945",
+    ],
     "La Shoah désigne le génocide de six millions de Juifs pendant la Seconde Guerre mondiale.",
   ),
   annale(
@@ -147,7 +171,7 @@ export const annalesHistoire: Qcm[] = [
     7,
     "Quel pays a été une colonie française ?",
     "L'Algérie",
-    ["La Grèce", "L'Argentine", "La Norvège"],
+    ["L'Égypte", "Le Mexique", "La Libye"],
     "L'Algérie a été colonie française de 1830 à son indépendance en 1962.",
   ),
   annale(
@@ -156,7 +180,7 @@ export const annalesHistoire: Qcm[] = [
     7,
     "Qui a rendu l'école gratuite, laïque et obligatoire ?",
     "Jules Ferry",
-    ["Napoléon Ier", "Victor Hugo", "Charles de Gaulle"],
+    ["Jean Jaurès", "Léon Gambetta", "Victor Hugo"],
     "Les lois de Jules Ferry (1881-1882) fondent l'école publique gratuite, laïque et obligatoire.",
   ),
   annale(
@@ -165,7 +189,7 @@ export const annalesHistoire: Qcm[] = [
     7,
     "Depuis quand les Français élisent-ils le président de la République au suffrage universel direct ?",
     "Depuis 1962",
-    ["Depuis 1789", "Depuis 1945", "Depuis 1981"],
+    ["Depuis 1958", "Depuis 1946", "Depuis 1969"],
     "Le référendum de 1962 instaure l'élection du président au suffrage universel direct (première élection en 1965).",
   ),
   annale(
@@ -174,7 +198,7 @@ export const annalesHistoire: Qcm[] = [
     7,
     "En quelle année l'Union européenne a-t-elle été fondée ?",
     "1992",
-    ["1945", "1957", "2002"],
+    ["1957", "1951", "2002"],
     "L'Union européenne est fondée par le traité de Maastricht, signé en 1992.",
   ),
   annale(
@@ -183,7 +207,7 @@ export const annalesHistoire: Qcm[] = [
     7,
     "Quand a eu lieu la Seconde Guerre mondiale ?",
     "De 1939 à 1945",
-    ["De 1914 à 1918", "De 1929 à 1935", "De 1946 à 1954"],
+    ["De 1938 à 1944", "De 1940 à 1945", "De 1939 à 1944"],
     "La Seconde Guerre mondiale s'est déroulée de 1939 à 1945.",
   ),
   annale(
@@ -192,7 +216,7 @@ export const annalesHistoire: Qcm[] = [
     7,
     "Quand a eu lieu la Première Guerre mondiale ?",
     "De 1914 à 1918",
-    ["De 1939 à 1945", "De 1870 à 1871", "De 1905 à 1910"],
+    ["De 1912 à 1918", "De 1914 à 1919", "De 1915 à 1918"],
     "La Première Guerre mondiale s'est déroulée de 1914 à 1918.",
   ),
   annale(
@@ -201,7 +225,7 @@ export const annalesHistoire: Qcm[] = [
     7,
     "Sous quel président a été abolie la peine de mort en France ?",
     "François Mitterrand",
-    ["Charles de Gaulle", "Jacques Chirac", "Georges Pompidou"],
+    ["Valéry Giscard d'Estaing", "Jacques Chirac", "Georges Pompidou"],
     "La peine de mort a été abolie en 1981, sous François Mitterrand, par la loi portée par Robert Badinter.",
   ),
   annale(
@@ -210,7 +234,11 @@ export const annalesHistoire: Qcm[] = [
     7,
     "Que célèbre-t-on le 8 mai ?",
     "La victoire des Alliés et la fin de la Seconde Guerre mondiale en Europe (1945)",
-    ["L'armistice de 1918", "La prise de la Bastille", "La fête du Travail"],
+    [
+      "L'armistice de la Première Guerre mondiale (1918)",
+      "Le débarquement en Normandie (1944)",
+      "La libération de Paris (1944)",
+    ],
     "Le 8 mai 1945 marque la capitulation de l'Allemagne nazie.",
   ),
   annale(
@@ -219,7 +247,7 @@ export const annalesHistoire: Qcm[] = [
     7,
     "Quelle est la première étape de la construction européenne en 1951 ?",
     "La Communauté européenne du charbon et de l'acier (CECA)",
-    ["Le traité de Maastricht", "La création de l'euro", "L'espace Schengen"],
+    ["La Communauté économique européenne (CEE)", "L'espace Schengen", "Le Conseil de l'Europe"],
     "En 1951, six pays créent la CECA, première communauté européenne.",
   ),
   annale(
@@ -228,7 +256,7 @@ export const annalesHistoire: Qcm[] = [
     7,
     "Qui était une figure de la Résistance française pendant la Seconde Guerre mondiale ?",
     "Jean Moulin",
-    ["Georges Clemenceau", "Jules Ferry", "Gustave Eiffel"],
+    ["Philippe Pétain", "Georges Clemenceau", "Jean Jaurès"],
     "Jean Moulin a unifié la Résistance intérieure ; il est mort sous la torture en 1943.",
   ),
   annale(
@@ -237,7 +265,11 @@ export const annalesHistoire: Qcm[] = [
     7,
     "Le 11 novembre est un jour férié. À quoi correspond cette date ?",
     "À l'armistice de la Première Guerre mondiale (1918)",
-    ["À la fin de la Seconde Guerre mondiale", "À la fête nationale", "À la journée de l'Europe"],
+    [
+      "À la victoire des Alliés en 1945",
+      "À la bataille de Verdun (1916)",
+      "À la fin de la guerre d'Algérie (1962)",
+    ],
     "Le 11 novembre 1918, l'armistice met fin aux combats de la Première Guerre mondiale.",
   ),
   annale(
@@ -246,7 +278,7 @@ export const annalesHistoire: Qcm[] = [
     7,
     "Depuis quand l'esclavage a-t-il été aboli en France ?",
     "1848",
-    ["1789", "1905", "1936"],
+    ["1794", "1815", "1870"],
     "L'esclavage a été définitivement aboli par le décret du 27 avril 1848.",
   ),
   annale(
@@ -255,7 +287,7 @@ export const annalesHistoire: Qcm[] = [
     7,
     "Qui a aboli l'esclavage en France ?",
     "Victor Schœlcher",
-    ["Napoléon Ier", "Louis XVI", "Jules Ferry"],
+    ["Jules Ferry", "L'abbé Grégoire", "Toussaint Louverture"],
     "Victor Schœlcher a fait adopter le décret d'abolition de l'esclavage en 1848.",
   ),
   annale(
@@ -264,7 +296,7 @@ export const annalesHistoire: Qcm[] = [
     7,
     "Depuis quelle année l'école publique est-elle gratuite ?",
     "1881",
-    ["1789", "1905", "1945"],
+    ["1882", "1848", "1905"],
     "La loi Jules Ferry de 1881 rend l'école publique gratuite.",
   ),
   annale(
@@ -273,7 +305,11 @@ export const annalesHistoire: Qcm[] = [
     7,
     "En 1944, qu'est-ce qui a changé pour les femmes ?",
     "Elles ont obtenu le droit de vote",
-    ["Elles ont pu ouvrir un compte bancaire", "Elles ont obtenu le droit de divorcer", "Elles ont pu travailler sans autorisation"],
+    [
+      "Elles ont pu ouvrir un compte bancaire sans leur mari",
+      "Elles ont obtenu le droit à la contraception",
+      "Elles ont obtenu l'égalité salariale",
+    ],
     "L'ordonnance du 21 avril 1944 accorde le droit de vote aux femmes, qui votent en 1945.",
   ),
   annale(
@@ -282,7 +318,11 @@ export const annalesHistoire: Qcm[] = [
     8,
     "Quelle organisation a été créée en 1945 après la Seconde Guerre mondiale ?",
     "L'Organisation des Nations unies (ONU)",
-    ["L'Union européenne", "L'OTAN", "La Société des Nations"],
+    [
+      "La Société des Nations (SDN)",
+      "L'Organisation du traité de l'Atlantique Nord (OTAN)",
+      "La Communauté européenne du charbon et de l'acier",
+    ],
     "L'ONU est créée en 1945 pour maintenir la paix entre les nations.",
   ),
   annale(
@@ -291,7 +331,7 @@ export const annalesHistoire: Qcm[] = [
     8,
     "En quelle année l'euro est-il devenu la monnaie officielle de la France ?",
     "2002",
-    ["1992", "1999", "2010"],
+    ["1992", "2000", "2004"],
     "Les pièces et billets en euros sont entrés en circulation le 1er janvier 2002.",
   ),
   annale(
@@ -300,7 +340,7 @@ export const annalesHistoire: Qcm[] = [
     8,
     "Lors de la seconde guerre mondiale, à quelle date la ville de Paris a-t-elle été libérée ?",
     "Le 25 août 1944",
-    ["Le 6 juin 1944", "Le 8 mai 1945", "Le 11 novembre 1943"],
+    ["Le 6 juin 1944", "Le 19 août 1944", "Le 8 mai 1945"],
     "Paris est libérée le 25 août 1944, après l'insurrection et l'arrivée de la 2e DB du général Leclerc.",
   ),
   annale(
@@ -309,7 +349,7 @@ export const annalesHistoire: Qcm[] = [
     8,
     "Quel était le principal port français impliqué dans la traite négrière au XVIIIe siècle ?",
     "Nantes",
-    ["Marseille", "Calais", "Nice"],
+    ["Bordeaux", "Le Havre", "Marseille"],
     "Nantes fut le premier port négrier français au XVIIIe siècle.",
   ),
   annale(
@@ -318,7 +358,7 @@ export const annalesHistoire: Qcm[] = [
     8,
     "Quel célèbre philosophe des Lumières a dénoncé l'esclavage ?",
     "Montesquieu",
-    ["Descartes", "Pasteur", "Molière"],
+    ["Descartes", "Pascal", "Colbert"],
     "Montesquieu, comme d'autres philosophes des Lumières, a dénoncé l'esclavage.",
   ),
   annale(
@@ -327,7 +367,7 @@ export const annalesHistoire: Qcm[] = [
     8,
     "Quelle œuvre a été écrite par Victor Hugo ?",
     "Les Misérables",
-    ["Le Petit Prince", "L'Étranger", "Madame Bovary"],
+    ["Le Comte de Monte-Cristo", "Germinal", "Madame Bovary"],
     "Victor Hugo est l'auteur des Misérables et de Notre-Dame de Paris.",
   ),
   annale(
@@ -336,7 +376,7 @@ export const annalesHistoire: Qcm[] = [
     8,
     "Quel peintre est français ?",
     "Claude Monet",
-    ["Pablo Picasso", "Vincent Van Gogh", "Léonard de Vinci"],
+    ["Vincent Van Gogh", "Pablo Picasso", "Rembrandt"],
     "Claude Monet, chef de file de l'impressionnisme, est français.",
   ),
   annale(
@@ -345,7 +385,7 @@ export const annalesHistoire: Qcm[] = [
     8,
     "Quel plat est une spécialité de la cuisine française ?",
     "Le bœuf bourguignon",
-    ["La paella", "La pizza", "Le sushi"],
+    ["La paella", "Le goulash", "L'osso buco"],
     "Le bœuf bourguignon est un plat traditionnel français, originaire de Bourgogne.",
   ),
   annale(
@@ -354,7 +394,11 @@ export const annalesHistoire: Qcm[] = [
     8,
     "Qui était Marie Curie ?",
     "Une scientifique, deux fois prix Nobel",
-    ["Une romancière", "Une actrice", "Une femme politique"],
+    [
+      "Une résistante, compagnon de la Libération",
+      "Une femme politique, première femme ministre",
+      "Une écrivaine, prix Nobel de littérature",
+    ],
     "Marie Curie, physicienne et chimiste, a reçu les prix Nobel de physique (1903) et de chimie (1911).",
   ),
   annale(
@@ -363,7 +407,7 @@ export const annalesHistoire: Qcm[] = [
     8,
     "Qui a peint « La liberté guidant le peuple » ?",
     "Eugène Delacroix",
-    ["Claude Monet", "Auguste Renoir", "Paul Cézanne"],
+    ["Jacques-Louis David", "Théodore Géricault", "Gustave Courbet"],
     "Ce tableau de Delacroix (1830) est un symbole de la liberté ; il est exposé au Louvre.",
   ),
   annale(
@@ -372,7 +416,7 @@ export const annalesHistoire: Qcm[] = [
     8,
     "Dans quel grand musée parisien est exposée la Joconde ?",
     "Le Louvre",
-    ["Le musée d'Orsay", "Le Centre Pompidou", "Le musée Rodin"],
+    ["Le musée d'Orsay", "Le musée de l'Orangerie", "Le Petit Palais"],
     "La Joconde de Léonard de Vinci est exposée au musée du Louvre.",
   ),
   annale(
@@ -381,7 +425,7 @@ export const annalesHistoire: Qcm[] = [
     8,
     "Quel château célèbre se trouve près de Paris et symbolise le pouvoir royal de Louis XIV ?",
     "Le château de Versailles",
-    ["Le château de Chambord", "Le Mont-Saint-Michel", "Le palais des Papes"],
+    ["Le château de Fontainebleau", "Le château de Chambord", "Le château de Vincennes"],
     "Louis XIV, le Roi-Soleil, a fait de Versailles le siège du pouvoir royal.",
   ),
   annale(
@@ -390,7 +434,7 @@ export const annalesHistoire: Qcm[] = [
     8,
     "Où peut-on voir des peintures préhistoriques en France ?",
     "Dans la grotte de Lascaux",
-    ["Au château de Versailles", "Dans les catacombes de Paris", "À la Sainte-Chapelle"],
+    ["Dans les gorges du Verdon", "Au gouffre de Padirac", "Dans les catacombes de Paris"],
     "La grotte de Lascaux (Dordogne) abrite des peintures préhistoriques célèbres.",
   ),
   annale(
@@ -399,7 +443,7 @@ export const annalesHistoire: Qcm[] = [
     8,
     "Quel peintre célèbre a peint les Nymphéas ?",
     "Claude Monet",
-    ["Paul Gauguin", "Edgar Degas", "Henri Matisse"],
+    ["Auguste Renoir", "Édouard Manet", "Edgar Degas"],
     "Monet a peint la série des Nymphéas dans son jardin de Giverny.",
   ),
   annale(
@@ -408,7 +452,7 @@ export const annalesHistoire: Qcm[] = [
     8,
     "Pendant quelles journées peut-on visiter gratuitement des lieux culturels en France ?",
     "Les Journées européennes du patrimoine",
-    ["Les soldes d'été", "La fête de la musique", "Le 1er avril"],
+    ["La Fête de la musique", "Le Printemps des poètes", "La fête nationale du 14 Juillet"],
     "Chaque année en septembre, les Journées du patrimoine ouvrent gratuitement de nombreux monuments.",
   ),
   annale(
@@ -417,7 +461,7 @@ export const annalesHistoire: Qcm[] = [
     8,
     "Que symbolise le 1er mai ?",
     "La fête du Travail",
-    ["La fête nationale", "La fête des mères", "La journée de l'Europe"],
+    ["La fête de la Victoire", "La journée de l'Europe", "La fête de la Fédération"],
     "Le 1er mai, jour férié, est la fête du Travail ; on y offre traditionnellement du muguet.",
   ),
   annale(
@@ -426,7 +470,11 @@ export const annalesHistoire: Qcm[] = [
     8,
     "Qui était Monsieur Rouget de Lisle ?",
     "L'auteur et compositeur de la Marseillaise",
-    ["Un roi de France", "Un peintre impressionniste", "Un résistant"],
+    [
+      "Le peintre de La Liberté guidant le peuple",
+      "Le rédacteur de la Déclaration des droits de l'homme",
+      "Le sculpteur de la statue de la Liberté",
+    ],
     "Officier, Rouget de Lisle a composé la Marseillaise en 1792 à Strasbourg.",
   ),
   annale(
@@ -435,7 +483,11 @@ export const annalesHistoire: Qcm[] = [
     8,
     "À quelle occasion a été construite la Tour Eiffel ?",
     "L'Exposition universelle de 1889",
-    ["Les Jeux olympiques de 1900", "Le sacre de Napoléon", "La visite de la reine Victoria"],
+    [
+      "L'Exposition universelle de 1900",
+      "Les Jeux olympiques de 1924",
+      "Le centenaire de la mort de Napoléon",
+    ],
     "Gustave Eiffel l'a construite pour l'Exposition universelle de 1889, centenaire de la Révolution.",
   ),
   annale(
@@ -444,7 +496,7 @@ export const annalesHistoire: Qcm[] = [
     8,
     "Quelle chaîne de montagnes est située entre la France et l'Italie ?",
     "Les Alpes",
-    ["Les Pyrénées", "Les Vosges", "Le Jura"],
+    ["Les Pyrénées", "Le Jura", "Les Vosges"],
     "Les Alpes séparent la France de l'Italie ; on y trouve le mont Blanc.",
   ),
   annale(
@@ -453,7 +505,11 @@ export const annalesHistoire: Qcm[] = [
     8,
     "Qui était Molière ?",
     "Un auteur de théâtre et comédien du XVIIe siècle",
-    ["Un peintre", "Un compositeur", "Un scientifique"],
+    [
+      "Un auteur de fables du XVIIe siècle",
+      "Un auteur de tragédies du XVIIIe siècle",
+      "Un philosophe des Lumières du XVIIIe siècle",
+    ],
     "Molière (1622-1673) est le grand auteur de comédies français ; on parle de la « langue de Molière ».",
   ),
   annale(
@@ -462,7 +518,11 @@ export const annalesHistoire: Qcm[] = [
     8,
     "Qui était Charles Baudelaire ?",
     "Un poète, auteur des Fleurs du mal",
-    ["Un sculpteur", "Un homme politique", "Un architecte"],
+    [
+      "Un poète, auteur des Contemplations",
+      "Un romancier, auteur de Germinal",
+      "Un dramaturge, auteur du Cid",
+    ],
     "Baudelaire (1821-1867) est l'un des plus grands poètes français.",
   ),
   annale(
@@ -471,7 +531,11 @@ export const annalesHistoire: Qcm[] = [
     8,
     "Qui était George Sand ?",
     "Une romancière du XIXe siècle",
-    ["Une chanteuse", "Une reine de France", "Une peintre"],
+    [
+      "Une chanteuse réaliste du XXe siècle",
+      "Une peintre impressionniste du XIXe siècle",
+      "Une reine de France du XVIe siècle",
+    ],
     "George Sand, pseudonyme d'Aurore Dupin, est une grande femme de lettres du XIXe siècle.",
   ),
   annale(
@@ -480,7 +544,11 @@ export const annalesHistoire: Qcm[] = [
     8,
     "Qui était Simone de Beauvoir ?",
     "Une philosophe et écrivaine, figure du féminisme",
-    ["Une ministre de la Santé", "Une résistante", "Une actrice"],
+    [
+      "Une ministre, auteure de la loi sur l'IVG",
+      "Une scientifique, prix Nobel de chimie",
+      "Une résistante, entrée au Panthéon",
+    ],
     "Autrice du Deuxième Sexe (1949), Simone de Beauvoir a marqué la pensée féministe.",
   ),
   annale(
@@ -489,7 +557,11 @@ export const annalesHistoire: Qcm[] = [
     8,
     "Qui était Albert Camus ?",
     "Un écrivain, prix Nobel de littérature",
-    ["Un peintre", "Un général", "Un chanteur"],
+    [
+      "Un philosophe, qui a refusé le prix Nobel",
+      "Un peintre, figure de l'impressionnisme",
+      "Un poète, auteur des Fleurs du mal",
+    ],
     "Albert Camus, auteur de L'Étranger et de La Peste, a reçu le prix Nobel de littérature en 1957.",
   ),
   annale(
@@ -498,7 +570,11 @@ export const annalesHistoire: Qcm[] = [
     8,
     "Qui était Marguerite Yourcenar ?",
     "Une écrivaine, première femme élue à l'Académie française",
-    ["Une danseuse étoile", "Une avocate", "Une exploratrice"],
+    [
+      "Une chanteuse, interprète de La Vie en rose",
+      "Une avocate, défenseure du droit à l'avortement",
+      "Une scientifique, deux fois prix Nobel",
+    ],
     "Marguerite Yourcenar est entrée à l'Académie française en 1980, une première pour une femme.",
   ),
   annale(
@@ -507,7 +583,11 @@ export const annalesHistoire: Qcm[] = [
     8,
     "Qui était Paul Cézanne ?",
     "Un peintre, célèbre pour ses vues de la montagne Sainte-Victoire",
-    ["Un romancier", "Un musicien", "Un cinéaste"],
+    [
+      "Un peintre, célèbre pour ses Nymphéas",
+      "Un sculpteur, auteur du Penseur",
+      "Un peintre, célèbre pour ses danseuses",
+    ],
     "Cézanne, peintre d'Aix-en-Provence, a ouvert la voie à la peinture moderne.",
   ),
   annale(
@@ -516,7 +596,11 @@ export const annalesHistoire: Qcm[] = [
     8,
     "Qui était Auguste Rodin ?",
     "Un sculpteur, auteur du Penseur",
-    ["Un peintre impressionniste", "Un poète", "Un architecte"],
+    [
+      "Un sculpteur, auteur de la statue de la Liberté",
+      "Un peintre, auteur des Nymphéas",
+      "Un architecte, auteur de la tour Eiffel",
+    ],
     "Rodin est le plus célèbre sculpteur français (Le Penseur, Le Baiser).",
   ),
   annale(
@@ -525,7 +609,7 @@ export const annalesHistoire: Qcm[] = [
     8,
     "Qui était un célèbre compositeur français ?",
     "Claude Debussy",
-    ["Ludwig van Beethoven", "Wolfgang Amadeus Mozart", "Giuseppe Verdi"],
+    ["Ludwig van Beethoven", "Giuseppe Verdi", "Antonio Vivaldi"],
     "Claude Debussy (1862-1918) est l'un des plus grands compositeurs français.",
   ),
   annale(
@@ -534,7 +618,11 @@ export const annalesHistoire: Qcm[] = [
     8,
     "Qui était Auguste Renoir ?",
     "Un peintre impressionniste",
-    ["Un sculpteur", "Un écrivain", "Un photographe"],
+    [
+      "Un sculpteur, auteur du Baiser",
+      "Un cinéaste de la Nouvelle Vague",
+      "Un peintre de la Renaissance",
+    ],
     "Renoir est un maître de l'impressionnisme (Bal du moulin de la Galette).",
   ),
   annale(
@@ -543,7 +631,7 @@ export const annalesHistoire: Qcm[] = [
     8,
     "Quel musée est situé à Paris ?",
     "Le musée d'Orsay",
-    ["Le musée du Prado", "Le British Museum", "Les Offices"],
+    ["Le musée du Prado", "Le Rijksmuseum", "La National Gallery"],
     "Le musée d'Orsay, installé dans une ancienne gare parisienne, abrite les chefs-d'œuvre impressionnistes.",
   ),
   annale(
@@ -552,7 +640,7 @@ export const annalesHistoire: Qcm[] = [
     9,
     "Quel monument historique se trouve sur une île en Normandie ?",
     "Le Mont-Saint-Michel",
-    ["Le château de Chambord", "Carcassonne", "Le pont du Gard"],
+    ["Fort Boyard", "Le château d'If", "Les falaises d'Étretat"],
     "Le Mont-Saint-Michel, abbaye bâtie sur un îlot rocheux, est classé au patrimoine mondial.",
   ),
   annale(
@@ -561,7 +649,7 @@ export const annalesHistoire: Qcm[] = [
     9,
     "Quelle ville française fait partie des 10 plus grandes métropoles du pays ?",
     "Lyon",
-    ["Aurillac", "Guéret", "Mende"],
+    ["Annecy", "Avignon", "Colmar"],
     "Lyon est, avec Paris et Marseille, l'une des plus grandes métropoles françaises.",
   ),
   annale(
@@ -570,7 +658,7 @@ export const annalesHistoire: Qcm[] = [
     9,
     "Quelle île fait partie des Antilles françaises ?",
     "La Guadeloupe",
-    ["La Corse", "La Réunion", "Mayotte"],
+    ["La Réunion", "La Nouvelle-Calédonie", "Saint-Pierre-et-Miquelon"],
     "La Guadeloupe et la Martinique sont les Antilles françaises, dans l'océan Atlantique.",
   ),
   annale(
@@ -579,7 +667,7 @@ export const annalesHistoire: Qcm[] = [
     9,
     "Quelle île est française ?",
     "La Corse",
-    ["La Sardaigne", "La Sicile", "Malte"],
+    ["La Sardaigne", "Majorque", "Malte"],
     "La Corse est une île française de Méditerranée.",
   ),
   annale(
@@ -588,7 +676,7 @@ export const annalesHistoire: Qcm[] = [
     9,
     "Quelle est la plus haute montagne de France ?",
     "Le mont Blanc",
-    ["Le puy de Dôme", "Le pic du Midi", "Le mont Ventoux"],
+    ["Le mont Ventoux", "La barre des Écrins", "Le pic du Midi"],
     "Le mont Blanc (4 806 m), dans les Alpes, est le plus haut sommet de France et d'Europe occidentale.",
   ),
   annale(
@@ -597,7 +685,7 @@ export const annalesHistoire: Qcm[] = [
     9,
     "Quelle île française est située dans l'océan indien ?",
     "La Réunion",
-    ["La Martinique", "La Corse", "Saint-Pierre-et-Miquelon"],
+    ["La Martinique", "La Guadeloupe", "La Nouvelle-Calédonie"],
     "La Réunion est un département français de l'océan Indien.",
   ),
   annale(
@@ -606,7 +694,7 @@ export const annalesHistoire: Qcm[] = [
     9,
     "Quel département français a une frontière avec le Brésil ?",
     "La Guyane",
-    ["La Martinique", "Mayotte", "La Réunion"],
+    ["La Martinique", "La Guadeloupe", "Saint-Martin"],
     "La Guyane, en Amérique du Sud, partage plus de 700 km de frontière avec le Brésil.",
   ),
   annale(
@@ -615,7 +703,7 @@ export const annalesHistoire: Qcm[] = [
     9,
     "De quelle ville française décolle la fusée Ariane ?",
     "Kourou",
-    ["Toulouse", "Bordeaux", "Marseille"],
+    ["Toulouse", "Cayenne", "Pointe-à-Pitre"],
     "Le Centre spatial guyanais, d'où décolle Ariane, est situé à Kourou, en Guyane.",
   ),
   annale(
@@ -624,7 +712,7 @@ export const annalesHistoire: Qcm[] = [
     9,
     "Quelle mer ou océan borde la France métropolitaine ?",
     "La mer Méditerranée",
-    ["La mer Noire", "La mer Baltique", "L'océan Indien"],
+    ["La mer Noire", "La mer Baltique", "La mer Adriatique"],
     "La métropole est bordée par la Manche, l'Atlantique, la mer du Nord et la Méditerranée.",
   ),
   annale(
@@ -633,7 +721,7 @@ export const annalesHistoire: Qcm[] = [
     9,
     "Quelle mer se situe entre la France et l'Angleterre ?",
     "La Manche",
-    ["La mer du Nord", "La mer Méditerranée", "La mer d'Iroise"],
+    ["La mer du Nord", "La mer Celtique", "La mer d'Irlande"],
     "La Manche sépare la France du Royaume-Uni ; un tunnel la traverse depuis 1994.",
   ),
   annale(
@@ -642,7 +730,7 @@ export const annalesHistoire: Qcm[] = [
     9,
     "Quelle île est un département d'outre-mer français ?",
     "La Martinique",
-    ["Malte", "La Sicile", "Chypre"],
+    ["Tahiti", "La Nouvelle-Calédonie", "Saint-Barthélemy"],
     "La Martinique est l'un des cinq départements et régions d'outre-mer.",
   ),
   annale(
@@ -651,7 +739,11 @@ export const annalesHistoire: Qcm[] = [
     9,
     "Qu'est-ce que la France d'outre-mer ?",
     "Les territoires français situés hors d'Europe",
-    ["Les pays frontaliers de la France", "Les anciennes colonies devenues indépendantes", "Les zones maritimes internationales"],
+    [
+      "Les anciennes colonies devenues indépendantes",
+      "Les pays francophones d'Afrique",
+      "Les territoires étrangers administrés par la France",
+    ],
     "La France d'outre-mer regroupe les territoires français des océans Atlantique, Indien et Pacifique.",
   ),
   annale(
@@ -660,7 +752,7 @@ export const annalesHistoire: Qcm[] = [
     9,
     "Quelle est la population approximative de la France en 2025 ?",
     "68 millions d'habitants",
-    ["50 millions", "80 millions", "95 millions"],
+    ["55 millions d'habitants", "60 millions d'habitants", "75 millions d'habitants"],
     "La France compte environ 68 millions d'habitants, outre-mer compris.",
   ),
   annale(
@@ -669,7 +761,7 @@ export const annalesHistoire: Qcm[] = [
     9,
     "Quel est le principal port maritime de France ?",
     "Marseille",
-    ["Paris", "Lyon", "Strasbourg"],
+    ["Le Havre", "Bordeaux", "Dunkerque"],
     "Marseille est le premier port maritime français.",
   ),
   annale(
@@ -678,7 +770,7 @@ export const annalesHistoire: Qcm[] = [
     9,
     "Combien y a-t-il de régions en France métropolitaine ?",
     "13",
-    ["22", "17", "9"],
+    ["22", "18", "12"],
     "Depuis 2016, la métropole compte 13 régions (18 avec l'outre-mer).",
   ),
   annale(
@@ -687,7 +779,7 @@ export const annalesHistoire: Qcm[] = [
     9,
     "Quelle chaîne de montagnes est située entre la France et l'Espagne ?",
     "Les Pyrénées",
-    ["Les Alpes", "Le Massif central", "Les Vosges"],
+    ["Les Alpes", "Les Cévennes", "Le Massif central"],
     "Les Pyrénées forment la frontière naturelle entre la France et l'Espagne.",
   ),
   annale(
@@ -696,7 +788,7 @@ export const annalesHistoire: Qcm[] = [
     9,
     "Quelle île française se trouve au sud-est du continent africain ?",
     "Mayotte",
-    ["La Guadeloupe", "La Corse", "Tahiti"],
+    ["La Martinique", "La Nouvelle-Calédonie", "Saint-Barthélemy"],
     "Mayotte, département français, est située dans le canal du Mozambique, au sud-est de l'Afrique.",
   ),
   annale(
@@ -714,7 +806,7 @@ export const annalesHistoire: Qcm[] = [
     9,
     "Quel est le chef-lieu de la région Bretagne ?",
     "Rennes",
-    ["Brest", "Nantes", "Quimper"],
+    ["Brest", "Nantes", "Vannes"],
     "Rennes est le chef-lieu de la région Bretagne.",
   ),
   annale(
@@ -723,7 +815,7 @@ export const annalesHistoire: Qcm[] = [
     9,
     "Quel est le chef-lieu de la région Provence-Alpes-Côte d'Azur ?",
     "Marseille",
-    ["Nice", "Toulon", "Avignon"],
+    ["Nice", "Toulon", "Aix-en-Provence"],
     "Marseille est le chef-lieu de la région Provence-Alpes-Côte d'Azur.",
   ),
   annale(
@@ -732,7 +824,7 @@ export const annalesHistoire: Qcm[] = [
     9,
     "Quel est le 101ème département français depuis 2011 ?",
     "Mayotte",
-    ["La Guyane", "La Corse-du-Sud", "Saint-Martin"],
+    ["La Guyane", "Saint-Martin", "La Nouvelle-Calédonie"],
     "Mayotte est devenue le 101e département français en 2011.",
   ),
   annale(
@@ -741,7 +833,7 @@ export const annalesHistoire: Qcm[] = [
     9,
     "Quelle région française est réputée pour ses stations de ski ?",
     "Auvergne-Rhône-Alpes",
-    ["La Bretagne", "Les Pays de la Loire", "La Normandie"],
+    ["La Bretagne", "La Normandie", "Les Hauts-de-France"],
     "Les Alpes, en région Auvergne-Rhône-Alpes, concentrent les grandes stations de ski françaises.",
   ),
   annale(
@@ -750,7 +842,7 @@ export const annalesHistoire: Qcm[] = [
     9,
     "Quel fleuve traverse Paris ?",
     "La Seine",
-    ["La Loire", "Le Rhône", "La Garonne"],
+    ["La Loire", "La Marne", "L'Oise"],
     "La Seine traverse Paris avant de se jeter dans la Manche au Havre.",
   ),
 ];

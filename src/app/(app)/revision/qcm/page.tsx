@@ -45,6 +45,7 @@ export default async function RevisionQcmPage() {
       title="Révision éclair"
       backHref="/dashboard"
       onSubmit={submitQcm}
+      resume={{ key: "qcm-revision", href: "/revision/qcm" }}
     />
   );
 }

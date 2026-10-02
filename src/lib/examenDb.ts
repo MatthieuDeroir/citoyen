@@ -1,7 +1,7 @@
-import { desc, eq } from "drizzle-orm";
+import { and, desc, eq, gt, lte } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { examens } from "@/db/schema";
-import { EXAM_PASS, type ExamDetailEntry } from "@/lib/examen";
+import { EXAM_TOTAL, isPassed, type ExamDetailEntry } from "@/lib/examen";
 
 /**
  * Accès DB des examens blancs — volontairement séparé de lib/examen.ts, qui
@@ -9,12 +9,12 @@ import { EXAM_PASS, type ExamDetailEntry } from "@/lib/examen";
  * le client libsql ne doit jamais partir dans le bundle navigateur.
  */
 
-/** Ids des questions déjà tombées dans les examens blancs de l'utilisateur. */
+/** Ids des questions déjà tombées dans les examens blancs (hors examen ultime). */
 export async function getSeenExamQuestionIds(userId: string): Promise<Set<string>> {
   const rows = await db
     .select({ detail: examens.detail })
     .from(examens)
-    .where(eq(examens.userId, userId));
+    .where(and(eq(examens.userId, userId), lte(examens.total, EXAM_TOTAL)));
   const seen = new Set<string>();
   for (const row of rows) {
     try {
@@ -36,8 +36,14 @@ export interface ExamHistoryEntry {
   createdAt: Date;
 }
 
-/** Historique des examens blancs, du plus récent au plus ancien. */
-export async function getExamHistory(userId: string): Promise<ExamHistoryEntry[]> {
+/**
+ * Historique du plus récent au plus ancien : examens blancs (40 questions)
+ * par défaut, ou examens ultimes (toute la banque) avec `ultime`.
+ */
+export async function getExamHistory(
+  userId: string,
+  { ultime = false }: { ultime?: boolean } = {},
+): Promise<ExamHistoryEntry[]> {
   const rows = await db
     .select({
       id: examens.id,
@@ -46,7 +52,12 @@ export async function getExamHistory(userId: string): Promise<ExamHistoryEntry[]
       createdAt: examens.createdAt,
     })
     .from(examens)
-    .where(eq(examens.userId, userId))
+    .where(
+      and(
+        eq(examens.userId, userId),
+        ultime ? gt(examens.total, EXAM_TOTAL) : lte(examens.total, EXAM_TOTAL),
+      ),
+    )
     .orderBy(desc(examens.createdAt));
-  return rows.map((r) => ({ ...r, passed: r.score >= EXAM_PASS }));
+  return rows.map((r) => ({ ...r, passed: isPassed(r.score, r.total) }));
 }

@@ -16,6 +16,23 @@ export const EXAM_TOTAL = 40;
 export const EXAM_PASS = 32;
 export const EXAM_DURATION_MINUTES = 45;
 
+/** Examen ultime : toute la banque officielle, sans limite de temps. */
+export const ULTIME_TOTAL = annales.length;
+
+/** Seuil d'admission (80 %) appliqué à n'importe quel nombre de questions. */
+export function passMark(total: number): number {
+  return Math.ceil((total * EXAM_PASS) / EXAM_TOTAL);
+}
+
+export function isPassed(score: number, total: number): boolean {
+  return score >= passMark(total);
+}
+
+/** Un examen enregistré de plus de 40 questions est un examen ultime. */
+export function isUltime(total: number): boolean {
+  return total > EXAM_TOTAL;
+}
+
 const DISTRIBUTION: Record<string, number> = {
   p1: 11,
   p2: 6,
@@ -57,4 +74,9 @@ export function buildExam(seenIds: Set<string> = new Set()): Qcm[] {
     selected.push(...[...fresh, ...already].slice(0, count));
   }
   return shuffle(selected);
+}
+
+/** Examen ultime : les 258 questions officielles, dans un ordre aléatoire. */
+export function buildUltime(): Qcm[] {
+  return shuffle(annales);
 }

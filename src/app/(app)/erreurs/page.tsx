@@ -43,6 +43,7 @@ export default async function ErreursPage() {
       title={`Corriger mes erreurs · ${errors.length}`}
       backHref="/dashboard"
       onSubmit={submitQcm}
+      resume={{ key: "qcm-erreurs", href: "/erreurs" }}
     />
   );
 }

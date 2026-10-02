@@ -14,7 +14,11 @@ export const annalesPrincipes: Qcm[] = [
     1,
     "Complétez les paroles de la Marseillaise « Allons enfants de la patrie… »",
     "Le jour de gloire est arrivé !",
-    ["La victoire en chantant", "Aux armes citoyens !", "L'étendard sanglant est levé"],
+    [
+      "Le jour de colère est arrivé !",
+      "L'heure de gloire est arrivée !",
+      "Le jour de victoire est arrivé !",
+    ],
     "La Marseillaise commence par « Allons enfants de la patrie, le jour de gloire est arrivé ! ».",
   ),
   annale(
@@ -23,7 +27,11 @@ export const annalesPrincipes: Qcm[] = [
     1,
     "Dans le cadre d'un entretien d'embauche, que peut-on demander au candidat ?",
     "Son expérience et ses compétences professionnelles",
-    ["Sa religion", "Ses opinions politiques", "Son état de santé"],
+    [
+      "Sa situation familiale et son projet d'avoir des enfants",
+      "Son lieu de naissance et ses origines familiales",
+      "Son appartenance syndicale et ses engagements passés",
+    ],
     "Seules les questions liées au poste sont permises : religion, opinions ou santé relèvent de la vie privée et les discriminations sont interdites.",
   ),
   annale(
@@ -32,7 +40,11 @@ export const annalesPrincipes: Qcm[] = [
     1,
     "Déclarer ses revenus aux services fiscaux est :",
     "Une obligation légale",
-    ["Un choix personnel", "Réservé aux plus riches", "Facultatif si on gagne peu"],
+    [
+      "Obligatoire uniquement si l'on est imposable",
+      "Obligatoire uniquement pour les salariés",
+      "Facultatif la première année en France",
+    ],
     "Chaque foyer doit déclarer ses revenus chaque année : l'impôt finance les services publics.",
   ),
   annale(
@@ -42,9 +54,9 @@ export const annalesPrincipes: Qcm[] = [
     "En France, les impôts permettent de financer les dépenses publiques. Quelle proposition est correcte ?",
     "Ils financent les écoles, les hôpitaux et les routes",
     [
-      "Ils financent uniquement l'armée",
-      "Ils sont reversés directement au président de la République",
-      "Ils financent les cultes religieux",
+      "Ils financent uniquement la défense et la police",
+      "Ils servent seulement à rembourser la dette de l'État",
+      "Ils financent l'entretien des lieux de culte construits après 1905",
     ],
     "Les impôts financent les services publics : éducation, santé, sécurité, infrastructures.",
   ),
@@ -54,7 +66,11 @@ export const annalesPrincipes: Qcm[] = [
     1,
     "La liberté d'association est :",
     "Un droit fondamental garanti par la loi",
-    ["Réservée aux Français de naissance", "Soumise à autorisation du préfet", "Interdite aux mineurs"],
+    [
+      "Un droit soumis à l'autorisation préalable du préfet",
+      "Un droit réservé aux personnes de nationalité française",
+      "Un droit accordé uniquement aux personnes majeures",
+    ],
     "Depuis la loi de 1901, chacun peut créer ou rejoindre librement une association.",
   ),
   annale(
@@ -63,7 +79,11 @@ export const annalesPrincipes: Qcm[] = [
     1,
     "La liberté d'expression sur les réseaux sociaux en France est :",
     "Autorisée, mais encadrée par la loi",
-    ["Totale et sans aucune limite", "Interdite", "Réservée aux journalistes"],
+    [
+      "Totale, car internet échappe à la loi française",
+      "Autorisée uniquement sous son vrai nom",
+      "Autorisée, sauf pour critiquer le gouvernement",
+    ],
     "On peut s'exprimer librement, mais l'injure, la diffamation et l'incitation à la haine sont punies par la loi.",
   ),
   annale(
@@ -72,7 +92,7 @@ export const annalesPrincipes: Qcm[] = [
     1,
     "Lequel de ces prénoms évoque un symbole de la République ?",
     "Marianne",
-    ["Jeanne", "Charlotte", "Louise"],
+    ["Jeanne", "Joséphine", "Anne"],
     "Marianne est la figure allégorique de la République française.",
   ),
   annale(
@@ -81,7 +101,7 @@ export const annalesPrincipes: Qcm[] = [
     1,
     "Lequel de ces symboles représente la République française ?",
     "Le drapeau bleu, blanc, rouge",
-    ["L'aigle impérial", "La fleur de lys", "La croix de Lorraine"],
+    ["La fleur de lys", "L'aigle impérial", "La croix de Lorraine"],
     "Le drapeau tricolore est le symbole officiel de la République (article 2 de la Constitution).",
   ),
   annale(
@@ -90,7 +110,11 @@ export const annalesPrincipes: Qcm[] = [
     1,
     "Où peut-on voir la devise de la République ?",
     "Sur le fronton des mairies et des bâtiments publics",
-    ["Sur les plaques d'immatriculation", "Sur les billets de banque uniquement", "Sur les panneaux d'autoroute"],
+    [
+      "Sur les panneaux d'entrée de ville",
+      "Sur les plaques d'immatriculation",
+      "À l'entrée des lieux de culte",
+    ],
     "« Liberté, Égalité, Fraternité » figure sur les frontons des mairies, des écoles et des bâtiments publics.",
   ),
   annale(
@@ -99,7 +123,11 @@ export const annalesPrincipes: Qcm[] = [
     1,
     "Lesquels sont des symboles officiels de la République française ?",
     "Le drapeau tricolore et La Marseillaise",
-    ["Le coq et la baguette", "La tour Eiffel et le béret", "Le lys et la couronne"],
+    [
+      "Le coq gaulois et la croix de Lorraine",
+      "Le drapeau tricolore et la fleur de lys",
+      "La Marseillaise et l'aigle impérial",
+    ],
     "La Constitution reconnaît le drapeau tricolore, La Marseillaise, la devise et le principe du gouvernement du peuple.",
   ),
   annale(
@@ -108,7 +136,11 @@ export const annalesPrincipes: Qcm[] = [
     1,
     "Peut-on brûler publiquement un drapeau français ?",
     "Non, l'outrage public au drapeau est puni par la loi",
-    ["Oui, c'est une liberté d'expression", "Oui, sauf le 14 juillet", "Oui, avec une autorisation"],
+    [
+      "Oui, au nom de la liberté d'expression",
+      "Oui, lors d'une manifestation déclarée",
+      "Oui, si le drapeau vous appartient",
+    ],
     "L'outrage au drapeau tricolore commis en public est une infraction pénale.",
   ),
   annale(
@@ -117,7 +149,7 @@ export const annalesPrincipes: Qcm[] = [
     1,
     "Quand la sécurité sociale a-t-elle été établie en France ?",
     "En 1945",
-    ["En 1905", "En 1789", "En 1981"],
+    ["En 1936", "En 1958", "En 1968"],
     "La Sécurité sociale a été créée en 1945, à la Libération.",
   ),
   annale(
@@ -126,7 +158,11 @@ export const annalesPrincipes: Qcm[] = [
     1,
     "Que commémore la fête nationale ?",
     "La prise de la Bastille du 14 juillet 1789",
-    ["Le sacre de Napoléon", "La fin de la Première Guerre mondiale", "La naissance du général de Gaulle"],
+    [
+      "La proclamation de la République du 22 septembre 1792",
+      "L'abolition des privilèges du 4 août 1789",
+      "La Déclaration des droits de l'homme du 26 août 1789",
+    ],
     "Le 14 juillet commémore la prise de la Bastille (1789) et la fête de la Fédération (1790).",
   ),
   annale(
@@ -135,7 +171,7 @@ export const annalesPrincipes: Qcm[] = [
     1,
     "Que porte Marianne sur la tête ?",
     "Un bonnet phrygien",
-    ["Une couronne de lauriers", "Un béret", "Une couronne royale"],
+    ["Une couronne de lauriers", "Une cocarde tricolore", "Un diadème étoilé"],
     "Le bonnet phrygien, hérité des esclaves affranchis de l'Antiquité, symbolise la liberté.",
   ),
   annale(
@@ -144,7 +180,11 @@ export const annalesPrincipes: Qcm[] = [
     1,
     "Que signifie le mot « fraternité » dans la devise française ?",
     "La solidarité entre tous les membres de la société",
-    ["L'obligation d'avoir des frères et sœurs", "L'amour de la patrie", "L'égalité devant l'impôt"],
+    [
+      "L'égalité de tous devant la loi",
+      "Le droit de penser et de s'exprimer librement",
+      "L'attachement à la nation et à ses traditions",
+    ],
     "La fraternité, c'est l'entraide et la solidarité qui unissent les citoyens.",
   ),
   annale(
@@ -153,7 +193,7 @@ export const annalesPrincipes: Qcm[] = [
     1,
     "Quel symbole de la République peut-on voir sur les maillots de l'équipe de France de football ?",
     "Le coq",
-    ["Marianne", "Le bonnet phrygien", "La devise républicaine"],
+    ["Marianne", "Le bonnet phrygien", "Le faisceau de licteur"],
     "Le coq gaulois figure sur les maillots des équipes de France.",
   ),
   annale(
@@ -162,7 +202,7 @@ export const annalesPrincipes: Qcm[] = [
     1,
     "Quelle est la devise de la République française ?",
     "Liberté, Égalité, Fraternité",
-    ["Travail, Famille, Patrie", "Unie dans la diversité", "Dieu et mon droit"],
+    ["Liberté, Égalité, Solidarité", "Liberté, Justice, Fraternité", "Unité, Égalité, Fraternité"],
     "La devise officielle de la République est « Liberté, Égalité, Fraternité » (article 2 de la Constitution).",
   ),
   annale(
@@ -172,9 +212,9 @@ export const annalesPrincipes: Qcm[] = [
     "Qu'est-ce que la liberté d'association ?",
     "Le droit de créer ou de rejoindre une association librement",
     [
-      "L'obligation d'adhérer à une association",
-      "Le droit de créer une entreprise sans impôts",
-      "Un droit réservé aux partis politiques",
+      "Le droit de manifester sur la voie publique sans déclaration",
+      "Le droit de créer une association après accord du maire",
+      "Le droit pour toute association de recevoir des subventions",
     ],
     "Toute personne peut fonder une association ou en devenir membre, sans autorisation préalable.",
   ),
@@ -185,9 +225,9 @@ export const annalesPrincipes: Qcm[] = [
     "Qu'est-ce qu'une liberté ?",
     "Un droit fondamental de faire tout ce qui ne nuit pas à autrui",
     [
-      "Le droit de faire absolument tout ce que l'on veut",
-      "Une permission accordée par le maire",
-      "Un privilège réservé aux citoyens français",
+      "Un droit de faire tout ce que la morale religieuse autorise",
+      "Un droit de faire seulement ce que l'État a expressément permis",
+      "Un droit de faire tout ce que l'on veut, du moment qu'on est chez soi",
     ],
     "Selon la DDHC de 1789, la liberté consiste à pouvoir faire tout ce qui ne nuit pas à autrui.",
   ),
@@ -197,7 +237,11 @@ export const annalesPrincipes: Qcm[] = [
     1,
     "Selon la Constitution, la France est une République…",
     "Indivisible, laïque, démocratique et sociale",
-    ["Fédérale, monarchique et religieuse", "Unie, chrétienne et libérale", "Centralisée, militaire et souveraine"],
+    [
+      "Indivisible, laïque, démocratique et libérale",
+      "Unie, laïque, fédérale et sociale",
+      "Indivisible, neutre, parlementaire et sociale",
+    ],
     "L'article 1er de la Constitution : « La France est une République indivisible, laïque, démocratique et sociale. »",
   ),
   annale(
@@ -206,7 +250,7 @@ export const annalesPrincipes: Qcm[] = [
     1,
     "Sur quel document peut-on voir Marianne ?",
     "Sur les timbres postaux",
-    ["Sur le permis de conduire", "Sur la carte bancaire", "Sur le carnet de santé"],
+    ["Sur les billets en euros", "Sur la carte Vitale", "Sur les tickets de métro"],
     "Marianne figure notamment sur les timbres, ainsi que sur les documents officiels de l'État.",
   ),
   annale(
@@ -216,9 +260,9 @@ export const annalesPrincipes: Qcm[] = [
     "Une des valeurs de la devise républicaine est l'Égalité. Qu'est-ce que cela signifie ?",
     "La loi est la même pour tous, sans distinction",
     [
-      "Tout le monde gagne le même salaire",
-      "Tous les citoyens ont le même métier",
-      "Chacun paie le même montant d'impôts",
+      "Chacun reçoit les mêmes aides, quelle que soit sa situation",
+      "Chacun paie le même montant d'impôt",
+      "Seuls les citoyens français ont des droits",
     ],
     "L'égalité signifie que tous les citoyens ont les mêmes droits et sont égaux devant la loi.",
   ),
@@ -228,7 +272,11 @@ export const annalesPrincipes: Qcm[] = [
     1,
     "Une personne peut-elle changer librement de religion en France ?",
     "Oui, la liberté de conscience le garantit",
-    ["Non, c'est interdit", "Oui, avec l'accord du préfet", "Seulement une fois dans sa vie"],
+    [
+      "Oui, mais il faut le déclarer à la mairie",
+      "Non, sauf en cas de mariage",
+      "Oui, mais une seule fois après sa majorité",
+    ],
     "Chacun est libre de croire, de ne pas croire ou de changer de religion : c'est la liberté de conscience.",
   ),
   annale(
@@ -238,9 +286,9 @@ export const annalesPrincipes: Qcm[] = [
     "Selon le principe de laïcité, que signifie la neutralité de l'État ?",
     "L'État ne privilégie et ne finance aucune religion",
     [
-      "L'État interdit toutes les religions",
-      "L'État choisit une religion officielle",
-      "L'État ne s'occupe d'aucun sujet de société",
+      "L'État finance tous les cultes de manière égale",
+      "L'État interdit les signes religieux dans la rue",
+      "L'État ne reconnaît que les grandes religions",
     ],
     "L'État est neutre : il garantit la liberté de culte mais ne reconnaît, ne salarie ni ne subventionne aucun culte.",
   ),
@@ -250,7 +298,11 @@ export const annalesPrincipes: Qcm[] = [
     1,
     "Que peut faire un usager du service public dans une mairie ?",
     "Demander un acte d'état civil ou faire ses démarches administratives",
-    ["Voter à n'importe quelle date", "Payer ses achats", "Faire ses courses alimentaires"],
+    [
+      "Demander ou renouveler son titre de séjour",
+      "Déposer une plainte pour un vol",
+      "Demander le versement de ses allocations familiales",
+    ],
     "La mairie délivre les actes d'état civil (naissance, mariage, décès) et accompagne les démarches des habitants.",
   ),
   annale(
@@ -259,7 +311,11 @@ export const annalesPrincipes: Qcm[] = [
     1,
     "En France, il est possible pour l'État de financer :",
     "L'entretien des édifices religieux construits avant 1905",
-    ["Le salaire des ministres du culte", "La construction de nouveaux lieux de culte", "Les activités religieuses des associations"],
+    [
+      "Le salaire des responsables religieux",
+      "La construction de nouveaux lieux de culte",
+      "L'organisation des fêtes religieuses",
+    ],
     "Les édifices religieux antérieurs à 1905 appartiennent aux collectivités publiques, qui peuvent les entretenir ; les cultes eux-mêmes ne sont pas financés.",
   ),
   annale(
@@ -268,7 +324,7 @@ export const annalesPrincipes: Qcm[] = [
     1,
     "En quelle année la loi de séparation des Églises et de l'État a-t-elle été votée ?",
     "1905",
-    ["1789", "1945", "1958"],
+    ["1882", "1789", "1946"],
     "La loi du 9 décembre 1905 sépare les Églises et l'État : c'est le fondement de la laïcité.",
   ),
   annale(
@@ -278,9 +334,9 @@ export const annalesPrincipes: Qcm[] = [
     "Que dit la loi de 1905 ?",
     "La République ne reconnaît, ne salarie ni ne subventionne aucun culte",
     [
-      "La religion catholique est la religion officielle",
-      "Les religions sont interdites en public",
-      "L'État nomme les responsables religieux",
+      "L'État reconnaît et finance les principales religions",
+      "Les signes religieux sont interdits dans l'espace public",
+      "Les ministres des cultes sont nommés par l'État",
     ],
     "La loi de 1905 garantit la liberté de conscience et le libre exercice des cultes, sans reconnaissance officielle.",
   ),
@@ -290,7 +346,11 @@ export const annalesPrincipes: Qcm[] = [
     1,
     "Que garantit le principe de laïcité ?",
     "La liberté de croire ou de ne pas croire",
-    ["L'interdiction de toute religion", "Une religion d'État", "L'obligation d'être athée"],
+    [
+      "La neutralité religieuse de chaque citoyen en public",
+      "Un financement égal de toutes les religions",
+      "La primauté des religions historiques de la France",
+    ],
     "La laïcité garantit la liberté de conscience et l'égalité de tous, quelle que soit leur croyance.",
   ),
   annale(
@@ -299,7 +359,7 @@ export const annalesPrincipes: Qcm[] = [
     1,
     "Quel jour célèbre-t-on officiellement la laïcité en France ?",
     "Le 9 décembre",
-    ["Le 14 juillet", "Le 1er mai", "Le 11 novembre"],
+    ["Le 26 août", "Le 4 août", "Le 22 septembre"],
     "Le 9 décembre, anniversaire de la loi de 1905, est la journée de la laïcité.",
   ),
   annale(
@@ -308,7 +368,11 @@ export const annalesPrincipes: Qcm[] = [
     2,
     "Quel symbole religieux peut être porté dans une école publique dans le respect de la laïcité ?",
     "Un signe discret, comme une petite médaille",
-    ["Aucun, même discret", "Tous les signes, sans limite", "Uniquement les signes chrétiens"],
+    [
+      "Un voile, s'il est porté avec discrétion",
+      "Une grande croix, si l'élève est majeur",
+      "Aucun, même discret",
+    ],
     "La loi de 2004 interdit aux élèves les signes religieux ostensibles à l'école publique ; les signes discrets restent permis.",
   ),
   annale(
@@ -317,7 +381,7 @@ export const annalesPrincipes: Qcm[] = [
     2,
     "Quel terme désigne précisément la haine ou les préjugés contre les Juifs ?",
     "L'antisémitisme",
-    ["Le racisme", "La xénophobie", "Le sexisme"],
+    ["Le racisme", "La xénophobie", "L'intégrisme"],
     "L'antisémitisme désigne la haine et les discriminations visant les Juifs ; il est puni par la loi.",
   ),
   annale(
@@ -326,7 +390,11 @@ export const annalesPrincipes: Qcm[] = [
     2,
     "Quel texte est considéré comme le texte fondateur de la laïcité ?",
     "La loi du 9 décembre 1905",
-    ["La Constitution de 1958", "Le Code civil", "Le traité de Rome"],
+    [
+      "La Déclaration des droits de l'homme de 1789",
+      "La Constitution de 1958",
+      "Les lois Jules Ferry de 1882",
+    ],
     "La loi de 1905 de séparation des Églises et de l'État fonde la laïcité française.",
   ),
   annale(
@@ -335,7 +403,7 @@ export const annalesPrincipes: Qcm[] = [
     2,
     "Quelle institution française doit rester neutre en matière de religion ?",
     "L'école publique",
-    ["Les associations cultuelles", "Les lieux de culte", "Les écoles privées confessionnelles"],
+    ["Les associations cultuelles", "Les écoles privées sous contrat", "Les aumôneries"],
     "Les services publics, et notamment l'école publique, sont soumis à la neutralité religieuse.",
   ),
   annale(
@@ -345,9 +413,9 @@ export const annalesPrincipes: Qcm[] = [
     "Qu'est-ce que la laïcité ?",
     "La séparation des Églises et de l'État et la liberté de conscience",
     [
-      "L'interdiction de pratiquer une religion",
-      "L'obligation d'appartenir à une religion",
-      "Le financement public des cultes",
+      "L'interdiction des religions dans l'espace public",
+      "Un financement égal de toutes les religions par l'État",
+      "La reconnaissance officielle des grandes religions",
     ],
     "La laïcité repose sur la liberté de conscience, la séparation des Églises et de l'État et l'égalité de tous devant la loi.",
   ),
@@ -358,9 +426,9 @@ export const annalesPrincipes: Qcm[] = [
     "À l'école, la charte de la laïcité permet de :",
     "Rappeler les règles de la laïcité et du vivre-ensemble",
     [
-      "Choisir la religion enseignée aux élèves",
-      "Dispenser certains élèves de cours",
-      "Interdire les cours d'histoire des religions",
+      "Interdire l'enseignement du fait religieux",
+      "Permettre aux familles de choisir les cours suivis",
+      "Fixer le calendrier des fêtes religieuses à l'école",
     ],
     "Affichée dans les écoles, la charte de la laïcité explique le sens et les règles de la laïcité à l'école.",
   ),
@@ -370,7 +438,7 @@ export const annalesPrincipes: Qcm[] = [
     2,
     "Qui doit respecter et veiller à la neutralité religieuse dans les services publics ?",
     "Les agents du service public",
-    ["Uniquement les enseignants", "Les usagers", "Les élus locaux uniquement"],
+    ["Les usagers du service public", "Uniquement les enseignants", "Les représentants des cultes"],
     "Tous les agents publics sont tenus à la neutralité religieuse dans l'exercice de leurs fonctions.",
   ),
   annale(
@@ -379,7 +447,11 @@ export const annalesPrincipes: Qcm[] = [
     2,
     "Une personne déclare ne croire en aucun dieu. On peut dire :",
     "Qu'elle est athée, et c'est son droit",
-    ["Qu'elle est hors-la-loi", "Qu'elle doit choisir une religion", "Qu'elle ne peut pas être française"],
+    [
+      "Qu'elle est agnostique, et c'est son droit",
+      "Qu'elle est laïque, et c'est son droit",
+      "Qu'elle est apatride, et c'est son droit",
+    ],
     "La liberté de conscience protège aussi le droit de ne pas croire.",
   ),
 ];

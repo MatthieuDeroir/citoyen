@@ -7,7 +7,7 @@ import { db } from "@/lib/db";
 import { examens } from "@/db/schema";
 import { getQcm } from "@/content";
 import { annalesById } from "@/content/examen";
-import { EXAM_PASS, type ExamDetailEntry } from "@/lib/examen";
+import { isPassed, isUltime, type ExamDetailEntry } from "@/lib/examen";
 
 export const metadata = { title: "Revue d'examen" };
 
@@ -44,7 +44,7 @@ export default async function ExamenReviewPage({
 
   // les erreurs (et questions laissées sans réponse) en haut
   const sorted = [...detail].sort((a, b) => Number(a.correct) - Number(b.correct));
-  const passed = exam.score >= EXAM_PASS;
+  const passed = isPassed(exam.score, exam.total);
   const errorCount = detail.filter((d) => !d.correct).length;
 
   return (
@@ -64,7 +64,10 @@ export default async function ExamenReviewPage({
               {passed ? "Admis" : "Recalé"}
             </span>
           </h1>
-          <p className="text-xs text-muted">{dateFmt.format(exam.createdAt)}</p>
+          <p className="text-xs text-muted">
+            {isUltime(exam.total) ? "Examen ultime · " : ""}
+            {dateFmt.format(exam.createdAt)}
+          </p>
         </div>
       </header>
 

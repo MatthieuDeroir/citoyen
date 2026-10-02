@@ -45,3 +45,6 @@ next-env.d.ts
 
 # base locale
 local.db*
+
+# sauvegardes locales de la base
+backups/

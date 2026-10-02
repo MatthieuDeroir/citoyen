@@ -1,9 +1,10 @@
-import { eq, gte, sql, and } from "drizzle-orm";
+import { eq, gte, lte, sql, and } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { attempts, cardProgress, examens, userStats, users } from "@/db/schema";
 import { allFlashcards, allQcms } from "@/content";
 import { getLevel, type Level } from "@/lib/levels";
 import { getEffectiveStreak } from "@/lib/xp";
+import { EXAM_TOTAL } from "@/lib/examen";
 
 export interface ClassementEntry {
   userId: string;
@@ -56,6 +57,7 @@ export async function getClassement(): Promise<ClassementEntry[]> {
   const bestScores = await db
     .select({ userId: examens.userId, best: sql<number>`max(${examens.score})` })
     .from(examens)
+    .where(lte(examens.total, EXAM_TOTAL)) // examens blancs seulement, pas l'ultime
     .groupBy(examens.userId);
   const bestByUser = new Map(bestScores.map((r) => [r.userId, r.best]));
 

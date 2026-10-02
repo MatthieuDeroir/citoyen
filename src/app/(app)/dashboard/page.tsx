@@ -23,6 +23,7 @@ import { Logo } from "@/components/ui/Logo";
 import { ProgressRing } from "@/components/ui/ProgressRing";
 import { GoalEditor } from "@/components/ui/GoalEditor";
 import { ExamChart } from "@/components/ui/ExamChart";
+import { ResumeSessions } from "@/components/ui/ResumeSessions";
 import { MarseillaisePlayer } from "@/components/marseillaise/MarseillaisePlayer";
 import { RadioCard } from "@/components/marseillaise/RadioCard";
 
@@ -93,6 +94,9 @@ export default async function DashboardPage() {
           </span>
         </div>
       </header>
+
+      {/* sessions laissées en cours (examen, QCM) */}
+      <ResumeSessions />
 
       {/* La Marseillaise */}
       <MarseillaisePlayer />

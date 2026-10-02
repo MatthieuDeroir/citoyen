@@ -12,7 +12,11 @@ export const annalesVivre: Qcm[] = [
     10,
     "Où faut-il déclarer la naissance d'un enfant ?",
     "À la mairie du lieu de naissance",
-    ["À la préfecture", "Au tribunal", "À la caisse d'allocations familiales"],
+    [
+      "À la mairie du domicile des parents",
+      "À la préfecture du département",
+      "À la caisse d'allocations familiales",
+    ],
     "La naissance est déclarée au service d'état civil de la mairie du lieu de naissance.",
   ),
   annale(
@@ -21,7 +25,11 @@ export const annalesVivre: Qcm[] = [
     10,
     "Quelle action peut réaliser le locataire d'un logement sans l'autorisation du propriétaire ?",
     "Repeindre les murs de son logement",
-    ["Abattre une cloison", "Changer les fenêtres", "Transformer le logement en commerce"],
+    [
+      "Abattre une cloison",
+      "Remplacer la chaudière par un autre modèle",
+      "Sous-louer une partie du logement",
+    ],
     "Le locataire peut faire des aménagements simples (peinture, décoration) ; les transformations lourdes exigent l'accord du propriétaire.",
   ),
   annale(
@@ -30,7 +38,11 @@ export const annalesVivre: Qcm[] = [
     10,
     "Quel mariage est reconnu légalement ?",
     "Le mariage civil célébré en mairie",
-    ["Le mariage religieux seul", "Le mariage coutumier", "Les fiançailles"],
+    [
+      "Le mariage religieux célébré dans un lieu de culte",
+      "Le mariage célébré selon la coutume du pays d'origine",
+      "Le PACS signé en mairie",
+    ],
     "Seul le mariage civil a une valeur légale ; la cérémonie religieuse ne peut avoir lieu qu'après.",
   ),
   annale(
@@ -39,7 +51,11 @@ export const annalesVivre: Qcm[] = [
     10,
     "Le stationnement sur une place réservée aux personnes handicapées :",
     "Est interdit et puni d'une amende",
-    ["Est toléré 10 minutes", "Est autorisé la nuit", "Est autorisé le dimanche"],
+    [
+      "Est toléré pour un arrêt de moins de 5 minutes",
+      "Est autorisé avec les feux de détresse allumés",
+      "Est autorisé si aucune autre place n'est libre",
+    ],
     "Stationner sans carte sur une place réservée est une infraction passible d'une amende de 135 €.",
   ),
   annale(
@@ -48,7 +64,11 @@ export const annalesVivre: Qcm[] = [
     10,
     "Si une machine à laver est cassée, il est possible de :",
     "La faire réparer ou la déposer en déchetterie pour recyclage",
-    ["La jeter sur le trottoir", "La brûler dans son jardin", "L'abandonner dans la nature"],
+    [
+      "La mettre dans le conteneur des ordures ménagères",
+      "La déposer dans un bois ou un terrain vague",
+      "La laisser dans le local poubelles de l'immeuble",
+    ],
     "Les encombrants et appareils électriques se réparent, se donnent ou se recyclent — jamais dans la nature.",
   ),
   annale(
@@ -57,7 +77,11 @@ export const annalesVivre: Qcm[] = [
     10,
     "Dans quel cas faut-il déclarer son enfant au service d'état civil ?",
     "Dans tous les cas, pour toute naissance",
-    ["Seulement si les parents sont mariés", "Seulement pour le premier enfant", "Seulement si l'enfant est né en France"],
+    [
+      "Seulement si les parents sont mariés",
+      "Seulement si l'un des parents est français",
+      "Seulement si l'enfant est né à l'hôpital",
+    ],
     "Toute naissance doit être déclarée à l'état civil : c'est ce qui établit l'existence juridique de l'enfant.",
   ),
   annale(
@@ -66,7 +90,11 @@ export const annalesVivre: Qcm[] = [
     10,
     "Quand faut-il déclarer son enfant au service d'état civil ?",
     "Dans les 5 jours suivant la naissance",
-    ["Dans le mois suivant la naissance", "Avant ses 1 an", "Le jour même uniquement"],
+    [
+      "Dans les 3 jours suivant la naissance",
+      "Dans les 15 jours suivant la naissance",
+      "Dans le mois suivant la naissance",
+    ],
     "La déclaration de naissance doit être faite dans les 5 jours à la mairie du lieu de naissance.",
   ),
   annale(
@@ -75,7 +103,7 @@ export const annalesVivre: Qcm[] = [
     10,
     "Quel numéro d'urgence permet d'appeler la police ?",
     "Le 17",
-    ["Le 15", "Le 18", "Le 115"],
+    ["Le 15", "Le 18", "Le 119"],
     "Le 17 joint la police, le 15 le SAMU, le 18 les pompiers, le 112 est le numéro européen.",
   ),
   annale(
@@ -84,7 +112,7 @@ export const annalesVivre: Qcm[] = [
     10,
     "Quel numéro d'urgence permet d'appeler le SAMU ?",
     "Le 15",
-    ["Le 17", "Le 18", "Le 3615"],
+    ["Le 17", "Le 18", "Le 115"],
     "Le 15 est le numéro du SAMU (urgences médicales).",
   ),
   annale(
@@ -93,7 +121,7 @@ export const annalesVivre: Qcm[] = [
     10,
     "Auprès de quelle institution les parents peuvent inscrire leurs enfants à l'école publique ?",
     "La mairie",
-    ["La préfecture", "Le rectorat", "La caisse d'allocations familiales"],
+    ["Le rectorat", "La préfecture", "La caisse d'allocations familiales"],
     "L'inscription à l'école maternelle et élémentaire publique se fait à la mairie de la commune.",
   ),
   annale(
@@ -102,7 +130,11 @@ export const annalesVivre: Qcm[] = [
     10,
     "En cas de divorce, qui exerce l'autorité parentale ?",
     "Les deux parents, en commun",
-    ["La mère uniquement", "Le père uniquement", "Le juge"],
+    [
+      "Le parent qui a la garde de l'enfant",
+      "La mère, sauf décision contraire du juge",
+      "Le juge aux affaires familiales",
+    ],
     "Sauf décision contraire du juge, l'autorité parentale reste exercée conjointement après le divorce.",
   ),
   annale(
@@ -111,7 +143,11 @@ export const annalesVivre: Qcm[] = [
     10,
     "Quelle aide permet aux personnes qui ont des difficultés financières d'avoir un avocat ?",
     "L'aide juridictionnelle",
-    ["Le RSA", "L'allocation logement", "La prime d'activité"],
+    [
+      "Le revenu de solidarité active (RSA)",
+      "L'aide personnalisée au logement (APL)",
+      "La complémentaire santé solidaire",
+    ],
     "L'aide juridictionnelle prend en charge tout ou partie des frais de justice et d'avocat.",
   ),
   annale(
@@ -120,7 +156,11 @@ export const annalesVivre: Qcm[] = [
     10,
     "Qui peut demander le divorce de personnes mariées ?",
     "Chacun des deux époux",
-    ["Seulement le mari", "Seulement la femme", "Les beaux-parents"],
+    [
+      "Seulement le mari",
+      "Seulement l'époux qui a les revenus les plus élevés",
+      "Seulement les deux époux, d'un commun accord",
+    ],
     "Le divorce peut être demandé par l'un ou l'autre des époux, ou par les deux ensemble.",
   ),
   annale(
@@ -129,7 +169,11 @@ export const annalesVivre: Qcm[] = [
     10,
     "Auprès de quel organisme faut-il demander le remboursement des frais de santé ?",
     "L'Assurance maladie",
-    ["La caisse d'allocations familiales", "France Travail", "La mairie"],
+    [
+      "La caisse d'allocations familiales (CAF)",
+      "Sa mutuelle uniquement",
+      "Le centre communal d'action sociale",
+    ],
     "L'Assurance maladie (CPAM) rembourse les frais de santé, en partie complétés par une mutuelle.",
   ),
   annale(
@@ -138,7 +182,11 @@ export const annalesVivre: Qcm[] = [
     10,
     "La contraception :",
     "Est libre et peut être remboursée par l'Assurance maladie",
-    ["Est interdite", "Nécessite l'accord du mari", "Est réservée aux personnes mariées"],
+    [
+      "Est libre mais réservée aux personnes majeures",
+      "Nécessite l'accord du conjoint",
+      "Est libre mais jamais remboursée",
+    ],
     "La contraception est un droit ; elle est gratuite pour les moins de 26 ans.",
   ),
   annale(
@@ -148,9 +196,9 @@ export const annalesVivre: Qcm[] = [
     "Qu'est-ce que le principe de confidentialité dans le domaine de la santé ?",
     "Les soignants ne divulguent pas les informations médicales des patients",
     [
-      "Les hôpitaux sont fermés au public",
-      "Les patients ne connaissent pas leur diagnostic",
-      "Les médicaments sont vendus sans ordonnance",
+      "Les patients doivent garder secrets leurs traitements",
+      "Le médecin peut informer l'employeur de son patient",
+      "Les dossiers médicaux sont accessibles à toute la famille",
     ],
     "Le secret médical protège toutes les informations de santé du patient.",
   ),
@@ -160,7 +208,7 @@ export const annalesVivre: Qcm[] = [
     10,
     "À quoi sert la carte Vitale ?",
     "À justifier de ses droits à l'Assurance maladie et être remboursé",
-    ["À payer chez le médecin", "À prouver son identité", "À voter"],
+    ["À prouver son identité", "À payer ses consultations", "À obtenir des aides au logement"],
     "La carte Vitale atteste des droits à l'Assurance maladie et permet le remboursement automatique des soins.",
   ),
   annale(
@@ -169,7 +217,7 @@ export const annalesVivre: Qcm[] = [
     10,
     "À quoi sert une mutuelle santé ?",
     "À compléter les remboursements de l'Assurance maladie",
-    ["À remplacer le médecin traitant", "À payer ses impôts", "À obtenir la carte Vitale"],
+    ["À remplacer l'Assurance maladie", "À obtenir sa carte Vitale", "À payer moins d'impôts"],
     "La complémentaire santé rembourse tout ou partie des frais non couverts par la Sécurité sociale.",
   ),
   annale(
@@ -178,7 +226,11 @@ export const annalesVivre: Qcm[] = [
     10,
     "Qu'est-ce que le tiers payant ?",
     "Ne pas avancer les frais médicaux",
-    ["Payer en trois fois", "Une taxe sur les médicaments", "Un impôt sur la santé"],
+    [
+      "Payer ses soins en trois fois sans frais",
+      "Être remboursé par une tierce personne",
+      "Une aide réservée aux personnes sans revenus",
+    ],
     "Avec le tiers payant, l'Assurance maladie et la mutuelle paient directement le professionnel de santé.",
   ),
   annale(
@@ -187,7 +239,11 @@ export const annalesVivre: Qcm[] = [
     10,
     "L'inscription à l'Assurance maladie est :",
     "Obligatoire pour toute personne travaillant ou résidant en France de façon stable",
-    ["Facultative", "Réservée aux salariés", "Payante à l'inscription"],
+    [
+      "Facultative pour les personnes sans emploi",
+      "Réservée aux salariés et aux retraités",
+      "Obligatoire seulement pour les Français",
+    ],
     "Toute personne résidant ou travaillant en France de manière stable et régulière relève de l'Assurance maladie.",
   ),
   annale(
@@ -196,7 +252,11 @@ export const annalesVivre: Qcm[] = [
     10,
     "L'avortement est-il possible en France ?",
     "Oui, l'IVG est un droit garanti par la loi",
-    ["Non, il est interdit", "Oui, avec l'accord du conjoint", "Oui, uniquement à l'étranger"],
+    [
+      "Oui, mais avec l'accord du conjoint",
+      "Oui, mais uniquement en cas de danger pour la mère",
+      "Non, sauf à l'étranger",
+    ],
     "L'IVG est légale depuis la loi Veil de 1975 ; sa liberté est inscrite dans la Constitution depuis 2024.",
   ),
   annale(
@@ -205,7 +265,11 @@ export const annalesVivre: Qcm[] = [
     10,
     "Travailler sans être déclaré est :",
     "Interdit : c'est du travail dissimulé, sanctionné par la loi",
-    ["Autorisé pour les petits boulots", "Autorisé moins de 10 heures par semaine", "Un choix personnel"],
+    [
+      "Autorisé pour moins de 10 heures par semaine",
+      "Autorisé si l'employeur et le salarié sont d'accord",
+      "Autorisé pendant la période d'essai",
+    ],
     "Le travail non déclaré prive de protection sociale et expose employeur et salarié à des sanctions.",
   ),
   annale(
@@ -214,7 +278,11 @@ export const annalesVivre: Qcm[] = [
     10,
     "Qu'est-ce que le SMIC ?",
     "Le salaire minimum légal en France",
-    ["Un impôt sur les salaires", "Une aide au logement", "Un contrat de travail"],
+    [
+      "Une aide versée aux personnes sans emploi",
+      "Le salaire moyen en France",
+      "Un impôt prélevé sur les salaires",
+    ],
     "Le SMIC (salaire minimum interprofessionnel de croissance) est le salaire horaire minimum légal.",
   ),
   annale(
@@ -223,7 +291,11 @@ export const annalesVivre: Qcm[] = [
     10,
     "Quelle est la première démarche à réaliser pour chercher un emploi ?",
     "S'inscrire à France Travail",
-    ["Aller à la préfecture", "S'inscrire à la mairie", "Contacter son député"],
+    [
+      "S'inscrire à la mairie de sa commune",
+      "Demander une autorisation à la préfecture",
+      "S'inscrire à la caisse d'allocations familiales",
+    ],
     "France Travail (ex-Pôle emploi) accompagne la recherche d'emploi et verse les allocations chômage.",
   ),
   annale(
@@ -232,7 +304,7 @@ export const annalesVivre: Qcm[] = [
     10,
     "Quelle est la durée légale du temps de travail par semaine ?",
     "35 heures",
-    ["39 heures", "40 heures", "48 heures"],
+    ["39 heures", "40 heures", "32 heures"],
     "La durée légale du travail à temps complet est de 35 heures par semaine.",
   ),
   annale(
@@ -241,7 +313,11 @@ export const annalesVivre: Qcm[] = [
     10,
     "Qui peut demander un congé parental d'éducation ?",
     "Chacun des deux parents",
-    ["La mère uniquement", "Le père uniquement", "Les grands-parents"],
+    [
+      "La mère uniquement",
+      "Le parent qui gagne le moins",
+      "Le père uniquement, à partir du deuxième enfant",
+    ],
     "Le congé parental est ouvert au père comme à la mère, après la naissance ou l'adoption.",
   ),
   annale(
@@ -250,7 +326,11 @@ export const annalesVivre: Qcm[] = [
     10,
     "Une personne étrangère, en situation régulière, peut créer son entreprise :",
     "Oui, elle en a le droit",
-    ["Non, jamais", "Oui, après 10 ans en France", "Oui, seulement avec un associé français"],
+    [
+      "Oui, mais après 5 ans de résidence en France",
+      "Oui, mais seulement avec un associé français",
+      "Non, sauf si elle obtient la nationalité française",
+    ],
     "Toute personne en situation régulière peut créer une entreprise en France.",
   ),
   annale(
@@ -259,7 +339,11 @@ export const annalesVivre: Qcm[] = [
     10,
     "Une femme peut-elle créer son entreprise ?",
     "Oui, librement, sans aucune autorisation",
-    ["Non", "Oui, avec l'accord de son mari", "Oui, uniquement dans certains secteurs"],
+    [
+      "Oui, avec l'accord de son mari",
+      "Oui, mais seulement si elle est célibataire",
+      "Oui, avec une autorisation de la préfecture",
+    ],
     "Hommes et femmes sont égaux en droits : une femme entreprend librement.",
   ),
   annale(
@@ -268,7 +352,11 @@ export const annalesVivre: Qcm[] = [
     10,
     "Quels sont les textes qui définissent les règles au travail ?",
     "Le Code du travail et les conventions collectives",
-    ["Le Code civil uniquement", "Le règlement municipal", "La Constitution uniquement"],
+    [
+      "Le règlement intérieur de l'entreprise seul",
+      "Le Code civil et le Code pénal",
+      "Le contrat de travail seul",
+    ],
     "Le Code du travail et les conventions collectives fixent les droits et devoirs au travail.",
   ),
   annale(
@@ -277,7 +365,11 @@ export const annalesVivre: Qcm[] = [
     10,
     "Quelles sont les affaires traitées par le conseil de prud'hommes ?",
     "Les litiges entre salariés et employeurs",
-    ["Les divorces", "Les crimes", "Les litiges entre voisins"],
+    [
+      "Les litiges entre commerçants",
+      "Les litiges entre locataires et propriétaires",
+      "Les litiges entre l'administration et les usagers",
+    ],
     "Les prud'hommes règlent les conflits individuels liés au contrat de travail.",
   ),
   annale(
@@ -286,7 +378,11 @@ export const annalesVivre: Qcm[] = [
     11,
     "Qui a le droit de se syndiquer ?",
     "Tout salarié, quelle que soit sa nationalité",
-    ["Uniquement les cadres", "Uniquement les Français", "Uniquement les fonctionnaires"],
+    [
+      "Uniquement les salariés de nationalité française",
+      "Uniquement les salariés en CDI",
+      "Uniquement les salariés des grandes entreprises",
+    ],
     "La liberté syndicale est garantie à tous les travailleurs.",
   ),
   annale(
@@ -295,7 +391,11 @@ export const annalesVivre: Qcm[] = [
     11,
     "Est-il possible de licencier une femme enceinte ou en congé maternité, en raison de sa grossesse ?",
     "Non, c'est interdit par la loi",
-    ["Oui, librement", "Oui, avec un préavis", "Oui, si l'entreprise est petite"],
+    [
+      "Oui, pendant la période d'essai",
+      "Oui, si l'entreprise a moins de 10 salariés",
+      "Oui, avec l'accord de l'inspection du travail",
+    ],
     "Le licenciement lié à la grossesse ou à la maternité est une discrimination interdite.",
   ),
   annale(
@@ -304,7 +404,7 @@ export const annalesVivre: Qcm[] = [
     11,
     "L'instruction des enfants est obligatoire de :",
     "3 à 16 ans",
-    ["6 à 14 ans", "5 à 18 ans", "7 à 16 ans"],
+    ["6 à 16 ans", "3 à 18 ans", "6 à 18 ans"],
     "Depuis 2019, l'instruction est obligatoire de 3 à 16 ans, puis formation obligatoire jusqu'à 18 ans.",
   ),
   annale(
@@ -313,7 +413,11 @@ export const annalesVivre: Qcm[] = [
     11,
     "Des parents ne respectent pas l'obligation d'instruction pour leurs enfants. Quelle sanction maximale risquent-ils ?",
     "Des sanctions pénales : amende et peine de prison",
-    ["Un simple avertissement", "Aucune sanction", "La perte de leur logement"],
+    [
+      "Une amende administrative uniquement",
+      "La suppression des allocations familiales",
+      "Un simple rappel à la loi par le maire",
+    ],
     "Le non-respect de l'obligation d'instruction est un délit passible d'amende et d'emprisonnement.",
   ),
   annale(
@@ -323,9 +427,9 @@ export const annalesVivre: Qcm[] = [
     "Quelle est la définition de l'autorité parentale ?",
     "L'ensemble des droits et devoirs des parents pour protéger l'enfant et assurer son éducation",
     [
-      "Le droit de punir physiquement ses enfants",
-      "Le pouvoir de l'État sur les familles",
-      "Le droit des enfants de choisir leurs parents",
+      "Le pouvoir du père sur les décisions de la famille",
+      "Le droit des parents de choisir le métier de leur enfant",
+      "Le droit des parents d'infliger des châtiments corporels",
     ],
     "L'autorité parentale vise l'intérêt de l'enfant : le protéger, l'entretenir et l'éduquer.",
   ),
@@ -335,7 +439,11 @@ export const annalesVivre: Qcm[] = [
     11,
     "Quel motif d'absence est accepté par l'école ?",
     "La maladie de l'enfant",
-    ["Les soldes", "Un match de football", "La grasse matinée"],
+    [
+      "Un départ anticipé en vacances",
+      "Un rendez-vous administratif d'un parent",
+      "Une fête de famille",
+    ],
     "Seuls des motifs légitimes (maladie, réunion de famille exceptionnelle…) justifient une absence scolaire.",
   ),
   annale(
@@ -344,7 +452,7 @@ export const annalesVivre: Qcm[] = [
     11,
     "Jusqu'à quel âge l'école est-elle obligatoire ?",
     "16 ans",
-    ["14 ans", "18 ans", "21 ans"],
+    ["18 ans", "14 ans", "15 ans"],
     "L'instruction est obligatoire jusqu'à 16 ans ; une formation est ensuite obligatoire jusqu'à 18 ans.",
   ),
   annale(
@@ -353,7 +461,7 @@ export const annalesVivre: Qcm[] = [
     11,
     "À quel âge commence l'instruction obligatoire des enfants ?",
     "3 ans",
-    ["6 ans", "5 ans", "7 ans"],
+    ["6 ans", "4 ans", "5 ans"],
     "Depuis la rentrée 2019, l'instruction est obligatoire dès 3 ans.",
   ),
   annale(
@@ -362,7 +470,7 @@ export const annalesVivre: Qcm[] = [
     11,
     "Comment s'appellent les établissements scolaires que les élèves intègrent après l'école élémentaire ?",
     "Les collèges",
-    ["Les lycées", "Les universités", "Les crèches"],
+    ["Les lycées", "Les écoles moyennes", "Les classes préparatoires"],
     "Après l'école élémentaire, les élèves entrent au collège (de la 6e à la 3e).",
   ),
   annale(
@@ -371,7 +479,11 @@ export const annalesVivre: Qcm[] = [
     11,
     "En tant que parent d'élève, il est possible de :",
     "Participer aux élections des représentants de parents d'élèves",
-    ["Choisir les enseignants de son enfant", "Modifier les programmes scolaires", "Noter les professeurs"],
+    [
+      "Choisir la classe et l'enseignant de son enfant",
+      "Assister aux cours quand on le souhaite",
+      "Modifier le règlement intérieur de l'école",
+    ],
     "Les parents participent à la vie de l'école, notamment via leurs représentants élus.",
   ),
   annale(
@@ -380,7 +492,11 @@ export const annalesVivre: Qcm[] = [
     11,
     "Quelle instruction est prévue pour les enfants qui ne parlent pas français ?",
     "Un accueil en classe spécifique avec un enseignement renforcé du français",
-    ["Aucune scolarisation", "Un retour dans leur pays d'origine", "Une école séparée payante"],
+    [
+      "Une scolarisation repoussée jusqu'à ce qu'ils parlent français",
+      "Des cours entièrement donnés dans leur langue d'origine",
+      "Une inscription obligatoire dans une école privée",
+    ],
     "Les élèves allophones sont scolarisés et bénéficient d'unités pédagogiques dédiées (UPE2A) pour apprendre le français.",
   ),
   annale(
@@ -389,7 +505,11 @@ export const annalesVivre: Qcm[] = [
     11,
     "S'agissant de l'accueil des enfants en situation de handicap à l'école, laquelle des propositions est vraie ?",
     "Ils ont le droit d'être scolarisés, avec un accompagnement adapté",
-    ["Ils ne peuvent pas aller à l'école", "Ils doivent payer leur scolarité", "Ils sont scolarisés uniquement à domicile"],
+    [
+      "Ils sont scolarisés uniquement dans des établissements spécialisés",
+      "Ils peuvent être refusés si l'école n'est pas équipée",
+      "Ils sont dispensés de l'obligation d'instruction",
+    ],
     "L'école inclusive garantit la scolarisation des élèves en situation de handicap, avec des accompagnants (AESH).",
   ),
   annale(
@@ -398,7 +518,7 @@ export const annalesVivre: Qcm[] = [
     11,
     "Depuis le 1er juillet 2021, quelle est la durée du congé paternité ?",
     "25 jours",
-    ["3 jours", "11 jours", "6 mois"],
+    ["11 jours", "14 jours", "30 jours"],
     "Le congé de paternité est de 25 jours calendaires (32 en cas de naissances multiples), en plus des 3 jours de congé de naissance.",
   ),
   annale(
@@ -407,7 +527,11 @@ export const annalesVivre: Qcm[] = [
     11,
     "Est-ce possible de punir physiquement ses enfants ?",
     "Non, les violences éducatives ordinaires sont interdites",
-    ["Oui, c'est un droit des parents", "Oui, jusqu'à 10 ans", "Oui, si c'est léger"],
+    [
+      "Oui, une fessée reste autorisée",
+      "Oui, si c'est dans un but éducatif",
+      "Oui, jusqu'à ses 6 ans",
+    ],
     "Depuis la loi de 2019, l'autorité parentale s'exerce sans violences physiques ni psychologiques.",
   ),
 ];
