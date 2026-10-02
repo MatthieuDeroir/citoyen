@@ -8,14 +8,8 @@ export interface RadioStation {
   mount: string;
 }
 
+/** La première station est celle lancée par défaut (60's). */
 export const RADIO_STATIONS: RadioStation[] = [
-  {
-    id: "cf",
-    label: "Généraliste",
-    title: "Chante France",
-    host: "chantefrance.ice.infomaniak.ch",
-    mount: "chantefrance-128.mp3",
-  },
   {
     id: "cf60",
     label: "60's",
@@ -43,6 +37,13 @@ export const RADIO_STATIONS: RadioStation[] = [
     title: "Chante France 90-2000's",
     host: "chantefrance.ice.infomaniak.ch",
     mount: "chantefrance90-2000-128.mp3",
+  },
+  {
+    id: "cf",
+    label: "Généraliste",
+    title: "Chante France",
+    host: "chantefrance.ice.infomaniak.ch",
+    mount: "chantefrance-128.mp3",
   },
 ];
 
