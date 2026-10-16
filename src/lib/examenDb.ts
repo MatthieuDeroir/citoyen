@@ -1,4 +1,4 @@
-import { and, desc, eq, gt, lte } from "drizzle-orm";
+import { and, desc, eq, lte } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { examens } from "@/db/schema";
 import { EXAM_TOTAL, isPassed, type ExamDetailEntry } from "@/lib/examen";
@@ -9,7 +9,7 @@ import { EXAM_TOTAL, isPassed, type ExamDetailEntry } from "@/lib/examen";
  * le client libsql ne doit jamais partir dans le bundle navigateur.
  */
 
-/** Ids des questions déjà tombées dans les examens blancs (hors examen ultime). */
+/** Ids des questions déjà tombées dans les examens blancs (hors examens ultimes de la v1). */
 export async function getSeenExamQuestionIds(userId: string): Promise<Set<string>> {
   const rows = await db
     .select({ detail: examens.detail })
@@ -36,14 +36,8 @@ export interface ExamHistoryEntry {
   createdAt: Date;
 }
 
-/**
- * Historique du plus récent au plus ancien : examens blancs (40 questions)
- * par défaut, ou examens ultimes (toute la banque) avec `ultime`.
- */
-export async function getExamHistory(
-  userId: string,
-  { ultime = false }: { ultime?: boolean } = {},
-): Promise<ExamHistoryEntry[]> {
+/** Historique des examens blancs (40 questions), du plus récent au plus ancien. */
+export async function getExamHistory(userId: string): Promise<ExamHistoryEntry[]> {
   const rows = await db
     .select({
       id: examens.id,
@@ -55,7 +49,7 @@ export async function getExamHistory(
     .where(
       and(
         eq(examens.userId, userId),
-        ultime ? gt(examens.total, EXAM_TOTAL) : lte(examens.total, EXAM_TOTAL),
+        lte(examens.total, EXAM_TOTAL),
       ),
     )
     .orderBy(desc(examens.createdAt));

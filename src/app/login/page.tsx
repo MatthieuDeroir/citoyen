@@ -6,7 +6,7 @@ export const metadata = { title: "Connexion" };
 
 export default async function LoginPage() {
   const session = await auth();
-  if (session?.user) redirect("/dashboard");
+  if (session?.user) redirect("/");
 
   return (
     <main className="mx-auto flex min-h-dvh w-full max-w-lg flex-col items-center justify-center gap-8 px-6 text-center">
@@ -16,15 +16,15 @@ export default async function LoginPage() {
           Citoyen<span className="text-accent">.</span>
         </h1>
         <p className="text-muted">
-          Entraîne-toi au Livret du citoyen : cartes, QCM et exercices corrigés
-          pour préparer l&apos;examen civique et l&apos;entretien de naturalisation.
+          Une leçon de 15 questions par jour, au format de l&apos;examen civique,
+          et la date à laquelle tu seras prêt.
         </p>
       </div>
 
       <form
         action={async () => {
           "use server";
-          await signIn("google", { redirectTo: "/dashboard" });
+          await signIn("google", { redirectTo: "/" });
         }}
         className="w-full max-w-xs"
       >

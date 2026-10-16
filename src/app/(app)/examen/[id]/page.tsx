@@ -5,8 +5,7 @@ import { ArrowLeft, CircleCheck, CircleX } from "lucide-react";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { examens } from "@/db/schema";
-import { getQcm } from "@/content";
-import { annalesById } from "@/content/examen";
+import { getQuestion } from "@/content";
 import { isPassed, isUltime, type ExamDetailEntry } from "@/lib/examen";
 
 export const metadata = { title: "Revue d'examen" };
@@ -45,7 +44,6 @@ export default async function ExamenReviewPage({
   // les erreurs (et questions laissées sans réponse) en haut
   const sorted = [...detail].sort((a, b) => Number(a.correct) - Number(b.correct));
   const passed = isPassed(exam.score, exam.total);
-  const errorCount = detail.filter((d) => !d.correct).length;
 
   return (
     <div className="space-y-6 pb-6">
@@ -71,18 +69,9 @@ export default async function ExamenReviewPage({
         </div>
       </header>
 
-      {errorCount > 0 && (
-        <Link
-          href="/erreurs"
-          className="flex items-center justify-center rounded-2xl bg-accent px-6 py-3 text-center font-semibold text-white transition-transform active:scale-[0.98]"
-        >
-          Retravailler mes {errorCount} erreur{errorCount > 1 ? "s" : ""}
-        </Link>
-      )}
-
       <section className="space-y-3">
         {sorted.map(({ qcmId, chosenIndex, correct }) => {
-          const qcm = annalesById.get(qcmId) ?? getQcm(qcmId);
+          const qcm = getQuestion(qcmId);
           if (!qcm) return null;
           return (
             <details
@@ -110,7 +99,7 @@ export default async function ExamenReviewPage({
                   </p>
                 )}
                 <p className="text-success">
-                  Bonne réponse : {qcm.choices[qcm.correctIndex]}
+                  Bonne réponse : {qcm.choices[0]}
                 </p>
                 <p className="mt-2 text-muted">{qcm.explication}</p>
               </div>

@@ -20,6 +20,9 @@
   --success-soft: #dffee6;
   --gold: #b98900;
   --gold-soft: #fef3c8;
+  /* courbes de progrès (validées daltonisme, voir components/progres) */
+  --chart-acquises: #3b3bd6;
+  --chart-maitrisees: #18853f;
 }
 
 .dark {
@@ -39,6 +42,8 @@
   --success-soft: #14301f;
   --gold: #fbbf24;
   --gold-soft: #33270a;
+  --chart-acquises: #8585f6;
+  --chart-maitrisees: #2fa862;
 }
 
 @theme inline {

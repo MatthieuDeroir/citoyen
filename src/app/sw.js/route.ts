@@ -36,14 +36,14 @@ self.addEventListener("push", (event) => {
       icon: "/icon-192.png",
       badge: "/icon-192.png",
       tag: data.tag || "rappel-streak",
-      data: { url: data.url || "/revision" },
+      data: { url: data.url || "/" },
     }),
   );
 });
 
 self.addEventListener("notificationclick", (event) => {
   event.notification.close();
-  const url = (event.notification.data && event.notification.data.url) || "/revision";
+  const url = (event.notification.data && event.notification.data.url) || "/";
   event.waitUntil(
     clients.matchAll({ type: "window", includeUncontrolled: true }).then((list) => {
       for (const client of list) {
@@ -95,7 +95,7 @@ self.addEventListener("fetch", (event) => {
         })
         .catch(async () => {
           const hit = await caches.match(req);
-          return hit ?? caches.match("/dashboard");
+          return hit ?? caches.match("/");
         }),
     );
   }

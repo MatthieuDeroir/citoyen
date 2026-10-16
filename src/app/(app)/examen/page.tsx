@@ -1,23 +1,10 @@
 import Link from "next/link";
-import {
-  GraduationCap,
-  ChevronRight,
-  CircleCheck,
-  CircleX,
-  TrendingUp,
-  Trophy,
-} from "lucide-react";
+import { GraduationCap, ChevronRight, CircleCheck, CircleX, TrendingUp } from "lucide-react";
 import { auth } from "@/lib/auth";
-import {
-  EXAM_DURATION_MINUTES,
-  EXAM_PASS,
-  EXAM_TOTAL,
-  ULTIME_TOTAL,
-  passMark,
-} from "@/lib/examen";
+import { EXAM_DURATION_MINUTES, EXAM_PASS, EXAM_TOTAL } from "@/lib/examen";
 import { getExamHistory } from "@/lib/examenDb";
 import { ExamChart } from "@/components/ui/ExamChart";
-import { ResumeSessions } from "@/components/ui/ResumeSessions";
+import { BackLink } from "@/components/ui/BackLink";
 
 export const metadata = { title: "Examen blanc" };
 export const dynamic = "force-dynamic";
@@ -32,29 +19,20 @@ const dateFmt = new Intl.DateTimeFormat("fr-FR", {
 
 export default async function ExamenHubPage() {
   const session = await auth();
-  const userId = session!.user!.id!;
-  const [history, ultimes] = await Promise.all([
-    getExamHistory(userId),
-    getExamHistory(userId, { ultime: true }),
-  ]);
-  const bestUltime = ultimes.reduce((m, e) => Math.max(m, e.score), 0);
-  const allExams = [...history, ...ultimes].sort(
-    (a, b) => b.createdAt.getTime() - a.createdAt.getTime(),
-  );
+  const history = await getExamHistory(session!.user!.id!);
   const best = history.reduce((m, e) => Math.max(m, e.score), 0);
   const chronological = [...history].reverse();
 
   return (
     <div className="space-y-6">
       <header>
+        <BackLink fallback="/" label="Aujourd'hui" />
         <h1 className="text-2xl font-bold">Examen blanc</h1>
         <p className="mt-1 text-sm text-muted">
-          {EXAM_TOTAL} questions officielles · {EXAM_DURATION_MINUTES} min · admis à{" "}
-          {EXAM_PASS}/{EXAM_TOTAL}
+          {EXAM_TOTAL} questions · {EXAM_DURATION_MINUTES} min · admis à {EXAM_PASS}/{EXAM_TOTAL}. Un par
+          semaine suffit : il vérifie en conditions réelles ce que disent tes progrès.
         </p>
       </header>
-
-      <ResumeSessions only="examen-" />
 
       <Link
         href="/examen/nouveau"
@@ -66,25 +44,7 @@ export default async function ExamenHubPage() {
         <span className="min-w-0 flex-1">
           <span className="block font-bold">Lancer un examen blanc</span>
           <span className="block text-sm text-muted">
-            Chaque sujet privilégie les questions jamais tombées
-          </span>
-        </span>
-        <ChevronRight className="size-5 shrink-0 text-muted" />
-      </Link>
-
-      <Link
-        href="/examen/ultime"
-        className="flex items-center gap-4 rounded-card border-2 border-gold/40 bg-surface p-4 shadow-sm transition-transform active:scale-[0.98]"
-      >
-        <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-gold text-white">
-          <Trophy className="size-6" />
-        </span>
-        <span className="min-w-0 flex-1">
-          <span className="block font-bold">Examen ultime</span>
-          <span className="block text-sm text-muted">
-            {ultimes.length > 0
-              ? `Les ${ULTIME_TOTAL} questions · record ${bestUltime}/${ULTIME_TOTAL}`
-              : `Les ${ULTIME_TOTAL} questions officielles · sans chrono · objectif ${passMark(ULTIME_TOTAL)}`}
+            28 questions officielles et 12 mises en situation, jamais tombées d&apos;abord
           </span>
         </span>
         <ChevronRight className="size-5 shrink-0 text-muted" />
@@ -111,13 +71,12 @@ export default async function ExamenHubPage() {
 
       <section className="space-y-3">
         <h2 className="font-bold">Historique</h2>
-        {allExams.length === 0 && (
+        {history.length === 0 && (
           <p className="rounded-2xl border border-border bg-surface p-4 text-sm text-muted">
-            Aucun examen blanc passé pour l&apos;instant. Lance-toi : le premier
-            sert de point de repère !
+            Aucun examen blanc pour l&apos;instant. Le premier sert de point de repère.
           </p>
         )}
-        {allExams.map((exam) => (
+        {history.map((exam) => (
           <Link
             key={exam.id}
             href={`/examen/${exam.id}`}
@@ -131,16 +90,11 @@ export default async function ExamenHubPage() {
             <span className="min-w-0 flex-1">
               <span className="block font-bold tabular-nums">
                 {exam.score}/{exam.total}
-                <span
-                  className={`ml-2 text-xs font-semibold ${exam.passed ? "text-success" : "text-accent"}`}
-                >
+                <span className={`ml-2 text-xs font-semibold ${exam.passed ? "text-success" : "text-accent"}`}>
                   {exam.passed ? "Admis" : "Recalé"}
                 </span>
               </span>
-              <span className="block text-xs text-muted">
-                {exam.total > EXAM_TOTAL ? "Examen ultime · " : ""}
-                {dateFmt.format(exam.createdAt)}
-              </span>
+              <span className="block text-xs text-muted">{dateFmt.format(exam.createdAt)}</span>
             </span>
             <ChevronRight className="size-5 shrink-0 text-muted" />
           </Link>

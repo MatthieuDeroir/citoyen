@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "Citoyen — Livret du citoyen 2026",
     short_name: "Citoyen",
     description:
-      "Entraînement interactif au Livret du citoyen : cartes, QCM et examen blanc officiel.",
+      "Préparation à l'examen civique : une leçon de 15 questions par jour, score attendu et date d'examen.",
     start_url: "/",
     display: "standalone",
     orientation: "portrait",

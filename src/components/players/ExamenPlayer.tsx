@@ -10,17 +10,15 @@ import {
   GraduationCap,
   CircleCheck,
   CircleX,
-  Trophy,
   PlayCircle,
-  SkipForward,
 } from "lucide-react";
-import type { Qcm } from "@/content/types";
+import type { Question } from "@/content/types";
 import type { WithChoiceOrder } from "@/lib/shuffle";
-import { EXAM_DURATION_MINUTES, EXAM_TOTAL, passMark } from "@/lib/examen";
+import { EXAM_DURATION_MINUTES, EXAM_TOTAL, EXAM_PASS } from "@/content/themes";
 import { clearSession, saveSession, useSavedSession } from "@/lib/sessionStore";
 import type { ExamResult } from "@/actions/examen";
 
-type Deck = (Qcm & WithChoiceOrder)[];
+type Deck = (Question & WithChoiceOrder)[];
 
 /** État sauvegardé pour reprendre un examen quitté en cours de route. */
 interface ExamSaveState {
@@ -35,21 +33,17 @@ interface Props {
    * l'ordre des choix ici, côté client, provoquerait un mismatch
    * d'hydratation (Math.random() diffère entre le SSR et l'hydratation). */
   deck: Deck;
-  /** « blanc » : 40 questions en 45 min · « ultime » : toute la banque, sans chrono. */
-  mode?: "blanc" | "ultime";
   onSubmit: (
     questionIds: string[],
     answers: { qcmId: string; chosenIndex: number }[],
   ) => Promise<ExamResult>;
 }
 
-export function ExamenPlayer({ deck: initialDeck, mode = "blanc", onSubmit }: Props) {
-  const ultime = mode === "ultime";
-  const storageKey = `examen-${mode}`;
+export function ExamenPlayer({ deck: initialDeck, onSubmit }: Props) {
+  const storageKey = "examen-blanc";
   const saved = useSavedSession<ExamSaveState>(storageKey);
   const [deck, setDeck] = useState(initialDeck);
   const [started, setStarted] = useState(false);
-  const [confirmFinish, setConfirmFinish] = useState(false);
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<string, number>>({});
   const [secondsLeft, setSecondsLeft] = useState(EXAM_DURATION_MINUTES * 60);
@@ -59,8 +53,8 @@ export function ExamenPlayer({ deck: initialDeck, mode = "blanc", onSubmit }: Pr
 
   const qcmById = useMemo(() => new Map(deck.map((q) => [q.id, q])), [deck]);
   const answeredCount = Object.keys(answers).length;
-  const pass = passMark(deck.length);
-  const title = ultime ? "Examen ultime" : "Examen blanc";
+  const pass = Math.ceil((deck.length * EXAM_PASS) / EXAM_TOTAL);
+  const title = "Examen blanc";
 
   // Sauvegarde continue : un clic par mégarde ailleurs dans l'app ne fait
   // plus perdre l'examen, il se reprend depuis l'accueil ou cette page.
@@ -68,14 +62,12 @@ export function ExamenPlayer({ deck: initialDeck, mode = "blanc", onSubmit }: Pr
     if (!started || result || submittedRef.current) return;
     saveSession<ExamSaveState>({
       key: storageKey,
-      href: ultime ? "/examen/ultime" : "/examen/nouveau",
+      href: "/examen/nouveau",
       title,
-      progress: `${answeredCount}/${deck.length} répondues${
-        ultime ? "" : ` · ${Math.ceil(secondsLeft / 60)} min restantes`
-      }`,
+      progress: `${answeredCount}/${deck.length} répondues · ${Math.ceil(secondsLeft / 60)} min restantes`,
       state: { deck, index, answers, secondsLeft },
     });
-  }, [started, result, deck, index, answers, secondsLeft, answeredCount, storageKey, ultime, title]);
+  }, [started, result, deck, index, answers, secondsLeft, answeredCount, storageKey, title]);
 
   function resume(state: ExamSaveState) {
     setDeck(state.deck);
@@ -89,16 +81,6 @@ export function ExamenPlayer({ deck: initialDeck, mode = "blanc", onSubmit }: Pr
     clearSession(storageKey);
     setDeck(initialDeck);
     setStarted(true);
-  }
-
-  function nextUnanswered() {
-    for (let step = 1; step <= deck.length; step++) {
-      const i = (index + step) % deck.length;
-      if (answers[deck[i].id] === undefined) {
-        setIndex(i);
-        return;
-      }
-    }
   }
 
   async function finish(current: Record<string, number>) {
@@ -121,7 +103,7 @@ export function ExamenPlayer({ deck: initialDeck, mode = "blanc", onSubmit }: Pr
   }
 
   useEffect(() => {
-    if (ultime || !started || result || submittedRef.current) return;
+    if (!started || result || submittedRef.current) return;
     const timer = setInterval(() => {
       setSecondsLeft((s) => {
         if (s <= 1) {
@@ -138,7 +120,7 @@ export function ExamenPlayer({ deck: initialDeck, mode = "blanc", onSubmit }: Pr
     }, 1000);
     return () => clearInterval(timer);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [started, result, ultime]);
+  }, [started, result]);
 
   /* ---------- écran d'accueil ---------- */
   if (!started) {
@@ -146,28 +128,20 @@ export function ExamenPlayer({ deck: initialDeck, mode = "blanc", onSubmit }: Pr
     return (
       <div className="flex min-h-[70dvh] flex-col items-center justify-center gap-6 text-center">
         <span className="flex size-20 items-center justify-center rounded-3xl bg-primary-soft text-primary">
-          {ultime ? <Trophy className="size-10" /> : <GraduationCap className="size-10" />}
+          <GraduationCap className="size-10" />
         </span>
         <div>
           <h1 className="text-2xl font-black">{title}</h1>
-          {ultime ? (
-            <p className="mx-auto mt-2 max-w-sm text-sm text-muted">
-              <strong>Toutes les {deck.length} questions officielles</strong> publiées par le
-              ministère de l&apos;Intérieur, dans un ordre aléatoire. Pas de chrono : ta copie
-              est sauvegardée au fil de l&apos;eau, tu peux faire une pause et reprendre plus
-              tard. Objectif : <strong>{pass}/{deck.length}</strong> (80 %).
-            </p>
-          ) : (
-            <p className="mx-auto mt-2 max-w-sm text-sm text-muted">
-              Conditions réelles de l&apos;examen civique : <strong>{EXAM_TOTAL} questions</strong>,{" "}
-              <strong>{EXAM_DURATION_MINUTES} minutes</strong>, admis à partir de{" "}
-              <strong>
-                {pass}/{EXAM_TOTAL}
-              </strong>{" "}
-              bonnes réponses. Pas de correction pendant l&apos;épreuve. Le sujet est tiré des{" "}
-              <strong>questions officielles</strong> publiées par le ministère de l&apos;Intérieur.
-            </p>
-          )}
+          <p className="mx-auto mt-2 max-w-sm text-sm text-muted">
+            Conditions réelles de l&apos;examen civique : <strong>{EXAM_TOTAL} questions</strong>,{" "}
+            <strong>{EXAM_DURATION_MINUTES} minutes</strong>, admis à partir de{" "}
+            <strong>
+              {pass}/{EXAM_TOTAL}
+            </strong>{" "}
+            bonnes réponses. Pas de correction pendant l&apos;épreuve. 28 questions de la{" "}
+            <strong>banque officielle</strong> du ministère de l&apos;Intérieur et 12{" "}
+            <strong>mises en situation</strong>, comme le jour J.
+          </p>
         </div>
         {saved ? (
           <div className="flex w-full max-w-sm flex-col gap-3">
@@ -221,7 +195,7 @@ export function ExamenPlayer({ deck: initialDeck, mode = "blanc", onSubmit }: Pr
             {result.score}/{deck.length}
           </p>
           <p className="text-sm text-muted">
-            Seuil de réussite : {pass}/{deck.length} · +{result.xp} XP
+            Seuil de réussite : {pass}/{deck.length}
           </p>
         </div>
 
@@ -257,7 +231,7 @@ export function ExamenPlayer({ deck: initialDeck, mode = "blanc", onSubmit }: Pr
                     </p>
                   )}
                   <p className="text-success">
-                    Bonne réponse : {qcm.choices[qcm.correctIndex]}
+                    Bonne réponse : {qcm.choices[0]}
                   </p>
                   <p className="mt-2 text-muted">{qcm.explication}</p>
                 </div>
@@ -274,7 +248,7 @@ export function ExamenPlayer({ deck: initialDeck, mode = "blanc", onSubmit }: Pr
             Historique
           </Link>
           <Link
-            href="/dashboard"
+            href="/"
             className="flex flex-1 items-center justify-center rounded-2xl bg-primary py-3.5 font-semibold text-on-primary"
           >
             Accueil
@@ -302,11 +276,6 @@ export function ExamenPlayer({ deck: initialDeck, mode = "blanc", onSubmit }: Pr
             style={{ width: `${(answeredCount / deck.length) * 100}%` }}
           />
         </div>
-        {ultime ? (
-          <span className="rounded-full bg-primary-soft px-3 py-1 text-sm font-bold tabular-nums text-primary">
-            {answeredCount} rép.
-          </span>
-        ) : (
           <span
             className={`flex items-center gap-1 rounded-full px-3 py-1 text-sm font-bold tabular-nums ${
               urgent ? "bg-accent-soft text-accent" : "bg-primary-soft text-primary"
@@ -315,7 +284,6 @@ export function ExamenPlayer({ deck: initialDeck, mode = "blanc", onSubmit }: Pr
             <Timer className="size-4" />
             {minutes}:{String(seconds).padStart(2, "0")}
           </span>
-        )}
       </header>
 
       <AnimatePresence mode="wait">
@@ -374,35 +342,6 @@ export function ExamenPlayer({ deck: initialDeck, mode = "blanc", onSubmit }: Pr
             )}
           </div>
 
-          {ultime && (
-            <div className="flex items-center justify-between gap-3 pb-1 text-sm">
-              <button
-                onClick={nextUnanswered}
-                disabled={answeredCount === deck.length}
-                className="flex items-center gap-1 font-semibold text-primary disabled:opacity-40"
-              >
-                <SkipForward className="size-4" /> Prochaine sans réponse
-              </button>
-              {confirmFinish ? (
-                <button
-                  onClick={() => finish(answers)}
-                  disabled={submitting}
-                  className="rounded-full bg-accent px-3 py-1.5 font-semibold text-white disabled:opacity-60"
-                >
-                  {submitting
-                    ? "Correction…"
-                    : `Confirmer (${deck.length - answeredCount} sans réponse)`}
-                </button>
-              ) : (
-                <button
-                  onClick={() => setConfirmFinish(true)}
-                  className="font-semibold text-muted underline-offset-2 hover:underline"
-                >
-                  Rendre la copie
-                </button>
-              )}
-            </div>
-          )}
         </motion.div>
       </AnimatePresence>
     </div>

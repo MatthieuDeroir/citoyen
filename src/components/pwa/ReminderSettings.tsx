@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Bell, BellOff } from "lucide-react";
-import { savePushSubscription, deletePushSubscription } from "@/actions/push";
+import { savePushSubscription, deletePushSubscription, enregistrerCreneaux } from "@/actions/push";
 
 function urlBase64ToUint8Array(base64: string) {
   const padding = "=".repeat((4 - (base64.length % 4)) % 4);
@@ -12,17 +12,34 @@ function urlBase64ToUint8Array(base64: string) {
 
 type State = "unsupported" | "loading" | "off" | "on" | "denied";
 
-/** Active/désactive les rappels quotidiens de streak (Web Push). */
-export function ReminderSettings() {
+const CRENEAUX = [
+  { value: "midi", label: "Midi" },
+  { value: "soir", label: "18 h" },
+  { value: "midi,soir", label: "Les deux" },
+];
+
+/** Active/désactive le rappel de la leçon du jour (Web Push) et choisit son créneau. */
+export function ReminderSettings({ slots: initialSlots }: { slots: string }) {
   const [state, setState] = useState<State>("loading");
+  const [slots, setSlots] = useState(initialSlots);
+
+  async function choisir(value: string) {
+    const prev = slots;
+    setSlots(value);
+    try {
+      await enregistrerCreneaux(value);
+    } catch {
+      setSlots(prev);
+    }
+  }
 
   useEffect(() => {
     if (!("serviceWorker" in navigator) || !("PushManager" in window)) {
-      setState("unsupported");
+      void Promise.resolve().then(() => setState("unsupported"));
       return;
     }
     if (Notification.permission === "denied") {
-      setState("denied");
+      void Promise.resolve().then(() => setState("denied"));
       return;
     }
     navigator.serviceWorker.ready
@@ -74,16 +91,17 @@ export function ReminderSettings() {
   if (state === "unsupported") return null;
 
   return (
-    <section className="flex items-center gap-4 rounded-card border border-border bg-surface p-4 shadow-sm">
+    <section className="rounded-card border border-border bg-surface p-4 shadow-sm">
+     <div className="flex items-center gap-4">
       <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary-soft text-primary">
         {state === "on" ? <Bell className="size-5" /> : <BellOff className="size-5" />}
       </span>
       <div className="min-w-0 flex-1">
-        <p className="font-semibold">Rappels quotidiens</p>
+        <p className="font-semibold">Rappel de la leçon</p>
         <p className="text-sm text-muted">
           {state === "denied"
             ? "Notifications bloquées — autorise-les dans les réglages du navigateur."
-            : "Une notification si ta série est en jeu et que l'objectif du jour n'est pas atteint."}
+            : "Une notification si tu n'as pas encore fait ta leçon du jour."}
         </p>
       </div>
       {state !== "denied" && (
@@ -92,7 +110,7 @@ export function ReminderSettings() {
           disabled={state === "loading"}
           role="switch"
           aria-checked={state === "on"}
-          aria-label="Rappels quotidiens"
+          aria-label="Rappel de la leçon"
           className={`relative h-7 w-12 shrink-0 rounded-full transition-colors ${
             state === "on" ? "bg-primary" : "bg-border"
           } ${state === "loading" ? "opacity-50" : ""}`}
@@ -103,6 +121,26 @@ export function ReminderSettings() {
             }`}
           />
         </button>
+      )}
+     </div>
+      {state === "on" && (
+        <div className="mt-3 flex gap-2" role="radiogroup" aria-label="Créneau du rappel">
+          {CRENEAUX.map((c) => (
+            <button
+              key={c.value}
+              role="radio"
+              aria-checked={slots === c.value}
+              onClick={() => choisir(c.value)}
+              className={`flex-1 rounded-xl py-2 text-sm font-semibold ring-1 transition-colors ${
+                slots === c.value
+                  ? "bg-primary text-on-primary ring-primary"
+                  : "bg-surface text-muted ring-border"
+              }`}
+            >
+              {c.label}
+            </button>
+          ))}
+        </div>
       )}
     </section>
   );

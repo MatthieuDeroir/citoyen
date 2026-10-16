@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     template: "%s · Citoyen",
   },
   description:
-    "Entraînement interactif au Livret du citoyen : cartes de révision et QCM pour préparer l'examen civique.",
+    "Préparation à l'examen civique : une leçon de 15 questions par jour, au format de l'examen, avec score attendu et date projetée.",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",

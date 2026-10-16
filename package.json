@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "validate": "tsx scripts/validate-content.ts"
+    "validate": "tsx scripts/v2/check-questions.ts && tsx scripts/v2/check-officielles.ts",
+    "test": "tsx scripts/v2/test-memoire.ts"
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^1.11.2",

@@ -3,7 +3,7 @@
 import { and, eq } from "drizzle-orm";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { pushSubscriptions } from "@/db/schema";
+import { pushSubscriptions, userStats } from "@/db/schema";
 
 interface SubscriptionPayload {
   endpoint: string;
@@ -46,5 +46,17 @@ export async function deletePushSubscription(endpoint: string) {
     .where(
       and(eq(pushSubscriptions.endpoint, endpoint), eq(pushSubscriptions.userId, userId)),
     );
+  return { ok: true };
+}
+
+const CRENEAUX = ["midi", "soir", "midi,soir"] as const;
+
+/** Créneaux des rappels : vers midi, vers 18 h, ou les deux. */
+export async function enregistrerCreneaux(slots: string) {
+  const session = await auth();
+  const userId = session?.user?.id;
+  if (!userId) throw new Error("Non authentifié");
+  if (!(CRENEAUX as readonly string[]).includes(slots)) throw new Error("Créneau invalide");
+  await db.update(userStats).set({ reminderSlots: slots }).where(eq(userStats.userId, userId));
   return { ok: true };
 }

@@ -16,7 +16,25 @@ export const si: Question[] = [
       "Il est élu au suffrage universel direct",
       "Il est désigné par le parti majoritaire"
     ],
-    explication: "Le président de la République nomme le Premier ministre (article 8 de la Constitution).",
+    explication: "Le président de la République nomme le Premier ministre. Il n'est pas élu : l'Assemblée nationale ne vote pas pour le désigner.",
+    page: 16
+  },
+  {
+    id: "an-si-001-v1",
+    theme: "si",
+    notion: "p2-s1",
+    kind: "connaissance",
+    official: false,
+    variantOf: "an-si-001",
+    difficulty: 3,
+    question: "Selon le livret, sur proposition de qui le président de la République nomme-t-il les ministres ?",
+    choices: [
+      "Du Premier ministre",
+      "Du président de l'Assemblée nationale",
+      "Du parti majoritaire à l'Assemblée",
+      "Du président du Sénat"
+    ],
+    explication: "Le président nomme le gouvernement (les ministres) sur proposition du Premier ministre, qui en dirige l'action. Le parti majoritaire n'a aucun pouvoir de nomination.",
     page: 16
   },
   {
@@ -25,15 +43,33 @@ export const si: Question[] = [
     notion: "p2-s1",
     kind: "connaissance",
     official: true,
-    difficulty: 2,
+    difficulty: 3,
     question: "Qui peut se présenter aux élections présidentielles ?",
     choices: [
       "Tout citoyen français majeur remplissant les conditions, dont 500 parrainages d'élus",
-      "Tout citoyen français ayant recueilli 500 000 signatures d'électeurs",
-      "Tout citoyen français âgé d'au moins 35 ans",
-      "Tout citoyen français ayant déjà exercé un mandat d'élu"
+      "Tout citoyen français majeur remplissant les conditions, dont 500 000 signatures d'électeurs",
+      "Tout citoyen français âgé d'au moins 35 ans et parrainé par 500 élus",
+      "Tout citoyen de l'Union européenne majeur et parrainé par 500 élus"
     ],
-    explication: "Il faut être français, électeur, âgé d'au moins 18 ans et réunir 500 parrainages d'élus.",
+    explication: "Seuls les candidats qui ont obtenu 500 parrainages d'élus peuvent se présenter. Il s'agit de signatures d'élus, pas d'électeurs, et aucun âge minimal de 35 ans n'est exigé.",
+    page: 16
+  },
+  {
+    id: "an-si-002-v1",
+    theme: "si",
+    notion: "p2-s1",
+    kind: "connaissance",
+    official: false,
+    variantOf: "an-si-002",
+    difficulty: 2,
+    question: "Que faut-il avoir obtenu pour pouvoir se présenter à l'élection présidentielle ?",
+    choices: [
+      "500 parrainages d'élus",
+      "1 000 parrainages d'élus",
+      "500 000 signatures d'électeurs",
+      "100 parrainages de parlementaires"
+    ],
+    explication: "Seuls les candidats qui ont obtenu 500 parrainages d'élus peuvent se présenter. Il ne s'agit pas d'une pétition de citoyens.",
     page: 16
   },
   {
@@ -47,10 +83,10 @@ export const si: Question[] = [
     choices: [
       "Au peuple",
       "Au Parlement",
-      "Au président de la République",
+      "Au gouvernement",
       "À l'État"
     ],
-    explication: "« La souveraineté nationale appartient au peuple qui l'exerce par ses représentants et par la voie du référendum. »",
+    explication: "« La souveraineté nationale appartient au peuple qui l'exerce par ses représentants et par la voie du référendum. » Le Parlement n'en est que le représentant.",
     page: 16
   },
   {
@@ -59,15 +95,15 @@ export const si: Question[] = [
     notion: "p2-s1",
     kind: "connaissance",
     official: true,
-    difficulty: 2,
+    difficulty: 3,
     question: "Qui est élu lors des élections municipales ?",
     choices: [
       "Les conseillers municipaux",
       "Le maire, élu directement par les habitants",
-      "Les conseillers départementaux",
-      "Les conseillers régionaux"
+      "Les conseillers municipaux et le préfet",
+      "Le maire et ses adjoints, élus directement"
     ],
-    explication: "Les électeurs de la commune élisent les conseillers municipaux, qui élisent ensuite le maire.",
+    explication: "Les électeurs de la commune élisent les conseillers municipaux, qui élisent ensuite le maire parmi eux. Le maire n'est donc pas élu directement par les habitants.",
     page: 16
   },
   {
@@ -84,7 +120,7 @@ export const si: Question[] = [
       "Facultative si l'on présente sa carte d'identité",
       "Valable pour une seule élection"
     ],
-    explication: "Pour voter, il faut être inscrit sur les listes électorales de sa commune (inscription automatique à 18 ans pour les jeunes recensés).",
+    explication: "Être inscrit sur les listes électorales fait partie des conditions pour voter : si elle n'est pas remplie, on ne peut pas voter. La carte d'identité ne remplace pas l'inscription.",
     page: 16
   },
   {
@@ -93,15 +129,33 @@ export const si: Question[] = [
     notion: "p2-s1",
     kind: "connaissance",
     official: true,
-    difficulty: 2,
+    difficulty: 3,
     question: "Quelle condition est nécessaire pour voter aux élections présidentielles ?",
     choices: [
       "Être français, majeur et inscrit sur les listes électorales",
-      "Être français, majeur et payer l'impôt sur le revenu",
-      "Être majeur et résider en France depuis cinq ans",
-      "Être français et avoir au moins 21 ans"
+      "Être français, âgé d'au moins 21 ans et inscrit sur les listes électorales",
+      "Être français ou européen, majeur et inscrit sur les listes électorales",
+      "Être français, majeur et payer l'impôt sur le revenu"
     ],
-    explication: "Le droit de vote appartient aux citoyens français majeurs inscrits sur les listes électorales et jouissant de leurs droits civiques.",
+    explication: "Il faut être français, majeur (18 ans), ne pas être privé de ses droits civiques et être inscrit sur les listes. Les ressortissants de l'UE ne votent qu'aux municipales et aux européennes.",
+    page: 16
+  },
+  {
+    id: "an-si-006-v1",
+    theme: "si",
+    notion: "p2-s1",
+    kind: "connaissance",
+    official: false,
+    variantOf: "an-si-006",
+    difficulty: 2,
+    question: "Un citoyen français majeur qui n'est pas inscrit sur les listes électorales peut-il voter à l'élection présidentielle ?",
+    choices: [
+      "Non, l'inscription est une condition pour voter",
+      "Oui, en présentant sa carte d'identité",
+      "Oui, dans le bureau de vote de sa commune de naissance",
+      "Oui, mais seulement au second tour"
+    ],
+    explication: "Si l'une des conditions (nationalité, majorité, droits civiques, inscription) n'est pas remplie, on ne peut pas voter. La pièce d'identité prouve l'identité, elle ne remplace pas l'inscription.",
     page: 16
   },
   {
@@ -110,15 +164,15 @@ export const si: Question[] = [
     notion: "p2-s1",
     kind: "connaissance",
     official: true,
-    difficulty: 2,
+    difficulty: 3,
     question: "Quelle condition faut-il remplir pour être candidat aux élections municipales ?",
     choices: [
       "Avoir au moins 18 ans et être électeur ou contribuable de la commune",
-      "Être né dans la commune et y résider",
-      "Avoir au moins 23 ans et y habiter depuis 5 ans",
-      "Être inscrit dans la commune depuis au moins 10 ans"
+      "Avoir au moins 18 ans et être né dans la commune",
+      "Avoir au moins 21 ans et être électeur de la commune",
+      "Avoir au moins 18 ans et habiter la commune depuis cinq ans"
     ],
-    explication: "Tout électeur français ou citoyen de l'UE d'au moins 18 ans, attaché à la commune, peut se présenter.",
+    explication: "Il suffit d'avoir 18 ans et d'avoir une attache avec la commune (électeur ou contribuable). Ni la naissance sur place ni une durée de résidence ne sont exigées.",
     page: 16
   },
   {
@@ -135,7 +189,25 @@ export const si: Question[] = [
       "Le Premier ministre",
       "Le recteur d'académie"
     ],
-    explication: "Le député est élu au suffrage universel direct ; préfet, recteur et commissaire sont nommés.",
+    explication: "Le député est élu au suffrage universel direct. Le Premier ministre est nommé par le président de la République ; le préfet et le recteur sont des fonctionnaires nommés.",
+    page: 16
+  },
+  {
+    id: "an-si-008-v1",
+    theme: "si",
+    notion: "p2-s1",
+    kind: "connaissance",
+    official: false,
+    variantOf: "an-si-008",
+    difficulty: 3,
+    question: "Parmi ces personnes, laquelle n'est pas élue ?",
+    choices: [
+      "Le préfet",
+      "Le sénateur",
+      "Le conseiller régional",
+      "Le député européen"
+    ],
+    explication: "Le préfet est nommé pour représenter l'État. Le sénateur est bien élu, mais au suffrage universel indirect, par des élus locaux.",
     page: 16
   },
   {
@@ -144,15 +216,33 @@ export const si: Question[] = [
     notion: "p2-s2",
     kind: "connaissance",
     official: true,
-    difficulty: 2,
+    difficulty: 3,
     question: "Quelles sont les fonctions du maire ?",
     choices: [
       "Diriger l'administration communale et être officier d'état civil",
-      "Diriger la police nationale et la gendarmerie de la commune",
-      "Nommer les conseillers municipaux et les adjoints",
-      "Juger les litiges entre les habitants de la commune"
+      "Diriger l'administration communale et représenter l'État dans le département",
+      "Gérer les collèges publics et célébrer les mariages",
+      "Nommer les conseillers municipaux et les adjoints"
     ],
-    explication: "Le maire gère la commune, célèbre les mariages et représente l'État pour l'état civil.",
+    explication: "Le maire dirige la commune et tient l'état civil (naissances, mariages, décès). Représenter l'État dans le département est le rôle du préfet, et les collèges relèvent du département.",
+    page: 19
+  },
+  {
+    id: "an-si-009-v1",
+    theme: "si",
+    notion: "p2-s2",
+    kind: "connaissance",
+    official: false,
+    variantOf: "an-si-009",
+    difficulty: 3,
+    question: "Laquelle de ces responsabilités relève de la commune ?",
+    choices: [
+      "Les activités sportives et culturelles",
+      "L'action sociale et la protection de l'enfance",
+      "La formation professionnelle",
+      "Les transports publics régionaux"
+    ],
+    explication: "Les communes gèrent notamment les écoles primaires, les activités sportives et culturelles, les routes communales et l'état civil. L'action sociale relève du département, la formation professionnelle et les transports de la région.",
     page: 19
   },
   {
@@ -166,10 +256,28 @@ export const si: Question[] = [
     choices: [
       "À la mairie de sa commune",
       "À la préfecture de son département",
-      "Au tribunal judiciaire",
-      "Au bureau de poste"
+      "À la sous-préfecture de son arrondissement",
+      "Au bureau de vote, le jour du scrutin"
     ],
-    explication: "L'inscription sur les listes électorales se fait en mairie (ou en ligne).",
+    explication: "On s'inscrit sur internet ou à la mairie de son lieu de résidence. La préfecture ne gère pas les inscriptions, et le jour du scrutin il est trop tard.",
+    page: 16
+  },
+  {
+    id: "an-si-010-v1",
+    theme: "si",
+    notion: "p2-s1",
+    kind: "connaissance",
+    official: false,
+    variantOf: "an-si-010",
+    difficulty: 3,
+    question: "Selon le livret, comment peut-on s'inscrire sur les listes électorales ?",
+    choices: [
+      "Sur internet ou à la mairie de son lieu de résidence",
+      "Sur internet ou à la préfecture de son département",
+      "Uniquement à la mairie de sa commune de naissance",
+      "Au bureau de vote, le jour du premier tour"
+    ],
+    explication: "Le livret prévoit deux voies : internet ou la mairie du lieu de résidence. La commune de naissance et la préfecture ne sont pas compétentes.",
     page: 16
   },
   {
@@ -178,7 +286,7 @@ export const si: Question[] = [
     notion: "p2-s1",
     kind: "connaissance",
     official: true,
-    difficulty: 2,
+    difficulty: 1,
     question: "À quel âge peut-on devenir électeur ?",
     choices: [
       "18 ans",
@@ -199,11 +307,11 @@ export const si: Question[] = [
     question: "En France, est-ce obligatoire de voter ?",
     choices: [
       "Non, voter est un droit, pas une obligation",
-      "Oui, sous peine d'amende",
-      "Oui, pour l'élection présidentielle uniquement",
-      "Non, sauf pour les élections municipales"
+      "Oui, voter est une obligation sous peine d'amende",
+      "Non, sauf pour l'élection présidentielle",
+      "Oui, sauf pour les Français de l'étranger"
     ],
-    explication: "Le vote est un droit et un devoir civique, mais il n'est pas juridiquement obligatoire.",
+    explication: "Le vote est un droit et un devoir civique, mais il n'est pas juridiquement obligatoire en France, quelle que soit l'élection.",
     page: 16
   },
   {
@@ -212,15 +320,15 @@ export const si: Question[] = [
     notion: "p2-s1",
     kind: "connaissance",
     official: true,
-    difficulty: 2,
+    difficulty: 1,
     question: "A-t-on le droit de ne pas respecter une loi ?",
     choices: [
       "Non, la loi s'impose à tous",
-      "Oui, si elle est contraire à ses convictions",
-      "Oui, tant qu'elle n'a pas été approuvée par référendum",
-      "Oui, si l'on n'a pas voté pour les députés qui l'ont adoptée"
+      "Oui, si elle est contraire à sa religion",
+      "Oui, si l'on n'a pas voté pour elle",
+      "Oui, si l'on est un élu de la République"
     ],
-    explication: "Nul n'est au-dessus de la loi : elle s'applique à tous, on peut seulement militer pour la changer.",
+    explication: "Dans un État de droit, la loi doit être respectée par tous, y compris par l'État et les élus. On peut seulement agir pour la faire changer.",
     page: 16
   },
   {
@@ -234,10 +342,10 @@ export const si: Question[] = [
     choices: [
       "Ils sont élus au suffrage universel direct",
       "Ils sont élus au suffrage universel indirect",
-      "Ils sont élus par les conseillers municipaux",
+      "Ils sont élus par les élus locaux",
       "Ils sont nommés par le Premier ministre"
     ],
-    explication: "Les députés sont élus pour 5 ans au suffrage universel direct, lors des élections législatives.",
+    explication: "Les 577 députés sont élus au suffrage universel direct tous les 5 ans. Ce sont les sénateurs qui sont élus au suffrage indirect, par des élus locaux.",
     page: 16
   },
   {
@@ -250,11 +358,29 @@ export const si: Question[] = [
     question: "Qui vote les lois ?",
     choices: [
       "Le Parlement (Assemblée nationale et Sénat)",
-      "Le gouvernement",
-      "Le président de la République",
-      "Le Conseil d'État"
+      "Le gouvernement (Premier ministre et ministres)",
+      "Le Conseil constitutionnel et le Conseil d'État",
+      "Le président de la République et le gouvernement"
     ],
-    explication: "Le pouvoir législatif appartient au Parlement, composé de l'Assemblée nationale et du Sénat.",
+    explication: "Le pouvoir législatif appartient au Parlement (Assemblée nationale et Sénat). Le gouvernement met en œuvre les lois ; le Conseil constitutionnel vérifie leur conformité à la Constitution.",
+    page: 16
+  },
+  {
+    id: "an-si-015-v1",
+    theme: "si",
+    notion: "p2-s1",
+    kind: "connaissance",
+    official: false,
+    variantOf: "an-si-015",
+    difficulty: 2,
+    question: "Outre le vote des lois, quelle mission le Parlement exerce-t-il ?",
+    choices: [
+      "Il contrôle le Gouvernement",
+      "Il nomme le Premier ministre",
+      "Il contrôle la conformité des lois à la Constitution",
+      "Il rend la justice administrative"
+    ],
+    explication: "Le Parlement vote les lois et contrôle le Gouvernement. Le Premier ministre est nommé par le président, et le contrôle de constitutionnalité revient au Conseil constitutionnel.",
     page: 16
   },
   {
@@ -271,7 +397,25 @@ export const si: Question[] = [
       "Exécutif, judiciaire et médiatique",
       "Législatif, administratif et judiciaire"
     ],
-    explication: "Le pouvoir législatif fait la loi, l'exécutif l'applique, le judiciaire la fait respecter.",
+    explication: "Le législatif vote les lois, l'exécutif les met en œuvre, le judiciaire rend la justice. Le Conseil constitutionnel n'est pas un « pouvoir » distinct.",
+    page: 16
+  },
+  {
+    id: "an-si-016-v1",
+    theme: "si",
+    notion: "p2-s1",
+    kind: "connaissance",
+    official: false,
+    variantOf: "an-si-016",
+    difficulty: 2,
+    question: "Quel pouvoir consiste à « définir la politique de la Nation et mettre en œuvre les lois » ?",
+    choices: [
+      "Le pouvoir exécutif",
+      "Le pouvoir législatif",
+      "Le pouvoir judiciaire",
+      "Le pouvoir administratif"
+    ],
+    explication: "Le pouvoir exécutif, exercé par le gouvernement, définit la politique de la Nation et met en œuvre les lois. Le législatif les élabore et les vote.",
     page: 16
   },
   {
@@ -284,11 +428,29 @@ export const si: Question[] = [
     question: "Qu'est-ce que l'État de droit ?",
     choices: [
       "Un État où la loi s'applique à tous, y compris aux pouvoirs publics",
-      "Un État où le gouvernement peut déroger aux lois",
-      "Un État où les juges sont élus par le peuple",
-      "Un État dirigé par un président élu"
+      "Un État où la loi s'applique à tous, sauf aux élus en exercice",
+      "Un État où le gouvernement peut déroger aux lois en cas de besoin",
+      "Un État où tous les citoyens majeurs ont le droit de vote"
     ],
-    explication: "Dans un État de droit, chacun — citoyens comme institutions — est soumis au droit.",
+    explication: "Dans un État de droit, la loi doit être respectée par tous, y compris par l'État. Le suffrage universel relève de la démocratie, pas de la définition de l'État de droit.",
+    page: 16
+  },
+  {
+    id: "an-si-017-v1",
+    theme: "si",
+    notion: "p2-s1",
+    kind: "connaissance",
+    official: false,
+    variantOf: "an-si-017",
+    difficulty: 3,
+    question: "Selon le livret, sous le contrôle de qui l'administration agit-elle ?",
+    choices: [
+      "Du juge",
+      "Du préfet",
+      "Du Conseil constitutionnel",
+      "Du ministre de l'Intérieur"
+    ],
+    explication: "L'administration respecte la Constitution, les lois et les principes républicains, et agit sous le contrôle du juge. Le Conseil constitutionnel contrôle les lois, pas l'administration.",
     page: 16
   },
   {
@@ -305,7 +467,25 @@ export const si: Question[] = [
       "4 ans",
       "7 ans"
     ],
-    explication: "Le conseil municipal, et donc le maire qu'il élit, est renouvelé tous les 6 ans.",
+    explication: "Le maire et les conseillers municipaux sont élus pour 6 ans, comme les conseillers départementaux et régionaux. Les 5 ans sont ceux du président et des députés.",
+    page: 19
+  },
+  {
+    id: "an-si-018-v1",
+    theme: "si",
+    notion: "p2-s2",
+    kind: "connaissance",
+    official: false,
+    variantOf: "an-si-018",
+    difficulty: 3,
+    question: "Lequel de ces mandats ne dure pas 6 ans ?",
+    choices: [
+      "Celui de député",
+      "Celui de conseiller départemental",
+      "Celui de conseiller régional",
+      "Celui de sénateur"
+    ],
+    explication: "Les députés sont élus pour 5 ans. Les sénateurs, les conseillers municipaux, départementaux et régionaux sont élus pour 6 ans.",
     page: 19
   },
   {
@@ -322,7 +502,7 @@ export const si: Question[] = [
       "Les conseillers départementaux",
       "Les députés européens"
     ],
-    explication: "Les législatives désignent les 577 députés de l'Assemblée nationale.",
+    explication: "Les législatives désignent les 577 députés de l'Assemblée nationale. Les sénateurs, eux, sont élus par des élus locaux.",
     page: 16
   },
   {
@@ -339,7 +519,25 @@ export const si: Question[] = [
       "6 ans",
       "4 ans"
     ],
-    explication: "Depuis le référendum de 2000, le mandat présidentiel est de 5 ans (quinquennat).",
+    explication: "Le président est élu pour 5 ans au suffrage universel direct. Le septennat (7 ans) a été remplacé par le quinquennat en 2000.",
+    page: 16
+  },
+  {
+    id: "an-si-020-v1",
+    theme: "si",
+    notion: "p2-s1",
+    kind: "connaissance",
+    official: false,
+    variantOf: "an-si-020",
+    difficulty: 3,
+    question: "Le mandat du président de la République est :",
+    choices: [
+      "De cinq ans, renouvelable une fois",
+      "De cinq ans, renouvelable sans limite",
+      "De sept ans, renouvelable une fois",
+      "De cinq ans, non renouvelable"
+    ],
+    explication: "Le président est élu au suffrage universel direct pour cinq ans, renouvelables une fois. Le mandat de sept ans n'existe plus depuis 2000.",
     page: 16
   },
   {
@@ -356,7 +554,25 @@ export const si: Question[] = [
       "4 ans",
       "7 ans"
     ],
-    explication: "Les députés sont élus pour 5 ans, sauf dissolution de l'Assemblée nationale.",
+    explication: "Les députés sont élus pour 5 ans, sauf dissolution de l'Assemblée nationale. Les 6 ans sont la durée du mandat des sénateurs.",
+    page: 16
+  },
+  {
+    id: "an-si-021-v1",
+    theme: "si",
+    notion: "p2-s1",
+    kind: "connaissance",
+    official: false,
+    variantOf: "an-si-021",
+    difficulty: 3,
+    question: "Quel mandat a la même durée que celui des députés ?",
+    choices: [
+      "Celui du président de la République",
+      "Celui des sénateurs",
+      "Celui des maires",
+      "Celui des conseillers régionaux"
+    ],
+    explication: "Députés et président de la République sont élus pour 5 ans. Les sénateurs, les maires et les conseillers régionaux le sont pour 6 ans.",
     page: 16
   },
   {
@@ -365,7 +581,7 @@ export const si: Question[] = [
     notion: "p2-s1",
     kind: "connaissance",
     official: true,
-    difficulty: 2,
+    difficulty: 3,
     question: "Quelle est la durée du mandat des sénateurs ?",
     choices: [
       "6 ans",
@@ -373,7 +589,25 @@ export const si: Question[] = [
       "5 ans",
       "7 ans"
     ],
-    explication: "Les sénateurs sont élus pour 6 ans au suffrage universel indirect, le Sénat étant renouvelé par moitié tous les 3 ans.",
+    explication: "Les 348 sénateurs sont élus pour 6 ans au suffrage universel indirect. Le mandat de 9 ans a été supprimé en 2003 ; 5 ans est la durée du mandat des députés.",
+    page: 16
+  },
+  {
+    id: "an-si-022-v1",
+    theme: "si",
+    notion: "p2-s1",
+    kind: "connaissance",
+    official: false,
+    variantOf: "an-si-022",
+    difficulty: 2,
+    question: "Par qui les sénateurs sont-ils élus ?",
+    choices: [
+      "Par des élus locaux, au suffrage universel indirect",
+      "Par les citoyens, au suffrage universel direct",
+      "Par les députés de l'Assemblée nationale",
+      "Par les maires seuls, réunis en Congrès"
+    ],
+    explication: "Les sénateurs sont élus au suffrage universel indirect par les élus locaux (conseillers municipaux, départementaux et régionaux). Seuls les députés sont élus directement par les citoyens.",
     page: 16
   },
   {
@@ -382,15 +616,15 @@ export const si: Question[] = [
     notion: "p2-s1",
     kind: "connaissance",
     official: true,
-    difficulty: 2,
+    difficulty: 3,
     question: "Qui dirige l'action du gouvernement ?",
     choices: [
       "Le Premier ministre",
+      "Le président de la République",
       "Le président de l'Assemblée nationale",
-      "Le ministre de l'Intérieur",
       "Le président du Sénat"
     ],
-    explication: "Le Premier ministre dirige l'action du gouvernement (article 21 de la Constitution).",
+    explication: "Le Premier ministre dirige l'action du gouvernement (article 21). Le président de la République nomme le gouvernement sur sa proposition, mais n'en dirige pas l'action.",
     page: 16
   },
   {
@@ -399,15 +633,15 @@ export const si: Question[] = [
     notion: "p2-s1",
     kind: "connaissance",
     official: true,
-    difficulty: 2,
+    difficulty: 1,
     question: "En France, est-ce possible d'adhérer à un parti politique ?",
     choices: [
       "Oui, librement",
-      "Oui, mais seulement à partir de 21 ans",
+      "Oui, après autorisation de la préfecture",
       "Oui, après déclaration à la mairie",
-      "Non, c'est réservé aux élus"
+      "Non, seuls les élus peuvent y adhérer"
     ],
-    explication: "Les partis politiques se forment et exercent leur activité librement (article 4 de la Constitution).",
+    explication: "Les partis politiques se forment et exercent leur activité librement : aucune autorisation ni déclaration n'est demandée pour y adhérer.",
     page: 16
   },
   {
@@ -420,11 +654,29 @@ export const si: Question[] = [
     question: "Qui sanctionne l'auteur d'un vol ?",
     choices: [
       "La justice (un tribunal)",
-      "La police",
-      "Le maire de la commune",
-      "Le préfet"
+      "La police nationale ou la gendarmerie",
+      "Le préfet du département",
+      "Le maire de la commune"
     ],
-    explication: "Seule l'autorité judiciaire peut juger et sanctionner les infractions : nul ne peut se faire justice soi-même.",
+    explication: "La justice, rendue par les juges, sanctionne les infractions par des peines prévues par la loi. La police enquête et interpelle, mais ne juge pas.",
+    page: 16
+  },
+  {
+    id: "an-si-025-v1",
+    theme: "si",
+    notion: "p2-s1",
+    kind: "connaissance",
+    official: false,
+    variantOf: "an-si-025",
+    difficulty: 3,
+    question: "Qui règle les litiges entre les citoyens et l'administration ?",
+    choices: [
+      "Les juges",
+      "Le préfet du département",
+      "Le Conseil constitutionnel",
+      "Le ministre concerné"
+    ],
+    explication: "La justice, rendue par les juges, règle les litiges entre particuliers et entre citoyens et administration. Le Conseil constitutionnel ne juge que la conformité des lois.",
     page: 16
   },
   {
@@ -433,7 +685,7 @@ export const si: Question[] = [
     notion: "p2-s2",
     kind: "connaissance",
     official: true,
-    difficulty: 2,
+    difficulty: 3,
     question: "Qui gère les collèges publics ?",
     choices: [
       "Le département",
@@ -441,7 +693,25 @@ export const si: Question[] = [
       "La région",
       "Le rectorat"
     ],
-    explication: "Les communes gèrent les écoles, les départements les collèges et les régions les lycées.",
+    explication: "Les communes gèrent les écoles primaires, les départements les collèges et les régions les lycées.",
+    page: 19
+  },
+  {
+    id: "an-si-026-v1",
+    theme: "si",
+    notion: "p2-s2",
+    kind: "connaissance",
+    official: false,
+    variantOf: "an-si-026",
+    difficulty: 3,
+    question: "Le chauffage du lycée public de votre fille est en panne depuis des semaines. Quelle collectivité est responsable du bâtiment ?",
+    choices: [
+      "La région",
+      "Le département",
+      "La commune",
+      "L'intercommunalité"
+    ],
+    explication: "La région construit et entretient les lycées publics. Le département s'occupe des collèges, la commune des écoles primaires.",
     page: 19
   },
   {
@@ -458,7 +728,25 @@ export const si: Question[] = [
       "La région",
       "La préfecture"
     ],
-    explication: "La commune construit et entretient les écoles maternelles et élémentaires.",
+    explication: "La commune est responsable des écoles primaires publiques (maternelles et élémentaires) ; le département gère les collèges, la région les lycées.",
+    page: 19
+  },
+  {
+    id: "an-si-027-v1",
+    theme: "si",
+    notion: "p2-s2",
+    kind: "connaissance",
+    official: false,
+    variantOf: "an-si-027",
+    difficulty: 2,
+    question: "Laquelle de ces responsabilités appartient au département ?",
+    choices: [
+      "L'aide aux personnes âgées",
+      "Les écoles maternelles",
+      "Les lycées publics",
+      "Les transports régionaux"
+    ],
+    explication: "Le département gère les collèges, l'action sociale, la protection de l'enfance et l'aide aux personnes âgées. Les écoles relèvent de la commune, lycées et transports de la région.",
     page: 19
   },
   {
@@ -467,7 +755,7 @@ export const si: Question[] = [
     notion: "p2-s2",
     kind: "connaissance",
     official: true,
-    difficulty: 2,
+    difficulty: 3,
     question: "Comment sont désignés les maires ?",
     choices: [
       "Ils sont élus par le conseil municipal",
@@ -475,7 +763,7 @@ export const si: Question[] = [
       "Ils sont nommés par le préfet",
       "Ils sont élus par les conseillers départementaux"
     ],
-    explication: "Après les élections municipales, le conseil municipal élit le maire parmi ses membres.",
+    explication: "Les habitants élisent le conseil municipal, qui élit ensuite le maire parmi ses membres. Le maire n'est donc pas élu directement.",
     page: 19
   },
   {
@@ -492,7 +780,25 @@ export const si: Question[] = [
       "La commune",
       "L'intercommunalité"
     ],
-    explication: "La région organise notamment les transports régionaux (TER) et gère les lycées.",
+    explication: "La région est chargée des transports publics, du développement économique, de la formation professionnelle et des lycées. Les transports urbains relèvent plutôt des intercommunalités.",
+    page: 19
+  },
+  {
+    id: "an-si-029-v1",
+    theme: "si",
+    notion: "p2-s2",
+    kind: "connaissance",
+    official: false,
+    variantOf: "an-si-029",
+    difficulty: 3,
+    question: "Laquelle de ces compétences relève de la région ?",
+    choices: [
+      "Le développement économique",
+      "L'action sociale",
+      "Les routes départementales",
+      "L'état civil"
+    ],
+    explication: "La région est chargée des transports publics, du développement économique, de la formation professionnelle et des lycées. L'action sociale et les routes départementales relèvent du département, l'état civil de la commune.",
     page: 19
   },
   {
@@ -509,7 +815,25 @@ export const si: Question[] = [
       "Un décret du président de la République",
       "Une décision du Conseil constitutionnel"
     ],
-    explication: "La Constitution peut être révisée par référendum ou par le Parlement réuni en Congrès.",
+    explication: "Les modifications de la Constitution doivent être approuvées par référendum ou par le Parlement réuni en Congrès. Une loi ordinaire ne suffit pas.",
+    page: 16
+  },
+  {
+    id: "an-si-030-v1",
+    theme: "si",
+    notion: "p2-s1",
+    kind: "connaissance",
+    official: false,
+    variantOf: "an-si-030",
+    difficulty: 3,
+    question: "Hors référendum, par qui une modification de la Constitution peut-elle être approuvée ?",
+    choices: [
+      "Par le Parlement réuni en Congrès",
+      "Par le Conseil constitutionnel en séance plénière",
+      "Par l'Assemblée nationale seule",
+      "Par le président de la République, par décret"
+    ],
+    explication: "Les modifications de la Constitution doivent être approuvées par référendum ou par le Parlement (Assemblée nationale et Sénat) réuni en Congrès. Ni l'Assemblée seule ni le Conseil constitutionnel ne peuvent le faire.",
     page: 16
   },
   {
@@ -518,7 +842,7 @@ export const si: Question[] = [
     notion: "p2-s1",
     kind: "connaissance",
     official: true,
-    difficulty: 2,
+    difficulty: 3,
     question: "Qui assure l'intérim du président de la République en cas de décès ?",
     choices: [
       "Le président du Sénat",
@@ -526,7 +850,7 @@ export const si: Question[] = [
       "Le président de l'Assemblée nationale",
       "Le président du Conseil constitutionnel"
     ],
-    explication: "En cas de vacance de la présidence, le président du Sénat assure l'intérim.",
+    explication: "En cas de vacance de la présidence, l'intérim est assuré par le président du Sénat, et non par le Premier ministre ou le président de l'Assemblée nationale.",
     page: 16
   },
   {
@@ -535,7 +859,7 @@ export const si: Question[] = [
     notion: "p2-s1",
     kind: "connaissance",
     official: true,
-    difficulty: 2,
+    difficulty: 3,
     question: "Quel est le rôle du Conseil constitutionnel ?",
     choices: [
       "Vérifier que les lois sont conformes à la Constitution",
@@ -543,7 +867,25 @@ export const si: Question[] = [
       "Juger les litiges entre l'administration et les citoyens",
       "Conseiller le gouvernement sur ses projets de loi"
     ],
-    explication: "Le Conseil constitutionnel contrôle la constitutionnalité des lois et veille à la régularité des grandes élections.",
+    explication: "Le Conseil constitutionnel veille à la conformité des lois avec la Constitution. Contrôler le gouvernement est le rôle du Parlement ; conseiller le gouvernement sur ses projets de loi est celui du Conseil d'État.",
+    page: 16
+  },
+  {
+    id: "an-si-032-v1",
+    theme: "si",
+    notion: "p2-s1",
+    kind: "connaissance",
+    official: false,
+    variantOf: "an-si-032",
+    difficulty: 3,
+    question: "Outre le contrôle des lois, quelle mission le livret attribue-t-il au Conseil constitutionnel ?",
+    choices: [
+      "Contrôler la régularité des élections nationales",
+      "Contrôler la régularité des élections municipales",
+      "Conseiller le gouvernement sur ses projets de loi",
+      "Nommer les membres du gouvernement"
+    ],
+    explication: "Le Conseil constitutionnel veille à la conformité des lois avec la Constitution et contrôle la régularité des élections nationales. Les élections municipales ne relèvent pas de lui.",
     page: 16
   },
   {
@@ -556,11 +898,11 @@ export const si: Question[] = [
     question: "Quelle condition est obligatoire pour se présenter à l'élection présidentielle ?",
     choices: [
       "Avoir la nationalité française",
-      "Avoir au moins 35 ans",
+      "Être âgé d'au moins 35 ans",
       "Être membre d'un parti politique",
-      "Avoir déjà exercé un mandat électif"
+      "Résider en France depuis dix ans"
     ],
-    explication: "Le candidat doit être français, électeur, âgé d'au moins 18 ans et parrainé par 500 élus.",
+    explication: "Le candidat doit être français, électeur, majeur et parrainé par 500 élus. L'appartenance à un parti n'est pas exigée et il n'y a pas d'âge minimal de 35 ans.",
     page: 16
   },
   {
@@ -569,7 +911,7 @@ export const si: Question[] = [
     notion: "p2-s2",
     kind: "connaissance",
     official: true,
-    difficulty: 2,
+    difficulty: 3,
     question: "Combien y a-t-il de départements en France ?",
     choices: [
       "101",
@@ -577,7 +919,25 @@ export const si: Question[] = [
       "100",
       "95"
     ],
-    explication: "La France compte 101 départements, dont 5 d'outre-mer.",
+    explication: "La France compte 101 départements : 96 en métropole et 5 en outre-mer. Le plus récent est Mayotte (2011).",
+    page: 19
+  },
+  {
+    id: "an-si-034-v1",
+    theme: "si",
+    notion: "p2-s2",
+    kind: "connaissance",
+    official: false,
+    variantOf: "an-si-034",
+    difficulty: 3,
+    question: "Combien de départements la France compte-t-elle en métropole ?",
+    choices: [
+      "96",
+      "101",
+      "95",
+      "99"
+    ],
+    explication: "Sur 101 départements, 96 sont en métropole et 5 en outre-mer (Guadeloupe, Martinique, Guyane, La Réunion, Mayotte).",
     page: 19
   },
   {
@@ -590,11 +950,29 @@ export const si: Question[] = [
     question: "Comment est organisé le découpage administratif de la France ?",
     choices: [
       "En communes, départements et régions",
-      "En communes, cantons et provinces",
-      "En régions et États fédérés",
-      "En départements et provinces"
+      "En communes, départements et provinces",
+      "En communes, districts et régions",
+      "En régions, États fédérés et communes"
     ],
-    explication: "Le territoire est organisé en collectivités : communes, départements et régions.",
+    explication: "Les collectivités territoriales sont les communes, les départements, les régions et les collectivités d'outre-mer. La France n'est pas un État fédéral et n'a plus de provinces.",
+    page: 19
+  },
+  {
+    id: "an-si-035-v1",
+    theme: "si",
+    notion: "p2-s2",
+    kind: "connaissance",
+    official: false,
+    variantOf: "an-si-035",
+    difficulty: 3,
+    question: "Comment appelle-t-on le transfert de compétences et de moyens de l'État vers les collectivités territoriales ?",
+    choices: [
+      "La décentralisation",
+      "La déconcentration",
+      "La délégation de service public",
+      "La fédéralisation"
+    ],
+    explication: "Par la décentralisation, l'État transfère des compétences et des moyens aux collectivités territoriales. La déconcentration désigne au contraire la présence de l'État sur le territoire, par exemple avec les préfets.",
     page: 19
   },
   {
@@ -611,7 +989,25 @@ export const si: Question[] = [
       "Le maire du chef-lieu",
       "Le sénateur du département"
     ],
-    explication: "Le préfet, nommé par le président de la République, représente l'État dans le département.",
+    explication: "Le préfet, nommé par l'État, le représente dans le département. Le président du conseil départemental dirige la collectivité, il ne représente pas l'État.",
+    page: 19
+  },
+  {
+    id: "an-si-036-v1",
+    theme: "si",
+    notion: "p2-s2",
+    kind: "connaissance",
+    official: false,
+    variantOf: "an-si-036",
+    difficulty: 3,
+    question: "Qui représente l'État dans certaines collectivités d'outre-mer ?",
+    choices: [
+      "Un haut-commissaire",
+      "Le président de la collectivité",
+      "Un ambassadeur de France",
+      "Le député de la collectivité"
+    ],
+    explication: "L'État est représenté par les préfets de région et de département, ou par des hauts-commissaires dans certaines collectivités d'outre-mer. Le président de la collectivité est un élu local.",
     page: 19
   },
   {
@@ -628,7 +1024,7 @@ export const si: Question[] = [
       "Chef du Parlement, il vote les lois et contrôle le gouvernement",
       "Chef de la justice, il nomme et révoque librement les juges"
     ],
-    explication: "Le président est le chef de l'État, garant des institutions, chef des armées, et il nomme le Premier ministre.",
+    explication: "Le président est le chef de l'État et des armées, garant des institutions. C'est le Premier ministre qui dirige l'action du gouvernement.",
     page: 16
   },
   {
@@ -637,7 +1033,7 @@ export const si: Question[] = [
     notion: "p2-s1",
     kind: "connaissance",
     official: true,
-    difficulty: 2,
+    difficulty: 3,
     question: "Quel est le rôle du Premier ministre ?",
     choices: [
       "Diriger l'action du gouvernement et assurer l'exécution des lois",
@@ -645,7 +1041,7 @@ export const si: Question[] = [
       "Présider l'Assemblée nationale et fixer son ordre du jour",
       "Commander les armées et négocier les traités"
     ],
-    explication: "Nommé par le président, le Premier ministre conduit la politique de la Nation avec son gouvernement.",
+    explication: "Nommé par le président, le Premier ministre dirige l'action du gouvernement. Présider le Conseil des ministres et promulguer les lois revient au président de la République.",
     page: 16
   },
   {
@@ -658,11 +1054,11 @@ export const si: Question[] = [
     question: "Quel est le rôle du Défenseur des droits ?",
     choices: [
       "Défendre les citoyens face aux administrations et lutter contre les discriminations",
-      "Défendre les accusés devant les tribunaux",
-      "Contrôler la conformité des lois à la Constitution",
-      "Représenter la France devant les cours européennes"
+      "Défendre les personnes poursuivies devant les tribunaux pénaux",
+      "Vérifier que les lois respectent les droits garantis par la Constitution",
+      "Représenter les citoyens devant la Cour européenne des droits de l'homme"
     ],
-    explication: "Autorité indépendante, le Défenseur des droits protège les droits des usagers et combat les discriminations.",
+    explication: "Autorité indépendante, le Défenseur des droits protège les usagers face aux services publics et combat les discriminations. Défendre un accusé est le rôle d'un avocat ; contrôler les lois, celui du Conseil constitutionnel.",
     page: 16
   },
   {
@@ -677,9 +1073,27 @@ export const si: Question[] = [
       "1992",
       "1957",
       "1979",
-      "1986"
+      "2000"
     ],
-    explication: "La citoyenneté européenne a été instituée par le traité de Maastricht en 1992.",
+    explication: "La citoyenneté européenne a été créée en 1992 par le traité de Maastricht. 1957 est la date du traité de Rome (CEE), 2000 celle de la Charte des droits fondamentaux.",
+    page: 22
+  },
+  {
+    id: "an-si-040-v1",
+    theme: "si",
+    notion: "p2-s3",
+    kind: "connaissance",
+    official: false,
+    variantOf: "an-si-040",
+    difficulty: 2,
+    question: "Quel droit la citoyenneté européenne donne-t-elle à un Français ?",
+    choices: [
+      "S'installer et travailler dans un autre pays de l'UE",
+      "Voter aux élections nationales du pays de l'UE où il réside",
+      "Obtenir la nationalité de son pays de résidence après un an",
+      "Se présenter à l'élection présidentielle d'un autre État membre"
+    ],
+    explication: "Les citoyens européens sont libres de circuler, travailler, étudier et s'installer dans les autres pays de l'UE, et votent aux élections locales du pays de résidence. Les élections nationales restent réservées aux nationaux.",
     page: 22
   },
   {
@@ -688,15 +1102,33 @@ export const si: Question[] = [
     notion: "p2-s3",
     kind: "connaissance",
     official: true,
-    difficulty: 2,
+    difficulty: 3,
     question: "Quel est le dernier État à avoir intégré l'Union européenne en 2013 ?",
     choices: [
       "La Croatie",
       "La Bulgarie",
       "La Slovénie",
-      "La Serbie"
+      "La Roumanie"
     ],
-    explication: "La Croatie est devenue le 28e État membre de l'UE le 1er juillet 2013.",
+    explication: "La Croatie est entrée dans l'UE en 2013, portant le nombre de membres à 28. La Bulgarie et la Roumanie ont adhéré en 2007, la Slovénie en 2004.",
+    page: 22
+  },
+  {
+    id: "an-si-041-v1",
+    theme: "si",
+    notion: "p2-s3",
+    kind: "connaissance",
+    official: false,
+    variantOf: "an-si-041",
+    difficulty: 3,
+    question: "Quels pays ont rejoint l'Union européenne en 2007 ?",
+    choices: [
+      "La Roumanie et la Bulgarie",
+      "La Croatie et la Slovénie",
+      "La Pologne et la Hongrie",
+      "L'Autriche et la Suède"
+    ],
+    explication: "La Roumanie et la Bulgarie sont entrées en 2007 (27 membres), avant la Croatie en 2013. La Pologne et la Hongrie ont adhéré en 2004, l'Autriche et la Suède en 1995.",
     page: 22
   },
   {
@@ -713,7 +1145,25 @@ export const si: Question[] = [
       "Joseph Haydn",
       "Franz Schubert"
     ],
-    explication: "L'« Ode à la joie », extraite de la 9e symphonie de Beethoven, est l'hymne européen.",
+    explication: "L'hymne européen, l'« Ode à la joie », est extrait de la Neuvième symphonie de Ludwig van Beethoven.",
+    page: 22
+  },
+  {
+    id: "an-si-042-v1",
+    theme: "si",
+    notion: "p2-s3",
+    kind: "connaissance",
+    official: false,
+    variantOf: "an-si-042",
+    difficulty: 3,
+    question: "De quelle œuvre l'hymne européen est-il extrait ?",
+    choices: [
+      "De la Neuvième symphonie de Beethoven",
+      "De la Cinquième symphonie de Beethoven",
+      "De la Neuvième symphonie de Dvořák",
+      "De La Flûte enchantée de Mozart"
+    ],
+    explication: "L'« Ode à la joie » est extraite de la Neuvième symphonie de Ludwig van Beethoven. La Neuvième de Dvořák est la « Symphonie du Nouveau Monde ».",
     page: 22
   },
   {
@@ -722,7 +1172,7 @@ export const si: Question[] = [
     notion: "p2-s3",
     kind: "connaissance",
     official: true,
-    difficulty: 2,
+    difficulty: 3,
     question: "Quand est célébrée la journée de l'Europe ?",
     choices: [
       "Le 9 mai",
@@ -730,7 +1180,25 @@ export const si: Question[] = [
       "Le 1er mai",
       "Le 25 mars"
     ],
-    explication: "Le 9 mai commémore la déclaration Schuman de 1950, acte fondateur de la construction européenne.",
+    explication: "La journée de l'Europe, le 9 mai, commémore la déclaration Schuman de 1950. Le 8 mai est l'anniversaire de la victoire de 1945.",
+    page: 22
+  },
+  {
+    id: "an-si-043-v1",
+    theme: "si",
+    notion: "p2-s3",
+    kind: "connaissance",
+    official: false,
+    variantOf: "an-si-043",
+    difficulty: 2,
+    question: "Quel événement la journée de l'Europe commémore-t-elle ?",
+    choices: [
+      "La déclaration de Robert Schuman du 9 mai 1950",
+      "La signature du traité de Rome en 1957",
+      "La signature du traité de Maastricht en 1992",
+      "La création de la CECA en 1951"
+    ],
+    explication: "Le 9 mai 1950, Robert Schuman, ministre français des affaires étrangères, présenta les bases de la coopération européenne, considérées comme l'acte de naissance de l'UE.",
     page: 22
   },
   {
@@ -747,7 +1215,25 @@ export const si: Question[] = [
       "À Luxembourg",
       "À Strasbourg"
     ],
-    explication: "La BCE, qui gère l'euro, siège à Francfort-sur-le-Main, en Allemagne.",
+    explication: "La BCE a été mise en place en 1998 à Francfort, en Allemagne. Bruxelles accueille la Commission, Strasbourg le Parlement européen.",
+    page: 22
+  },
+  {
+    id: "an-si-044-v1",
+    theme: "si",
+    notion: "p2-s3",
+    kind: "connaissance",
+    official: false,
+    variantOf: "an-si-044",
+    difficulty: 3,
+    question: "Quel traité a créé la Banque centrale européenne ?",
+    choices: [
+      "Le traité de Maastricht",
+      "Le traité de Rome",
+      "Le traité de Lisbonne",
+      "Le traité de Paris"
+    ],
+    explication: "Le traité de Maastricht (1992) crée l'UE, la citoyenneté européenne et la BCE, mise en place le 1er juin 1998 à Francfort. Le traité de Rome (1957) avait créé la CEE.",
     page: 22
   },
   {
@@ -762,9 +1248,27 @@ export const si: Question[] = [
       "À Bruxelles",
       "À Strasbourg",
       "À Luxembourg",
-      "À La Haye"
+      "À Francfort"
     ],
-    explication: "La Commission européenne siège à Bruxelles, en Belgique.",
+    explication: "La Commission européenne, organe exécutif de l'UE, siège à Bruxelles. Strasbourg est le siège du Parlement européen, Francfort celui de la BCE.",
+    page: 22
+  },
+  {
+    id: "an-si-045-v1",
+    theme: "si",
+    notion: "p2-s3",
+    kind: "connaissance",
+    official: false,
+    variantOf: "an-si-045",
+    difficulty: 3,
+    question: "En quelle année la Commission européenne, organe exécutif de l'UE, a-t-elle été créée ?",
+    choices: [
+      "1958",
+      "1957",
+      "1951",
+      "1992"
+    ],
+    explication: "La Commission européenne a été créée en 1958, au lendemain du traité de Rome (1957). 1951 est la date de la CECA, 1992 celle de l'Union européenne.",
     page: 22
   },
   {
@@ -781,7 +1285,25 @@ export const si: Question[] = [
       "Les commissaires européens",
       "Des députés désignés par les parlements nationaux"
     ],
-    explication: "Les eurodéputés, élus tous les 5 ans au suffrage universel direct, siègent au Parlement européen.",
+    explication: "Les députés européens, élus tous les 5 ans par les citoyens de l'Union, siègent au Parlement européen. Les ministres siègent au Conseil de l'UE, les commissaires à la Commission.",
+    page: 22
+  },
+  {
+    id: "an-si-046-v1",
+    theme: "si",
+    notion: "p2-s3",
+    kind: "connaissance",
+    official: false,
+    variantOf: "an-si-046",
+    difficulty: 2,
+    question: "Quelle institution européenne est élue directement par les citoyens ?",
+    choices: [
+      "Le Parlement européen",
+      "La Commission européenne",
+      "Le Conseil européen",
+      "La Banque centrale européenne"
+    ],
+    explication: "Tous les cinq ans, les citoyens de l'Union élisent les députés du Parlement européen. La Commission et la BCE ne sont pas élues par les citoyens.",
     page: 22
   },
   {
@@ -790,15 +1312,33 @@ export const si: Question[] = [
     notion: "p2-s3",
     kind: "connaissance",
     official: true,
-    difficulty: 2,
+    difficulty: 3,
     question: "Les citoyens de l'Union européenne peuvent-ils voter aux élections locales dans un autre État de l'Union ?",
     choices: [
       "Oui, aux élections municipales et européennes de leur État de résidence",
-      "Oui, à toutes les élections, y compris nationales",
-      "Non, ils votent uniquement dans leur pays d'origine",
-      "Oui, mais uniquement aux élections européennes"
+      "Oui, aux élections municipales et régionales de leur État de résidence",
+      "Oui, aux élections municipales et législatives de leur État de résidence",
+      "Non, ils ne peuvent voter que dans leur pays d'origine"
     ],
-    explication: "La citoyenneté européenne donne le droit de vote aux municipales et aux européennes dans l'État de résidence.",
+    explication: "Un ressortissant de l'UE peut voter aux élections municipales et européennes de son pays de résidence. Les élections régionales et nationales lui restent fermées.",
+    page: 22
+  },
+  {
+    id: "an-si-047-v1",
+    theme: "si",
+    notion: "p2-s3",
+    kind: "connaissance",
+    official: false,
+    variantOf: "an-si-047",
+    difficulty: 3,
+    question: "Un Espagnol installé à Lyon peut-il voter à l'élection présidentielle française ?",
+    choices: [
+      "Non, seulement aux municipales et aux européennes",
+      "Oui, s'il réside en France depuis cinq ans",
+      "Oui, comme tout citoyen de l'Union européenne",
+      "Non, seulement aux régionales et aux européennes"
+    ],
+    explication: "Un ressortissant de l'UE peut voter en France aux élections municipales et européennes, jamais à la présidentielle, réservée aux Français. Les régionales ne lui sont pas ouvertes non plus.",
     page: 22
   },
   {
@@ -815,7 +1355,25 @@ export const si: Question[] = [
       "25",
       "26"
     ],
-    explication: "Depuis le départ du Royaume-Uni en 2020, l'UE compte 27 États membres.",
+    explication: "Depuis le départ du Royaume-Uni en 2020, l'UE compte 27 États membres. Elle en comptait 28 entre 2013 et 2020.",
+    page: 22
+  },
+  {
+    id: "an-si-048-v1",
+    theme: "si",
+    notion: "p2-s3",
+    kind: "connaissance",
+    official: false,
+    variantOf: "an-si-048",
+    difficulty: 2,
+    question: "Combien d'États membres l'Union européenne comptait-elle juste avant le Brexit ?",
+    choices: [
+      "28",
+      "27",
+      "29",
+      "25"
+    ],
+    explication: "Après l'adhésion de la Croatie en 2013, l'UE comptait 28 membres. Le départ du Royaume-Uni en 2020 l'a ramenée à 27.",
     page: 22
   },
   {
@@ -830,9 +1388,27 @@ export const si: Question[] = [
       "1992",
       "1957",
       "1986",
-      "1999"
+      "2002"
     ],
-    explication: "Signé en 1992, le traité de Maastricht crée l'Union européenne et la citoyenneté européenne.",
+    explication: "Le traité de Maastricht a été signé en 1992. 1957 est l'année du traité de Rome, 2002 celle de l'arrivée des pièces et billets en euros.",
+    page: 22
+  },
+  {
+    id: "an-si-049-v1",
+    theme: "si",
+    notion: "p2-s3",
+    kind: "connaissance",
+    official: false,
+    variantOf: "an-si-049",
+    difficulty: 3,
+    question: "Lequel de ces éléments n'a PAS été créé par le traité de Maastricht ?",
+    choices: [
+      "La Communauté économique européenne",
+      "La citoyenneté européenne",
+      "La Banque centrale européenne",
+      "L'Union européenne"
+    ],
+    explication: "Le traité de Maastricht (1992) crée l'UE, la citoyenneté européenne et la BCE. La CEE date du traité de Rome de 1957.",
     page: 22
   },
   {
@@ -847,9 +1423,27 @@ export const si: Question[] = [
       "Le traité de Maastricht",
       "Le traité de Versailles",
       "Le traité de l'Élysée",
-      "Le traité de l'Atlantique Nord"
+      "Le traité de Francfort"
     ],
-    explication: "Le traité de Maastricht (1992) fonde l'Union européenne ; Versailles (1919) clôt la Première Guerre mondiale.",
+    explication: "Le traité de Maastricht (1992) crée l'Union européenne. Le traité de Versailles (1919) clôt la Première Guerre mondiale ; celui de l'Élysée (1963) est un traité franco-allemand.",
+    page: 22
+  },
+  {
+    id: "an-si-050-v1",
+    theme: "si",
+    notion: "p2-s3",
+    kind: "connaissance",
+    official: false,
+    variantOf: "an-si-050",
+    difficulty: 2,
+    question: "Quel traité a instauré la Communauté économique européenne en 1957 ?",
+    choices: [
+      "Le traité de Rome",
+      "Le traité de Maastricht",
+      "Le traité de Paris",
+      "Le traité de Lisbonne"
+    ],
+    explication: "Le traité de Rome instaure en 1957 la CEE entre six pays fondateurs. Le traité de Maastricht, en 1992, crée l'Union européenne.",
     page: 22
   },
   {
@@ -858,7 +1452,7 @@ export const si: Question[] = [
     notion: "p2-s3",
     kind: "connaissance",
     official: true,
-    difficulty: 2,
+    difficulty: 1,
     question: "Quel État a quitté l'Union européenne en 2020 ?",
     choices: [
       "Le Royaume-Uni",
@@ -866,7 +1460,25 @@ export const si: Question[] = [
       "Le Danemark",
       "La Norvège"
     ],
-    explication: "Après le référendum de 2016, le Royaume-Uni a quitté l'UE le 31 janvier 2020 (Brexit).",
+    explication: "Le Royaume-Uni a quitté l'UE en 2020 (Brexit). La Suisse et la Norvège n'en ont jamais été membres ; le Danemark y est depuis 1973.",
+    page: 22
+  },
+  {
+    id: "an-si-051-v1",
+    theme: "si",
+    notion: "p2-s3",
+    kind: "connaissance",
+    official: false,
+    variantOf: "an-si-051",
+    difficulty: 3,
+    question: "En quelle année le Royaume-Uni avait-il rejoint la construction européenne ?",
+    choices: [
+      "1973",
+      "1957",
+      "1981",
+      "1986"
+    ],
+    explication: "Le Royaume-Uni est entré en 1973, avec l'Irlande et le Danemark, et a quitté l'UE en 2020. 1981 est l'année de la Grèce, 1986 celle de l'Espagne et du Portugal.",
     page: 22
   },
   {
@@ -875,15 +1487,15 @@ export const si: Question[] = [
     notion: "p2-s3",
     kind: "connaissance",
     official: true,
-    difficulty: 2,
+    difficulty: 3,
     question: "Quelle est la devise de l'Union européenne ?",
     choices: [
       "« Unie dans la diversité »",
       "« Unie dans la paix »",
       "« L'union fait la force »",
-      "« Liberté, Égalité, Fraternité »"
+      "« Unie dans la solidarité »"
     ],
-    explication: "La devise de l'UE est « Unie dans la diversité ».",
+    explication: "La devise de l'UE est « Unie dans la diversité ». « L'union fait la force » est la devise de la Belgique.",
     page: 22
   },
   {
@@ -898,9 +1510,27 @@ export const si: Question[] = [
       "L'Ode à la joie",
       "Le Beau Danube bleu",
       "Le Boléro",
-      "L'Hymne à la paix"
+      "La Symphonie du Nouveau Monde"
     ],
-    explication: "L'hymne européen est l'« Ode à la joie » de Beethoven.",
+    explication: "L'hymne européen est l'« Ode à la joie », extraite de la Neuvième symphonie de Beethoven et adoptée en 1985.",
+    page: 22
+  },
+  {
+    id: "an-si-053-v1",
+    theme: "si",
+    notion: "p2-s3",
+    kind: "connaissance",
+    official: false,
+    variantOf: "an-si-053",
+    difficulty: 3,
+    question: "En quelle année l'Ode à la joie a-t-elle été adoptée comme hymne européen ?",
+    choices: [
+      "1985",
+      "1957",
+      "1992",
+      "2002"
+    ],
+    explication: "L'hymne européen a été adopté en 1985. 1957 correspond au traité de Rome, 1992 au traité de Maastricht, 2002 à l'arrivée de l'euro.",
     page: 22
   },
   {
@@ -909,7 +1539,7 @@ export const si: Question[] = [
     notion: "p2-s3",
     kind: "connaissance",
     official: true,
-    difficulty: 2,
+    difficulty: 3,
     question: "De quoi est composé le drapeau européen ?",
     choices: [
       "De douze étoiles dorées en cercle sur fond bleu",
@@ -917,7 +1547,25 @@ export const si: Question[] = [
       "De douze étoiles blanches en cercle sur fond bleu",
       "De douze étoiles dorées en carré sur fond blanc"
     ],
-    explication: "Les douze étoiles en cercle symbolisent l'unité et l'harmonie entre les peuples d'Europe.",
+    explication: "Le drapeau compte douze étoiles dorées en cercle sur fond bleu, quel que soit le nombre d'États membres (27). Elles symbolisent l'unité et l'harmonie entre les Européens.",
+    page: 22
+  },
+  {
+    id: "an-si-054-v1",
+    theme: "si",
+    notion: "p2-s3",
+    kind: "connaissance",
+    official: false,
+    variantOf: "an-si-054",
+    difficulty: 2,
+    question: "Que symbolisent les douze étoiles du drapeau européen ?",
+    choices: [
+      "L'unité et l'harmonie entre les Européens",
+      "Les douze pays fondateurs de la CEE",
+      "Les douze premières monnaies remplacées par l'euro",
+      "Les douze membres de la première Commission"
+    ],
+    explication: "Les douze étoiles symbolisent l'unité et l'harmonie entre les Européens, indépendamment du nombre d'États. La CEE n'avait que six pays fondateurs.",
     page: 22
   },
   {
@@ -934,7 +1582,25 @@ export const si: Question[] = [
       "Les chefs d'État et de gouvernement",
       "Les citoyens de l'Union, au suffrage universel indirect"
     ],
-    explication: "Les eurodéputés sont élus tous les 5 ans par les citoyens de chaque État membre.",
+    explication: "Tous les cinq ans, les citoyens de l'Union élisent directement leurs députés européens. Ils ne sont pas désignés par les parlements nationaux.",
+    page: 22
+  },
+  {
+    id: "an-si-055-v1",
+    theme: "si",
+    notion: "p2-s3",
+    kind: "connaissance",
+    official: false,
+    variantOf: "an-si-055",
+    difficulty: 2,
+    question: "Tous les combien de temps les citoyens élisent-ils les députés européens ?",
+    choices: [
+      "Tous les 5 ans",
+      "Tous les 6 ans",
+      "Tous les 4 ans",
+      "Tous les 7 ans"
+    ],
+    explication: "Les députés du Parlement européen sont élus tous les cinq ans par les citoyens de l'Union.",
     page: 22
   },
   {
@@ -943,33 +1609,34 @@ export const si: Question[] = [
     notion: "p2-s3",
     kind: "connaissance",
     official: true,
-    difficulty: 2,
+    difficulty: 3,
     question: "Où est le siège du Parlement européen ?",
     choices: [
       "À Strasbourg",
       "À Bruxelles",
-      "À Francfort",
-      "À La Haye"
+      "À Luxembourg",
+      "À Francfort"
     ],
-    explication: "Le siège officiel du Parlement européen est à Strasbourg, en France.",
+    explication: "Le siège du Parlement européen est à Strasbourg, en France. Bruxelles est le siège de la Commission européenne, Francfort celui de la BCE.",
     page: 22
   },
   {
-    id: "p2-s1-qcm-001",
+    id: "an-si-056-v1",
     theme: "si",
-    notion: "p2-s1",
+    notion: "p2-s3",
     kind: "connaissance",
     official: false,
+    variantOf: "an-si-056",
     difficulty: 2,
-    question: "Pour combien de temps le Président de la République est-il élu ?",
+    question: "Quelle institution européenne a son siège à Strasbourg ?",
     choices: [
-      "5 ans, renouvelables une fois",
-      "7 ans, renouvelables une fois",
-      "5 ans, sans limite de mandats",
-      "6 ans, renouvelables une fois"
+      "Le Parlement européen",
+      "La Commission européenne",
+      "La Banque centrale européenne",
+      "Le Conseil de l'Union européenne"
     ],
-    explication: "Le Président de la République est élu au suffrage universel direct pour cinq ans, renouvelables une fois.",
-    page: 16
+    explication: "Le Parlement européen siège à Strasbourg. La Commission et le Conseil de l'UE sont à Bruxelles, la BCE à Francfort.",
+    page: 22
   },
   {
     id: "p2-s1-qcm-002",
@@ -982,62 +1649,11 @@ export const si: Question[] = [
     choices: [
       "577",
       "348",
-      "500",
+      "555",
       "925"
     ],
-    explication: "Les députés sont au nombre de 577, élus au suffrage universel direct tous les cinq ans. Les sénateurs sont 348.",
+    explication: "L'Assemblée nationale compte 577 députés, élus au suffrage universel direct. 348 est le nombre de sénateurs.",
     page: 16
-  },
-  {
-    id: "p2-s1-qcm-003",
-    theme: "si",
-    notion: "p2-s1",
-    kind: "connaissance",
-    official: false,
-    difficulty: 2,
-    question: "Comment les sénateurs sont-ils élus ?",
-    choices: [
-      "Au suffrage universel indirect, pour 6 ans",
-      "Au suffrage universel direct, pour 5 ans",
-      "Nommés par le Président de la République",
-      "Au suffrage universel direct, pour 6 ans"
-    ],
-    explication: "Les 348 sénateurs sont élus au suffrage universel indirect (par des élus) pour un mandat de six ans.",
-    page: 16
-  },
-  {
-    id: "p2-s1-qcm-004",
-    theme: "si",
-    notion: "p2-s1",
-    kind: "connaissance",
-    official: false,
-    difficulty: 2,
-    question: "Quel est le rôle du pouvoir législatif ?",
-    choices: [
-      "Élaborer et voter les lois",
-      "Mettre en œuvre les lois",
-      "Rendre la justice",
-      "Contrôler les élections"
-    ],
-    explication: "Le pouvoir législatif (députés et sénateurs) élabore et vote les lois ; l'exécutif les met en œuvre ; le judiciaire rend la justice.",
-    page: 16
-  },
-  {
-    id: "p2-s1-qcm-005",
-    theme: "si",
-    notion: "p2-s1",
-    kind: "connaissance",
-    official: false,
-    difficulty: 2,
-    question: "Qui veille à la conformité des lois avec la Constitution ?",
-    choices: [
-      "Le Conseil constitutionnel",
-      "Le Sénat",
-      "Le Premier ministre",
-      "La Cour de cassation"
-    ],
-    explication: "Le Conseil constitutionnel est chargé de veiller à la conformité des lois avec la Constitution et contrôle la régularité des élections nationales.",
-    page: 17
   },
   {
     id: "p2-s1-qcm-006",
@@ -1045,15 +1661,15 @@ export const si: Question[] = [
     notion: "p2-s1",
     kind: "connaissance",
     official: false,
-    difficulty: 2,
+    difficulty: 3,
     question: "En quelle année les femmes françaises ont-elles obtenu le droit de vote ?",
     choices: [
       "1944",
+      "1945",
       "1848",
-      "1958",
-      "1936"
+      "1946"
     ],
-    explication: "Les femmes françaises ont obtenu le droit de vote en avril 1944 et ont voté pour la première fois un an plus tard, en avril 1945.",
+    explication: "Les femmes ont obtenu le droit de vote en avril 1944 et ont voté pour la première fois un an plus tard, en avril 1945.",
     page: 17
   },
   {
@@ -1067,10 +1683,10 @@ export const si: Question[] = [
     choices: [
       "1848",
       "1789",
-      "1944",
-      "1918"
+      "1830",
+      "1875"
     ],
-    explication: "Le premier vote au suffrage universel a eu lieu en 1848, mais il ne concernait que les hommes en âge de voter.",
+    explication: "Le premier vote au suffrage universel a eu lieu en 1848, mais il ne concernait que les hommes. Les femmes n'ont voté qu'à partir de 1945.",
     page: 17
   },
   {
@@ -1082,30 +1698,13 @@ export const si: Question[] = [
     difficulty: 2,
     question: "Laquelle de ces conditions n'est PAS requise pour voter en France ?",
     choices: [
-      "Avoir un emploi",
+      "Payer l'impôt sur le revenu",
       "Être majeur (18 ans)",
       "Être inscrit sur les listes électorales",
       "Ne pas avoir été privé de ses droits civiques"
     ],
-    explication: "Pour voter il faut : la nationalité française (ou UE pour certaines élections), être majeur, ne pas être privé de ses droits civiques et être inscrit sur les listes électorales. L'emploi n'a rien à voir.",
+    explication: "Pour voter, il faut être français (ou européen pour certaines élections), majeur, non privé de ses droits civiques et inscrit sur les listes. Le paiement d'un impôt n'est pas exigé : le suffrage est universel.",
     page: 17
-  },
-  {
-    id: "p2-s1-qcm-009",
-    theme: "si",
-    notion: "p2-s1",
-    kind: "connaissance",
-    official: false,
-    difficulty: 2,
-    question: "Qui nomme le Premier ministre ?",
-    choices: [
-      "Le Président de la République",
-      "L'Assemblée nationale",
-      "Le Sénat",
-      "Le Conseil constitutionnel"
-    ],
-    explication: "Le Président de la République nomme le Premier ministre, qui dirige l'action du Gouvernement. Le Gouvernement détermine et conduit la politique de la Nation.",
-    page: 18
   },
   {
     id: "p2-s1-qcm-010",
@@ -1117,11 +1716,11 @@ export const si: Question[] = [
     question: "Que garantit le caractère secret du vote ?",
     choices: [
       "Le passage par un isoloir et le dépôt du bulletin sous enveloppe dans l'urne",
-      "Le vote par correspondance uniquement",
-      "L'anonymat sur les listes électorales",
-      "L'interdiction des panneaux d'affichage électoral"
+      "Le vote par procuration confié à un proche",
+      "Le dépôt du bulletin à découvert devant les assesseurs",
+      "La signature de la liste d'émargement par chaque électeur"
     ],
-    explication: "Le vote est personnel et secret : on passe par un isoloir pour mettre son bulletin dans une enveloppe, déposée ensuite dans une urne. Il est interdit d'entrer à plusieurs dans un isoloir.",
+    explication: "Le vote est personnel et secret : on passe par un isoloir pour mettre son bulletin dans une enveloppe, déposée ensuite dans l'urne. Il est interdit d'entrer à plusieurs dans un isoloir.",
     page: 17
   },
   {
@@ -1130,15 +1729,15 @@ export const si: Question[] = [
     notion: "p2-s1",
     kind: "connaissance",
     official: false,
-    difficulty: 2,
+    difficulty: 3,
     question: "Faut-il présenter une pièce d'identité pour voter en France ?",
     choices: [
       "Oui, sauf exception dans les communes de moins de 1 000 habitants",
-      "Non, jamais",
-      "Oui, uniquement un passeport",
-      "Non, la carte électorale suffit toujours"
+      "Oui, sauf exception dans les communes de moins de 3 500 habitants",
+      "Oui, dans toutes les communes, sans aucune exception",
+      "Non, la carte électorale suffit dans toutes les communes"
     ],
-    explication: "Les Français et les ressortissants de l'UE doivent présenter une pièce d'identité pour voter, sauf dans les communes de moins de 1 000 habitants où ce n'est pas obligatoire.",
+    explication: "Les Français et les ressortissants de l'UE doivent présenter une pièce d'identité, sauf dans les communes de moins de 1 000 habitants. Même là, le président du bureau peut demander une preuve d'identité.",
     page: 17
   },
   {
@@ -1147,15 +1746,15 @@ export const si: Question[] = [
     notion: "p2-s2",
     kind: "connaissance",
     official: false,
-    difficulty: 2,
+    difficulty: 3,
     question: "Combien la France compte-t-elle de régions au total ?",
     choices: [
       "18",
       "13",
       "22",
-      "27"
+      "17"
     ],
-    explication: "La France compte 13 régions métropolitaines et 5 régions d'outre-mer, soit 18 régions en tout.",
+    explication: "La France compte 13 régions métropolitaines et 5 régions d'outre-mer, soit 18 régions en tout. 13 ne compte que la métropole.",
     page: 19
   },
   {
@@ -1170,60 +1769,9 @@ export const si: Question[] = [
       "Mayotte",
       "La Réunion",
       "La Guyane",
-      "La Corse-du-Sud"
+      "La Martinique"
     ],
     explication: "Mayotte est devenue le 101e département français en 2011.",
-    page: 19
-  },
-  {
-    id: "p2-s2-qcm-003",
-    theme: "si",
-    notion: "p2-s2",
-    kind: "connaissance",
-    official: false,
-    difficulty: 2,
-    question: "Qui est responsable des écoles primaires publiques ?",
-    choices: [
-      "Les communes",
-      "Les départements",
-      "Les régions",
-      "L'État uniquement"
-    ],
-    explication: "Les communes gèrent les écoles primaires (maternelles et élémentaires), les départements les collèges, et les régions les lycées.",
-    page: 19
-  },
-  {
-    id: "p2-s2-qcm-004",
-    theme: "si",
-    notion: "p2-s2",
-    kind: "connaissance",
-    official: false,
-    difficulty: 2,
-    question: "Qui est responsable des collèges publics ?",
-    choices: [
-      "Les départements",
-      "Les communes",
-      "Les régions",
-      "Les intercommunalités"
-    ],
-    explication: "Les départements sont responsables des collèges publics, de l'action sociale, des routes départementales et de la protection de l'enfance.",
-    page: 19
-  },
-  {
-    id: "p2-s2-qcm-005",
-    theme: "si",
-    notion: "p2-s2",
-    kind: "connaissance",
-    official: false,
-    difficulty: 2,
-    question: "Qui est responsable de la construction et de l'entretien des lycées publics ?",
-    choices: [
-      "Les régions",
-      "Les communes",
-      "Les départements",
-      "Le ministère de l'Éducation"
-    ],
-    explication: "Les régions sont chargées des lycées publics, des transports publics, du développement économique et de la formation professionnelle.",
     page: 19
   },
   {
@@ -1238,26 +1786,9 @@ export const si: Question[] = [
       "Les communes",
       "Les préfectures",
       "Les départements",
-      "Les tribunaux"
+      "Les tribunaux judiciaires"
     ],
-    explication: "Les communes tiennent les registres de l'état civil : elles enregistrent les naissances, les mariages et les décès.",
-    page: 19
-  },
-  {
-    id: "p2-s2-qcm-007",
-    theme: "si",
-    notion: "p2-s2",
-    kind: "connaissance",
-    official: false,
-    difficulty: 2,
-    question: "Qui représente l'État dans les régions et départements ?",
-    choices: [
-      "Les préfets",
-      "Les maires",
-      "Les présidents de conseil régional",
-      "Les sénateurs"
-    ],
-    explication: "L'État est représenté par les préfets de région et de département (ou par les hauts-commissaires dans certaines collectivités d'outre-mer).",
+    explication: "Les communes tiennent les registres de l'état civil : elles enregistrent les naissances, les mariages et les décès. Le maire y agit comme officier d'état civil.",
     page: 19
   },
   {
@@ -1272,27 +1803,10 @@ export const si: Question[] = [
       "La Réunion",
       "La Polynésie française",
       "La Nouvelle-Calédonie",
-      "Wallis-et-Futuna"
+      "Saint-Pierre-et-Miquelon"
     ],
-    explication: "Guadeloupe, Martinique, Mayotte, Guyane et La Réunion sont à la fois départements et régions. Les autres sont des collectivités à statut particulier.",
+    explication: "Guadeloupe, Martinique, Mayotte, Guyane et La Réunion sont à la fois départements et régions. Les autres sont des collectivités d'outre-mer à statut particulier.",
     page: 20
-  },
-  {
-    id: "p2-s2-qcm-009",
-    theme: "si",
-    notion: "p2-s2",
-    kind: "connaissance",
-    official: false,
-    difficulty: 2,
-    question: "Combien la France compte-t-elle de départements ?",
-    choices: [
-      "101",
-      "96",
-      "100",
-      "112"
-    ],
-    explication: "La France compte 101 départements : 96 en métropole et 5 en outre-mer.",
-    page: 19
   },
   {
     id: "p2-s2-qcm-010",
@@ -1303,12 +1817,12 @@ export const si: Question[] = [
     difficulty: 2,
     question: "Que gèrent typiquement les intercommunalités ?",
     choices: [
-      "L'eau, l'assainissement, les déchets, les transports urbains",
-      "Les collèges et les lycées",
-      "La justice et la police nationale",
-      "Les impôts nationaux"
+      "L'eau, l'assainissement, les déchets et les transports urbains",
+      "Les collèges, l'action sociale et la protection de l'enfance",
+      "Les lycées, la formation professionnelle et les TER",
+      "L'état civil, les mariages et les listes électorales"
     ],
-    explication: "Les communes regroupées en intercommunalités (communautés de communes, métropoles…) gèrent des services publics comme l'eau, l'assainissement, les déchets ou les transports urbains.",
+    explication: "Les intercommunalités (communautés de communes, métropoles…) gèrent des services publics comme l'eau, l'assainissement, les déchets ou les transports urbains. Collèges et action sociale relèvent du département, lycées et formation professionnelle de la région.",
     page: 19
   },
   {
@@ -1317,13 +1831,13 @@ export const si: Question[] = [
     notion: "p2-s2",
     kind: "connaissance",
     official: false,
-    difficulty: 2,
+    difficulty: 3,
     question: "Les ressortissants de l'Union européenne peuvent-ils se présenter comme candidats aux élections municipales en France ?",
     choices: [
       "Oui, ils peuvent voter et se présenter comme candidats",
-      "Non, ils peuvent seulement voter",
-      "Non, ils n'ont aucun droit électoral en France",
-      "Oui, mais uniquement comme conseillers régionaux"
+      "Non, ils peuvent seulement y voter",
+      "Non, ils peuvent seulement voter aux européennes",
+      "Oui, mais seulement s'ils résident en France depuis dix ans"
     ],
     explication: "Les élections municipales permettent aux citoyens français et aux ressortissants de l'Union européenne de voter et de se présenter comme candidats.",
     page: 19
@@ -1334,7 +1848,7 @@ export const si: Question[] = [
     notion: "p2-s2",
     kind: "connaissance",
     official: false,
-    difficulty: 2,
+    difficulty: 3,
     question: "Quel est le numéro de département de la Guadeloupe ?",
     choices: [
       "971",
@@ -1352,49 +1866,15 @@ export const si: Question[] = [
     kind: "connaissance",
     official: false,
     difficulty: 2,
-    question: "Parmi ces noms, lequel est celui d'une région métropolitaine française ?",
+    question: "Lequel de ces noms est celui d'une des 13 régions métropolitaines actuelles ?",
     choices: [
       "Nouvelle-Aquitaine",
-      "Nouvelle-Bretagne",
-      "Grande-Provence",
-      "Île-Bourgogne"
+      "Midi-Pyrénées",
+      "Rhône-Alpes",
+      "Nord-Pas-de-Calais"
     ],
-    explication: "La Nouvelle-Aquitaine fait partie des 13 régions métropolitaines, avec entre autres Hauts-de-France, Normandie, Île-de-France, Grand Est, Bretagne, Pays de la Loire, Centre-Val de Loire, Bourgogne-Franche-Comté, Auvergne-Rhône-Alpes, Occitanie, Provence-Alpes-Côte d'Azur et Corse.",
+    explication: "La Nouvelle-Aquitaine fait partie des 13 régions métropolitaines. Midi-Pyrénées, Rhône-Alpes et Nord-Pas-de-Calais sont d'anciennes régions, fondues respectivement dans l'Occitanie, l'Auvergne-Rhône-Alpes et les Hauts-de-France.",
     page: 21
-  },
-  {
-    id: "p2-s3-qcm-001",
-    theme: "si",
-    notion: "p2-s3",
-    kind: "connaissance",
-    official: false,
-    difficulty: 2,
-    question: "Quel traité a créé l'Union européenne en 1992 ?",
-    choices: [
-      "Le traité de Maastricht",
-      "Le traité de Rome",
-      "Le traité de Lisbonne",
-      "Le traité de Paris"
-    ],
-    explication: "Le traité de Maastricht, signé en 1992, crée l'Union européenne, la citoyenneté européenne et la Banque centrale européenne. Le traité de Rome (1957) avait créé la CEE.",
-    page: 22
-  },
-  {
-    id: "p2-s3-qcm-002",
-    theme: "si",
-    notion: "p2-s3",
-    kind: "connaissance",
-    official: false,
-    difficulty: 2,
-    question: "Combien d'États membres compte l'Union européenne aujourd'hui ?",
-    choices: [
-      "27",
-      "28",
-      "25",
-      "30"
-    ],
-    explication: "L'UE compte 27 États membres depuis le départ du Royaume-Uni (Brexit) en 2020.",
-    page: 22
   },
   {
     id: "p2-s3-qcm-003",
@@ -1402,50 +1882,16 @@ export const si: Question[] = [
     notion: "p2-s3",
     kind: "connaissance",
     official: false,
-    difficulty: 2,
+    difficulty: 3,
     question: "Lequel de ces pays n'est PAS un pays fondateur de la construction européenne ?",
     choices: [
-      "L'Espagne",
-      "La France",
-      "L'Italie",
+      "Le Danemark",
+      "La Belgique",
+      "Les Pays-Bas",
       "Le Luxembourg"
     ],
-    explication: "Les six fondateurs (1957) sont la France, l'Allemagne, l'Italie, la Belgique, les Pays-Bas et le Luxembourg. L'Espagne a adhéré en 1986.",
+    explication: "Les six fondateurs de 1957 sont la France, l'Allemagne, l'Italie, la Belgique, les Pays-Bas et le Luxembourg. Le Danemark a adhéré en 1973.",
     page: 22
-  },
-  {
-    id: "p2-s3-qcm-004",
-    theme: "si",
-    notion: "p2-s3",
-    kind: "connaissance",
-    official: false,
-    difficulty: 2,
-    question: "Combien d'étoiles figurent sur le drapeau européen ?",
-    choices: [
-      "12",
-      "27",
-      "15",
-      "9"
-    ],
-    explication: "Le drapeau européen porte 12 étoiles, symbole de l'unité et de l'harmonie entre les Européens — quel que soit le nombre d'États membres.",
-    page: 22
-  },
-  {
-    id: "p2-s3-qcm-005",
-    theme: "si",
-    notion: "p2-s3",
-    kind: "connaissance",
-    official: false,
-    difficulty: 2,
-    question: "Quel est l'hymne de l'Union européenne ?",
-    choices: [
-      "L'Ode à la joie (Beethoven)",
-      "La Marseillaise",
-      "Le Chant des partisans",
-      "L'Hymne à l'amour"
-    ],
-    explication: "L'hymne européen est l'Ode à la joie, extrait de la Neuvième symphonie de Beethoven, adopté en 1985.",
-    page: 23
   },
   {
     id: "p2-s3-qcm-006",
@@ -1453,84 +1899,16 @@ export const si: Question[] = [
     notion: "p2-s3",
     kind: "connaissance",
     official: false,
-    difficulty: 2,
+    difficulty: 3,
     question: "Depuis quand les pièces et billets en euros circulent-ils ?",
     choices: [
       "Le 1er janvier 2002",
-      "1992",
-      "1999",
-      "Le 1er janvier 2000"
+      "Le 1er janvier 1999",
+      "Le 1er janvier 2000",
+      "Le 1er janvier 1993"
     ],
-    explication: "Les pièces et billets en euros sont mis en circulation depuis le 1er janvier 2002. La France partage l'euro avec 20 autres pays.",
+    explication: "Les pièces et billets en euros circulent depuis le 1er janvier 2002, d'abord dans 12 pays. La France partage aujourd'hui l'euro avec 20 autres pays de l'UE.",
     page: 23
-  },
-  {
-    id: "p2-s3-qcm-007",
-    theme: "si",
-    notion: "p2-s3",
-    kind: "connaissance",
-    official: false,
-    difficulty: 2,
-    question: "Où siège le Parlement européen ?",
-    choices: [
-      "À Strasbourg",
-      "À Bruxelles",
-      "À Paris",
-      "À Francfort"
-    ],
-    explication: "Le Parlement européen siège à Strasbourg, en France. La Commission européenne est à Bruxelles et la BCE à Francfort.",
-    page: 23
-  },
-  {
-    id: "p2-s3-qcm-008",
-    theme: "si",
-    notion: "p2-s3",
-    kind: "connaissance",
-    official: false,
-    difficulty: 2,
-    question: "Quelle est la devise de l'Union européenne ?",
-    choices: [
-      "« Unie dans la diversité »",
-      "« Liberté, égalité, fraternité »",
-      "« La paix par l'union »",
-      "« Ensemble pour l'Europe »"
-    ],
-    explication: "La devise de l'UE, adoptée en 2020, est « Unie dans la diversité ».",
-    page: 23
-  },
-  {
-    id: "p2-s3-qcm-009",
-    theme: "si",
-    notion: "p2-s3",
-    kind: "connaissance",
-    official: false,
-    difficulty: 2,
-    question: "Pourquoi la journée de l'Europe est-elle célébrée le 9 mai ?",
-    choices: [
-      "En mémoire de la déclaration de Robert Schuman du 9 mai 1950",
-      "C'est la date de signature du traité de Rome",
-      "C'est la date d'entrée en vigueur de l'euro",
-      "C'est l'anniversaire du traité de Maastricht"
-    ],
-    explication: "Le 9 mai 1950, Robert Schuman présentait les bases de la coopération européenne — l'acte de naissance de l'UE. Le 9 mai commémore la paix et l'unité en Europe.",
-    page: 23
-  },
-  {
-    id: "p2-s3-qcm-010",
-    theme: "si",
-    notion: "p2-s3",
-    kind: "connaissance",
-    official: false,
-    difficulty: 2,
-    question: "Quel événement a fait passer l'UE de 28 à 27 membres en 2020 ?",
-    choices: [
-      "Le Brexit (départ du Royaume-Uni)",
-      "Le départ de la Norvège",
-      "L'adhésion de la Croatie",
-      "La réunification allemande"
-    ],
-    explication: "Le Royaume-Uni a quitté l'Union européenne en 2020 (Brexit), ramenant le nombre d'États membres à 27.",
-    page: 22
   },
   {
     id: "p2-s3-qcm-011",
@@ -1538,15 +1916,15 @@ export const si: Question[] = [
     notion: "p2-s3",
     kind: "connaissance",
     official: false,
-    difficulty: 2,
+    difficulty: 3,
     question: "Quel est le rôle de la Commission européenne ?",
     choices: [
-      "C'est l'organe exécutif de l'UE, basé à Bruxelles",
-      "Elle vote les lois au nom des citoyens européens",
-      "Elle gère la politique monétaire et l'euro",
-      "Elle rend la justice au niveau européen"
+      "C'est l'organe exécutif de l'UE, qui siège à Bruxelles",
+      "C'est l'organe exécutif de l'UE, qui siège à Strasbourg",
+      "C'est l'assemblée élue de l'UE, qui siège à Bruxelles",
+      "C'est la banque centrale de l'UE, qui siège à Francfort"
     ],
-    explication: "La Commission européenne, créée en 1958 et basée à Bruxelles, est l'organe exécutif de l'Union européenne. Le Parlement (Strasbourg) vote les lois et la BCE (Francfort) gère la politique monétaire.",
+    explication: "La Commission européenne, créée en 1958, est l'organe exécutif de l'UE et siège à Bruxelles. Strasbourg accueille le Parlement européen, Francfort la BCE.",
     page: 23
   },
   {
@@ -1555,15 +1933,15 @@ export const si: Question[] = [
     notion: "p2-s3",
     kind: "connaissance",
     official: false,
-    difficulty: 2,
+    difficulty: 3,
     question: "En 2004, combien de pays ont rejoint l'Union européenne en une seule vague d'élargissement ?",
     choices: [
       "10",
-      "6",
-      "5",
-      "3"
+      "12",
+      "8",
+      "5"
     ],
-    explication: "En 2004, 10 pays d'Europe centrale et de l'Est (dont la Pologne et la Hongrie) ont rejoint l'UE, la faisant passer de 15 à 25 États membres.",
+    explication: "En 2004, 10 pays (dont la Pologne, la Hongrie, Malte et Chypre) ont rejoint l'UE, qui est passée de 15 à 25 membres.",
     page: 22
   },
 ];

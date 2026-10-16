@@ -105,6 +105,8 @@ export const attempts = sqliteTable(
     aiFeedback: text("ai_feedback"),
     gradedBy: text("graded_by", { enum: ["local", "ai", "self"] }).notNull(),
     createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
+    /** v2 : leçon (ou examen blanc) dans laquelle la réponse a été donnée */
+    leconId: text("lecon_id"),
   },
   (t) => [index("idx_attempts_user").on(t.userId, t.createdAt)],
 );
@@ -122,6 +124,8 @@ export const userStats = sqliteTable("user_stats", {
   streakFreezes: integer("streak_freezes").notNull().default(2),
   totalReviews: integer("total_reviews").notNull().default(0),
   totalAttempts: integer("total_attempts").notNull().default(0),
+  /** v2 : créneaux des rappels push, "midi", "soir" ou "midi,soir" */
+  reminderSlots: text("reminder_slots").notNull().default("soir"),
 });
 
 /** Journal d'XP (source de vérité de l'XP du jour et de l'historique). */
@@ -189,4 +193,32 @@ export const pushSubscriptions = sqliteTable(
     createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
   },
   (t) => [index("idx_push_user").on(t.userId)],
+);
+
+/* ---------- v2 : leçons quotidiennes ---------- */
+// La mémoire de chaque question n'est pas stockée : elle se rejoue depuis `attempts`
+// (lib/memoire.ts), seule source de vérité — l'historique v1 compte donc d'emblée.
+
+/** Une leçon de 15 questions (ou un examen blanc), avec son plan figé. */
+export const lecons = sqliteTable(
+  "lecons",
+  {
+    id: text("id")
+      .primaryKey()
+      .$defaultFn(() => crypto.randomUUID()),
+    userId: text("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    /** "YYYY-MM-DD" en Europe/Paris */
+    day: text("day").notNull(),
+    /** JSON [{ id, order, role }] : questions, ordre d'affichage des choix, rôle dans la leçon */
+    plan: text("plan").notNull(),
+    /** JSON { pv: 3.1, si: 2.4, … } : score attendu par thème au début */
+    before: text("before").notNull(),
+    correct: integer("correct").notNull().default(0),
+    answered: integer("answered").notNull().default(0),
+    createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
+    finishedAt: integer("finished_at", { mode: "timestamp" }),
+  },
+  (t) => [index("idx_lecons_user").on(t.userId, t.day)],
 );
