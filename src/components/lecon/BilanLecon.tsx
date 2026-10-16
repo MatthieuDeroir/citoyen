@@ -63,7 +63,7 @@ export function BilanLeconView({ bilan }: { bilan: BilanLecon }) {
                     style={{ width: `${(Math.min(t.avant, t.apres) / t.max) * 100}%` }}
                   />
                   <motion.div
-                    className={`absolute inset-y-0 left-0 rounded-full ${d < 0 ? "bg-accent" : "bg-primary"}`}
+                    className={`absolute inset-y-0 left-0 rounded-full ${d <= -0.05 ? "bg-accent" : "bg-primary"}`}
                     initial={{ width: `${(t.avant / t.max) * 100}%` }}
                     animate={{ width: `${(t.apres / t.max) * 100}%` }}
                     transition={{ delay: 0.3 + i * 0.12, duration: 0.7, ease: "easeOut" }}

@@ -15,6 +15,8 @@ interface Props {
   jours: JourPoint[];
   today: string;
   depart: string;
+  /** acquises au départ : origine de la droite de base */
+  auDepart: number;
   totalCore: number;
   /** questions acquises nécessaires pour un score attendu de 32/40 */
   seuilAdmission: number | null;
@@ -28,7 +30,9 @@ interface Props {
  * premier jour) et projection au rythme choisi jusqu'à la banque complète.
  * Un seul axe : des questions.
  */
-export function CourbeProgres({ jours, today, depart, totalCore, seuilAdmission, rythmes, initial }: Props) {
+export function CourbeProgres({ jours: tous, today, depart, auDepart, totalCore, seuilAdmission, rythmes, initial }: Props) {
+  // l'historique antérieur au départ (v1) n'est pas tracé : la courbe part du départ
+  const jours = tous.filter((j) => j.day >= depart);
   const [cle, setCle] = useState<Rythme["cle"]>(initial);
   const [hover, setHover] = useState<number | null>(null);
   const svgRef = useRef<SVGSVGElement>(null);
@@ -69,7 +73,7 @@ export function CourbeProgres({ jours, today, depart, totalCore, seuilAdmission,
   const yTicks = [0, Math.round(totalCore / 2), totalCore];
   const h = hover !== null ? jours[hover] : null;
   const baseAt = (day: string) =>
-    Math.min(totalCore, Math.max(0, ((t(day) - geo.x0) / DAY_MS + 1) * base.parJour));
+    Math.min(totalCore, auDepart + Math.max(0, ((t(day) - geo.x0) / DAY_MS + 1) * base.parJour));
 
   function onMove(e: React.PointerEvent<SVGSVGElement>) {
     const svg = svgRef.current;
@@ -167,7 +171,7 @@ export function CourbeProgres({ jours, today, depart, totalCore, seuilAdmission,
           {/* droite de base */}
           <path
             d={path([
-              [sx(geo.x0), sy(0)],
+              [sx(geo.x0), sy(auDepart)],
               [sx(baseEnd), sy(totalCore)],
             ])}
             stroke="var(--muted)"

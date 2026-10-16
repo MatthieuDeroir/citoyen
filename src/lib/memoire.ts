@@ -363,6 +363,12 @@ export function acquisitionsPourAdmission(
 /** Une leçon = 15 questions ; rythme de base = 80 % de 15, à l'image des 32/40. */
 export const LECON_TAILLE = 15;
 export const RYTHME_BASE = (LECON_TAILLE * EXAM_PASS) / 40;
+/**
+ * Lancement de la v2 : la droite de base et les rythmes partent d'ici au plus
+ * tôt. Les questions acquises avant restent acquises, mais ne comptent pas
+ * comme du rythme.
+ */
+export const DEBUT_V2 = "2026-10-16";
 
 export interface Rythme {
   cle: "base" | "debut" | "mois" | "semaine";
@@ -378,6 +384,8 @@ export interface Rythme {
 
 export interface Projection {
   totalCore: number;
+  /** acquises au départ (veille du premier jour compté) : point de départ de la droite de base */
+  auDepart: number;
   acquises: number;
   maitrisees: number;
   restantPourAdmission: number | null;
@@ -398,7 +406,8 @@ export function projeter(
   const last = jours[jours.length - 1];
   const acquises = last?.acquises ?? 0;
   const maitrisees = last?.maitrisees ?? 0;
-  const depart = jours[0]?.day ?? today;
+  const premier = jours[0]?.day ?? today;
+  const depart = premier > DEBUT_V2 ? premier : DEBUT_V2 > today ? today : DEBUT_V2;
   const restant = totalCore - acquises;
 
   const ilYa = (n: number) => {
@@ -407,9 +416,10 @@ export function projeter(
     return p?.acquises ?? 0;
   };
   const ecoules = Math.max(1, daysBetween(depart, today) + 1);
+  // acquises gagnées sur les n derniers jours (au plus depuis le départ)
   const pente = (n: number) => {
     const span = Math.min(n, ecoules);
-    return (acquises - (span >= ecoules ? 0 : ilYa(span))) / span;
+    return (acquises - ilYa(span)) / span;
   };
 
   const dated = (from: string, perDay: number, need: number | null) => {
@@ -419,8 +429,9 @@ export function projeter(
   };
 
   const rythmes: Rythme[] = [];
-  // droite de base : depuis le premier jour, toute la banque à 12 par jour
-  const baseAcquise = addDays(depart, Math.ceil(totalCore / RYTHME_BASE));
+  // droite de base : depuis le départ, ce qui restait alors à 12 par jour
+  const auDepart = ilYa(daysBetween(depart, today) + 1);
+  const baseAcquise = addDays(depart, Math.ceil((totalCore - auDepart) / RYTHME_BASE));
   rythmes.push({
     cle: "base",
     label: "Rythme de base (12/jour)",
@@ -447,7 +458,7 @@ export function projeter(
       });
     }
   }
-  return { totalCore, acquises, maitrisees, restantPourAdmission, rythmes, depart };
+  return { totalCore, auDepart, acquises, maitrisees, restantPourAdmission, rythmes, depart };
 }
 
 /* ------------------------------------------------------------------ */
@@ -621,8 +632,9 @@ function trierParDifficulte(qs: Question[], ordre: (1 | 2 | 3)[]): Question[] {
  * Rythme qui sert à annoncer LA date : celui des 7 derniers jours dès qu'il y a
  * une semaine d'historique et un rythme positif, sinon le rythme de base.
  */
-export function rythmeDeReference(p: Projection, jours: number): Rythme {
+export function rythmeDeReference(p: Projection, now: Date = new Date()): Rythme {
   const semaine = p.rythmes.find((r) => r.cle === "semaine");
+  const jours = daysBetween(p.depart, parisDay(now)) + 1;
   if (semaine && jours >= 7 && semaine.parJour > 0) return semaine;
   return p.rythmes[0];
 }

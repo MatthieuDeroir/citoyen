@@ -116,14 +116,14 @@ export async function terminerLecon(leconId: string): Promise<BilanLecon> {
     .where(and(eq(lecons.id, leconId), isNull(lecons.finishedAt)));
   await markActivity(userId, now);
 
-  const [{ score, projection, rejeu }, leconsAujourdhui, stats] = await Promise.all([
+  const [{ score, projection }, leconsAujourdhui, stats] = await Promise.all([
     bilanUtilisateur(userId, now),
     leconsTermineesDuJour(userId, now),
     db.select().from(userStats).where(eq(userStats.userId, userId)),
   ]);
   const before = JSON.parse(row.before) as ScoresParTheme;
   const scoreAvant = Object.values(before).reduce((a, b) => a + b, 0);
-  const ref = rythmeDeReference(projection, rejeu.jours.length);
+  const ref = rythmeDeReference(projection);
   return {
     correct: row.correct,
     total: (JSON.parse(row.plan) as PlanStocke[]).length,

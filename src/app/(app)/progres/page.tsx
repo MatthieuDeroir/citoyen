@@ -29,7 +29,7 @@ export default async function ProgresPage() {
       .limit(5),
   ]);
   const today = parisDay();
-  const ref = rythmeDeReference(projection, rejeu.jours.length);
+  const ref = rythmeDeReference(projection);
   const { etats } = rejeu;
 
   // par notion (sous-thème du livret) : questions comptées acquises / maîtrisées
@@ -95,6 +95,7 @@ export default async function ProgresPage() {
             jours={rejeu.jours}
             today={today}
             depart={projection.depart}
+            auDepart={projection.auDepart}
             totalCore={projection.totalCore}
             seuilAdmission={seuil}
             rythmes={projection.rythmes}

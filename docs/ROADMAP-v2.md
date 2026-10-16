@@ -21,7 +21,8 @@ Refonte décidée le 2026-10-16 : une app directe, sur le modèle de Rusky v2.
 - Périmètre compté : banque officielle (258 annales) + mises en situation. Les variantes
   entraînent mais ne comptent pas.
 - **Projection de base : 80 % de 15 = 12 questions par jour**, à l'image des 32/40 exigés
-  (258 / 12 ≈ 22 jours).
+  (338 questions comptées / 12 ≈ 29 jours ; départ au lancement de la v2, le 16 octobre 2026,
+  les questions acquises en v1 restant acquises).
 - Puis recalage sur le rythme réel : moyennes depuis le début, sur 30 jours et sur 7 jours, une
   date par rythme.
 - Deux jalons : **admissible** (score attendu ≥ 32/40) et **banque maîtrisée** (100 %).
@@ -54,3 +55,17 @@ Refonte décidée le 2026-10-16 : une app directe, sur le modèle de Rusky v2.
 - Retirés temporairement : radio et Marseillaise.
 - Gardés : Turso + Drizzle, Auth.js, PWA, DSFR, les 258 annales et leurs distracteurs, le
   lecteur du livret, les rappels push.
+
+## État au 2026-10-16
+
+Phases 0 à 6 réalisées sur la branche `v2`, en attente de validation par Matthieu avant la fusion
+dans `main`, la migration Turso (additive) et la mise en production.
+
+- Contenu : 676 questions (258 officielles intactes, 80 mises en situation, 208 variantes),
+  difficulté 1 / 2 / 3 : 49 / 362 / 265.
+- Testé : simulation du moteur sur 40 jours (`npm test`), leçon complète et examen blanc pilotés
+  dans Firefox sans interface, build de production, lint et typage.
+- Écart à la roadmap : la mémoire n'est pas stockée par question, elle se rejoue depuis le journal
+  des réponses (une seule source de vérité, l'historique v1 compte sans import).
+- Rétention des questions acquises mesurée sur 14 jours (1 − taux d'oubli) : la date
+  « admissible » en tient compte ; « admissible » ne s'affiche que si le score attendu atteint 32.
