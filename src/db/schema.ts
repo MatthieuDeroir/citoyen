@@ -222,3 +222,24 @@ export const lecons = sqliteTable(
   },
   (t) => [index("idx_lecons_user").on(t.userId, t.day)],
 );
+
+/**
+ * Archive d'une réinitialisation de compte : toute la progression supprimée
+ * y est copiée (JSON) avant suppression, pour pouvoir la restaurer en cas
+ * d'erreur. Rien n'est jamais perdu.
+ */
+export const reinitialisations = sqliteTable(
+  "reinitialisations",
+  {
+    id: text("id")
+      .primaryKey()
+      .$defaultFn(() => crypto.randomUUID()),
+    userId: text("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    /** JSON { attempts, lecons, examens, userStats, cardProgress, xpEvents, achievements } */
+    archive: text("archive").notNull(),
+    createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
+  },
+  (t) => [index("idx_reinit_user").on(t.userId)],
+);

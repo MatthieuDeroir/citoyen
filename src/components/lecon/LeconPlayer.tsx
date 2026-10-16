@@ -8,12 +8,39 @@ import { X, Check, XCircle, ArrowRight, BookOpen, Loader2 } from "lucide-react";
 import type { QuestionDeLecon } from "@/lib/lecon";
 import { repondre, terminerLecon, type BilanLecon } from "@/actions/lecon";
 import { BilanLeconView } from "@/components/lecon/BilanLecon";
+import { LivretPanneau } from "@/components/lecon/LivretPanneau";
 
 const ROLE_LABEL: Record<QuestionDeLecon["role"], string> = {
   revision: "Révision",
   nouvelle: "Nouvelle",
   piege: "Piège",
 };
+
+/**
+ * Copie locale des réponses de la leçon. Le retour arrière du navigateur
+ * réutilise la page telle qu'elle a été chargée (cache client de Next) : sans
+ * cette copie, la leçon repartirait du début. Elle sert aussi à renvoyer une
+ * réponse que le serveur n'aurait pas reçue (réseau coupé).
+ */
+const cleLocale = (leconId: string) => `citoyen:lecon:${leconId}`;
+
+function lireLocal(leconId: string): Record<string, number> {
+  try {
+    return JSON.parse(localStorage.getItem(cleLocale(leconId)) ?? "{}");
+  } catch {
+    return {};
+  }
+}
+
+function ecrireLocal(leconId: string, questionId: string, chosen: number) {
+  try {
+    const m = lireLocal(leconId);
+    m[questionId] = chosen;
+    localStorage.setItem(cleLocale(leconId), JSON.stringify(m));
+  } catch {
+    // stockage indisponible (navigation privée) : le serveur reste la référence
+  }
+}
 
 const KEYS = ["1", "2", "3", "4"];
 const LETTERS = ["A", "B", "C", "D"];
@@ -28,8 +55,10 @@ interface Props {
 export function LeconPlayer({ leconId, items: initial, themeLabels, notionLabels }: Props) {
   const router = useRouter();
   const [items, setItems] = useState(initial);
-  const firstOpen = initial.findIndex((q) => q.chosen === null);
-  const [index, setIndex] = useState(firstOpen < 0 ? initial.length : firstOpen);
+  const [index, setIndex] = useState(0);
+  // tant que la copie locale n'est pas fusionnée, on n'affiche rien (pas de saut visible)
+  const [pret, setPret] = useState(false);
+  const [livret, setLivret] = useState<number | null>(null);
   const [revealed, setRevealed] = useState(false);
   const [bilan, setBilan] = useState<BilanLecon | null>(null);
   const [finishing, setFinishing] = useState(false);
@@ -58,6 +87,7 @@ export function LeconPlayer({ leconId, items: initial, themeLabels, notionLabels
     if (!q || revealed) return;
     setItems((cur) => cur.map((it, i) => (i === index ? { ...it, chosen: original } : it)));
     setRevealed(true);
+    ecrireLocal(leconId, q.id, original);
     void envoyer(q.id, original);
   }
 
@@ -82,6 +112,9 @@ export function LeconPlayer({ leconId, items: initial, themeLabels, notionLabels
         pending.current.delete(id);
       }
       setBilan(await terminerLecon(leconId));
+      try {
+        localStorage.removeItem(cleLocale(leconId));
+      } catch {}
       router.refresh();
     } catch {
       setErreur("Connexion impossible — tes réponses sont gardées, réessaie.");
@@ -90,19 +123,36 @@ export function LeconPlayer({ leconId, items: initial, themeLabels, notionLabels
     }
   }, [leconId, router]);
 
-  // leçon rouverte alors que tout est répondu : on va droit au bilan
-  const dejaFinie = useRef(firstOpen < 0);
+  // À l'ouverture (y compris par « retour » ou « Reprendre ») : fusion des
+  // réponses serveur et locales, puis reprise à la première question sans
+  // réponse ; tout est répondu → droit au bilan.
+  const fusionnee = useRef(false);
   useEffect(() => {
-    if (dejaFinie.current) {
-      dejaFinie.current = false;
-      void Promise.resolve().then(finish);
-    }
-  }, [finish]);
+    if (fusionnee.current) return;
+    fusionnee.current = true;
+    const local = lireLocal(leconId);
+    const merged = initial.map((it) =>
+      it.chosen === null && local[it.id] !== undefined ? { ...it, chosen: local[it.id] } : it,
+    );
+    void Promise.resolve().then(() => {
+      setItems(merged);
+      for (const it of merged) {
+        // réponse connue du seul appareil : le serveur ne l'a pas reçue
+        if (initial.find((x) => x.id === it.id)?.chosen === null && it.chosen !== null) {
+          void envoyer(it.id, it.chosen);
+        }
+      }
+      const first = merged.findIndex((it) => it.chosen === null);
+      setIndex(first < 0 ? merged.length : first);
+      setPret(true);
+      if (first < 0) void finish();
+    });
+  }, [leconId, initial, envoyer, finish]);
 
   // clavier : 1-4 ou A-D pour répondre, Entrée / espace pour continuer
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
-      if (e.ctrlKey || e.metaKey || e.altKey || done) return;
+      if (e.ctrlKey || e.metaKey || e.altKey || done || !pret || livret !== null) return;
       if (!revealed) {
         const k = e.key.toUpperCase();
         const pos = KEYS.indexOf(k) >= 0 ? KEYS.indexOf(k) : LETTERS.indexOf(k);
@@ -120,6 +170,14 @@ export function LeconPlayer({ leconId, items: initial, themeLabels, notionLabels
   });
 
   if (bilan) return <BilanLeconView bilan={bilan} />;
+
+  if (!pret) {
+    return (
+      <div className="flex flex-1 items-center justify-center">
+        <Loader2 className="size-8 animate-spin text-primary" />
+      </div>
+    );
+  }
 
   if (done) {
     return (
@@ -267,13 +325,13 @@ export function LeconPlayer({ leconId, items: initial, themeLabels, notionLabels
                   </p>
                   <p>{q.explication}</p>
                   {q.page && (
-                    <Link
-                      href={`/livret/page/${q.page}`}
-                      className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-primary underline-offset-2 hover:underline"
+                    <button
+                      onClick={() => setLivret(q.page!)}
+                      className="mt-3 inline-flex items-center gap-1.5 text-left text-xs font-semibold text-primary underline-offset-2 hover:underline"
                     >
-                      <BookOpen className="size-4" />
+                      <BookOpen className="size-4 shrink-0" />
                       Livret p. {q.page} · {notionLabels[q.notion]}
-                    </Link>
+                    </button>
                   )}
                 </div>
                 <button
@@ -288,6 +346,11 @@ export function LeconPlayer({ leconId, items: initial, themeLabels, notionLabels
             )}
           </AnimatePresence>
         </motion.div>
+      </AnimatePresence>
+      <AnimatePresence>
+        {livret !== null && (
+          <LivretPanneau page={livret} titre={notionLabels[q.notion]} onClose={() => setLivret(null)} />
+        )}
       </AnimatePresence>
       <p className="sr-only" aria-live="polite">
         {revealed ? (chosen === 0 ? "Bonne réponse" : "Mauvaise réponse") : ""} — {correctCount} justes

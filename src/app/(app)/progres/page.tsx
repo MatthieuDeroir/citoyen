@@ -12,6 +12,7 @@ import { fmt1 } from "@/lib/format";
 import { parisDay } from "@/lib/dates";
 import { CourbeProgres } from "@/components/progres/CourbeProgres";
 import { ReminderSettings } from "@/components/pwa/ReminderSettings";
+import { Reinitialiser } from "@/components/progres/Reinitialiser";
 
 export const metadata = { title: "Progrès" };
 
@@ -255,6 +256,8 @@ export default async function ProgresPage() {
           <LogOut className="size-4" /> Se déconnecter
         </button>
       </form>
+
+      <Reinitialiser />
     </div>
   );
 }

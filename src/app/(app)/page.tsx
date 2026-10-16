@@ -40,7 +40,7 @@ export default async function AujourdhuiPage() {
       .limit(1),
   ]);
   const serie = getEffectiveStreak(stats);
-  const { score, projection, rejeu } = bilan;
+  const { score, projection } = bilan;
   const ref = rythmeDeReference(projection);
   const admis = score.total >= EXAM_PASS;
   const examenDu = examenSuggere(dernierExamen?.createdAt);
