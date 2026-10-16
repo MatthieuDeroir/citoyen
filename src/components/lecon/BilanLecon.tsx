@@ -24,7 +24,7 @@ export function BilanLeconView({ bilan, resultats }: { bilan: BilanLecon; result
   // fin de l'anneau : les barres des thèmes prennent le relais
   const apresAnneau = 1.35;
   return (
-    <div className="flex flex-1 flex-col gap-5 overflow-y-auto py-4">
+    <div className="flex min-h-0 flex-1 flex-col gap-5 overflow-y-auto overscroll-contain py-4">
       {bilan.correct >= SEUIL_FETE && <Confettis seed={bilan.correct + bilan.leconsAujourdhui} />}
       <header className="text-center">
         <p className="text-sm font-semibold text-muted">

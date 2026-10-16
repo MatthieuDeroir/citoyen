@@ -68,6 +68,7 @@ export function LeconPlayer({ leconId, items: initial, themeLabels, notionLabels
   const [erreur, setErreur] = useState<string | null>(null);
   const pending = useRef<Map<string, number>>(new Map());
   const advancing = useRef(false);
+  const suivantRef = useRef<HTMLButtonElement>(null);
 
   const q = items[index];
   const done = index >= items.length;
@@ -213,8 +214,8 @@ export function LeconPlayer({ leconId, items: initial, themeLabels, notionLabels
   for (let i = revealed ? index : index - 1; i >= 0 && items[i]?.chosen === 0; i--) combo++;
 
   return (
-    <div className="flex flex-1 flex-col">
-      <header className="flex items-center gap-3 py-2">
+    <div className="flex min-h-0 flex-1 flex-col">
+      <header className="flex shrink-0 items-center gap-3 py-2">
         <Link
           href="/"
           aria-label="Quitter la leçon (elle reprendra où tu en es)"
@@ -276,7 +277,7 @@ export function LeconPlayer({ leconId, items: initial, themeLabels, notionLabels
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -40 }}
           transition={{ duration: 0.18 }}
-          className="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto pt-3 pb-4"
+          className="min-h-0 flex-1 space-y-4 overflow-y-auto overscroll-contain pt-3 pb-4"
         >
           <div className="flex flex-wrap items-center gap-2 text-xs font-semibold">
             <span
@@ -368,6 +369,10 @@ export function LeconPlayer({ leconId, items: initial, themeLabels, notionLabels
               <motion.div
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
+                // explication et bouton suivant ramenés à l'écran s'ils dépassent
+                onAnimationComplete={() =>
+                  suivantRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" })
+                }
                 className="overflow-hidden"
               >
                 <div className="rounded-2xl bg-primary-soft p-4 text-sm leading-relaxed">
@@ -386,6 +391,7 @@ export function LeconPlayer({ leconId, items: initial, themeLabels, notionLabels
                   )}
                 </div>
                 <button
+                  ref={suivantRef}
                   onClick={next}
                   autoFocus
                   className="mt-4 flex w-full items-center justify-center gap-2 rounded-2xl bg-primary py-3.5 font-semibold text-on-primary transition-transform active:scale-[0.98]"

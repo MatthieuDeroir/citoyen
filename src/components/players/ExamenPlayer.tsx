@@ -177,7 +177,7 @@ export function ExamenPlayer({ deck: initialDeck, onSubmit }: Props) {
   /* ---------- résultats ---------- */
   if (result) {
     return (
-      <div className="space-y-6 pb-6">
+      <div className="min-h-0 flex-1 space-y-6 overflow-y-auto overscroll-contain pb-6">
         <div
           className={`flex flex-col items-center gap-3 rounded-card p-6 text-center ${
             result.passed ? "bg-success-soft" : "bg-accent-soft"
@@ -265,7 +265,7 @@ export function ExamenPlayer({ deck: initialDeck, onSubmit }: Props) {
   const urgent = secondsLeft < 300;
 
   return (
-    <div className="flex flex-1 flex-col">
+    <div className="flex min-h-0 flex-1 flex-col">
       <header className="flex items-center justify-between gap-3 py-2">
         <span className="text-sm font-semibold text-muted tabular-nums">
           {index + 1}/{deck.length}

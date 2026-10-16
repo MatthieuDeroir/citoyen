@@ -47,7 +47,7 @@ export function LivretPanneau({ page, titre, onClose }: { page: number; titre?: 
           {titre && n === page && <p className="truncate text-xs text-muted">{titre}</p>}
         </div>
       </header>
-      <div className="mx-auto w-full max-w-lg flex-1 overflow-y-auto px-4">
+      <div className="mx-auto min-h-0 w-full max-w-lg flex-1 overflow-y-auto overscroll-contain px-4">
         <img
           key={n}
           src={`/livret/page-${String(n).padStart(2, "0")}.webp`}
