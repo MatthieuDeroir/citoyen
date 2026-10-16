@@ -1,9 +1,9 @@
 "use client";
 
-/* eslint-disable @next/next/no-img-element */
 import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { PageZoomable } from "@/components/livret/PageZoomable";
 
 const PAGES = 83;
 
@@ -48,12 +48,7 @@ export function LivretPanneau({ page, titre, onClose }: { page: number; titre?: 
         </div>
       </header>
       <div className="mx-auto min-h-0 w-full max-w-lg flex-1 overflow-y-auto overscroll-contain px-4">
-        <img
-          key={n}
-          src={`/livret/page-${String(n).padStart(2, "0")}.webp`}
-          alt={`Livret du citoyen, page ${n}`}
-          className="w-full rounded-2xl border border-border shadow-sm"
-        />
+        <PageZoomable key={n} n={n} priorite />
       </div>
       <nav className="mx-auto flex w-full max-w-lg items-center justify-between gap-3 px-4 pt-3 pb-[max(1rem,env(safe-area-inset-bottom))]">
         <button

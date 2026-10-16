@@ -1,8 +1,8 @@
-/* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { BackLink } from "@/components/ui/BackLink";
+import { PageZoomable } from "@/components/livret/PageZoomable";
 import { sousThemes } from "@/content/parties";
 
 const PAGES = 83;
@@ -12,7 +12,6 @@ export default async function LivretPage({ params }: { params: Promise<{ n: stri
   const n = Number((await params).n);
   if (!Number.isInteger(n) || n < 1 || n > PAGES) notFound();
   const st = sousThemes.find((s) => n >= s.pages[0] && n <= s.pages[1]);
-  const pad = (k: number) => String(k).padStart(2, "0");
 
   return (
     <div className="space-y-4">
@@ -25,11 +24,7 @@ export default async function LivretPage({ params }: { params: Promise<{ n: stri
           </p>
         )}
       </header>
-      <img
-        src={`/livret/page-${pad(n)}.webp`}
-        alt={`Livret du citoyen, page ${n}`}
-        className="w-full rounded-2xl border border-border shadow-sm"
-      />
+      <PageZoomable key={n} n={n} priorite />
       <nav className="flex justify-between text-sm font-semibold text-primary">
         {n > 1 ? (
           <Link href={`/livret/page/${n - 1}`} className="flex items-center gap-1">

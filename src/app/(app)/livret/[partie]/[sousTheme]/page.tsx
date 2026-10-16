@@ -1,6 +1,6 @@
-/* eslint-disable @next/next/no-img-element */
 import { notFound } from "next/navigation";
 import { BackLink } from "@/components/ui/BackLink";
+import { PageZoomable } from "@/components/livret/PageZoomable";
 import {
   getPartie,
   getSousTheme,
@@ -43,19 +43,13 @@ export default async function LectureSousThemePage({
           {sousTheme.emoji} {sousTheme.titre}
         </h1>
         <p className="mt-1 text-sm text-muted">
-          Livret du citoyen, pages {from}–{to} — texte original.
+          Livret du citoyen, pages {from}–{to}. Pince ou touche deux fois une page pour zoomer.
         </p>
       </header>
 
       <div className="space-y-3">
-        {pageNumbers.map((n) => (
-          <img
-            key={n}
-            src={`/livret/page-${String(n).padStart(2, "0")}.webp`}
-            alt={`Livret du citoyen, page ${n}`}
-            loading="lazy"
-            className="w-full rounded-2xl border border-border shadow-sm"
-          />
+        {pageNumbers.map((n, i) => (
+          <PageZoomable key={n} n={n} priorite={i === 0} />
         ))}
       </div>
 
