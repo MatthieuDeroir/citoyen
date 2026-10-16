@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useRef, useState } from "react";
+import { motion, useReducedMotion } from "motion/react";
 import type { JourPoint, Rythme } from "@/lib/memoire";
 import { formatJourCourt } from "@/lib/format";
 
@@ -35,6 +36,7 @@ export function CourbeProgres({ jours: tous, today, depart, auDepart, totalCore,
   const jours = tous.filter((j) => j.day >= depart);
   const [cle, setCle] = useState<Rythme["cle"]>(initial);
   const [hover, setHover] = useState<number | null>(null);
+  const reduit = useReducedMotion();
   const svgRef = useRef<SVGSVGElement>(null);
   const base = rythmes.find((r) => r.cle === "base")!;
   const rythme = rythmes.find((r) => r.cle === cle) ?? base;
@@ -183,8 +185,27 @@ export function CourbeProgres({ jours: tous, today, depart, auDepart, totalCore,
             <path d={proj} stroke="var(--chart-acquises)" strokeWidth="2" strokeDasharray="6 4" fill="none" opacity="0.8" />
           )}
 
-          <path d={lineMai} stroke="var(--chart-maitrisees)" strokeWidth="2" fill="none" strokeLinejoin="round" />
-          <path d={lineAcq} stroke="var(--chart-acquises)" strokeWidth="2" fill="none" strokeLinejoin="round" />
+          {/* les deux courbes se tracent une fois, à l'ouverture */}
+          <motion.path
+            d={lineMai}
+            stroke="var(--chart-maitrisees)"
+            strokeWidth="2"
+            fill="none"
+            strokeLinejoin="round"
+            initial={reduit ? false : { pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 1.1, delay: 0.15, ease: "easeInOut" }}
+          />
+          <motion.path
+            d={lineAcq}
+            stroke="var(--chart-acquises)"
+            strokeWidth="2"
+            fill="none"
+            strokeLinejoin="round"
+            initial={reduit ? false : { pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 1.1, ease: "easeInOut" }}
+          />
 
           {last && (
             <>

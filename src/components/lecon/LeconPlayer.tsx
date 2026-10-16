@@ -9,6 +9,9 @@ import type { QuestionDeLecon } from "@/lib/lecon";
 import { repondre, terminerLecon, type BilanLecon } from "@/actions/lecon";
 import { BilanLeconView } from "@/components/lecon/BilanLecon";
 import { LivretPanneau } from "@/components/lecon/LivretPanneau";
+import { Eclats } from "@/components/fx/Eclats";
+import { Flamme } from "@/components/fx/Flamme";
+import { vibrer } from "@/lib/haptique";
 
 const ROLE_LABEL: Record<QuestionDeLecon["role"], string> = {
   revision: "Révision",
@@ -87,6 +90,7 @@ export function LeconPlayer({ leconId, items: initial, themeLabels, notionLabels
     if (!q || revealed) return;
     setItems((cur) => cur.map((it, i) => (i === index ? { ...it, chosen: original } : it)));
     setRevealed(true);
+    vibrer(original === 0 ? 12 : [30, 50, 30]);
     ecrireLocal(leconId, q.id, original);
     void envoyer(q.id, original);
   }
@@ -169,7 +173,7 @@ export function LeconPlayer({ leconId, items: initial, themeLabels, notionLabels
     return () => window.removeEventListener("keydown", onKey);
   });
 
-  if (bilan) return <BilanLeconView bilan={bilan} />;
+  if (bilan) return <BilanLeconView bilan={bilan} resultats={items.map((it) => it.chosen === 0)} />;
 
   if (!pret) {
     return (
@@ -204,6 +208,9 @@ export function LeconPlayer({ leconId, items: initial, themeLabels, notionLabels
   }
 
   const chosen = q.chosen;
+  // bonnes réponses d'affilée jusqu'à la question en cours (révélée)
+  let combo = 0;
+  for (let i = revealed ? index : index - 1; i >= 0 && items[i]?.chosen === 0; i--) combo++;
 
   return (
     <div className="flex flex-1 flex-col">
@@ -216,24 +223,50 @@ export function LeconPlayer({ leconId, items: initial, themeLabels, notionLabels
           <X className="size-6" />
         </Link>
         <div className="flex h-3 flex-1 gap-1">
-          {items.map((it, i) => (
-            <span
-              key={it.id}
-              className={`h-full flex-1 rounded-full transition-colors ${
-                it.chosen === null || (i === index && !revealed)
-                  ? i === index
-                    ? "bg-primary/40"
-                    : "bg-border"
-                  : it.chosen === 0
-                    ? "bg-success"
-                    : "bg-accent"
-              }`}
-            />
-          ))}
+          {items.map((it, i) => {
+            const fait = it.chosen !== null && !(i === index && !revealed);
+            return (
+              <span
+                key={it.id}
+                className={`relative h-full flex-1 overflow-hidden rounded-full ${
+                  i === index && !fait ? "bg-primary/30" : "bg-border"
+                }`}
+              >
+                <motion.span
+                  className={`absolute inset-0 origin-left rounded-full ${it.chosen === 0 ? "bg-success" : "bg-accent"}`}
+                  initial={false}
+                  animate={{ scaleX: fait ? 1 : 0 }}
+                  transition={{ type: "spring", stiffness: 260, damping: 24 }}
+                />
+              </span>
+            );
+          })}
         </div>
-        <span className="text-sm font-semibold tabular-nums text-muted">
-          {index + 1}/{items.length}
-        </span>
+        <AnimatePresence mode="popLayout" initial={false}>
+          {combo >= 3 ? (
+            <motion.span
+              key={`combo-${combo}`}
+              initial={{ scale: 0.4, opacity: 0, y: 6 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.6, opacity: 0 }}
+              transition={{ type: "spring", stiffness: 500, damping: 18 }}
+              className="inline-flex items-center gap-1 rounded-full bg-gold-soft px-2 py-0.5 text-sm font-bold tabular-nums text-gold"
+              title={`${combo} bonnes réponses d'affilée`}
+            >
+              <Flamme allumee className="size-4" /> {combo}
+            </motion.span>
+          ) : (
+            <motion.span
+              key="pos"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="text-sm font-semibold tabular-nums text-muted"
+            >
+              {index + 1}/{items.length}
+            </motion.span>
+          )}
+        </AnimatePresence>
       </header>
 
       <AnimatePresence mode="wait">
@@ -279,19 +312,26 @@ export function LeconPlayer({ leconId, items: initial, themeLabels, notionLabels
                     ? "wrong"
                     : "dim";
               return (
-                <motion.button
+                <motion.div
                   key={i}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.06 + pos * 0.05, duration: 0.22, ease: "easeOut" }}
+                >
+                <motion.button
                   onClick={() => choose(i)}
                   disabled={revealed}
                   animate={
                     state === "wrong"
                       ? { x: [0, -8, 8, -6, 6, 0] }
                       : state === "correct" && isChosen
-                        ? { scale: [1, 1.03, 1] }
-                        : {}
+                        ? { scale: [1, 1.04, 1] }
+                        : state === "correct"
+                          ? { scale: [1, 1.025, 1, 1.025, 1] }
+                          : {}
                   }
-                  transition={{ duration: 0.4 }}
-                  className={`flex w-full items-center gap-3 rounded-2xl border-2 p-4 text-left font-medium transition-colors ${
+                  transition={{ duration: state === "correct" && !isChosen ? 0.9 : 0.4, delay: state === "correct" && !isChosen ? 0.3 : 0 }}
+                  className={`relative flex w-full items-center gap-3 rounded-2xl border-2 p-4 text-left font-medium transition-colors ${
                     state === "idle"
                       ? "border-border bg-surface hover:border-primary/40 active:scale-[0.99]"
                       : state === "correct"
@@ -305,9 +345,20 @@ export function LeconPlayer({ leconId, items: initial, themeLabels, notionLabels
                     {pos + 1}
                   </span>
                   <span className="flex-1">{q.choices[i]}</span>
-                  {revealed && isCorrect && <Check className="size-5 shrink-0" />}
+                  {revealed && isCorrect && (
+                    <motion.span
+                      initial={{ scale: 0, rotate: -45 }}
+                      animate={{ scale: 1, rotate: 0 }}
+                      transition={{ type: "spring", stiffness: 500, damping: 14, delay: isChosen ? 0 : 0.3 }}
+                      className="shrink-0"
+                    >
+                      <Check className="size-5" strokeWidth={3} />
+                    </motion.span>
+                  )}
                   {state === "wrong" && <XCircle className="size-5 shrink-0" />}
+                  {state === "correct" && isChosen && <Eclats seed={index + 1} />}
                 </motion.button>
+                </motion.div>
               );
             })}
           </div>

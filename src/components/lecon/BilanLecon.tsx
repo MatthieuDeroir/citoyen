@@ -2,31 +2,52 @@
 
 import Link from "next/link";
 import { motion } from "motion/react";
-import { Flame, Plus, CalendarCheck } from "lucide-react";
+import { Plus, CalendarCheck } from "lucide-react";
 import type { BilanLecon } from "@/actions/lecon";
 import { commencerLecon } from "@/actions/lecon";
 import { EXAM_PASS, EXAM_TOTAL } from "@/content/themes";
 import { AnnonceDate } from "@/components/ui/AnnonceDate";
+import { AnneauScore } from "@/components/fx/AnneauScore";
+import { Compteur } from "@/components/fx/Compteur";
+import { Confettis } from "@/components/fx/Confettis";
+import { Flamme } from "@/components/fx/Flamme";
+
+/** Seuil des confettis : 80 % de la leçon, comme les 32/40 de l'examen. */
+const SEUIL_FETE = 12;
 
 const fmt = (n: number) => n.toLocaleString("fr-FR", { maximumFractionDigits: 1, minimumFractionDigits: 1 });
 
 /** Bilan de fin de leçon : ce qui a bougé sur chacun des 5 thèmes. */
-export function BilanLeconView({ bilan }: { bilan: BilanLecon }) {
+export function BilanLeconView({ bilan, resultats }: { bilan: BilanLecon; resultats?: boolean[] }) {
   const delta = bilan.scoreApres - bilan.scoreAvant;
   const admis = bilan.scoreApres >= EXAM_PASS;
+  // fin de l'anneau : les barres des thèmes prennent le relais
+  const apresAnneau = 1.35;
   return (
     <div className="flex flex-1 flex-col gap-5 overflow-y-auto py-4">
+      {bilan.correct >= SEUIL_FETE && <Confettis seed={bilan.correct + bilan.leconsAujourdhui} />}
       <header className="text-center">
         <p className="text-sm font-semibold text-muted">
           Leçon {bilan.leconsAujourdhui > 1 ? `n° ${bilan.leconsAujourdhui} ` : ""}terminée
         </p>
-        <p className="mt-1 text-5xl font-extrabold tabular-nums">
-          {bilan.correct}
-          <span className="text-2xl text-muted">/{bilan.total}</span>
-        </p>
-        <p className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-gold-soft px-3 py-1 text-sm font-semibold text-gold">
-          <Flame className="size-4" /> Série : {bilan.serie} jour{bilan.serie > 1 ? "s" : ""}
-        </p>
+        {resultats?.length ? (
+          <div className="mt-3">
+            <AnneauScore resultats={resultats} />
+          </div>
+        ) : (
+          <p className="mt-1 text-5xl font-extrabold tabular-nums">
+            {bilan.correct}
+            <span className="text-2xl text-muted">/{bilan.total}</span>
+          </p>
+        )}
+        <motion.p
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: apresAnneau, type: "spring", stiffness: 300, damping: 20 }}
+          className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-gold-soft px-3 py-1 text-sm font-semibold text-gold"
+        >
+          <Flamme allumee={bilan.serie > 0} /> Série : {bilan.serie} jour{bilan.serie > 1 ? "s" : ""}
+        </motion.p>
       </header>
 
       <section className="rounded-card border border-border bg-surface p-4">
@@ -34,7 +55,7 @@ export function BilanLeconView({ bilan }: { bilan: BilanLecon }) {
           <h2 className="font-bold">Score attendu à l&apos;examen</h2>
           <p className="tabular-nums">
             <span className={`text-2xl font-extrabold ${admis ? "text-success" : ""}`}>
-              {fmt(bilan.scoreApres)}
+              <Compteur de={bilan.scoreAvant} a={bilan.scoreApres} decimales={1} duree={1.2} delai={apresAnneau} />
             </span>
             <span className="text-muted">/{EXAM_TOTAL}</span>
           </p>
@@ -66,7 +87,7 @@ export function BilanLeconView({ bilan }: { bilan: BilanLecon }) {
                     className={`absolute inset-y-0 left-0 rounded-full ${d <= -0.05 ? "bg-accent" : "bg-primary"}`}
                     initial={{ width: `${(t.avant / t.max) * 100}%` }}
                     animate={{ width: `${(t.apres / t.max) * 100}%` }}
-                    transition={{ delay: 0.3 + i * 0.12, duration: 0.7, ease: "easeOut" }}
+                    transition={{ delay: apresAnneau + i * 0.12, duration: 0.7, ease: "easeOut" }}
                   />
                   {/* seuil d'admission : 80 % de chaque thème */}
                   <span className="absolute inset-y-0 left-[80%] w-0.5 bg-foreground/30" />

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { desc, eq } from "drizzle-orm";
-import { Flame, Play, Plus, Check, GraduationCap, ChevronRight, CalendarCheck } from "lucide-react";
+import { Play, Plus, Check, GraduationCap, ChevronRight, CalendarCheck } from "lucide-react";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { examens, userStats } from "@/db/schema";
@@ -12,6 +12,7 @@ import { commencerLecon } from "@/actions/lecon";
 import { THEMES, EXAM_PASS, EXAM_TOTAL } from "@/content";
 import { fmt1 } from "@/lib/format";
 import { Logo } from "@/components/ui/Logo";
+import { Flamme } from "@/components/fx/Flamme";
 
 export const metadata = { title: "Aujourd'hui" };
 
@@ -56,7 +57,7 @@ export default async function AujourdhuiPage() {
           }`}
           title="Jours d'affilée avec au moins une leçon"
         >
-          <Flame className="size-4" /> {serie}
+          <Flamme allumee={serie > 0} /> {serie}
         </span>
       </div>
 
