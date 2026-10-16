@@ -11,74 +11,43 @@ export interface Partie {
   pages: [number, number];
 }
 
+/** Sous-thème du livret : sert de « notion » pour suivre les progrès. */
 export interface SousTheme {
   id: string; // "p1-s1"
   partieId: PartieId;
   slug: string;
   titre: string;
   description: string;
-  /** illustration des cartes et listes */
   emoji: string;
   pages: [number, number];
 }
 
-export interface Flashcard {
-  id: string; // "p1-s1-fc-001"
-  sousThemeId: string;
-  /** question ou notion, recto */
-  front: string;
-  /** réponse à mémoriser, verso — markdown léger (**gras**, listes -) */
-  back: string;
-  hint?: string;
-  sourcePage: number;
-}
+/** Les 5 thématiques officielles de l'examen civique. */
+export type ThemeId = "pv" | "si" | "dd" | "hg" | "vs";
 
-export interface Qcm {
-  id: string; // "p1-s1-qcm-001"
-  sousThemeId: string;
+export type QuestionKind = "connaissance" | "situation";
+
+/**
+ * Une question, toujours au format de l'examen : QCM à 4 choix.
+ * La bonne réponse est TOUJOURS en premier dans `choices` ; l'affichage mélange.
+ */
+export interface Question {
+  /** stable : l'historique des réponses s'y rattache */
+  id: string;
+  theme: ThemeId;
+  /** id du sous-thème du livret ("p1-s1") */
+  notion: string;
+  kind: QuestionKind;
+  /** intitulé de la banque officielle du ministère (12 déc. 2025) */
+  official: boolean;
+  /** variante d'une question officielle : même notion, autre angle */
+  variantOf?: string;
+  /** 1 = accessible, 2 = exigeante, 3 = piège / détail fin */
+  difficulty: 1 | 2 | 3;
   question: string;
-  choices: string[]; // 4 choix
-  correctIndex: number;
-  /** affichée après réponse, bonne ou mauvaise */
+  choices: [string, string, string, string] | string[];
+  /** affichée après la réponse, juste ou fausse */
   explication: string;
-  sourcePage: number;
+  /** page du Livret du citoyen 2026 */
+  page?: number;
 }
-
-export interface QuestionOuverte {
-  id: string; // "p1-s1-qo-001"
-  sousThemeId: string;
-  question: string;
-  /** réponse modèle montrée à l'utilisateur après correction */
-  expectedAnswer: string;
-  /** points-clés injectés dans le prompt de correction */
-  keyPoints: string[];
-  sourcePage: number;
-}
-
-export interface Blank {
-  /** correspond au {{n}} du template */
-  index: number;
-  /** toutes les formes acceptées en correction locale */
-  accepted: string[];
-  /** dates, chiffres, noms propres : correction exacte, jamais d'IA ni de tolérance typo */
-  strict?: boolean;
-}
-
-export interface TexteATrous {
-  id: string; // "p1-s1-tt-001"
-  sousThemeId: string;
-  intro?: string;
-  /** texte avec trous notés {{1}}, {{2}}… */
-  template: string;
-  blanks: Blank[];
-  sourcePage: number;
-}
-
-export interface SousThemeContent {
-  flashcards: Flashcard[];
-  qcms: Qcm[];
-  ouvertes: QuestionOuverte[];
-  trous: TexteATrous[];
-}
-
-export type ExerciseType = "qcm" | "ouverte" | "trous";
