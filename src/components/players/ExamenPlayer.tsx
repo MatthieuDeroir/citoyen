@@ -177,7 +177,7 @@ export function ExamenPlayer({ deck: initialDeck, onSubmit }: Props) {
   /* ---------- résultats ---------- */
   if (result) {
     return (
-      <div className="min-h-0 flex-1 space-y-6 overflow-y-auto overscroll-contain pb-6">
+      <div className="min-h-0 flex-1 space-y-6 overflow-x-hidden overflow-y-auto overscroll-contain pb-6">
         <div
           className={`flex flex-col items-center gap-3 rounded-card p-6 text-center ${
             result.passed ? "bg-success-soft" : "bg-accent-soft"
@@ -293,7 +293,7 @@ export function ExamenPlayer({ deck: initialDeck, onSubmit }: Props) {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -30 }}
           transition={{ duration: 0.15 }}
-          className="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto pt-4"
+          className="flex min-h-0 flex-1 flex-col gap-4 overflow-x-hidden overflow-y-auto overscroll-contain pt-4"
         >
           <h1 className="text-lg font-bold leading-snug">{qcm.question}</h1>
 

@@ -47,7 +47,7 @@ export function LivretPanneau({ page, titre, onClose }: { page: number; titre?: 
           {titre && n === page && <p className="truncate text-xs text-muted">{titre}</p>}
         </div>
       </header>
-      <div className="mx-auto min-h-0 w-full max-w-lg flex-1 overflow-y-auto overscroll-contain px-4">
+      <div className="mx-auto min-h-0 w-full max-w-lg flex-1 overflow-x-hidden overflow-y-auto overscroll-contain px-4">
         <PageZoomable key={n} n={n} priorite />
       </div>
       <nav className="mx-auto flex w-full max-w-lg items-center justify-between gap-3 px-4 pt-3 pb-[max(1rem,env(safe-area-inset-bottom))]">

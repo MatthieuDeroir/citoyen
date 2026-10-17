@@ -28,12 +28,45 @@ const GROUPES = groupes(questions);
 /** Journal des réponses QCM de l'utilisateur (questions encore au programme). */
 export async function chargerReponses(userId: string): Promise<Reponse[]> {
   const rows = await db
-    .select({ id: attempts.exerciseId, verdict: attempts.verdict, at: attempts.createdAt })
+    .select({
+      id: attempts.exerciseId,
+      verdict: attempts.verdict,
+      at: attempts.createdAt,
+      leconId: attempts.leconId,
+    })
     .from(attempts)
     .where(and(eq(attempts.userId, userId), eq(attempts.exerciseType, "qcm")));
   return rows
     .filter((r) => getQuestion(r.id))
-    .map((r) => ({ questionId: r.id, correct: r.verdict === "correct", at: r.at }));
+    .map((r) => ({ questionId: r.id, correct: r.verdict === "correct", at: r.at, leconId: r.leconId }));
+}
+
+export interface Apport {
+  /** questions comptées acquises avant et après la leçon */
+  acquisesAvant: number;
+  acquisesApres: number;
+  totalCore: number;
+  /** ratées dans la leçon : elles reviendront */
+  aRevoir: number;
+  /** vues pour la première fois */
+  decouvertes: number;
+}
+
+/** Ce que la leçon a changé : on rejoue le journal avec et sans ses réponses. */
+export async function apportDeLecon(userId: string, leconId: string, now: Date = new Date()): Promise<Apport> {
+  const reponses = await chargerReponses(userId);
+  const dans = reponses.filter((r) => r.leconId === leconId);
+  const avant = rejouer(reponses.filter((r) => r.leconId !== leconId), coreIds, now);
+  const apres = rejouer(reponses, coreIds, now);
+  const acquises = (r: ReturnType<typeof rejouer>) =>
+    [...r.etats].filter(([id, e]) => coreIds.has(id) && e.lastCorrect).length;
+  return {
+    acquisesAvant: acquises(avant),
+    acquisesApres: acquises(apres),
+    totalCore: coreIds.size,
+    aRevoir: dans.filter((r) => !r.correct).length,
+    decouvertes: new Set(dans.filter((r) => !avant.etats.has(r.questionId)).map((r) => r.questionId)).size,
+  };
 }
 
 /** Tout ce qu'il faut savoir sur la préparation de l'utilisateur, à l'instant. */

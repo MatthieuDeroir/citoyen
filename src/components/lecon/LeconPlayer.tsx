@@ -277,7 +277,8 @@ export function LeconPlayer({ leconId, items: initial, themeLabels, notionLabels
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -40 }}
           transition={{ duration: 0.18 }}
-          className="min-h-0 flex-1 space-y-4 overflow-y-auto overscroll-contain pt-3 pb-4"
+          // -mx-1 px-1 : de la place pour le rebond des cartes, sans défilement horizontal
+          className="-mx-1 min-h-0 flex-1 space-y-4 overflow-x-hidden overflow-y-auto overscroll-contain px-1 pt-3 pb-4"
         >
           <div className="flex flex-wrap items-center gap-2 text-xs font-semibold">
             <span

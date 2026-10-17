@@ -7,10 +7,12 @@ import { db } from "@/lib/db";
 import { attempts, lecons, userStats } from "@/db/schema";
 import { getQuestion, THEMES, type ThemeId } from "@/content";
 import {
+  apportDeLecon,
   bilanUtilisateur,
   creerLecon,
   leconEnCours,
   leconsTermineesDuJour,
+  type Apport,
   type PlanStocke,
   type ScoresParTheme,
 } from "@/lib/lecon";
@@ -99,6 +101,7 @@ export interface BilanLecon {
   leconsAujourdhui: number;
   serie: number;
   annonce: Annonce;
+  apport: Apport;
 }
 
 /** Clôt la leçon (série du jour) et renvoie le bilan : ce qui a bougé sur chaque thème. */
@@ -116,8 +119,9 @@ export async function terminerLecon(leconId: string): Promise<BilanLecon> {
     .where(and(eq(lecons.id, leconId), isNull(lecons.finishedAt)));
   await markActivity(userId, now);
 
-  const [{ score, projection }, leconsAujourdhui, stats] = await Promise.all([
+  const [{ score, projection }, apport, leconsAujourdhui, stats] = await Promise.all([
     bilanUtilisateur(userId, now),
+    apportDeLecon(userId, leconId, now),
     leconsTermineesDuJour(userId, now),
     db.select().from(userStats).where(eq(userStats.userId, userId)),
   ]);
@@ -140,5 +144,6 @@ export async function terminerLecon(leconId: string): Promise<BilanLecon> {
     leconsAujourdhui,
     serie: getEffectiveStreak(stats[0], now),
     annonce: annonce(score, projection, ref),
+    apport,
   };
 }

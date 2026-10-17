@@ -23,6 +23,8 @@ export interface Reponse {
   questionId: string;
   correct: boolean;
   at: Date;
+  /** leçon ou examen blanc d'origine (null pour la v1) */
+  leconId?: string | null;
 }
 
 export interface Etat {

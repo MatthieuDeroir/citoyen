@@ -11,7 +11,7 @@ export default async function AppLayout({
   return (
     <div className="mx-auto flex h-dvh w-full max-w-lg flex-col overflow-hidden">
       {/* pb = hauteur de la BottomNav (fixe) + marge : le contenu ne passe jamais dessous */}
-      <main className="flex-1 overflow-y-auto px-4 pb-[calc(4.5rem+env(safe-area-inset-bottom))] pt-6">
+      <main className="flex-1 overflow-x-hidden overflow-y-auto px-4 pb-[calc(4.5rem+env(safe-area-inset-bottom))] pt-6">
         {children}
       </main>
       <BottomNav />
