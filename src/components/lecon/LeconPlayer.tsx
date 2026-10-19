@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
-import { X, Check, XCircle, ArrowRight, BookOpen, Loader2 } from "lucide-react";
+import { X, Check, XCircle, ArrowRight, ArrowLeft, BookOpen, Loader2, Undo2 } from "lucide-react";
 import type { QuestionDeLecon } from "@/lib/lecon";
 import { repondre, terminerLecon, type BilanLecon } from "@/actions/lecon";
 import { BilanLeconView } from "@/components/lecon/BilanLecon";
@@ -62,6 +62,8 @@ export function LeconPlayer({ leconId, items: initial, themeLabels, notionLabels
   // tant que la copie locale n'est pas fusionnée, on n'affiche rien (pas de saut visible)
   const [pret, setPret] = useState(false);
   const [livret, setLivret] = useState<number | null>(null);
+  // relecture d'une question déjà répondue (lecture seule) ; null = question en cours
+  const [revue, setRevue] = useState<number | null>(null);
   const [revealed, setRevealed] = useState(false);
   const [bilan, setBilan] = useState<BilanLecon | null>(null);
   const [finishing, setFinishing] = useState(false);
@@ -72,6 +74,9 @@ export function LeconPlayer({ leconId, items: initial, themeLabels, notionLabels
 
   const q = items[index];
   const done = index >= items.length;
+  // question précédente relisible depuis l'écran affiché (en cours ou en relecture)
+  const depuis = revue ?? index;
+  const precedente = depuis > 0 && items[depuis - 1]?.chosen !== null ? depuis - 1 : null;
   const correctCount = items.filter((i) => i.chosen === 0).length;
 
   const envoyer = useCallback(
@@ -88,7 +93,7 @@ export function LeconPlayer({ leconId, items: initial, themeLabels, notionLabels
   );
 
   function choose(original: number) {
-    if (!q || revealed) return;
+    if (!q || revealed || revue !== null) return;
     setItems((cur) => cur.map((it, i) => (i === index ? { ...it, chosen: original } : it)));
     setRevealed(true);
     vibrer(original === 0 ? 12 : [30, 50, 30]);
@@ -158,6 +163,19 @@ export function LeconPlayer({ leconId, items: initial, themeLabels, notionLabels
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
       if (e.ctrlKey || e.metaKey || e.altKey || done || !pret || livret !== null) return;
+      // relecture : ← → pour naviguer, Échap pour revenir à la question en cours
+      if (e.key === "ArrowLeft" && precedente !== null) {
+        e.preventDefault();
+        setRevue(precedente);
+        return;
+      }
+      if (revue !== null) {
+        if (e.key === "Escape" || e.key === "ArrowRight" || e.key === "Enter") {
+          e.preventDefault();
+          setRevue(revue + 1 < index ? (e.key === "ArrowRight" ? revue + 1 : null) : null);
+        }
+        return;
+      }
       if (!revealed) {
         const k = e.key.toUpperCase();
         const pos = KEYS.indexOf(k) >= 0 ? KEYS.indexOf(k) : LETTERS.indexOf(k);
@@ -208,7 +226,11 @@ export function LeconPlayer({ leconId, items: initial, themeLabels, notionLabels
     );
   }
 
-  const chosen = q.chosen;
+  const enRevue = revue !== null;
+  // question affichée : celle en cours, ou celle qu'on relit
+  const v = enRevue ? items[revue] : q;
+  const chosen = v.chosen;
+  const vRevealed = enRevue || revealed;
   // bonnes réponses d'affilée jusqu'à la question en cours (révélée)
   let combo = 0;
   for (let i = revealed ? index : index - 1; i >= 0 && items[i]?.chosen === 0; i--) combo++;
@@ -227,11 +249,15 @@ export function LeconPlayer({ leconId, items: initial, themeLabels, notionLabels
           {items.map((it, i) => {
             const fait = it.chosen !== null && !(i === index && !revealed);
             return (
-              <span
+              <button
                 key={it.id}
-                className={`relative h-full flex-1 overflow-hidden rounded-full ${
+                type="button"
+                disabled={!fait}
+                onClick={() => setRevue(i === index ? null : i)}
+                aria-label={`Revoir la question ${i + 1}`}
+                className={`relative h-full flex-1 overflow-hidden rounded-full disabled:cursor-default ${
                   i === index && !fait ? "bg-primary/30" : "bg-border"
-                }`}
+                } ${i === revue ? "outline-2 outline-offset-2 outline-foreground/60" : ""}`}
               >
                 <motion.span
                   className={`absolute inset-0 origin-left rounded-full ${it.chosen === 0 ? "bg-success" : "bg-accent"}`}
@@ -239,7 +265,7 @@ export function LeconPlayer({ leconId, items: initial, themeLabels, notionLabels
                   animate={{ scaleX: fait ? 1 : 0 }}
                   transition={{ type: "spring", stiffness: 260, damping: 24 }}
                 />
-              </span>
+              </button>
             );
           })}
         </div>
@@ -272,7 +298,7 @@ export function LeconPlayer({ leconId, items: initial, themeLabels, notionLabels
 
       <AnimatePresence mode="wait">
         <motion.div
-          key={q.id}
+          key={enRevue ? `revue-${v.id}` : v.id}
           initial={{ opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -40 }}
@@ -280,33 +306,52 @@ export function LeconPlayer({ leconId, items: initial, themeLabels, notionLabels
           // -mx-1 px-1 : de la place pour le rebond des cartes, sans défilement horizontal
           className="-mx-1 min-h-0 flex-1 space-y-4 overflow-x-hidden overflow-y-auto overscroll-contain px-1 pt-3 pb-4"
         >
+          {(precedente !== null || enRevue) && (
+            <div className="flex items-center justify-between gap-2 text-sm">
+              {precedente !== null ? (
+                <button
+                  onClick={() => setRevue(precedente)}
+                  className="-ml-1 inline-flex items-center gap-1 rounded-lg px-1 py-0.5 font-semibold text-primary"
+                >
+                  <ArrowLeft className="size-4" /> Précédente
+                </button>
+              ) : (
+                <span />
+              )}
+              {enRevue && (
+                <span className="rounded-full bg-surface px-2.5 py-0.5 text-xs font-semibold text-muted ring-1 ring-border">
+                  Relecture · question {revue + 1}
+                </span>
+              )}
+            </div>
+          )}
           <div className="flex flex-wrap items-center gap-2 text-xs font-semibold">
             <span
               className={`rounded-full px-2.5 py-1 ${
-                q.role === "piege"
+                v.role === "piege"
                   ? "bg-accent-soft text-accent"
-                  : q.role === "revision"
+                  : v.role === "revision"
                     ? "bg-gold-soft text-gold"
                     : "bg-primary-soft text-primary"
               }`}
             >
-              {ROLE_LABEL[q.role]}
+              {ROLE_LABEL[v.role]}
             </span>
-            {q.kind === "situation" && (
+            {v.kind === "situation" && (
               <span className="rounded-full bg-surface px-2.5 py-1 text-foreground ring-1 ring-border">
                 Mise en situation
               </span>
             )}
-            <span className="truncate text-muted">{themeLabels[q.theme]}</span>
+            <span className="truncate text-muted">{themeLabels[v.theme]}</span>
           </div>
 
-          <h1 className="text-lg font-bold leading-snug">{q.question}</h1>
+          <h1 className="text-lg font-bold leading-snug">{v.question}</h1>
 
           <div className="space-y-3">
-            {q.order.map((i, pos) => {
+            {v.order.map((i, pos) => {
               const isCorrect = i === 0;
               const isChosen = i === chosen;
-              const state = !revealed
+              const state = !vRevealed
                 ? "idle"
                 : isCorrect
                   ? "correct"
@@ -322,9 +367,11 @@ export function LeconPlayer({ leconId, items: initial, themeLabels, notionLabels
                 >
                 <motion.button
                   onClick={() => choose(i)}
-                  disabled={revealed}
+                  disabled={vRevealed}
                   animate={
-                    state === "wrong"
+                    enRevue
+                      ? {}
+                      : state === "wrong"
                       ? { x: [0, -8, 8, -6, 6, 0] }
                       : state === "correct" && isChosen
                         ? { scale: [1, 1.04, 1] }
@@ -346,10 +393,10 @@ export function LeconPlayer({ leconId, items: initial, themeLabels, notionLabels
                   <span className="hidden size-6 shrink-0 items-center justify-center rounded-md border border-current text-xs opacity-60 sm:flex">
                     {pos + 1}
                   </span>
-                  <span className="flex-1">{q.choices[i]}</span>
-                  {revealed && isCorrect && (
+                  <span className="flex-1">{v.choices[i]}</span>
+                  {vRevealed && isCorrect && (
                     <motion.span
-                      initial={{ scale: 0, rotate: -45 }}
+                      initial={enRevue ? false : { scale: 0, rotate: -45 }}
                       animate={{ scale: 1, rotate: 0 }}
                       transition={{ type: "spring", stiffness: 500, damping: 14, delay: isChosen ? 0 : 0.3 }}
                       className="shrink-0"
@@ -358,7 +405,7 @@ export function LeconPlayer({ leconId, items: initial, themeLabels, notionLabels
                     </motion.span>
                   )}
                   {state === "wrong" && <XCircle className="size-5 shrink-0" />}
-                  {state === "correct" && isChosen && <Eclats seed={index + 1} />}
+                  {state === "correct" && isChosen && !enRevue && <Eclats seed={index + 1} />}
                 </motion.button>
                 </motion.div>
               );
@@ -366,13 +413,13 @@ export function LeconPlayer({ leconId, items: initial, themeLabels, notionLabels
           </div>
 
           <AnimatePresence>
-            {revealed && (
+            {vRevealed && (
               <motion.div
-                initial={{ opacity: 0, height: 0 }}
+                initial={enRevue ? false : { opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
                 // explication et bouton suivant ramenés à l'écran s'ils dépassent
                 onAnimationComplete={() =>
-                  suivantRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" })
+                  !enRevue && suivantRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" })
                 }
                 className="overflow-hidden"
               >
@@ -380,26 +427,45 @@ export function LeconPlayer({ leconId, items: initial, themeLabels, notionLabels
                   <p className="mb-1 font-bold text-primary">
                     {chosen === 0 ? "Exact." : "Pas tout à fait."}
                   </p>
-                  <p>{q.explication}</p>
-                  {q.page && (
+                  <p>{v.explication}</p>
+                  {v.page && (
                     <button
-                      onClick={() => setLivret(q.page!)}
+                      onClick={() => setLivret(v.page!)}
                       className="mt-3 inline-flex items-center gap-1.5 text-left text-xs font-semibold text-primary underline-offset-2 hover:underline"
                     >
                       <BookOpen className="size-4 shrink-0" />
-                      Livret p. {q.page} · {notionLabels[q.notion]}
+                      Livret p. {v.page} · {notionLabels[v.notion]}
                     </button>
                   )}
                 </div>
-                <button
-                  ref={suivantRef}
-                  onClick={next}
-                  autoFocus
-                  className="mt-4 flex w-full items-center justify-center gap-2 rounded-2xl bg-primary py-3.5 font-semibold text-on-primary transition-transform active:scale-[0.98]"
-                >
-                  {index + 1 < items.length ? "Question suivante" : "Voir le bilan"}
-                  <ArrowRight className="size-5" />
-                </button>
+                {enRevue ? (
+                  <div className="mt-4 flex gap-2">
+                    {revue + 1 < index && (
+                      <button
+                        onClick={() => setRevue(revue + 1)}
+                        className="flex items-center justify-center gap-1 rounded-2xl border border-border bg-surface px-4 py-3.5 text-sm font-semibold"
+                      >
+                        Suivante <ArrowRight className="size-4" />
+                      </button>
+                    )}
+                    <button
+                      onClick={() => setRevue(null)}
+                      className="flex flex-1 items-center justify-center gap-2 rounded-2xl bg-primary py-3.5 font-semibold text-on-primary transition-transform active:scale-[0.98]"
+                    >
+                      <Undo2 className="size-5" /> Revenir à la question {index + 1}
+                    </button>
+                  </div>
+                ) : (
+                  <button
+                    ref={suivantRef}
+                    onClick={next}
+                    autoFocus
+                    className="mt-4 flex w-full items-center justify-center gap-2 rounded-2xl bg-primary py-3.5 font-semibold text-on-primary transition-transform active:scale-[0.98]"
+                  >
+                    {index + 1 < items.length ? "Question suivante" : "Voir le bilan"}
+                    <ArrowRight className="size-5" />
+                  </button>
+                )}
               </motion.div>
             )}
           </AnimatePresence>
@@ -407,11 +473,13 @@ export function LeconPlayer({ leconId, items: initial, themeLabels, notionLabels
       </AnimatePresence>
       <AnimatePresence>
         {livret !== null && (
-          <LivretPanneau page={livret} titre={notionLabels[q.notion]} onClose={() => setLivret(null)} />
+          <LivretPanneau page={livret} titre={notionLabels[v.notion]} onClose={() => setLivret(null)} />
         )}
       </AnimatePresence>
       <p className="sr-only" aria-live="polite">
-        {revealed ? (chosen === 0 ? "Bonne réponse" : "Mauvaise réponse") : ""} — {correctCount} justes
+        {enRevue
+          ? `Relecture de la question ${revue + 1}`
+          : `${revealed ? (chosen === 0 ? "Bonne réponse" : "Mauvaise réponse") : ""} — ${correctCount} justes`}
       </p>
     </div>
   );
